@@ -41,7 +41,7 @@ describe("core boundary", () => {
       if (specifier.startsWith(".")) {
         // Relative imports may traverse within core (lint/ -> ../contract.js)
         // but must never escape src/core itself.
-        const depth = file.split("/").length - 2; // segments below src/
+        const depth = file.split(/[\\/]/).length - 2; // segments below src/ (cross-platform separators)
         const ups = specifier.match(/\.\.\//g)?.length ?? 0;
         expect(ups, `${file} escapes core via ${specifier}`).toBeLessThan(depth);
       } else {

@@ -22,12 +22,11 @@
       "type": "forbidden-composition",
       "requirement": "must",
       "level": "error",
-      "message": "Forbidden descendant 'input' found at $.root.children[1].children[0].",
+      "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[1], id \"subscribe\").",
       "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
       "location": {
-        "path": "$.root.children[1]",
-        "component": "button",
-        "nodeId": "subscribe"
+        "path": "$.root.children[1].children[0]",
+        "component": "input"
       },
       "exampleIds": []
     }

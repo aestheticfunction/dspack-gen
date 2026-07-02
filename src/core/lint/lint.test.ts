@@ -57,11 +57,12 @@ describe("expected findings, spot-checked (goldens carry the full detail)", () =
     expect(cancel.location.component).toBe("alert-dialog");
   });
 
-  it("F5: nested interactive — forbidden descendant located at the offending node", () => {
+  it("F5: nested interactive — finding located AT the offending descendant (spec §5.3)", () => {
     const report = lintSurface(load(join(VIOLATING, "F5-nested-interactive.dsurface.json")), contract);
     const nested = report.findings.find((f) => f.ruleId === "rule.button-no-interactive-descendants")!;
-    expect(nested.message).toMatch(/Forbidden descendant 'input' found at \$\.root\.children\[1\]\.children\[0\]/);
-    expect(nested.location.nodeId).toBe("subscribe");
+    expect(nested.location.path).toBe("$.root.children[1].children[0]");
+    expect(nested.location.component).toBe("input");
+    expect(nested.message).toMatch(/inside 'button' \(at \$\.root\.children\[1\], id "subscribe"\)/);
   });
 });
 

@@ -69,6 +69,11 @@ function finding(rule: RuleEntry, message: string, location: Finding["location"]
 
 const SURFACE_LOCATION = { path: "$.root", component: "surface" } as const;
 
+/** Human reference to a node for messages: path plus id when present. */
+function describeNode(visited: VisitedNode): string {
+  return visited.node.id ? `at ${visited.path}, id "${visited.node.id}"` : `at ${visited.path}`;
+}
+
 function locationOf(visited: VisitedNode): Finding["location"] {
   return { path: visited.path, component: visited.node.component, nodeId: visited.node.id };
 }
@@ -166,9 +171,10 @@ function evaluateRequiredComposition(entry: RuleEntry, surface: Surface): Findin
 
 /**
  * forbidden-composition: for EVERY node matching `component`, no descendant
- * may match any forbiddenDescendants id (finding at the offending descendant),
- * and no forbiddenProps entry may hold (on the node itself, or on descendants
- * matching `on`).
+ * may match any forbiddenDescendants id — per spec §5.3 the finding is
+ * LOCATED AT the offending descendant (the message names the matching origin
+ * node) — and no forbiddenProps entry may hold (on the node itself, or on
+ * descendants matching `on`, located at the checked node).
  */
 function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface): Finding[] {
   const rule = entry as ForbiddenCompositionRule;
@@ -180,7 +186,11 @@ function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface): Findi
     for (const id of rule.forbiddenDescendants ?? []) {
       for (const offender of descendants.filter((d) => d.node.component === id)) {
         findings.push(
-          finding(rule, `Forbidden descendant '${id}' found at ${offender.path}.`, locationOf(visited)),
+          finding(
+            rule,
+            `Forbidden descendant '${id}' inside '${rule.component}' (${describeNode(visited)}).`,
+            locationOf(offender),
+          ),
         );
       }
     }

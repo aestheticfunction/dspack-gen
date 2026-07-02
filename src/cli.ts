@@ -86,6 +86,15 @@ function commandLint(flags: Map<string, string>): void {
   }
 }
 
+function parseMaxRepairs(flags: Map<string, string>): number | undefined {
+  if (!flags.has("max-repairs")) return undefined;
+  const value = Number(flags.get("max-repairs"));
+  if (!Number.isInteger(value) || value < 0) {
+    fail(`--max-repairs must be a non-negative integer (got '${flags.get("max-repairs")}')`);
+  }
+  return value;
+}
+
 async function commandRun(flags: Map<string, string>): Promise<void> {
   const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
   const intent = flags.get("intent") ?? fail("--intent <id> is required");
@@ -101,7 +110,7 @@ async function commandRun(flags: Map<string, string>): Promise<void> {
       intent,
       prompt,
       adapter: adapterFor(modelRef),
-      maxRepairs: flags.has("max-repairs") ? Number(flags.get("max-repairs")) : undefined,
+      maxRepairs: parseMaxRepairs(flags),
       compile: {
         depth: flags.has("depth") ? Number(flags.get("depth")) : undefined,
         omitRuleSteering: flags.get("no-steering") === "true",

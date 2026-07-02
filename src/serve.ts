@@ -75,11 +75,13 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
     }
 
     let raw = "";
+    let bytes = 0;
     let tooLarge = false;
-    request.on("data", (chunk) => {
+    request.on("data", (chunk: Buffer) => {
       if (tooLarge) return;
+      bytes += chunk.length; // byte-accurate: string length counts UTF-16 code units
       raw += chunk;
-      if (raw.length > MAX_BODY_BYTES) {
+      if (bytes > MAX_BODY_BYTES) {
         tooLarge = true;
         response.writeHead(413, { "content-type": "application/json" });
         response.end(JSON.stringify({ error: `request body exceeds ${MAX_BODY_BYTES} bytes` }));
@@ -99,8 +101,16 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
         }
 
         const intent = body.intent ?? "destructive-action";
+        // Untrusted JSON: booleans are strict, numbers are validated.
+        const fake = body.fake === true;
+        const noSteering = body.noSteering === true;
+        if (body.maxRepairs !== undefined && (!Number.isInteger(body.maxRepairs) || body.maxRepairs < 0)) {
+          response.writeHead(400, { "content-type": "application/json" });
+          response.end(JSON.stringify({ error: "maxRepairs must be a non-negative integer" }));
+          return;
+        }
         let adapter;
-        if (body.fake) {
+        if (fake) {
           // The scripted repair must land on the contract's worked example
           // FOR THIS INTENT — fail fast instead of scripting `undefined`.
           const example = (contract.examples ?? []).find((e) => e.intent === intent);
@@ -110,7 +120,7 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
             return;
           }
           adapter = new ScriptedAdapter([{ output: violating }, { output: example.surface }]);
-        } else if (body.model) {
+        } else if (typeof body.model === "string") {
           adapter = adapterFor(body.model);
         } else {
           response.writeHead(400, { "content-type": "application/json" });
@@ -129,7 +139,7 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
             prompt: body.prompt ?? "a screen to delete my account",
             adapter,
             maxRepairs: body.maxRepairs,
-            compile: { omitRuleSteering: body.noSteering },
+            compile: { omitRuleSteering: noSteering },
             onEvent: send,
           });
         } catch (error) {
