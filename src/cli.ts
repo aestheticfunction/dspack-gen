@@ -140,7 +140,16 @@ function main(): void {
     void commandRun(flags);
     return;
   }
-  fail(`unknown command '${command ?? ""}' (available: context, lint, run)`);
+  if (command === "serve") {
+    void import("./serve.js").then(({ startServer }) =>
+      startServer({
+        contractPath: flags.get("dspack") ?? "fixtures/shadcn.v0_3.dspack.json",
+        port: flags.has("port") ? Number(flags.get("port")) : undefined,
+      }),
+    );
+    return;
+  }
+  fail(`unknown command '${command ?? ""}' (available: context, lint, run, serve)`);
 }
 
 main();

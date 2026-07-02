@@ -2,7 +2,7 @@
   "name": "@aestheticfunction/dspack-gen",
   "version": "0.1.0",
   "private": true,
-  "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1–S3, bounded repair, protocol emission, audit reports.",
+  "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1\u2013S3, bounded repair, protocol emission, audit reports.",
   "type": "module",
   "license": "Apache-2.0",
   "exports": {
@@ -26,7 +26,8 @@
     "prepare": "npm run build",
     "test": "vitest run",
     "context": "tsx src/cli.ts context",
-    "smoke:ollama": "tsx scripts/smoke-ollama.ts"
+    "smoke:ollama": "tsx scripts/smoke-ollama.ts",
+    "demo:e2e": "playwright test"
   },
   "dependencies": {
     "@aestheticfunction/dspack-to-a2ui": "github:aestheticfunction/dspack-to-a2ui#e68a17e",
@@ -35,6 +36,7 @@
     "ajv-formats": "^3.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^22.10.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",

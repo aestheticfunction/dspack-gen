@@ -17,8 +17,8 @@ import {
   type DspackSurface,
 } from "@aestheticfunction/dspack-to-a2ui";
 import type { Contract } from "../core/contract.js";
-import { compileContext, type CompileOptions } from "../core/compiler.js";
-import { lintSurface } from "../core/lint/index.js";
+import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
+import { lintSurface, type Finding, type GateReport } from "../core/lint/index.js";
 import { AdapterOutputError, type GenerateMessage, type GenerationAdapter } from "../adapters/types.js";
 import { renderRepairMessage } from "../repair/render.js";
 import {
@@ -44,7 +44,17 @@ export interface RunOptions {
   a2uiVersions?: A2uiVersion[];
   /** Injectable clock for deterministic reports in tests. */
   now?: () => Date;
+  /** Live progress events (the demo's NDJSON stream). Purely observational. */
+  onEvent?: (event: PipelineEvent) => void;
 }
+
+/** Progress events streamed by `dspack-gen serve` (observational; the report is the artifact). */
+export type PipelineEvent =
+  | { type: "start"; intent: string; prompt: string; adapterId: string; ruleIds: string[] }
+  | { type: "attempt"; index: number; model?: string; surface: unknown; gates: GateReport[]; findings: Finding[] }
+  | { type: "repair"; index: number; message: string }
+  | { type: "emitted"; validations: EmittedValidation[]; warnings: Array<{ code: string; message: string }> }
+  | { type: "done"; outcome: Outcome; exitCode: number; report: AuditReportV1; surfaceMessages?: unknown };
 
 export interface RunResult {
   report: AuditReportV1;
@@ -69,6 +79,14 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
 
   const context = compileContext(contract, intent, options.compile);
   const conversation: GenerateMessage[] = [...context.fewshot, { role: "user", content: prompt }];
+  const emit = options.onEvent ?? (() => {});
+  emit({
+    type: "start",
+    intent,
+    prompt,
+    adapterId: adapter.id,
+    ruleIds: applicableRules(contract, intent).map((rule) => rule.id),
+  });
 
   const attempts: AttemptRecord[] = [];
   const repairMessages: string[] = [];
@@ -102,7 +120,9 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
     } catch (error) {
       if (error instanceof AdapterOutputError) {
         attempts.push({ index, adapterError: error.message });
-        return finalize("failed-adapter", 1);
+        const failed = finalize("failed-adapter", 1);
+        emit({ type: "done", outcome: failed.report.outcome, exitCode: failed.exitCode, report: failed.report });
+        return failed;
       }
       throw error;
     }
@@ -118,6 +138,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       gates: lint.gates,
       findings: lint.findings,
     });
+    emit({ type: "attempt", index, model: generated.model, surface: generated.json, gates: lint.gates, findings: lint.findings });
 
     if (lint.pass) {
       const surface = generated.json as DspackSurface;
@@ -139,16 +160,23 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       }
 
       const emitted = { target: "a2ui" as const, surfaceMessages: { messages }, warnings, validations };
-      if (!gatesPass) return finalize("failed-gate", 3, {}, emitted);
-      return finalize("passed", 0, { surface, surfaceMessages: { messages } }, emitted);
+      emit({ type: "emitted", validations, warnings });
+      const result = gatesPass
+        ? finalize("passed", 0, { surface, surfaceMessages: { messages } }, emitted)
+        : finalize("failed-gate", 3, {}, emitted);
+      emit({ type: "done", outcome: result.report.outcome, exitCode: result.exitCode, report: result.report, surfaceMessages: result.surfaceMessages });
+      return result;
     }
 
     if (index < maxRepairs) {
       const repair = renderRepairMessage(lint.findings, contract);
       repairMessages.push(repair);
       conversation.push({ role: "assistant", content: generated.raw }, { role: "user", content: repair });
+      emit({ type: "repair", index, message: repair });
     }
   }
 
-  return finalize("failed-lint-exhausted", 2);
+  const exhausted = finalize("failed-lint-exhausted", 2);
+  emit({ type: "done", outcome: exhausted.report.outcome, exitCode: exhausted.exitCode, report: exhausted.report });
+  return exhausted;
 }

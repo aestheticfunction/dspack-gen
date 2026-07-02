@@ -30,3 +30,29 @@ jobs:
           diff /tmp/f1.json fixtures/golden/violating/F1-dialog-for-delete.expected.json
       - name: CLI smoke
         run: npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructive-action > /dev/null
+
+  # PR-7 acceptance gate: the flagship demo, deterministic fake adapter.
+  demo-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dspack-gen
+      - uses: actions/checkout@v4
+        with:
+          repository: aestheticfunction/dspack-to-a2ui
+          # Flip to `main` once aestheticfunction/dspack-to-a2ui#4 and #5 merge.
+          ref: feat/demo-generate-view
+          path: dspack-to-a2ui
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+        working-directory: dspack-gen
+      - run: npm --prefix dspack-to-a2ui/demo install
+      - run: npx playwright install --with-deps chromium
+        working-directory: dspack-gen
+      - run: npm run demo:e2e
+        working-directory: dspack-gen
+        env:
+          DEMO_DIR: ../dspack-to-a2ui
