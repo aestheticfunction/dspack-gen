@@ -1,0 +1,52 @@
+{
+  "dspackSurface": "0.1",
+  "system": "shadcn/ui",
+  "intent": "destructive-action",
+  "root": {
+    "component": "card",
+    "children": [
+      {
+        "component": "dialog",
+        "children": [
+          {
+            "component": "dialog-trigger",
+            "children": [
+              {
+                "component": "button",
+                "props": {
+                  "variant": "destructive"
+                },
+                "text": "Delete account"
+              }
+            ]
+          },
+          {
+            "component": "dialog-content",
+            "children": [
+              {
+                "component": "dialog-title",
+                "text": "Delete your account?"
+              },
+              {
+                "component": "dialog-description",
+                "text": "This will permanently delete your account."
+              },
+              {
+                "component": "dialog-footer",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "text": "Delete"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -18,5 +18,15 @@ jobs:
       - run: npm test
       - name: Build (exports map consumers)
         run: npm run build
+      - name: Lint CLI gate (F1 golden, exit 2)
+        run: |
+          set +e
+          npx tsx src/cli.ts lint --dspack fixtures/shadcn.v0_3.dspack.json \
+            --surface fixtures/golden/violating/F1-dialog-for-delete.dsurface.json \
+            > /tmp/f1.json 2>/dev/null
+          code=$?
+          set -e
+          test "$code" -eq 2
+          diff /tmp/f1.json fixtures/golden/violating/F1-dialog-for-delete.expected.json
       - name: CLI smoke
         run: npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructive-action > /dev/null

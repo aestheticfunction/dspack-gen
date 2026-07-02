@@ -3,17 +3,21 @@
  * dspack-gen CLI.
  *
  *   dspack-gen context --dspack <contract.json> --intent <id> [--depth N] [--no-steering]
+ *   dspack-gen lint    --dspack <contract.json> --surface <file.dsurface.json>
  *
- * Prints the compiled generation context ({ system, schema, fewshot }) as JSON.
- * Later PRs add `lint` (surface gates S1–S3) and `run` (the full pipeline).
+ * `context` prints the compiled generation context ({ system, schema, fewshot }).
+ * `lint` runs surface gates S1–S3: machine-readable JSON report on stdout,
+ * human rendering on stderr. Later PRs add `run` (the full pipeline).
  *
  * Exit codes (full table in README): 0 clean, 1 internal/usage error,
- * 2 governance failure, 3 emitter-gate failure, 4 unknown rule type.
+ * 2 governance failure (any S-gate error), 3 emitter-gate failure,
+ * 4 unknown rule type.
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Contract } from "./core/contract.js";
 import { compileContext } from "./core/compiler.js";
+import { lintSurface, renderText, UnknownRuleTypeError } from "./core/lint/index.js";
 
 function fail(message: string): never {
   console.error(`error: ${message}`);
@@ -41,11 +45,7 @@ function parseFlags(argv: string[]): Map<string, string> {
   return flags;
 }
 
-function main(): void {
-  const [command, ...rest] = process.argv.slice(2);
-  if (command !== "context") fail(`unknown command '${command ?? ""}' (available: context)`);
-
-  const flags = parseFlags(rest);
+function commandContext(flags: Map<string, string>): void {
   const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
   const intent = flags.get("intent") ?? fail("--intent <id> is required");
 
@@ -60,6 +60,35 @@ function main(): void {
     fail(e instanceof Error ? e.message : String(e));
   }
   process.stdout.write(JSON.stringify(context, null, 2) + "\n");
+}
+
+function commandLint(flags: Map<string, string>): void {
+  const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
+  const surfacePath = flags.get("surface") ?? fail("--surface <file.dsurface.json> is required");
+
+  const contract = JSON.parse(readFileSync(resolve(contractPath), "utf8")) as Contract;
+  const surface = JSON.parse(readFileSync(resolve(surfacePath), "utf8")) as unknown;
+
+  try {
+    const report = lintSurface(surface, contract);
+    process.stdout.write(JSON.stringify(report, null, 2) + "\n");
+    process.stderr.write(renderText(report) + "\n");
+    process.exit(report.pass ? 0 : 2);
+  } catch (e) {
+    if (e instanceof UnknownRuleTypeError) {
+      console.error(`error: ${e.message}`);
+      process.exit(4);
+    }
+    throw e;
+  }
+}
+
+function main(): void {
+  const [command, ...rest] = process.argv.slice(2);
+  const flags = parseFlags(rest);
+  if (command === "context") return commandContext(flags);
+  if (command === "lint") return commandLint(flags);
+  fail(`unknown command '${command ?? ""}' (available: context, lint)`);
 }
 
 main();

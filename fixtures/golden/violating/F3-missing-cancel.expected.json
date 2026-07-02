@@ -1,0 +1,39 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.alertdialog-requires-cancel",
+      "type": "required-composition",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+      "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+      "location": {
+        "path": "$.root.children[0]",
+        "component": "alert-dialog"
+      },
+      "exampleIds": [
+        "ex.delete-account-confirmation"
+      ]
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

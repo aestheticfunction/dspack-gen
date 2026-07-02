@@ -1,0 +1,18 @@
+{
+  "dspackSurface": "0.1",
+  "system": "shadcn/ui",
+  "intent": "destructive-action",
+  "root": {
+    "component": "card",
+    "children": [
+      {
+        "component": "button",
+        "id": "delete_btn",
+        "props": {
+          "variant": "destructive"
+        },
+        "text": "Delete account"
+      }
+    ]
+  }
+}

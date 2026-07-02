@@ -1,0 +1,39 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.destructive-requires-alertdialog",
+      "type": "component-choice",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required component 'alert-dialog' does not appear in the surface.",
+      "rationale": "Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.",
+      "location": {
+        "path": "$.root",
+        "component": "surface"
+      },
+      "exampleIds": [
+        "ex.delete-account-confirmation"
+      ]
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

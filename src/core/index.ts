@@ -9,3 +9,4 @@
 export * from "./contract.js";
 export * from "./generation-schema.js";
 export * from "./compiler.js";
+export * from "./lint/index.js";
