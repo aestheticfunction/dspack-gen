@@ -1,0 +1,402 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-02T19:32:59.750Z",
+  "request": {
+    "prompt": "a screen to delete my account",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.3",
+      "sha256": "e377998a11e0eb993875c29b4a2a4e0341385bba05f5729f80596edfd2e2f59b"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gpt-oss:latest",
+    "schemaSha256": "37852669337c8af9ab1e95bddb256b80547ad45270a5350dfdb1a3a94ecbd439",
+    "maxRepairs": 2,
+    "ruleSteering": true
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": [
+                    {
+                      "component": "button",
+                      "text": "Delete account"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Delete your account?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Cancel"
+                    },
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "button",
+                          "text": "Delete account"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2697,
+        "outputTokens": 167
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 34165334125,
+        "load_duration": 2196486166,
+        "prompt_eval_duration": 18483000,
+        "eval_duration": 3026727000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' found at $.root.children[0].children[0].children[0].",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": []
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' found at $.root.children[1].children[2].children[1].children[0].",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[1].children[2].children[1]",
+            "component": "button"
+          },
+          "exampleIds": []
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": [
+                    {
+                      "component": "button",
+                      "text": "Delete account"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Delete your account?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Cancel"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "children": [
+                        {
+                          "component": "button",
+                          "props": {
+                            "variant": "destructive"
+                          },
+                          "children": [
+                            {
+                              "component": "button",
+                              "text": "Delete account"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2009,
+        "outputTokens": 178
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 12544075916,
+        "load_duration": 214198166,
+        "prompt_eval_duration": 18386000,
+        "eval_duration": 3181079000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' found at $.root.children[0].children[0].children[0].",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": []
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' found at $.root.children[1].children[2].children[1].children[0].children[0].",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[1].children[2].children[1].children[0]",
+            "component": "button"
+          },
+          "exampleIds": []
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": [
+                    {
+                      "component": "button",
+                      "text": "Delete account"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Delete your account?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Cancel"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "children": [
+                        {
+                          "component": "button",
+                          "props": {
+                            "variant": "destructive"
+                          },
+                          "children": [
+                            {
+                              "component": "button",
+                              "text": "Delete account"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2295,
+        "outputTokens": 178
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 9587446417,
+        "load_duration": 220663708,
+        "prompt_eval_duration": 18820000,
+        "eval_duration": 3189209000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' found at $.root.children[0].children[0].children[0].",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": []
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' found at $.root.children[1].children[2].children[1].children[0].children[0].",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[1].children[2].children[1].children[0]",
+            "component": "button"
+          },
+          "exampleIds": []
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 2 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0] (component: button)\n  Forbidden descendant 'button' found at $.root.children[0].children[0].children[0].\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 2: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[1].children[2].children[1] (component: button)\n  Forbidden descendant 'button' found at $.root.children[1].children[2].children[1].children[0].\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 2 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0] (component: button)\n  Forbidden descendant 'button' found at $.root.children[0].children[0].children[0].\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 2: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[1].children[2].children[1].children[0] (component: button)\n  Forbidden descendant 'button' found at $.root.children[1].children[2].children[1].children[0].children[0].\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 56354
+  }
+}

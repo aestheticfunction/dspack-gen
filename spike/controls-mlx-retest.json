@@ -1,0 +1,47 @@
+[
+  {
+    "model": "gemma4:e4b-mlx",
+    "label": "C1-tiny",
+    "wallMs": 7558,
+    "rawHead": "json\n{```json\n{\n  \"question\": \"Is the sky blue on a clear day?\",\n  \"answer\": true,\n  \"explanation\": \"The sky appears blue due to a phenomenon called Rayleigh scattering. When sunlight enters Earth's a",
+    "evalCount": 301,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token 'j', \"json\n{```j\"... is not valid JSON"
+  },
+  {
+    "model": "gemma4:e4b-mlx",
+    "label": "C2-depth3",
+    "wallMs": 14517,
+    "rawHead": "```json\n{\n  \"name\": \"account_deletion_confirmation\",\n  \"description\": \"A modal dialog used to confirm and execute the permanent deletion of a user's account.\",\n  \"components\": [\n    {\n      \"type\": \"D",
+    "evalCount": 1147,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token '`', \"```json\n{\n\"... is not valid JSON"
+  },
+  {
+    "model": "qwen3.6:35b-mlx",
+    "label": "C1-tiny",
+    "wallMs": 22532,
+    "rawHead": "{\n  \"question\": \"Is the sky blue on a clear day?\",\n  \"answer\": true,\n  \"explanation\": \"Yes, due to Rayleigh scattering, which causes shorter blue wavelengths of sunlight to be scattered more by atmosp",
+    "evalCount": 59,
+    "parsedJson": true,
+    "schemaValid": false,
+    "firstError": {
+      "instancePath": "",
+      "schemaPath": "#/required",
+      "keyword": "required",
+      "params": {
+        "missingProperty": "ok"
+      },
+      "message": "must have required property 'ok'"
+    }
+  },
+  {
+    "model": "qwen3.6:35b-mlx",
+    "label": "C2-depth3",
+    "wallMs": 58204,
+    "rawHead": "```json\n{\n  \"surface\": {\n    \"id\": \"delete-account-screen\",\n    \"title\": \"Delete Account\",\n    \"framework\": \"react\",\n    \"uiLibrary\": \"shadcn/ui\",\n    \"version\": \"1.0.0\",\n    \"layout\": \"flex flex-col ",
+    "evalCount": 876,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token '`', \"```json\n{\n\"... is not valid JSON"
+  }
+]
