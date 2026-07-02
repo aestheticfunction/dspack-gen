@@ -41,8 +41,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: aestheticfunction/dspack-to-a2ui
-          # Flip to `main` once aestheticfunction/dspack-to-a2ui#4 and #5 merge.
-          ref: feat/demo-generate-view
+          # dspack-to-a2ui #4 and #5 merged 2026-07-02; main carries the Generate view.
+          ref: main
           path: dspack-to-a2ui
       - uses: actions/setup-node@v4
         with:
