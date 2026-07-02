@@ -111,6 +111,32 @@ describe("clean golden and gate independence", () => {
     expect(report.findings[0]).toMatchObject({ requirement: "should", level: "warn" });
   });
 
+  it("duplicate sub-component ids fail S2 loudly, naming the id and every declaring component", () => {
+    const ambiguous: Contract = {
+      ...contract,
+      components: {
+        ...contract.components,
+        "widget-a": {
+          name: "WidgetA",
+          description: "First parent.",
+          composition: { subComponents: [{ id: "shared-part", name: "SharedPart" }] },
+        },
+        "widget-b": {
+          name: "WidgetB",
+          description: "Second parent.",
+          composition: { subComponents: [{ id: "shared-part", name: "SharedPart" }] },
+        },
+      },
+    };
+    const report = lintSurface(load("fixtures/golden/clean/delete-account.dsurface.json"), ambiguous);
+    const s2 = report.gates.find((g) => g.gate === "S2")!;
+    expect(s2.status).toBe("FAIL");
+    expect(s2.errors!.join("\n")).toMatch(
+      /sub-component id 'shared-part' is declared by multiple components \(widget-a, widget-b\)/,
+    );
+    expect(report.pass).toBe(false);
+  });
+
   it("unknown rule types throw UnknownRuleTypeError (CLI exit 4), never skip", () => {
     const futureContract: Contract = {
       ...contract,
