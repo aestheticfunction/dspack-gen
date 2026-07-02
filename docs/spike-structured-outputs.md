@@ -75,3 +75,148 @@ which grammar enforcement would have made impossible.
 Children accept the full vocabulary at every level (per-parent constraints are S3 territory);
 `text` allowed on every node; `slots` not generated. The PR-3 compiler inherits these
 documented simplifications.
+
+---
+
+## Addendum — 2026-07-02 model refresh (maintainer-requested)
+
+**Ollama:** 0.31.1 (unchanged) · **Scripts:** the same `spike/` harness; results in
+`spike/results-gguf-refresh.json` and `spike/controls-mlx-retest.json`.
+
+`qwen3:8b` is retired from this machine; its recorded S0/M1 outputs remain checked in
+(`spike/results-qwen3-8b.json`) and the claims above stand at exactly the measured strength.
+Newly installed models, tags verified via `ollama list` (each in two formats):
+
+| Tag | Params (ollama show) | Quantization | Engine (inferred from quantization/behavior) |
+|---|---|---|---|
+| `gemma4:e4b` | 8.0B | Q4_K_M (GGUF) | llama.cpp |
+| `gemma4:e4b-mlx` | 8.1B | nvfp4 | mlx |
+| `qwen3.6:35b` | 35B-class | GGUF | llama.cpp |
+| `qwen3.6:35b-mlx` | 35B-class | mlx | mlx |
+
+### GGUF variants at the confirmed unroll depth (6)
+
+Same protocol as the original spike (2 runs per cell, temperature 0.2, depth-6 schema,
+60,294 bytes):
+
+| Model | JSON parses | Schema-valid | Wall (warm) |
+|---|---|---|---|
+| `gemma4:e4b` | 2/2 | **2/2** | 8–12 s |
+| `qwen3.6:35b` | 2/2 | **2/2** | 32–37 s |
+
+Schema compilation and adherence hold at depth 6 on both new GGUF models.
+
+### MLX retest — the silent-`format` behavior REPRODUCES
+
+Controls re-run on the freshly installed MLX variants (`spike/controls-mlx-retest.json`):
+
+| Model | C1 (trivial 2-field schema) | C2 (real depth-3 schema) |
+|---|---|---|
+| `gemma4:e4b-mlx` | **not JSON** (markdown fence + invented keys) | **not JSON** (markdown fence + invented schema) |
+| `qwen3.6:35b-mlx` | parses, **schema-invalid** (invented keys) | **not JSON** (markdown fence) |
+
+The result is treated as **engine-scoped**, and this refresh strengthens that scoping: the
+paired `gemma4:e4b` variants are the same model architecture and size, differing only in
+quantization/engine (Q4_K_M/llama.cpp vs nvfp4/mlx) — the GGUF variant is 2/2 schema-valid
+while the MLX variant fails even the trivial schema.
+
+### Minimal upstream repro (for filing an issue)
+
+- **Environment:** Ollama 0.31.1, macOS/Apple Silicon; model `gemma4:e4b-mlx`
+  (nvfp4, `ollama show` reports `requires 0.31.0`).
+- **Request:** `POST http://localhost:11434/api/chat`
+
+  ```json
+  {
+    "model": "gemma4:e4b-mlx",
+    "stream": false,
+    "options": { "temperature": 0.2 },
+    "format": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "reason"],
+      "properties": { "ok": { "type": "boolean" },
+                      "reason": { "type": "string", "maxLength": 40 } }
+    },
+    "messages": [{ "role": "user",
+                   "content": "Is the sky blue on a clear day? Answer via the JSON schema." }]
+  }
+  ```
+- **Expected:** `message.content` is a JSON object matching the schema.
+- **Observed:** unconstrained prose/markdown, e.g. content beginning
+  `json\n{```json\n{\n  "question": "Is the sky blue on a clear day?", "answer": true,
+  "explanation": "The sky appears blue due to ...` — no error, no warning; the same request
+  against the GGUF variant (`gemma4:e4b`) returns schema-conformant JSON.
+- Full transcripts: `spike/controls-mlx-retest.json` (this refresh) and
+  `spike/controls.json` (original run, different models, same behavior).
+
+### Flagship-prompt endings per candidate recording model (pipeline runs)
+
+Flagship prompt "a screen to delete my account", intent `destructive-action`, maxRepairs 2.
+Full audit reports retained in `docs/evidence/2026-07-02-flagship-candidates/`.
+
+| Model | Runs | Endings observed |
+|---|---|---|
+| `gemma4:e4b` | 4 | failed-lint-exhausted ×2 · failed-gate ×2 |
+| `gpt-oss:latest` | 5 | **clean pass ×3 · failed-lint-exhausted ×2** (non-deterministic) |
+| `qwen3.6:35b` | 2 | failed-lint-exhausted ×2 |
+
+**No run produced a repaired pass (11/11).** Two measured observations, no cause claims:
+
+- Every persistent lint failure across every exhausted run is
+  `rule.button-no-interactive-descendants`. That rule links **no example**
+  (`examples: []` in the contract), so its repair feedback carries no corrected reference —
+  unlike the two alert-dialog rules, which repaired successfully whenever they fired.
+- `gemma4:e4b`'s two `failed-gate` endings are attempt-1 lint-clean surfaces whose emitted
+  `AlertDialog` failed instance validation (A3): the title text sat in a nested child of the
+  sub-component rather than on its `text` field, which S3's presence check accepts but the
+  emitter's flattening does not project. The gate ordering caught it, as designed.
+
+Per-rule × per-model first-attempt violation and repair-success rates are PR-10 (eval
+matrix) questions; nothing here claims a cause.
+
+### Post-example-link rerun (same day) — A/B result: negative
+
+The maintainer-approved contract amendment (dspack#9 follow-up commit) linked the EXISTING
+`ex.delete-account-confirmation` to `rule.button-no-interactive-descendants` — the one rule
+whose repair feedback previously carried no corrected reference. **The A/B is clean on that
+single variable:** the compiled generation context is byte-identical pre/post fix (verified
+by diff against the checked-in golden; the example was already in the destructive-action
+few-shot), and only the repair message changes. Audit-report `contract.sha256` values
+document both arms (`e377998a…` pre, `681197f4…` post); post-fix repair messages verifiably
+contain the corrected reference.
+
+Same models, prompt, and run counts; audit reports in
+`docs/evidence/2026-07-02-flagship-candidates-post-example-link/`:
+
+| Model | Runs | Pre-fix endings | Post-fix endings |
+|---|---|---|---|
+| `gemma4:e4b` | 4 | exhausted ×2 · failed-gate ×2 | exhausted ×4 (3→3→3 findings, no convergence) |
+| `gpt-oss:latest` | 5 | clean ×3 · exhausted ×2 | clean ×3 · exhausted ×2 (1→1→1) |
+| `qwen3.6:35b` | 2 | exhausted ×2 | exhausted ×2 (1→1→1) |
+
+**No repaired pass post-fix (11/11), and no change in repair convergence.** Stated at
+measured strength: the pre-fix data showed linked-example rules repairing whenever they
+fired while the unlinked rule never repaired — a correlation; the rerun tested whether the
+corrected reference is causal for this rule, and **it is not sufficient**: adding the
+reference produced no repair progress on `rule.button-no-interactive-descendants` for these
+models on this prompt. The contract amendment stands on its independent design grounds
+(ADR-7's repair template carries linked examples; a rule without one is a contract gap);
+the repair-failure mechanism for this rule is an open PR-10 question. Per the pre-agreed
+fallback, the live recording is the honest-exhaustion take and the write-up reports this
+negative result.
+
+*Hypothesis, recorded as PR-10 matrix design input only — not a finding:* the two
+alert-dialog rules call for substitution/addition-shaped repairs, while
+`rule.button-no-interactive-descendants` requires removal or restructuring, and the repair
+template's "Do not change parts that were not flagged" may be less effective for
+deletion-shaped repairs. PR-10's prompt set therefore spans repair shapes (substitution,
+addition, deletion, restructuring) and includes one repair-template variant for removal
+cases.
+
+**ADR-D1 evidence (filed):** the pre-fix `gemma4:e4b` failed-gate pair —
+`docs/evidence/2026-07-02-flagship-candidates/gemma4-e4b-r3.audit-report.json` and
+`…/gemma4-e4b-r4.audit-report.json` — documents the text-placement gap: S3's presence
+semantics accept sub-component title text in a nested child, the emitter's documented
+flattening cannot project it, and A3 catches it as designed. A
+text-placement/`requiredProps`-style refinement is a v0.4 candidate (plan, ADR-D1).
