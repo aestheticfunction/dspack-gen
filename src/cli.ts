@@ -13,11 +13,14 @@
  * 2 governance failure (any S-gate error), 3 emitter-gate failure,
  * 4 unknown rule type.
  */
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 import type { Contract } from "./core/contract.js";
 import { compileContext } from "./core/compiler.js";
 import { lintSurface, renderText, UnknownRuleTypeError } from "./core/lint/index.js";
+import { adapterFor, AdapterOutputError } from "./adapters/index.js";
+import { runPipeline } from "./run/orchestrator.js";
+import { renderMarkdown } from "./audit/report.js";
 
 function fail(message: string): never {
   console.error(`error: ${message}`);
@@ -83,12 +86,61 @@ function commandLint(flags: Map<string, string>): void {
   }
 }
 
+async function commandRun(flags: Map<string, string>): Promise<void> {
+  const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
+  const intent = flags.get("intent") ?? fail("--intent <id> is required");
+  const prompt = flags.get("prompt") ?? fail("--prompt <text> is required");
+  const modelRef = flags.get("model") ?? fail("--model ollama:<id>|anthropic:<id> is required");
+  const outDir = flags.get("out") ?? "out";
+
+  const contract = JSON.parse(readFileSync(resolve(contractPath), "utf8")) as Contract;
+  let result;
+  try {
+    result = await runPipeline({
+      contract,
+      intent,
+      prompt,
+      adapter: adapterFor(modelRef),
+      maxRepairs: flags.has("max-repairs") ? Number(flags.get("max-repairs")) : undefined,
+      compile: {
+        depth: flags.has("depth") ? Number(flags.get("depth")) : undefined,
+        omitRuleSteering: flags.get("no-steering") === "true",
+      },
+    });
+  } catch (e) {
+    if (e instanceof UnknownRuleTypeError) {
+      console.error(`error: ${e.message}`);
+      process.exit(4);
+    }
+    if (e instanceof AdapterOutputError) {
+      console.error(`error: ${e.message}`);
+      process.exit(1);
+    }
+    throw e;
+  }
+
+  mkdirSync(resolve(outDir), { recursive: true });
+  writeFileSync(join(resolve(outDir), "audit-report.json"), JSON.stringify(result.report, null, 2) + "\n");
+  writeFileSync(join(resolve(outDir), "audit-report.md"), renderMarkdown(result.report));
+  if (result.surfaceMessages) {
+    writeFileSync(join(resolve(outDir), "generated.surface.json"), JSON.stringify(result.surfaceMessages, null, 2) + "\n");
+  }
+
+  console.error(`outcome: ${result.report.outcome} (${result.report.attempts.length} attempt(s))`);
+  console.error(`audit report -> ${join(outDir, "audit-report.json")}`);
+  process.exit(result.exitCode);
+}
+
 function main(): void {
   const [command, ...rest] = process.argv.slice(2);
   const flags = parseFlags(rest);
   if (command === "context") return commandContext(flags);
   if (command === "lint") return commandLint(flags);
-  fail(`unknown command '${command ?? ""}' (available: context, lint)`);
+  if (command === "run") {
+    void commandRun(flags);
+    return;
+  }
+  fail(`unknown command '${command ?? ""}' (available: context, lint, run)`);
 }
 
 main();

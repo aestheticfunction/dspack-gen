@@ -29,6 +29,7 @@
     "smoke:ollama": "tsx scripts/smoke-ollama.ts"
   },
   "dependencies": {
+    "@aestheticfunction/dspack-to-a2ui": "github:aestheticfunction/dspack-to-a2ui#8dbbad5",
     "@anthropic-ai/sdk": "^0.109.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1"

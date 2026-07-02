@@ -1,8 +1,13 @@
 /**
  * @aestheticfunction/dspack-gen — public entry.
  *
- * Currently re-exports `core` (compiler; linter from PR-4). The pipeline
- * orchestrator, adapters, and audit report join here in later PRs; `./core`
- * stays the zero-network subpath ds-mcp depends on.
+ * `./core` remains the zero-network, emitter-free subpath (compiler + linter)
+ * that ds-mcp depends on; this root entry adds the network-touching pipeline:
+ * adapters, orchestrator, repair rendering, audit report.
  */
 export * from "./core/index.js";
+export * from "./adapters/index.js";
+export { ScriptedAdapter, type ScriptEntry } from "./adapters/fake.js";
+export { renderRepairMessage } from "./repair/render.js";
+export * from "./audit/report.js";
+export { runPipeline, type RunOptions, type RunResult } from "./run/orchestrator.js";
