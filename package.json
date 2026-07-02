@@ -30,7 +30,7 @@
     "demo:e2e": "playwright test"
   },
   "dependencies": {
-    "@aestheticfunction/dspack-to-a2ui": "github:aestheticfunction/dspack-to-a2ui#b47a2cf",
+    "@aestheticfunction/dspack-to-a2ui": "^0.2.0",
     "@anthropic-ai/sdk": "^0.109.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1"
