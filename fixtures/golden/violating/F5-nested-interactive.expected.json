@@ -28,7 +28,9 @@
         "path": "$.root.children[1].children[0]",
         "component": "input"
       },
-      "exampleIds": []
+      "exampleIds": [
+        "ex.delete-account-confirmation"
+      ]
     }
   ],
   "errorCount": 1,
