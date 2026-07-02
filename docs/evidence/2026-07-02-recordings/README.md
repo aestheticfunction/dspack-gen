@@ -8,7 +8,7 @@ analysis: `docs/m1-report.md`.
 | Take | Adapter | Ending | Trail |
 |---|---|---|---|
 | 1 (scripted fixture replay) | `fake:scripted` | `passed` | S3 violation (fixture) → repair → S1–S3 pass → A1–A3 pass |
-| 2 (live) | `ollama:qwen3.6:35b` | `failed-gate` (exit 3) | S3 violation → repair → **S1–S3 pass** → **A3 FAIL** (ADR-D1 text-placement gap) |
+| 2 (live) | `ollama:qwen3.6:35b` | `failed-gate` (exit 3) | S3 violation → repair → **S1–S3 pass** → **A3 FAIL** (missing `triggerLabel`: text-less trigger button, unrequired by the rule — ADR-D1 family) |
 
 Both takes ran against the post-`table` contract revision (sha `4c86ba94…`),
 later than the A/B matrix evidence in the sibling directories — and live

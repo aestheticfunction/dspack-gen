@@ -33,7 +33,7 @@ make violations unobservable and the audit trail vacuous.
 
 ## The two recordings
 
-Both takes ship with their audit report
+Both takes ship with their audit reports
 (`docs/evidence/2026-07-02-recordings/`), each schema-valid against
 [`audit-report.v1`](../schemas/audit-report.v1.schema.json).
 
@@ -58,11 +58,15 @@ rule steering in the prompt. What actually happened, in the report's own vocabul
 2. **Repair:** one deterministic repair message, carrying the rule's linked corrected
    reference.
 3. **Attempt 2:** **S1/S2/S3 all pass** — the repaired structure is verified by governance.
-4. **Emission:** gates **A1/A2 pass, A3 fails** on both A2UI versions — the surface placed
-   the AlertDialog's title text where S3's presence semantics accept it but the emitter's
-   documented flattening cannot project it (the ADR-D1 text-placement gap, previously
-   observed in the candidate evidence), so the emitted instance is invalid against the
-   generated catalog.
+4. **Emission:** gates **A1/A2 pass, A3 fails** on both A2UI versions. The emitted
+   AlertDialog carries `title`, `description`, and `cancelLabel`, but **no `triggerLabel`**:
+   the model put a text-less button (wrapping an empty badge) inside the trigger, and the
+   governance rule requires only cancel + title presence — nothing obliges the trigger to
+   carry a label — so S3 passed a surface the emitter's documented projection cannot turn
+   into a valid instance (`triggerLabel` is A3-required). A sibling of the text-*placement*
+   gap in the historical candidate evidence: both are cases where S3's structural semantics
+   accept content the emitter cannot project, and both feed the same
+   `requiredProps`-style v0.4 refinement (plan, ADR-D1).
 5. **Outcome: `failed-gate`, exit 3.** No surface rendered; the report names the failing
    gate and instance.
 
@@ -70,8 +74,8 @@ This is the enterprise story stated plainly: a schema-valid, prompt-steered, and
 one repair — **governance-clean** generation still produced an artifact the downstream gate
 had to refuse, and the pipeline refused it loudly with a machine-readable trail instead of
 degrading. The repair loop and the governance layer worked; the emitter gate worked; the
-failure is attributed precisely to the projection gap, which is a named v0.4 candidate
-(plan, ADR-D1).
+failure is attributed precisely to the governance-coverage/projection gap, a named v0.4
+candidate (plan, ADR-D1).
 
 *Two disclosure notes:* live findings locate at the offending descendant per the
 spec-conformance fix that landed after the historical evidence was recorded, so they do not
