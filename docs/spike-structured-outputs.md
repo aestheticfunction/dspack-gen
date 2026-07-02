@@ -120,7 +120,7 @@ paired `gemma4:e4b` variants are the same model architecture and size, differing
 quantization/engine (Q4_K_M/llama.cpp vs nvfp4/mlx) — the GGUF variant is 2/2 schema-valid
 while the MLX variant fails even the trivial schema.
 
-### Minimal upstream repro (for filing an issue)
+### Minimal upstream repro — FILED: [ollama/ollama#17013](https://github.com/ollama/ollama/issues/17013)
 
 - **Environment:** Ollama 0.31.1, macOS/Apple Silicon; model `gemma4:e4b-mlx`
   (nvfp4, `ollama show` reports `requires 0.31.0`).
