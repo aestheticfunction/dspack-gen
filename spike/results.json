@@ -1,0 +1,365 @@
+[
+  {
+    "model": "gemma4:e4b-mlx",
+    "depth": 3,
+    "run": 1,
+    "schemaBytes": 29097,
+    "wallMs": 11395,
+    "timings": {
+      "total_duration": 11346995750,
+      "load_duration": 2389857208,
+      "prompt_eval_count": 1057,
+      "prompt_eval_duration": 17256792,
+      "eval_count": 476,
+      "eval_duration": 3900473042
+    },
+    "outputBytes": 814,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token 'd', \"dsp{\"dspac\"... is not valid JSON",
+    "rawHead": "dsp{\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete My Account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-header\",\"children\":[{\"component\":\"a"
+  },
+  {
+    "model": "gemma4:e4b-mlx",
+    "depth": 3,
+    "run": 2,
+    "schemaBytes": 29097,
+    "wallMs": 6243,
+    "timings": {
+      "total_duration": 6239547791,
+      "load_duration": 61062708,
+      "prompt_eval_count": 1057,
+      "prompt_eval_duration": 10985833,
+      "eval_count": 443,
+      "eval_duration": 3765812875
+    },
+    "outputBytes": 764,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token 'd', \"dspackSurf\"... is not valid JSON",
+    "rawHead": "dspackSurface{\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete My Account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-header\",\"children\":[{\"com"
+  },
+  {
+    "model": "qwen3.6:35b-mlx",
+    "depth": 3,
+    "run": 1,
+    "schemaBytes": 29097,
+    "wallMs": 46494,
+    "timings": {
+      "total_duration": 46489368750,
+      "load_duration": 5373137875,
+      "prompt_eval_count": 3293,
+      "prompt_eval_duration": 2328547250,
+      "eval_count": 148,
+      "eval_duration": 2098311792
+    },
+    "outputBytes": 729,
+    "parsedJson": true,
+    "schemaValid": false,
+    "schemaErrors": [
+      {
+        "instancePath": "/root/component",
+        "schemaPath": "#/anyOf/0/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "button"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/component",
+        "schemaPath": "#/anyOf/1/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "alert-dialog"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/component",
+        "schemaPath": "#/anyOf/2/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "dialog"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/children/0/component",
+        "schemaPath": "#/anyOf/0/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "button"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/children/0/children/0",
+        "schemaPath": "#/$defs/node_2/anyOf/0/additionalProperties",
+        "keyword": "additionalProperties",
+        "params": {
+          "additionalProperty": "children"
+        },
+        "message": "must NOT have additional properties"
+      }
+    ],
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "text": "Delete account"
+                  }
+                ]
+              },
+              {
+                "component": "alert-dialog-content",
+                "children": [
+                  {
+                    "component": "alert-dialog-title",
+                    "text": "Are you absolutely sure?"
+                  },
+                  {
+                    "component": "alert-dialog-description",
+                    "text": "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+                  },
+                  {
+                    "component": "alert-dialog-footer",
+                    "children": [
+                      {
+                        "component": "alert-dialog-cancel",
+                        "text": "Cancel"
+                      },
+                      {
+                        "component": "alert-dialog-action",
+                        "text": "Delete account"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "qwen3.6:35b-mlx",
+    "depth": 3,
+    "run": 2,
+    "schemaBytes": 29097,
+    "error": "TypeError: fetch failed"
+  },
+  {
+    "model": "gemma4:e4b-mlx",
+    "depth": 6,
+    "run": 1,
+    "schemaBytes": 60294,
+    "wallMs": 12870,
+    "timings": {
+      "total_duration": 12863076334,
+      "load_duration": 2433603125,
+      "prompt_eval_count": 1057,
+      "prompt_eval_duration": 32091583,
+      "eval_count": 358,
+      "eval_duration": 5050321291
+    },
+    "outputBytes": 798,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token 'd', \"dspack{\"ds\"... is not valid JSON",
+    "rawHead": "dspack{\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete Account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-header\",\"children\":[{\"component\":\"a"
+  },
+  {
+    "model": "gemma4:e4b-mlx",
+    "depth": 6,
+    "run": 2,
+    "schemaBytes": 60294,
+    "wallMs": 11183,
+    "timings": {
+      "total_duration": 11178910709,
+      "load_duration": 58514125,
+      "prompt_eval_count": 1057,
+      "prompt_eval_duration": 17910708,
+      "eval_count": 495,
+      "eval_duration": 7605502292
+    },
+    "outputBytes": 724,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token 'd', \"dsp{\"dspac\"... is not valid JSON",
+    "rawHead": "dsp{\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete My Account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Are you sure you wan"
+  },
+  {
+    "model": "qwen3.6:35b-mlx",
+    "depth": 6,
+    "run": 1,
+    "schemaBytes": 60294,
+    "wallMs": 31680,
+    "timings": {
+      "total_duration": 31674541542,
+      "load_duration": 3862757792,
+      "prompt_eval_count": 1694,
+      "prompt_eval_duration": 1241476291,
+      "eval_count": 366,
+      "eval_duration": 7530406500
+    },
+    "outputBytes": 1708,
+    "parsedJson": true,
+    "schemaValid": false,
+    "schemaErrors": [
+      {
+        "instancePath": "/root/component",
+        "schemaPath": "#/anyOf/0/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "button"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/component",
+        "schemaPath": "#/anyOf/1/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "alert-dialog"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/component",
+        "schemaPath": "#/anyOf/2/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "dialog"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/children/0/component",
+        "schemaPath": "#/anyOf/0/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "button"
+        },
+        "message": "must be equal to constant"
+      },
+      {
+        "instancePath": "/root/children/0/children/1/component",
+        "schemaPath": "#/anyOf/0/properties/component/const",
+        "keyword": "const",
+        "params": {
+          "allowedValue": "button"
+        },
+        "message": "must be equal to constant"
+      }
+    ],
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-header",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "text": "Delete Account"
+                  }
+                ]
+              },
+              {
+                "component": "alert-dialog-content",
+                "children": [
+                  {
+                    "component": "alert-dialog-header",
+                    "children": [
+                      {
+                        "component": "alert-dialog-title",
+                        "text": "Are you absolutely sure?"
+                      },
+                      {
+                        "component": "alert-dialog-description",
+                        "text": "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+                      }
+                    ]
+                  },
+                  {
+                    "component": "alert-dialog-footer",
+                    "children": [
+                      {
+                        "component": "alert-dialog-cancel",
+                        "text": "Cancel"
+                      },
+                      {
+                        "component": "alert-dialog-action",
+                        "props": {
+                          "variant": "destructive"
+                        },
+                        "text": "Yes, delete my account"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "qwen3.6:35b-mlx",
+    "depth": 6,
+    "run": 2,
+    "schemaBytes": 60294,
+    "error": "TypeError: fetch failed"
+  }
+]

@@ -1,0 +1,769 @@
+[
+  {
+    "model": "qwen3:8b",
+    "depth": 3,
+    "run": 1,
+    "schemaBytes": 29097,
+    "wallMs": 11482,
+    "timings": {
+      "total_duration": 11433594625,
+      "load_duration": 1465293875,
+      "prompt_eval_count": 1173,
+      "prompt_eval_duration": 475314000,
+      "eval_count": 137,
+      "eval_duration": 2911711000
+    },
+    "outputBytes": 652,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "alert-dialog-content",
+      "card-header",
+      "card-title",
+      "card-content",
+      "badge"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "text": "Delete account"
+              },
+              {
+                "component": "alert-dialog-content",
+                "text": "This will permanently delete your account and all associated data. This action cannot be undone. Please enter your password to confirm: <input type=\"password\" placeholder=\"Password\" disabled>"
+              }
+            ]
+          },
+          {
+            "component": "card-header",
+            "children": [
+              {
+                "component": "card-title",
+                "text": "Account Deletion"
+              }
+            ]
+          },
+          {
+            "component": "card-content",
+            "children": [
+              {
+                "component": "badge",
+                "props": {
+                  "variant": "destructive"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "qwen3:8b",
+    "depth": 3,
+    "run": 2,
+    "schemaBytes": 29097,
+    "wallMs": 8723,
+    "timings": {
+      "total_duration": 8719750166,
+      "load_duration": 133524125,
+      "prompt_eval_count": 1193,
+      "prompt_eval_duration": 480194000,
+      "eval_count": 137,
+      "eval_duration": 2923590000
+    },
+    "outputBytes": 652,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "alert-dialog-content",
+      "card-header",
+      "card-title",
+      "card-content",
+      "badge"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "text": "Delete account"
+              },
+              {
+                "component": "alert-dialog-content",
+                "text": "This will permanently delete your account and all associated data. This action cannot be undone. Please enter your password to confirm: <input type=\"password\" placeholder=\"Password\" disabled>"
+              }
+            ]
+          },
+          {
+            "component": "card-header",
+            "children": [
+              {
+                "component": "card-title",
+                "text": "Account Deletion"
+              }
+            ]
+          },
+          {
+            "component": "card-content",
+            "children": [
+              {
+                "component": "badge",
+                "props": {
+                  "variant": "destructive"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "qwen3:8b",
+    "depth": 6,
+    "run": 1,
+    "schemaBytes": 60294,
+    "wallMs": 32673,
+    "timings": {
+      "total_duration": 32663615792,
+      "load_duration": 128233167,
+      "prompt_eval_count": 1449,
+      "prompt_eval_duration": 959619000,
+      "eval_count": 998,
+      "eval_duration": 21146501000
+    },
+    "outputBytes": 4492,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "badge",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action",
+      "card-footer"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive",
+                      "size": "lg"
+                    },
+                    "children": [
+                      {
+                        "component": "badge",
+                        "props": {
+                          "variant": "destructive"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "sm"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "sm",
+                              "disabled": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "size": "sm",
+                          "disabled": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "component": "alert-dialog-content",
+                    "children": [
+                      {
+                        "component": "alert-dialog-title",
+                        "text": "Delete your account?"
+                      },
+                      {
+                        "component": "alert-dialog-description",
+                        "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                      },
+                      {
+                        "component": "alert-dialog-footer",
+                        "children": [
+                          {
+                            "component": "alert-dialog-cancel",
+                            "text": "Cancel"
+                          },
+                          {
+                            "component": "alert-dialog-action",
+                            "text": "Delete account"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "component": "card-footer",
+            "children": [
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "secondary",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "secondary",
+                      "size": "sm",
+                      "disabled": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "size": "sm",
+                  "disabled": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "qwen3:8b",
+    "depth": 6,
+    "run": 2,
+    "schemaBytes": 60294,
+    "wallMs": 14179,
+    "timings": {
+      "total_duration": 14165781000,
+      "load_duration": 150208584,
+      "prompt_eval_count": 1300,
+      "prompt_eval_duration": 953246000,
+      "eval_count": 258,
+      "eval_duration": 5541096000
+    },
+    "outputBytes": 1203,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action",
+      "card-footer"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "children": [
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive"
+                        },
+                        "children": [
+                          {
+                            "component": "button",
+                            "props": {
+                              "variant": "destructive",
+                              "size": "icon",
+                              "asChild": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "component": "button",
+                        "props": {
+                          "variant": "destructive",
+                          "size": "default"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "component": "alert-dialog-content",
+                    "children": [
+                      {
+                        "component": "alert-dialog-title",
+                        "text": "Delete your account?"
+                      },
+                      {
+                        "component": "alert-dialog-description",
+                        "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                      },
+                      {
+                        "component": "alert-dialog-footer",
+                        "children": [
+                          {
+                            "component": "alert-dialog-cancel",
+                            "text": "Cancel"
+                          },
+                          {
+                            "component": "alert-dialog-action",
+                            "text": "Delete account"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "component": "card-footer",
+            "children": [
+              {
+                "component": "button",
+                "props": {
+                  "variant": "ghost",
+                  "size": "sm"
+                },
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "ghost",
+                      "size": "sm",
+                      "asChild": true
+                    }
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "props": {
+                  "variant": "ghost",
+                  "size": "sm",
+                  "asChild": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

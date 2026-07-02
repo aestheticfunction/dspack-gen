@@ -1,0 +1,38 @@
+[
+  {
+    "model": "gemma4:e4b-mlx",
+    "label": "C1-tiny",
+    "wallMs": 8219,
+    "rawHead": "json\n```json\n{\n  \"query\": \"Is the sky blue on a clear day?\",\n  \"answer\": true,\n  \"scientific_explanation\": {\n    \"phenomenon\": \"Rayleigh Scattering\",\n    \"description\": \"The atmosphere is composed of ",
+    "evalCount": 342,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token 'j', \"json\n```js\"... is not valid JSON"
+  },
+  {
+    "model": "gemma4:e4b-mlx",
+    "label": "C2-depth3",
+    "wallMs": 12416,
+    "rawHead": "```json\n{\n  \"name\": \"delete-account-screen\",\n  \"description\": \"A confirmation screen for permanently deleting a user's account, emphasizing caution and irreversible action.\",\n  \"layout\": {\n    \"type\":",
+    "evalCount": 810,
+    "parsedJson": false,
+    "parseError": "SyntaxError: Unexpected token '`', \"```json\n{\n\"... is not valid JSON"
+  },
+  {
+    "model": "gpt-oss:latest",
+    "label": "C1-tiny",
+    "wallMs": 19832,
+    "rawHead": "{\"ok\":true,\"reason\":\"The sky is blue on a clear day.\"}",
+    "evalCount": 18,
+    "parsedJson": true,
+    "schemaValid": true
+  },
+  {
+    "model": "gpt-oss:latest",
+    "label": "C2-depth3",
+    "wallMs": 26169,
+    "rawHead": "{\n  \"dspackSurface\": \"0.1\",\n  \"system\": \"shadcn/ui\",\n  \"intent\": \"destructive-action\",\n  \"root\": {\n    \"component\": \"card\",\n    \"props\": {\n      \"className\": \"w-full max-w-md mx-auto mt-10\"\n    },\n   ",
+    "evalCount": 303,
+    "parsedJson": true,
+    "schemaValid": true
+  }
+]

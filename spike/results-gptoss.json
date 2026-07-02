@@ -1,0 +1,350 @@
+[
+  {
+    "model": "gpt-oss:latest",
+    "depth": 6,
+    "run": 1,
+    "schemaBytes": 60294,
+    "wallMs": 6750,
+    "timings": {
+      "total_duration": 6705791042,
+      "load_duration": 244753042,
+      "prompt_eval_count": 1167,
+      "prompt_eval_duration": 17017000,
+      "eval_count": 159,
+      "eval_duration": 2765631000
+    },
+    "outputBytes": 740,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "children": []
+                  },
+                  {
+                    "component": "button",
+                    "text": "Delete account"
+                  }
+                ]
+              },
+              {
+                "component": "alert-dialog-content",
+                "children": [
+                  {
+                    "component": "alert-dialog-title",
+                    "text": "Delete your account?"
+                  },
+                  {
+                    "component": "alert-dialog-description",
+                    "text": "This action will permanently delete your account and all associated data. This cannot be undone."
+                  },
+                  {
+                    "component": "alert-dialog-footer",
+                    "children": [
+                      {
+                        "component": "alert-dialog-cancel",
+                        "text": "Cancel"
+                      },
+                      {
+                        "component": "alert-dialog-action",
+                        "text": "Delete"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "gpt-oss:latest",
+    "depth": 6,
+    "run": 2,
+    "schemaBytes": 60294,
+    "wallMs": 5903,
+    "timings": {
+      "total_duration": 5900183042,
+      "load_duration": 249998459,
+      "prompt_eval_count": 1196,
+      "prompt_eval_duration": 17135000,
+      "eval_count": 150,
+      "eval_duration": 2594545000
+    },
+    "outputBytes": 699,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "component": "alert-dialog-content",
+                "children": [
+                  {
+                    "component": "alert-dialog-title",
+                    "text": "Delete your account?"
+                  },
+                  {
+                    "component": "alert-dialog-description",
+                    "text": "This action will permanently delete your account and all associated data. It cannot be undone."
+                  },
+                  {
+                    "component": "alert-dialog-footer",
+                    "children": [
+                      {
+                        "component": "alert-dialog-cancel",
+                        "text": "Cancel"
+                      },
+                      {
+                        "component": "alert-dialog-action",
+                        "text": "Delete account"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "gpt-oss:latest",
+    "depth": 8,
+    "run": 1,
+    "schemaBytes": 81092,
+    "wallMs": 6095,
+    "timings": {
+      "total_duration": 6090905416,
+      "load_duration": 242074916,
+      "prompt_eval_count": 1199,
+      "prompt_eval_duration": 18049000,
+      "eval_count": 149,
+      "eval_duration": 2614995000
+    },
+    "outputBytes": 693,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "component": "alert-dialog-content",
+                "children": [
+                  {
+                    "component": "alert-dialog-title",
+                    "text": "Delete your account?"
+                  },
+                  {
+                    "component": "alert-dialog-description",
+                    "text": "This action will permanently delete your account and all associated data. This cannot be undone."
+                  },
+                  {
+                    "component": "alert-dialog-footer",
+                    "children": [
+                      {
+                        "component": "alert-dialog-cancel",
+                        "text": "Cancel"
+                      },
+                      {
+                        "component": "alert-dialog-action",
+                        "text": "Delete"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "gpt-oss:latest",
+    "depth": 8,
+    "run": 2,
+    "schemaBytes": 81092,
+    "wallMs": 10115,
+    "timings": {
+      "total_duration": 10111853583,
+      "load_duration": 219794958,
+      "prompt_eval_count": 1431,
+      "prompt_eval_duration": 17110000,
+      "eval_count": 159,
+      "eval_duration": 2784285000
+    },
+    "outputBytes": 740,
+    "parsedJson": true,
+    "schemaValid": true,
+    "componentsUsed": [
+      "card",
+      "alert-dialog",
+      "alert-dialog-trigger",
+      "button",
+      "alert-dialog-content",
+      "alert-dialog-title",
+      "alert-dialog-description",
+      "alert-dialog-footer",
+      "alert-dialog-cancel",
+      "alert-dialog-action"
+    ],
+    "usedAlertDialog": true,
+    "usedDialog": false,
+    "output": {
+      "dspackSurface": "0.1",
+      "system": "shadcn/ui",
+      "intent": "destructive-action",
+      "root": {
+        "component": "card",
+        "children": [
+          {
+            "component": "alert-dialog",
+            "children": [
+              {
+                "component": "alert-dialog-trigger",
+                "children": [
+                  {
+                    "component": "button",
+                    "props": {
+                      "variant": "destructive"
+                    },
+                    "children": []
+                  },
+                  {
+                    "component": "button",
+                    "text": "Delete account"
+                  }
+                ]
+              },
+              {
+                "component": "alert-dialog-content",
+                "children": [
+                  {
+                    "component": "alert-dialog-title",
+                    "text": "Delete your account?"
+                  },
+                  {
+                    "component": "alert-dialog-description",
+                    "text": "This action will permanently delete your account and all associated data. This cannot be undone."
+                  },
+                  {
+                    "component": "alert-dialog-footer",
+                    "children": [
+                      {
+                        "component": "alert-dialog-cancel",
+                        "text": "Cancel"
+                      },
+                      {
+                        "component": "alert-dialog-action",
+                        "text": "Delete"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]
