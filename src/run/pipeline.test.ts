@@ -144,6 +144,19 @@ describe("failure paths are first-class artifacts", () => {
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);
   });
 
+  it("a throwing onEvent hook never aborts the pipeline or changes the outcome", async () => {
+    const adapter = new ScriptedAdapter([{ output: violatingF1 }, { output: workedExample }]);
+    const result = await runPipeline({
+      ...baseOptions,
+      adapter,
+      onEvent: () => {
+        throw new Error("client disconnected mid-stream");
+      },
+    });
+    expect(result.report.outcome).toBe("passed");
+    expect(result.exitCode).toBe(0);
+  });
+
   it("adapter failure → failed-adapter, exit 1, recorded in the report", async () => {
     const adapter = new ScriptedAdapter([{ error: "model output is not valid JSON" }]);
     const result = await runPipeline({ ...baseOptions, adapter });

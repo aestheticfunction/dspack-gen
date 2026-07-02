@@ -79,7 +79,16 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
 
   const context = compileContext(contract, intent, options.compile);
   const conversation: GenerateMessage[] = [...context.fewshot, { role: "user", content: prompt }];
-  const emit = options.onEvent ?? (() => {});
+  // Purely observational, enforced: a throwing hook (e.g. a stream write
+  // after the client disconnected) must never abort the pipeline or change
+  // its outcome — the audit report is the artifact, events are a view.
+  const emit = (event: PipelineEvent): void => {
+    try {
+      options.onEvent?.(event);
+    } catch {
+      /* observational — swallowed by contract */
+    }
+  };
   emit({
     type: "start",
     intent,

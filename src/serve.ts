@@ -7,10 +7,14 @@
  *       emitted / done — the `done` event carries the full audit report v1).
  *
  * `fake: true` runs the deterministic ScriptedAdapter (golden violating
- * fixture F1, then the contract's worked example) — the demo's verification
- * mode and the Playwright gate's backend. Live mode requires `model`
- * ("ollama:<tag>" | "anthropic:<id>"); as everywhere, no default model
- * exists in code.
+ * fixture F1, then the contract's worked example for the requested intent) —
+ * the demo's verification mode and the Playwright gate's backend. Live mode
+ * requires `model` ("ollama:<tag>" | "anthropic:<id>"); as everywhere, no
+ * default model exists in code.
+ *
+ * Hardening (localhost-only is not a security boundary while a browser is
+ * running): CORS is restricted to the demo dev-server origins, request
+ * bodies are size-capped, and event emission can never fail a run.
  */
 import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
@@ -23,6 +27,7 @@ import { runPipeline } from "./run/orchestrator.js";
 
 export interface ServeOptions {
   contractPath: string;
+  /** 1–65535 (validated by the CLI); 0 is permitted for tests (ephemeral port). */
   port?: number;
 }
 
@@ -35,6 +40,12 @@ interface RunBody {
   noSteering?: boolean;
 }
 
+/** Only the demo dev server may read responses cross-origin. */
+const ALLOWED_ORIGINS = new Set(["http://localhost:5173", "http://127.0.0.1:5173"]);
+
+/** Pipeline requests are small JSON documents; anything bigger is a mistake. */
+const MAX_BODY_BYTES = 64 * 1024;
+
 export function startServer(options: ServeOptions): ReturnType<typeof createServer> {
   const contract = JSON.parse(readFileSync(resolve(options.contractPath), "utf8")) as Contract;
   const violating = JSON.parse(
@@ -42,9 +53,13 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
   ) as unknown;
 
   const server = createServer((request, response) => {
-    // The demo app runs on the Vite dev origin; this server is localhost-only.
-    response.setHeader("access-control-allow-origin", "*");
-    response.setHeader("access-control-allow-headers", "content-type");
+    const origin = request.headers.origin;
+    if (origin && ALLOWED_ORIGINS.has(origin)) {
+      response.setHeader("access-control-allow-origin", origin);
+      response.setHeader("vary", "origin");
+      response.setHeader("access-control-allow-methods", "GET, POST, OPTIONS");
+      response.setHeader("access-control-allow-headers", "content-type");
+    }
     if (request.method === "OPTIONS") {
       response.writeHead(204).end();
       return;
@@ -60,8 +75,19 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
     }
 
     let raw = "";
-    request.on("data", (chunk) => (raw += chunk));
+    let tooLarge = false;
+    request.on("data", (chunk) => {
+      if (tooLarge) return;
+      raw += chunk;
+      if (raw.length > MAX_BODY_BYTES) {
+        tooLarge = true;
+        response.writeHead(413, { "content-type": "application/json" });
+        response.end(JSON.stringify({ error: `request body exceeds ${MAX_BODY_BYTES} bytes` }));
+        request.destroy();
+      }
+    });
     request.on("end", () => {
+      if (tooLarge) return;
       void (async () => {
         let body: RunBody;
         try {
@@ -72,13 +98,21 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
           return;
         }
 
-        const workedExample = (contract.examples ?? [])[0]?.surface;
-        const adapter = body.fake
-          ? new ScriptedAdapter([{ output: violating }, { output: workedExample }])
-          : body.model
-            ? adapterFor(body.model)
-            : null;
-        if (!adapter) {
+        const intent = body.intent ?? "destructive-action";
+        let adapter;
+        if (body.fake) {
+          // The scripted repair must land on the contract's worked example
+          // FOR THIS INTENT — fail fast instead of scripting `undefined`.
+          const example = (contract.examples ?? []).find((e) => e.intent === intent);
+          if (!example) {
+            response.writeHead(400, { "content-type": "application/json" });
+            response.end(JSON.stringify({ error: `contract has no example for intent '${intent}' — fake mode needs one` }));
+            return;
+          }
+          adapter = new ScriptedAdapter([{ output: violating }, { output: example.surface }]);
+        } else if (body.model) {
+          adapter = adapterFor(body.model);
+        } else {
           response.writeHead(400, { "content-type": "application/json" });
           response.end(JSON.stringify({ error: "either fake: true or model: 'ollama:<tag>|anthropic:<id>' is required" }));
           return;
@@ -91,7 +125,7 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
         try {
           await runPipeline({
             contract,
-            intent: body.intent ?? "destructive-action",
+            intent,
             prompt: body.prompt ?? "a screen to delete my account",
             adapter,
             maxRepairs: body.maxRepairs,
@@ -112,7 +146,9 @@ export function startServer(options: ServeOptions): ReturnType<typeof createServ
 
   const port = options.port ?? 8787;
   server.listen(port, "127.0.0.1", () => {
-    console.error(`dspack-gen serve: http://127.0.0.1:${port} (contract: ${contract.name})`);
+    const address = server.address();
+    const actual = typeof address === "object" && address ? address.port : port;
+    console.error(`dspack-gen serve: http://127.0.0.1:${actual} (contract: ${contract.name})`);
   });
   return server;
 }

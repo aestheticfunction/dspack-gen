@@ -2,7 +2,7 @@
   "name": "@aestheticfunction/dspack-gen",
   "version": "0.1.0",
   "private": true,
-  "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1\u2013S3, bounded repair, protocol emission, audit reports.",
+  "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1–S3, bounded repair, protocol emission, audit reports.",
   "type": "module",
   "license": "Apache-2.0",
   "exports": {
@@ -30,7 +30,7 @@
     "demo:e2e": "playwright test"
   },
   "dependencies": {
-    "@aestheticfunction/dspack-to-a2ui": "github:aestheticfunction/dspack-to-a2ui#e68a17e",
+    "@aestheticfunction/dspack-to-a2ui": "github:aestheticfunction/dspack-to-a2ui#b47a2cf",
     "@anthropic-ai/sdk": "^0.109.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1"

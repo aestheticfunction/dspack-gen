@@ -141,10 +141,17 @@ function main(): void {
     return;
   }
   if (command === "serve") {
+    let port: number | undefined;
+    if (flags.has("port")) {
+      port = Number(flags.get("port"));
+      if (!Number.isInteger(port) || port < 1 || port > 65535) {
+        fail(`--port must be an integer between 1 and 65535 (got '${flags.get("port")}')`);
+      }
+    }
     void import("./serve.js").then(({ startServer }) =>
       startServer({
         contractPath: flags.get("dspack") ?? "fixtures/shadcn.v0_3.dspack.json",
-        port: flags.has("port") ? Number(flags.get("port")) : undefined,
+        port,
       }),
     );
     return;
