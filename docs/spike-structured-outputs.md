@@ -174,3 +174,41 @@ Full audit reports retained in `docs/evidence/2026-07-02-flagship-candidates/`.
 
 Per-rule × per-model first-attempt violation and repair-success rates are PR-10 (eval
 matrix) questions; nothing here claims a cause.
+
+### Post-example-link rerun (same day) — A/B result: negative
+
+The maintainer-approved contract amendment (dspack#9 follow-up commit) linked the EXISTING
+`ex.delete-account-confirmation` to `rule.button-no-interactive-descendants` — the one rule
+whose repair feedback previously carried no corrected reference. **The A/B is clean on that
+single variable:** the compiled generation context is byte-identical pre/post fix (verified
+by diff against the checked-in golden; the example was already in the destructive-action
+few-shot), and only the repair message changes. Audit-report `contract.sha256` values
+document both arms (`e377998a…` pre, `681197f4…` post); post-fix repair messages verifiably
+contain the corrected reference.
+
+Same models, prompt, and run counts; audit reports in
+`docs/evidence/2026-07-02-flagship-candidates-post-example-link/`:
+
+| Model | Runs | Pre-fix endings | Post-fix endings |
+|---|---|---|---|
+| `gemma4:e4b` | 4 | exhausted ×2 · failed-gate ×2 | exhausted ×4 (3→3→3 findings, no convergence) |
+| `gpt-oss:latest` | 5 | clean ×3 · exhausted ×2 | clean ×3 · exhausted ×2 (1→1→1) |
+| `qwen3.6:35b` | 2 | exhausted ×2 | exhausted ×2 (1→1→1) |
+
+**No repaired pass post-fix (11/11), and no change in repair convergence.** Stated at
+measured strength: the pre-fix data showed linked-example rules repairing whenever they
+fired while the unlinked rule never repaired — a correlation; the rerun tested whether the
+corrected reference is causal for this rule, and **it is not sufficient**: adding the
+reference produced no repair progress on `rule.button-no-interactive-descendants` for these
+models on this prompt. The contract amendment stands on its independent design grounds
+(ADR-7's repair template carries linked examples; a rule without one is a contract gap);
+the repair-failure mechanism for this rule is an open PR-10 question. Per the pre-agreed
+fallback, the live recording is the honest-exhaustion take and the write-up reports this
+negative result.
+
+**ADR-D1 evidence (filed):** the pre-fix `gemma4:e4b` failed-gate pair —
+`docs/evidence/2026-07-02-flagship-candidates/gemma4-e4b-r3.audit-report.json` and
+`…/gemma4-e4b-r4.audit-report.json` — documents the text-placement gap: S3's presence
+semantics accept sub-component title text in a nested child, the emitter's documented
+flattening cannot project it, and A3 catches it as designed. A
+text-placement/`requiredProps`-style refinement is a v0.4 candidate (plan, ADR-D1).
