@@ -206,6 +206,14 @@ the repair-failure mechanism for this rule is an open PR-10 question. Per the pr
 fallback, the live recording is the honest-exhaustion take and the write-up reports this
 negative result.
 
+*Hypothesis, recorded as PR-10 matrix design input only — not a finding:* the two
+alert-dialog rules call for substitution/addition-shaped repairs, while
+`rule.button-no-interactive-descendants` requires removal or restructuring, and the repair
+template's "Do not change parts that were not flagged" may be less effective for
+deletion-shaped repairs. PR-10's prompt set therefore spans repair shapes (substitution,
+addition, deletion, restructuring) and includes one repair-template variant for removal
+cases.
+
 **ADR-D1 evidence (filed):** the pre-fix `gemma4:e4b` failed-gate pair —
 `docs/evidence/2026-07-02-flagship-candidates/gemma4-e4b-r3.audit-report.json` and
 `…/gemma4-e4b-r4.audit-report.json` — documents the text-placement gap: S3's presence
