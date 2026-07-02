@@ -1,0 +1,6106 @@
+{
+  "system": "You generate user interface surfaces for the \"shadcn/ui\" design system. You must respond\nwith a single JSON object conforming to the provided schema — a dspack surface document.\n\n## Component vocabulary\nYou may use only these components (with the listed props and allowed values):\n- button — An interactive element that triggers an action when activated. Built on a native button element with support for Radix UI Slot composition via asChild. Props: variant ∈ {default, destructive, outline, secondary, ghost, link}; size ∈ {default, sm, lg, icon}; disabled; asChild.\n- alert-dialog — A modal dialog that interrupts the user with important content and expects a response. Built on Radix UI AlertDialog. Renders with a required action and a cancel option. The user cannot dismiss it by clicking the overlay or pressing Escape — they must choose an explicit action. Props: open; onOpenChange. Sub-components (used as children): alert-dialog-trigger, alert-dialog-content, alert-dialog-header, alert-dialog-title, alert-dialog-description, alert-dialog-footer, alert-dialog-action, alert-dialog-cancel.\n- dialog — A modal window that appears over the page content. Built on Radix UI Dialog. Can be dismissed by clicking the overlay, pressing Escape, or activating a close button. Props: open; onOpenChange; modal. Sub-components (used as children): dialog-trigger, dialog-content, dialog-header, dialog-title, dialog-description, dialog-footer, dialog-close.\n- card — A container for grouping related content and actions. Provides visual separation through a bordered surface. Props: className. Sub-components (used as children): card-header, card-title, card-description, card-content, card-footer.\n- input — A single-line text input field built on the native <input> element. Supports all standard HTML input types. Props: type; placeholder; disabled.\n- badge — A small label for categorization, status indication, or metadata. Renders as an inline element. Props: variant ∈ {default, secondary, outline, destructive}.\n- dropdown-menu — A menu that appears on activation of a trigger element. Built on Radix UI DropdownMenu. Supports items, checkboxes, radio groups, sub-menus, separators, and keyboard navigation. Props: open; onOpenChange; modal. Sub-components (used as children): dropdown-menu-trigger, dropdown-menu-content, dropdown-menu-item, dropdown-menu-checkbox-item, dropdown-menu-radio-group, dropdown-menu-radio-item, dropdown-menu-label, dropdown-menu-separator, dropdown-menu-group, dropdown-menu-sub, dropdown-menu-sub-trigger, dropdown-menu-sub-content.\n\n## Governance rules in effect (intent: destructive-action)\nThese are hard requirements. Surfaces violating them will be rejected:\n1. [rule.destructive-requires-alertdialog / must] Use alert-dialog for this surface; dialog is forbidden. Why: Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.\n2. [rule.alertdialog-requires-cancel / must] Every alert-dialog must contain alert-dialog-cancel and alert-dialog-title. Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\n3. [rule.button-no-interactive-descendants / must] Never place button or input inside a button. Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\n## Design intent\nIntent \"destructive-action\": The requested UI performs an irreversible or high-consequence operation: deleting records or accounts, revoking access, removing members.\nRelated pattern \"Destructive Action Confirmation\": Use AlertDialog, not Dialog, for destructive confirmations. The trigger should clearly indicate the destructive nature of the action. Inside the AlertDialog, provide a clear title stating what will happen, a description of the consequences, and two actions: a cancel option and a confirm option. The confirm button MUST use the destructive variant. Place the cancel action before the confirm action in the footer. The description should state specifically what will be affected (e.g., 'This will permanently delete 3 projects and all associated data').\n\nOutput only the JSON object. No commentary.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "dspackSurface",
+      "system",
+      "intent",
+      "root"
+    ],
+    "properties": {
+      "dspackSurface": {
+        "const": "0.1"
+      },
+      "system": {
+        "const": "shadcn/ui"
+      },
+      "intent": {
+        "const": "destructive-action"
+      },
+      "root": {
+        "$ref": "#/$defs/node_0"
+      }
+    },
+    "$defs": {
+      "node_0": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "button"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "destructive",
+                      "outline",
+                      "secondary",
+                      "ghost",
+                      "link"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "default",
+                      "sm",
+                      "lg",
+                      "icon"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "asChild": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-action"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-cancel"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-close"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "className": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "input"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "badge"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "secondary",
+                      "outline",
+                      "destructive"
+                    ]
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-checkbox-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-label"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-separator"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_1"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "node_1": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "button"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "destructive",
+                      "outline",
+                      "secondary",
+                      "ghost",
+                      "link"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "default",
+                      "sm",
+                      "lg",
+                      "icon"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "asChild": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-action"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-cancel"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-close"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "className": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "input"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "badge"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "secondary",
+                      "outline",
+                      "destructive"
+                    ]
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-checkbox-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-label"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-separator"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_2"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "node_2": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "button"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "destructive",
+                      "outline",
+                      "secondary",
+                      "ghost",
+                      "link"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "default",
+                      "sm",
+                      "lg",
+                      "icon"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "asChild": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-action"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-cancel"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-close"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "className": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "input"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "badge"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "secondary",
+                      "outline",
+                      "destructive"
+                    ]
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-checkbox-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-label"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-separator"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_3"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "node_3": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "button"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "destructive",
+                      "outline",
+                      "secondary",
+                      "ghost",
+                      "link"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "default",
+                      "sm",
+                      "lg",
+                      "icon"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "asChild": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-action"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-cancel"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-close"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "className": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "input"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "badge"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "secondary",
+                      "outline",
+                      "destructive"
+                    ]
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-checkbox-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-label"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-separator"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_4"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "node_4": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "button"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "destructive",
+                      "outline",
+                      "secondary",
+                      "ghost",
+                      "link"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "default",
+                      "sm",
+                      "lg",
+                      "icon"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "asChild": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-action"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-cancel"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-close"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "className": {
+                    "type": "string"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "input"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "badge"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "secondary",
+                      "outline",
+                      "destructive"
+                    ]
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-checkbox-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-label"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-separator"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/node_5"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "node_5": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "button"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "destructive",
+                      "outline",
+                      "secondary",
+                      "ghost",
+                      "link"
+                    ]
+                  },
+                  "size": {
+                    "enum": [
+                      "default",
+                      "sm",
+                      "lg",
+                      "icon"
+                    ]
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  },
+                  "asChild": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-action"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "alert-dialog-cancel"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dialog-close"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "className": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-header"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-title"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-description"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "card-footer"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "input"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "placeholder": {
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "badge"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "variant": {
+                    "enum": [
+                      "default",
+                      "secondary",
+                      "outline",
+                      "destructive"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "open": {
+                    "type": "boolean"
+                  },
+                  "onOpenChange": {
+                    "type": "string"
+                  },
+                  "modal": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-checkbox-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-radio-item"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-label"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-separator"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-group"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-trigger"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component"
+            ],
+            "properties": {
+              "component": {
+                "const": "dropdown-menu-sub-content"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "fewshot": [
+    {
+      "role": "user",
+      "content": "a screen to delete my account"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}"
+    }
+  ]
+}
