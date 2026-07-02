@@ -1,0 +1,37 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.button-no-interactive-descendants",
+      "type": "forbidden-composition",
+      "requirement": "must",
+      "level": "error",
+      "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[1], id \"subscribe\").",
+      "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+      "location": {
+        "path": "$.root.children[1].children[0]",
+        "component": "input"
+      },
+      "exampleIds": []
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

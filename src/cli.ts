@@ -3,17 +3,24 @@
  * dspack-gen CLI.
  *
  *   dspack-gen context --dspack <contract.json> --intent <id> [--depth N] [--no-steering]
+ *   dspack-gen lint    --dspack <contract.json> --surface <file.dsurface.json>
  *
- * Prints the compiled generation context ({ system, schema, fewshot }) as JSON.
- * Later PRs add `lint` (surface gates S1–S3) and `run` (the full pipeline).
+ * `context` prints the compiled generation context ({ system, schema, fewshot }).
+ * `lint` runs surface gates S1–S3: machine-readable JSON report on stdout,
+ * human rendering on stderr. Later PRs add `run` (the full pipeline).
  *
  * Exit codes (full table in README): 0 clean, 1 internal/usage error,
- * 2 governance failure, 3 emitter-gate failure, 4 unknown rule type.
+ * 2 governance failure (any S-gate error), 3 emitter-gate failure,
+ * 4 unknown rule type.
  */
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 import type { Contract } from "./core/contract.js";
 import { compileContext } from "./core/compiler.js";
+import { lintSurface, renderText, UnknownRuleTypeError } from "./core/lint/index.js";
+import { adapterFor, AdapterOutputError } from "./adapters/index.js";
+import { runPipeline } from "./run/orchestrator.js";
+import { renderMarkdown } from "./audit/report.js";
 
 function fail(message: string): never {
   console.error(`error: ${message}`);
@@ -41,11 +48,7 @@ function parseFlags(argv: string[]): Map<string, string> {
   return flags;
 }
 
-function main(): void {
-  const [command, ...rest] = process.argv.slice(2);
-  if (command !== "context") fail(`unknown command '${command ?? ""}' (available: context)`);
-
-  const flags = parseFlags(rest);
+function commandContext(flags: Map<string, string>): void {
   const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
   const intent = flags.get("intent") ?? fail("--intent <id> is required");
 
@@ -60,6 +63,109 @@ function main(): void {
     fail(e instanceof Error ? e.message : String(e));
   }
   process.stdout.write(JSON.stringify(context, null, 2) + "\n");
+}
+
+function commandLint(flags: Map<string, string>): void {
+  const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
+  const surfacePath = flags.get("surface") ?? fail("--surface <file.dsurface.json> is required");
+
+  const contract = JSON.parse(readFileSync(resolve(contractPath), "utf8")) as Contract;
+  const surface = JSON.parse(readFileSync(resolve(surfacePath), "utf8")) as unknown;
+
+  try {
+    const report = lintSurface(surface, contract);
+    process.stdout.write(JSON.stringify(report, null, 2) + "\n");
+    process.stderr.write(renderText(report) + "\n");
+    process.exit(report.pass ? 0 : 2);
+  } catch (e) {
+    if (e instanceof UnknownRuleTypeError) {
+      console.error(`error: ${e.message}`);
+      process.exit(4);
+    }
+    throw e;
+  }
+}
+
+function parseMaxRepairs(flags: Map<string, string>): number | undefined {
+  if (!flags.has("max-repairs")) return undefined;
+  const value = Number(flags.get("max-repairs"));
+  if (!Number.isInteger(value) || value < 0) {
+    fail(`--max-repairs must be a non-negative integer (got '${flags.get("max-repairs")}')`);
+  }
+  return value;
+}
+
+async function commandRun(flags: Map<string, string>): Promise<void> {
+  const contractPath = flags.get("dspack") ?? fail("--dspack <contract.json> is required");
+  const intent = flags.get("intent") ?? fail("--intent <id> is required");
+  const prompt = flags.get("prompt") ?? fail("--prompt <text> is required");
+  const modelRef = flags.get("model") ?? fail("--model ollama:<id>|anthropic:<id> is required");
+  const outDir = flags.get("out") ?? "out";
+
+  const contract = JSON.parse(readFileSync(resolve(contractPath), "utf8")) as Contract;
+  let result;
+  try {
+    result = await runPipeline({
+      contract,
+      intent,
+      prompt,
+      adapter: adapterFor(modelRef),
+      maxRepairs: parseMaxRepairs(flags),
+      compile: {
+        depth: flags.has("depth") ? Number(flags.get("depth")) : undefined,
+        omitRuleSteering: flags.get("no-steering") === "true",
+      },
+    });
+  } catch (e) {
+    if (e instanceof UnknownRuleTypeError) {
+      console.error(`error: ${e.message}`);
+      process.exit(4);
+    }
+    if (e instanceof AdapterOutputError) {
+      console.error(`error: ${e.message}`);
+      process.exit(1);
+    }
+    throw e;
+  }
+
+  mkdirSync(resolve(outDir), { recursive: true });
+  writeFileSync(join(resolve(outDir), "audit-report.json"), JSON.stringify(result.report, null, 2) + "\n");
+  writeFileSync(join(resolve(outDir), "audit-report.md"), renderMarkdown(result.report));
+  if (result.surfaceMessages) {
+    writeFileSync(join(resolve(outDir), "generated.surface.json"), JSON.stringify(result.surfaceMessages, null, 2) + "\n");
+  }
+
+  console.error(`outcome: ${result.report.outcome} (${result.report.attempts.length} attempt(s))`);
+  console.error(`audit report -> ${join(outDir, "audit-report.json")}`);
+  process.exit(result.exitCode);
+}
+
+function main(): void {
+  const [command, ...rest] = process.argv.slice(2);
+  const flags = parseFlags(rest);
+  if (command === "context") return commandContext(flags);
+  if (command === "lint") return commandLint(flags);
+  if (command === "run") {
+    void commandRun(flags);
+    return;
+  }
+  if (command === "serve") {
+    let port: number | undefined;
+    if (flags.has("port")) {
+      port = Number(flags.get("port"));
+      if (!Number.isInteger(port) || port < 1 || port > 65535) {
+        fail(`--port must be an integer between 1 and 65535 (got '${flags.get("port")}')`);
+      }
+    }
+    void import("./serve.js").then(({ startServer }) =>
+      startServer({
+        contractPath: flags.get("dspack") ?? "fixtures/shadcn.v0_3.dspack.json",
+        port,
+      }),
+    );
+    return;
+  }
+  fail(`unknown command '${command ?? ""}' (available: context, lint, run, serve)`);
 }
 
 main();

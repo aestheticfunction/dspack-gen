@@ -1,0 +1,16 @@
+Your surface violates 2 governance rule finding(s) of the "shadcn/ui" design system:
+
+Violation 1: [rule.destructive-requires-alertdialog / must]
+  At: $.root.children[0] (component: dialog)
+  Component 'dialog' is forbidden for intent 'destructive-action'.
+  Why: Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.
+Violation 2: [rule.destructive-requires-alertdialog / must]
+  At: $.root (component: surface)
+  Required component 'alert-dialog' does not appear in the surface.
+  Why: Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.
+
+A correct example (ex.delete-account-confirmation): {"dspackSurface":"0.1","system":"shadcn/ui","intent":"destructive-action","root":{"component":"card","children":[{"component":"alert-dialog","children":[{"component":"alert-dialog-trigger","children":[{"component":"button","props":{"variant":"destructive"},"text":"Delete account"}]},{"component":"alert-dialog-content","children":[{"component":"alert-dialog-title","text":"Delete your account?"},{"component":"alert-dialog-description","text":"This will permanently delete your account and all associated data. This action cannot be undone."},{"component":"alert-dialog-footer","children":[{"component":"alert-dialog-cancel","text":"Cancel"},{"component":"alert-dialog-action","text":"Delete account"}]}]}]}]}}
+
+Produce a corrected dspack surface document that fixes every violation above.
+Do not change parts of the surface that were not flagged.
+Respond with a single JSON object conforming to the provided schema. No commentary.

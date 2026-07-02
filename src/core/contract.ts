@@ -135,6 +135,22 @@ export function subComponentIndex(contract: Contract): Map<string, string> {
   return index;
 }
 
+/**
+ * Sub-component ids declared by more than one component, with all declaring
+ * parents. Spec v0.3 §5 makes document-wide uniqueness normative for
+ * contracts using governance blocks: S2 and rule resolution work by id alone
+ * and must never depend on object iteration order.
+ */
+export function duplicateSubComponentIds(contract: Contract): Map<string, string[]> {
+  const parents = new Map<string, string[]>();
+  for (const [id, component] of Object.entries(contract.components ?? {})) {
+    for (const sub of component.composition?.subComponents ?? []) {
+      parents.set(sub.id, [...(parents.get(sub.id) ?? []), id]);
+    }
+  }
+  return new Map([...parents].filter(([, declaredBy]) => declaredBy.length > 1));
+}
+
 export function getIntent(contract: Contract, intentId: string): IntentEntry {
   const intent = (contract.intents ?? []).find((i) => i.id === intentId);
   if (!intent) {

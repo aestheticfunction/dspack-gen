@@ -21,7 +21,8 @@ const FORBIDDEN_MODULES = [
   "undici",
 ];
 
-const files = readdirSync(CORE_DIR)
+const files = readdirSync(CORE_DIR, { recursive: true })
+  .map(String)
   .filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts"))
   .map((f) => join(CORE_DIR, f));
 
@@ -38,10 +39,16 @@ describe("core boundary", () => {
     for (const specifier of imports) {
       expect(FORBIDDEN_MODULES, `${file} imports ${specifier}`).not.toContain(specifier);
       if (specifier.startsWith(".")) {
-        expect(specifier, `${file} escapes core via ${specifier}`).not.toMatch(/^\.\.\//);
+        // Relative imports may traverse within core (lint/ -> ../contract.js)
+        // but must never escape src/core itself.
+        const depth = file.split(/[\\/]/).length - 2; // segments below src/ (cross-platform separators)
+        const ups = specifier.match(/\.\.\//g)?.length ?? 0;
+        expect(ups, `${file} escapes core via ${specifier}`).toBeLessThan(depth);
       } else {
-        // Bare imports must be dependency-free core tooling only (none today).
-        expect(specifier.startsWith("node:"), `${file} bare-imports ${specifier}`).toBe(true);
+        // Bare imports: node built-ins (non-network, checked above) and the
+        // pure-computation validator ajv only.
+        const allowed = specifier.startsWith("node:") || specifier === "ajv" || specifier.startsWith("ajv/") || specifier === "ajv-formats";
+        expect(allowed, `${file} bare-imports ${specifier}`).toBe(true);
       }
     }
     expect(source, `${file} performs network I/O`).not.toMatch(/\bfetch\s*\(/);

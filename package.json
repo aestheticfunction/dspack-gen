@@ -25,13 +25,18 @@
     "build": "tsc -p tsconfig.json",
     "prepare": "npm run build",
     "test": "vitest run",
-    "context": "tsx src/cli.ts context"
+    "context": "tsx src/cli.ts context",
+    "smoke:ollama": "tsx scripts/smoke-ollama.ts",
+    "demo:e2e": "playwright test"
   },
   "dependencies": {
+    "@aestheticfunction/dspack-to-a2ui": "github:aestheticfunction/dspack-to-a2ui#b47a2cf",
+    "@anthropic-ai/sdk": "^0.109.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^22.10.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
