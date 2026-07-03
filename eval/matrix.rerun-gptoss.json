@@ -1,6 +1,6 @@
 {
   "comment": "E0 (M3 Phase 0): gpt-oss third-local-family column against the v0.3 contract \u2014 same 12 prompts x 2 templates x 3 runs as the 2026-07-03 rerun (prompts byte-identical to matrix.rerun-local.json); model id from `ollama list` 2026-07-03 (gpt-oss:latest, GGUF/llama.cpp engine). Extends findings.md to three local families for the M2 write-up (plan: m3-planning, Phase 0 E0).",
-  "contract": "../fixtures/shadcn.v0_3.dspack.json",
+  "contract": "../fixtures/shadcn.v0_4.dspack.json",
   "runsPerCell": 3,
   "maxRepairs": 2,
   "models": [

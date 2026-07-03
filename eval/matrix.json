@@ -1,6 +1,6 @@
 {
   "comment": "Live eval matrix. Model ids are configuration, verified against the installed/live providers at authoring time (ollama tags from `ollama list` 2026-07-02, GGUF/llama.cpp engine only — mlx variants excluded per the S0 engine finding, ollama/ollama#17013). Prompts span repair shapes (substitution / addition / deletion / restructuring) and include ADR-D1 probes; every prompt crosses both repair templates (the removal-shape hypothesis A/B). Cost scales linearly in runsPerCell × models × prompts × templates — adjust here, never in code. Live runs are documented, never CI-gating.",
-  "contract": "../fixtures/shadcn.v0_3.dspack.json",
+  "contract": "../fixtures/shadcn.v0_4.dspack.json",
   "runsPerCell": 3,
   "maxRepairs": 2,
   "models": [

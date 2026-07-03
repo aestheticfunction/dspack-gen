@@ -1,12 +1,16 @@
 /**
  * PR-4 acceptance gates: surface gates S1–S3 over the golden fixtures.
  *
- * Violating goldens F1–F5 each reproduce their checked-in *.expected.json
+ * Violating goldens F1–F7 each reproduce their checked-in *.expected.json
  * exactly (regenerate deliberately with UPDATE_GOLDEN=1 npm test — the diff
- * is the review artifact). The clean golden (the contract's worked example)
- * passes all gates. S1/S2 are independently reported; unknown rule types
- * throw (CLI exit 4). All three v0.3 evaluators are active — see rules.ts for
- * why forbidden-composition could not defer to M2.
+ * is the review artifact). F6a/F6b are the two measured variants of the
+ * projection gap (label nested / label absent — 78/78 gate-failure signature)
+ * that v0.4's required-props converts into repairable S3 findings; F7 is the
+ * category-based forbidden-composition form. The clean golden (the contract's
+ * worked example) passes all gates. S1/S2 are independently reported; unknown
+ * rule types throw (CLI exit 4). All three v0.3 evaluators plus v0.4's
+ * required-props are active — see rules.ts for why forbidden-composition
+ * could not defer to M2.
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -14,7 +18,7 @@ import { describe, expect, it } from "vitest";
 import type { Contract } from "../contract.js";
 import { lintSurface, UnknownRuleTypeError } from "./index.js";
 
-const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_3.dspack.json", "utf8")) as Contract;
+const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 const VIOLATING = "fixtures/golden/violating";
 
 const load = (path: string) => JSON.parse(readFileSync(path, "utf8"));
@@ -22,8 +26,8 @@ const load = (path: string) => JSON.parse(readFileSync(path, "utf8"));
 describe("violating goldens reproduce their expected reports exactly", () => {
   const fixtures = readdirSync(VIOLATING).filter((f) => f.endsWith(".dsurface.json"));
 
-  it("all five violating fixtures are present", () => {
-    expect(fixtures.length).toBe(5);
+  it("all eight violating fixtures are present", () => {
+    expect(fixtures.length).toBe(8);
   });
 
   it.each(fixtures)("%s", (fixture) => {
@@ -63,6 +67,58 @@ describe("expected findings, spot-checked (goldens carry the full detail)", () =
     expect(nested.location.path).toBe("$.root.children[1].children[0]");
     expect(nested.location.component).toBe("input");
     expect(nested.message).toMatch(/inside 'button' \(at \$\.root\.children\[1\], id "subscribe"\)/);
+  });
+
+  it("F6a: label nested in a child — required-props fires AT the button, exactly once", () => {
+    const report = lintSurface(load(join(VIOLATING, "F6a-trigger-label-nested.dsurface.json")), contract);
+    const labels = report.findings.filter((f) => f.ruleId === "rule.trigger-carries-label");
+    expect(labels.length).toBe(1);
+    expect(labels[0].location.component).toBe("button");
+    expect(labels[0].location.path).toBe("$.root.children[0].children[0].children[0]");
+    expect(labels[0].message).toMatch(/non-empty direct text .*text in descendants does not count/);
+    expect(report.findings.length).toBe(1); // isolated: no other rule fires
+  });
+
+  it("F6b: label absent entirely — the same rule, the take-2 shape", () => {
+    const report = lintSurface(load(join(VIOLATING, "F6b-trigger-label-missing.dsurface.json")), contract);
+    const labels = report.findings.filter((f) => f.ruleId === "rule.trigger-carries-label");
+    expect(labels.length).toBe(1);
+    expect(labels[0].location.component).toBe("button");
+    expect(report.findings.length).toBe(1);
+  });
+
+  it("F7: category-forbidden descendant — the finding names the concrete id AND the category", () => {
+    const report = lintSurface(load(join(VIOLATING, "F7-nested-overlay.dsurface.json")), contract);
+    const overlays = report.findings.filter((f) => f.ruleId === "rule.alertdialog-no-nested-overlays");
+    expect(overlays.length).toBe(1);
+    expect(overlays[0].location.component).toBe("dropdown-menu");
+    expect(overlays[0].message).toMatch(/'dropdown-menu' \(category 'overlay'\) inside 'alert-dialog'/);
+    expect(report.findings.length).toBe(1);
+  });
+
+  it("required-props within-existence: a trigger with no label-bearer at all fires AT the trigger (spec v0.4 §4.1)", () => {
+    const surface = {
+      dspackSurface: "0.1",
+      system: "shadcn/ui",
+      intent: "destructive-action",
+      root: {
+        component: "alert-dialog",
+        children: [
+          { component: "alert-dialog-trigger", children: [{ component: "badge", text: "Delete" }] },
+          {
+            component: "alert-dialog-content",
+            children: [
+              { component: "alert-dialog-title", text: "Delete?" },
+              { component: "alert-dialog-cancel", text: "Cancel" },
+            ],
+          },
+        ],
+      },
+    };
+    const report = lintSurface(surface, contract);
+    const label = report.findings.find((f) => f.ruleId === "rule.trigger-carries-label")!;
+    expect(label.location.component).toBe("alert-dialog-trigger");
+    expect(label.message).toBe("'alert-dialog-trigger' contains no 'button' to carry the required content.");
   });
 });
 
@@ -146,7 +202,7 @@ describe("clean golden and gate independence", () => {
           id: "rule.from-the-future",
           type: "layout-order",
           severity: "must",
-          rationale: "A v0.4 rule type this linter does not know.",
+          rationale: "A future rule type this linter does not know.",
         },
       ],
     };

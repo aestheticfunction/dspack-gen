@@ -159,7 +159,7 @@ function main(): void {
     }
     void import("./serve.js").then(({ startServer }) =>
       startServer({
-        contractPath: flags.get("dspack") ?? "fixtures/shadcn.v0_3.dspack.json",
+        contractPath: flags.get("dspack") ?? "fixtures/shadcn.v0_4.dspack.json",
         port,
       }),
     );

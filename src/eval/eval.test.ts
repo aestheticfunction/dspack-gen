@@ -24,7 +24,7 @@ import { renderRepairMessage } from "../repair/render.js";
 import { computeMetrics } from "./runner.js";
 import type { RunSummary } from "./types.js";
 
-const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_3.dspack.json", "utf8")) as Contract;
+const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 
 describe("fake-matrix eval (the CI gate)", () => {
   const outDir = mkdtempSync(join(tmpdir(), "eval-fake-"));

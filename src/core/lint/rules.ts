@@ -1,11 +1,14 @@
 /**
  * Gate S3 — the rule-type registry and evaluators (normative semantics:
- * spec/dspack-v0.3.md §5.3).
+ * spec/dspack-v0.3.md §5.3 and spec/dspack-v0.4.md §4).
  *
  * The registry is the thesis-bearing seam: new rule types land additively in
- * v0.4 by adding an entry — never by touching existing evaluators. A rule
- * whose type has no registry entry is a HARD error (UnknownRuleTypeError →
- * CLI exit 4): silently skipping would misreport a surface as governed.
+ * v0.4 by adding an entry — never by touching existing evaluators. v0.4 kept
+ * that promise for `required-props` (a new entry); `forbiddenCategories` is
+ * the spec'd exception — a new OPTIONAL field on forbidden-composition
+ * (v0.4 §4.2; existing fields' semantics frozen). A rule whose type has no
+ * registry entry is a HARD error (UnknownRuleTypeError → CLI exit 4):
+ * silently skipping would misreport a surface as governed.
  *
  * All three v0.3 evaluators are implemented. (The M1 plan deferred
  * `forbidden-composition` to M2, but the v0.3 shadcn contract carries a
@@ -19,9 +22,11 @@ import type {
   Contract,
   ForbiddenCompositionRule,
   RequiredCompositionRule,
+  RequiredPropsRule,
   RuleEntry,
   Surface,
 } from "../contract.js";
+import { categoryIndex } from "../contract.js";
 import { LEVEL_OF, type Finding } from "./findings.js";
 import { descendantsOf, walkSurface, type VisitedNode } from "./walk.js";
 
@@ -39,6 +44,7 @@ const REGISTRY: Record<string, Evaluator> = {
   "component-choice": evaluateComponentChoice,
   "required-composition": evaluateRequiredComposition,
   "forbidden-composition": evaluateForbiddenComposition,
+  "required-props": evaluateRequiredProps,
 };
 
 export function evaluateRules(surface: Surface, contract: Contract): Finding[] {
@@ -47,7 +53,7 @@ export function evaluateRules(surface: Surface, contract: Contract): Finding[] {
     if (rule.appliesTo && !rule.appliesTo.intents.includes(surface.intent)) continue;
     const evaluator = REGISTRY[rule.type];
     if (evaluator === undefined) {
-      throw new UnknownRuleTypeError(rule.id, rule.type, "not a v0.3 rule type");
+      throw new UnknownRuleTypeError(rule.id, rule.type, "not a v0.3/v0.4 rule type");
     }
     findings.push(...evaluator(rule, surface, contract));
   }
@@ -176,9 +182,10 @@ function evaluateRequiredComposition(entry: RuleEntry, surface: Surface): Findin
  * node) — and no forbiddenProps entry may hold (on the node itself, or on
  * descendants matching `on`, located at the checked node).
  */
-function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface): Finding[] {
+function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface, contract: Contract): Finding[] {
   const rule = entry as ForbiddenCompositionRule;
   const findings: Finding[] = [];
+  const categories = rule.forbiddenCategories?.length ? categoryIndex(contract) : undefined;
 
   for (const visited of walkSurface(surface).filter((v) => v.node.component === rule.component)) {
     const descendants = descendantsOf(visited);
@@ -192,6 +199,23 @@ function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface): Findi
             locationOf(offender),
           ),
         );
+      }
+    }
+
+    // v0.4 §4.2: membership resolved through the contract at lint time; the
+    // message names BOTH the concrete id and the matched category so repair
+    // feedback stays actionable without the contract in hand.
+    for (const category of rule.forbiddenCategories ?? []) {
+      for (const offender of descendants) {
+        if (categories?.get(offender.node.component)?.includes(category)) {
+          findings.push(
+            finding(
+              rule,
+              `Forbidden descendant '${offender.node.component}' (category '${category}') inside '${rule.component}' (${describeNode(visited)}).`,
+              locationOf(offender),
+            ),
+          );
+        }
       }
     }
 
@@ -210,6 +234,70 @@ function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface): Findi
         );
       }
     }
+  }
+  return findings;
+}
+
+/**
+ * required-props (v0.4 §4.1): content every instance of `component` must
+ * carry DIRECTLY. Without `within`, every matching node in the surface is
+ * checked (conditional — existence is required-composition's job). With
+ * `within`, only matching nodes under a `within` ancestor are checked, and
+ * every `within` node must contain at least one — the existence clause that
+ * closes the scope-carries-no-label-bearer hole (mirrors v0.3's
+ * requiredProps.on semantics).
+ */
+function evaluateRequiredProps(entry: RuleEntry, surface: Surface): Finding[] {
+  const rule = entry as RequiredPropsRule;
+  const findings: Finding[] = [];
+
+  const checkNode = (target: VisitedNode): void => {
+    if (rule.requiredText && !(typeof target.node.text === "string" && target.node.text.length > 0)) {
+      findings.push(
+        finding(
+          rule,
+          `'${rule.component}' must carry non-empty direct text (its own \`text\` field — text in descendants does not count).`,
+          locationOf(target),
+        ),
+      );
+    }
+    for (const requirement of rule.requiredProps ?? []) {
+      const value = target.node.props?.[requirement.prop];
+      if (value === undefined) {
+        findings.push(
+          finding(rule, `Required prop '${requirement.prop}' is not present on '${rule.component}' itself.`, locationOf(target)),
+        );
+      } else if (requirement.oneOf && !requirement.oneOf.includes(value as never)) {
+        findings.push(
+          finding(
+            rule,
+            `Required prop '${requirement.prop}' must be one of ${requirement.oneOf.map((v) => JSON.stringify(v)).join(", ")} (got ${JSON.stringify(value)}).`,
+            locationOf(target),
+          ),
+        );
+      }
+    }
+  };
+
+  if (rule.within === undefined) {
+    for (const target of walkSurface(surface).filter((v) => v.node.component === rule.component)) {
+      checkNode(target);
+    }
+    return findings;
+  }
+
+  for (const scope of walkSurface(surface).filter((v) => v.node.component === rule.within)) {
+    const targets = descendantsOf(scope).filter((d) => d.node.component === rule.component);
+    if (targets.length === 0) {
+      findings.push(
+        finding(
+          rule,
+          `'${rule.within}' contains no '${rule.component}' to carry the required content.`,
+          locationOf(scope),
+        ),
+      );
+    }
+    for (const target of targets) checkNode(target);
   }
   return findings;
 }

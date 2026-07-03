@@ -1,7 +1,7 @@
 /**
- * Minimal dspack v0.3 contract types — exactly the fields the pipeline reads.
- * Deliberately local: `core` (compiler + linter) is protocol-neutral and
- * depends on no emitter and no network module (enforced by core-boundary
+ * Minimal dspack v0.3/v0.4 contract types — exactly the fields the pipeline
+ * reads. Deliberately local: `core` (compiler + linter) is protocol-neutral
+ * and depends on no emitter and no network module (enforced by core-boundary
  * tests). dspack documents may carry more; unknown properties are ignored per
  * dspack conformance rules.
  */
@@ -12,6 +12,8 @@ export interface Contract {
   description?: string;
   tokens?: Record<string, { values?: Record<string, { value?: unknown }> }>;
   components?: Record<string, ContractComponent>;
+  /** v0.4: contract-defined category registry (spec v0.4 §3). */
+  categories?: Record<string, { name?: string; description: string }>;
   patterns?: ContractPattern[];
   intents?: IntentEntry[];
   rules?: RuleEntry[];
@@ -24,6 +26,8 @@ export interface ContractComponent {
   description: string;
   props?: Record<string, ContractProp>;
   composition?: { subComponents?: SubComponent[]; notes?: string };
+  /** v0.4: membership in registered categories. */
+  categories?: string[];
   [k: string]: unknown;
 }
 
@@ -42,6 +46,8 @@ export interface SubComponent {
   required?: boolean;
   slot?: string;
   acceptsChildren?: string;
+  /** v0.4: membership in registered categories. */
+  categories?: string[];
 }
 
 export interface ContractPattern {
@@ -60,7 +66,7 @@ export interface IntentEntry {
 }
 
 export type RuleSeverity = "must" | "should";
-export type RuleType = "component-choice" | "required-composition" | "forbidden-composition";
+export type RuleType = "component-choice" | "required-composition" | "forbidden-composition" | "required-props";
 
 export interface RuleBase {
   id: string;
@@ -90,9 +96,29 @@ export interface ForbiddenCompositionRule extends RuleBase {
   component: string;
   forbiddenDescendants?: string[];
   forbiddenProps?: Array<{ on?: string; prop: string; values: unknown[] }>;
+  /** v0.4: forbid descendants by registered category (spec v0.4 §4.2). */
+  forbiddenCategories?: string[];
 }
 
-export type RuleEntry = ComponentChoiceRule | RequiredCompositionRule | ForbiddenCompositionRule | RuleBase;
+/**
+ * v0.4 required-props (spec v0.4 §4.1): content every instance of `component`
+ * must carry DIRECTLY — its own `text` field and/or directly-present props.
+ * The one rule type whose `component` accepts a sub-component id.
+ */
+export interface RequiredPropsRule extends RuleBase {
+  type: "required-props";
+  component: string;
+  within?: string;
+  requiredText?: true;
+  requiredProps?: Array<{ prop: string; oneOf?: unknown[] }>;
+}
+
+export type RuleEntry =
+  | ComponentChoiceRule
+  | RequiredCompositionRule
+  | ForbiddenCompositionRule
+  | RequiredPropsRule
+  | RuleBase;
 
 export interface ExampleEntry {
   id: string;
@@ -149,6 +175,22 @@ export function duplicateSubComponentIds(contract: Contract): Map<string, string
     }
   }
   return new Map([...parents].filter(([, declaredBy]) => declaredBy.length > 1));
+}
+
+/**
+ * Category memberships by component/sub-component id (v0.4). Ids without
+ * memberships are absent. Resolution is through the contract at lint time —
+ * categories never appear in surfaces (spec v0.4 §3).
+ */
+export function categoryIndex(contract: Contract): Map<string, string[]> {
+  const index = new Map<string, string[]>();
+  for (const [id, component] of Object.entries(contract.components ?? {})) {
+    if (component.categories?.length) index.set(id, component.categories);
+    for (const sub of component.composition?.subComponents ?? []) {
+      if (sub.categories?.length) index.set(sub.id, sub.categories);
+    }
+  }
+  return index;
 }
 
 export function getIntent(contract: Contract, intentId: string): IntentEntry {

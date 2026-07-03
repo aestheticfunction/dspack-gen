@@ -18,6 +18,7 @@ import {
   type ExampleEntry,
   type IntentEntry,
   type RuleEntry,
+  categoryIndex,
   enumValues,
   getIntent,
 } from "./contract.js";
@@ -108,7 +109,7 @@ function renderSystemPrompt(
       "These are hard requirements. Surfaces violating them will be rejected:",
     );
     rules.forEach((rule, i) => {
-      lines.push(`${i + 1}. [${rule.id} / ${rule.severity}] ${ruleInstruction(rule)} Why: ${rule.rationale}`);
+      lines.push(`${i + 1}. [${rule.id} / ${rule.severity}] ${ruleInstruction(rule, contract)} Why: ${rule.rationale}`);
     });
   }
 
@@ -124,7 +125,7 @@ function renderSystemPrompt(
 }
 
 /** One-sentence imperative rendering of a rule (the rationale is appended by the caller). */
-export function ruleInstruction(rule: RuleEntry): string {
+export function ruleInstruction(rule: RuleEntry, contract?: Contract): string {
   switch (rule.type) {
     case "component-choice": {
       const r = rule as { require?: string[]; forbid?: string[] };
@@ -142,10 +143,25 @@ export function ruleInstruction(rule: RuleEntry): string {
       return `Every ${r.component} must contain ${needs.join(", plus ")}.`;
     }
     case "forbidden-composition": {
-      const r = rule as { component: string; forbiddenDescendants?: string[]; forbiddenProps?: Array<{ prop: string; values: unknown[] }> };
+      const r = rule as {
+        component: string;
+        forbiddenDescendants?: string[];
+        forbiddenProps?: Array<{ prop: string; values: unknown[] }>;
+        forbiddenCategories?: string[];
+      };
       const parts: string[] = [];
       if (r.forbiddenDescendants?.length)
         parts.push(`Never place ${r.forbiddenDescendants.join(" or ")} inside a ${r.component}`);
+      for (const category of r.forbiddenCategories ?? []) {
+        // Steering names the category AND its resolved member ids, so the
+        // model sees concrete vocabulary (mirrors the finding message).
+        const members = contract
+          ? [...categoryIndex(contract)].filter(([, cats]) => cats.includes(category)).map(([id]) => id)
+          : [];
+        parts.push(
+          `never place ${category}-category components${members.length ? ` (${members.join(", ")})` : ""} inside ${r.component}`,
+        );
+      }
       if (r.forbiddenProps?.length)
         parts.push(
           r.forbiddenProps
@@ -153,6 +169,22 @@ export function ruleInstruction(rule: RuleEntry): string {
             .join("; "),
         );
       return `${parts.join("; ")}.`;
+    }
+    case "required-props": {
+      const r = rule as {
+        component: string;
+        within?: string;
+        requiredText?: true;
+        requiredProps?: Array<{ prop: string; oneOf?: unknown[] }>;
+      };
+      const scope = r.within ? `Every ${r.component} inside ${r.within}` : `Every ${r.component}`;
+      const needs: string[] = [];
+      if (r.requiredText) needs.push("carry its label as its own `text` field (never nested in a child component)");
+      for (const p of r.requiredProps ?? []) {
+        needs.push(p.oneOf ? `set ${p.prop} to one of ${p.oneOf.map(String).join("/")}` : `set ${p.prop} directly`);
+      }
+      const existence = r.within ? `; every ${r.within} must contain a ${r.component}` : "";
+      return `${scope} must ${needs.join(", and ")}${existence}.`;
     }
     default:
       // The linter hard-errors on unknown types (exit 4); the compiler simply
