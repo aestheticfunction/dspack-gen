@@ -23,7 +23,7 @@ if (!model) {
 }
 const intent = flag("intent") ?? "destructive-action";
 
-const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_3.dspack.json", "utf8")) as Contract;
+const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 const context = compileContext(contract, intent, { omitRuleSteering: args.includes("--no-steering") });
 const adapter = new OllamaAdapter({ model });
 
