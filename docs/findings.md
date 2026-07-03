@@ -1,5 +1,14 @@
 # Eval findings — 2026-07-03 rerun
 
+> *Addendum (2026-07-03, later the same day): a **third local family**
+> (`ollama:gpt-oss:latest`) was run on the identical matrix after this document
+> merged — see [the addendum](#addendum--third-local-family-gpt-oss-2026-07-03)
+> at the end. Headline updates: the projection-gap signature extends to
+> **78/78** gate failures across three families, and the third family produced
+> the pipeline's **first live end-to-end passes** (28/72), so "zero end-to-end
+> passes" is a two-family result, not a local-model result. The body below is
+> unchanged (it was written from the two-family run and merged as reviewed).*
+
 Written from the aggregated results of the 2026-07-03 rerun; every rate below
 is computed from the 216 retained audit reports in
 [`docs/evidence/2026-07-03-eval-rerun/`](evidence/2026-07-03-eval-rerun/)
@@ -180,3 +189,56 @@ CI gate is the only place a clean pass is demonstrated end to end. Nothing
 here is a claim about "local models" in general; it is about these two tags
 against this contract. Failure is attributed with the report's own
 vocabulary throughout, and the two failure classes are never blended.
+
+## Addendum — third local family (gpt-oss), 2026-07-03
+
+Run after the two-family body above merged (M3 plan, Phase 0 item E0;
+maintainer-directed so the M2 write-up ships as a three-local-family result).
+Same matrix, byte-identical prompts, same contract sha, same
+`runsPerCell` = 3: 72 runs of `ollama:gpt-oss:latest` (GGUF/llama.cpp engine).
+Evidence: [`docs/evidence/2026-07-03-gptoss-third-family/`](evidence/2026-07-03-gptoss-third-family/)
+(matrix config, `results.json`, `report.md`, 72 retained reports; zero
+contained errors, zero adapter failures).
+
+| model | n | S1 schema-valid | 1st-attempt S3 violation | repair success | **exhausted** (S3) | **gate-failed** (A-gate) | **end-to-end pass** |
+|---|---|---|---|---|---|---|---|
+| `gpt-oss:latest` | 72 | 72/72 (100%) | 41/72 (57%) | 15/41 (37%) | 26/72 | 18/72 | **28/72 (39%)** |
+
+Three updates to the body's claims, each at measured strength:
+
+1. **Finding 1 extends: the projection-gap signature is now 78/78 across three
+   families.** Every one of gpt-oss's 18 gate failures carries the identical
+   trigger-label signature (checked against all 18 reports: the emitted
+   instance misses A3-required `child`/`triggerLabel`); 10 of the 18 are on
+   ordinary prompts, 8 on the deliberate probes (p12 textless-trigger 6/6,
+   p10 and p11 one each). Combined with the body: **43 + 17 + 18 = 78/78 gate
+   failures, three model families, one signature.** gpt-oss sharpens the
+   claim rather than merely repeating it: this is the family that otherwise
+   *passes* — even where generation and repair succeed, the only remaining
+   downstream failure is the gap S3 cannot express. The v0.4 `required-props`
+   case gets stronger, not weaker, from a model that can comply.
+2. **"Zero end-to-end passes" was a two-family result.** gpt-oss produced
+   **28/72 live end-to-end passes — the pipeline's first**, exercising the
+   success path (S1–S3, repair, A1–A3, audit report `passed`) live rather
+   than only via the fake-adapter CI gate. The spread across families —
+   0/72 · 0/72 · 28/72 — is itself the finding: governance floors are
+   model-specific, and a per-model report is measuring something an average
+   would hide. The body's "honest limits" line about the unexercised success
+   path is superseded for this family.
+3. **Repair looks different here, and the confound stands.** Repair success
+   15/41 (37%) vs gemma 3/32, qwen 9/63 — driven almost entirely by
+   `rule.button-no-interactive-descendants` (15/33 repaired, the rule the
+   other two families almost never repaired). Per shape (still **one rule per
+   shape** — the body's confound applies unchanged): substitution 2/8,
+   addition 3/6, deletion 9/12, restructuring 1/15. Restructuring is again
+   the weakest, consistent with — and still not confirmatory of — the
+   repair-shape hypothesis; the ≥2-rules-per-shape deconfound remains owed.
+   Repair-template A/B remains null at this n (standard 6/18 vs
+   permit-restructuring 9/23).
+
+Unchanged by this addendum: the hosted column remains blocked (not attempted
+here); Finding 3 (take-2 non-replication) was qwen-specific and was not
+re-tested; per-rule first-attempt violation ordering matches the body's
+(`button-no-interactive-descendants` dominant: 33 of gpt-oss's 46 rule
+findings). Honest limits as in the body: one contract, one intent, small
+per-cell n, rates as k/n; this is about this tag against this contract.
