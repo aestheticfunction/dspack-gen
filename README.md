@@ -43,7 +43,7 @@ engine silently ignoring `format`, which is exactly why.
 ## CLI
 
 ```bash
-npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructive-action
+npm run context -- --dspack fixtures/shadcn.v0_4.dspack.json --intent destructive-action
 # prints { system, schema, fewshot } — the compiled generation context
 ```
 
@@ -106,7 +106,7 @@ npm test          # vitest: golden context, generation-schema behavior, core bou
 npm run check:sync  # contract-copy drift check vs the dspack repo (CI-run; --write re-syncs)
 ```
 
-`fixtures/shadcn.v0_3.dspack.json` is a byte copy of the spec repo's
+`fixtures/shadcn.v0_4.dspack.json` is a byte copy of the spec repo's
 `examples/shadcn-ui.dspack.json`; CI fails loudly if they diverge
 (dspack-gen#7). After `--write`, regenerate the derived goldens (context
 golden, F-fixture expected outputs, eval fake golden) and commit the sync +

@@ -1,0 +1,37 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.alertdialog-no-nested-overlays",
+      "type": "forbidden-composition",
+      "requirement": "must",
+      "level": "error",
+      "message": "Forbidden descendant 'dropdown-menu' (category 'overlay') inside 'alert-dialog' (at $.root.children[0]).",
+      "rationale": "An alert dialog is a single focused interruption. Stacking another overlay (dialog, dropdown menu, another alert dialog) inside it breaks focus containment and dismiss semantics and buries the confirmation decision under a second layer.",
+      "location": {
+        "path": "$.root.children[0].children[1].children[1]",
+        "component": "dropdown-menu"
+      },
+      "exampleIds": []
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

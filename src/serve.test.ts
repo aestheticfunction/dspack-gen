@@ -14,7 +14,7 @@ let base: string;
 let server: ReturnType<typeof startServer>;
 
 beforeAll(async () => {
-  server = startServer({ contractPath: "fixtures/shadcn.v0_3.dspack.json", port: 0 });
+  server = startServer({ contractPath: "fixtures/shadcn.v0_4.dspack.json", port: 0 });
   await new Promise((resolve) => server.on("listening", resolve));
   const address = server.address();
   base = `http://127.0.0.1:${typeof address === "object" && address ? address.port : 0}`;

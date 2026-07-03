@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 
 const MANIFEST = [
   {
-    local: "fixtures/shadcn.v0_3.dspack.json",
+    local: "fixtures/shadcn.v0_4.dspack.json",
     source:
       "https://raw.githubusercontent.com/aestheticfunction/dspack/main/examples/shadcn-ui.dspack.json",
     note: "the pipeline's contract fixture — copy of the spec repo's source of truth",

@@ -21,7 +21,7 @@ jobs:
       - name: Lint CLI gate (F1 golden, exit 2)
         run: |
           set +e
-          npx tsx src/cli.ts lint --dspack fixtures/shadcn.v0_3.dspack.json \
+          npx tsx src/cli.ts lint --dspack fixtures/shadcn.v0_4.dspack.json \
             --surface fixtures/golden/violating/F1-dialog-for-delete.dsurface.json \
             > /tmp/f1.json 2>/dev/null
           code=$?
@@ -29,7 +29,7 @@ jobs:
           test "$code" -eq 2
           diff /tmp/f1.json fixtures/golden/violating/F1-dialog-for-delete.expected.json
       - name: CLI smoke
-        run: npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructive-action > /dev/null
+        run: npm run context -- --dspack fixtures/shadcn.v0_4.dspack.json --intent destructive-action > /dev/null
       - name: Contract-copy drift check (dspack-gen#7)
         run: npm run check:sync
       - name: Eval harness gate (fake matrix, deterministic golden + threshold exit codes)

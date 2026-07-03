@@ -15,7 +15,7 @@ import { OllamaAdapter } from "./ollama.js";
 import { AdapterOutputError, parseModelRef, type FetchLike } from "./types.js";
 import { adapterFor } from "./index.js";
 
-const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_3.dspack.json", "utf8")) as Contract;
+const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 const context = compileContext(contract, "destructive-action");
 const workedSurface = contract.examples![0].surface;
 

@@ -1,0 +1,39 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.trigger-carries-label",
+      "type": "required-props",
+      "requirement": "must",
+      "level": "error",
+      "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+      "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+      "location": {
+        "path": "$.root.children[0].children[0].children[0]",
+        "component": "button"
+      },
+      "exampleIds": [
+        "ex.delete-account-confirmation"
+      ]
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

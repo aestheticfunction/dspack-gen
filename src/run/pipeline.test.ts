@@ -25,7 +25,7 @@ import { ScriptedAdapter } from "../adapters/fake.js";
 import { runPipeline } from "./orchestrator.js";
 import { renderMarkdown } from "../audit/report.js";
 
-const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_3.dspack.json", "utf8")) as Contract;
+const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 const violatingF1 = JSON.parse(readFileSync("fixtures/golden/violating/F1-dialog-for-delete.dsurface.json", "utf8"));
 const workedExample = contract.examples!.find((e) => e.id === "ex.delete-account-confirmation")!.surface;
 

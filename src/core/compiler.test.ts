@@ -17,7 +17,7 @@ import type { Contract, Surface, SurfaceNode } from "./contract.js";
 import { compileContext } from "./compiler.js";
 import { DEFAULT_UNROLL_DEPTH } from "./generation-schema.js";
 
-const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_3.dspack.json", "utf8")) as Contract;
+const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 const workedSurface = contract.examples!.find((e) => e.id === "ex.delete-account-confirmation")!.surface;
 const GOLDEN = "fixtures/golden/context/shadcn.destructive-action.json";
 
