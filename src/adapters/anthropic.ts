@@ -47,7 +47,7 @@ export class AnthropicAdapter implements GenerationAdapter {
   async generate(request: GenerateRequest): Promise<GenerateResult> {
     // Typed transport: SDK connection/API errors surface as failed-adapter
     // outcomes (with a report), never as raw exceptions that kill a matrix.
-    let response;
+    let response: unknown;
     try {
       response = await this.client.messages.create({
         model: this.model,

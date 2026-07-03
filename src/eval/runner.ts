@@ -90,12 +90,23 @@ export async function runMatrix(options: RunMatrixOptions): Promise<EvalResults>
           const reportPath = reportRelPath(model, prompt.id, repairTemplate, run);
           // Resume: a retained audit report is a completed observation —
           // summarize it instead of re-running. Contained-error records
-          // (.error.json) are NOT skipped: errors are retryable.
+          // (.error.json) are NOT skipped: errors are retryable. A retained
+          // file that fails to read/parse (e.g. a partial write from the
+          // very crash being resumed from) is treated as not retained and
+          // the run re-executes — the containment contract applies to the
+          // resume path too.
           if (options.resume && existsSync(join(outDir, reportPath))) {
-            const retained = JSON.parse(readFileSync(join(outDir, reportPath), "utf8")) as AuditReportV1;
-            runs.push(summarize(run, retained, exitCodeFor(retained.outcome), reportPath));
-            log(`${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: ${retained.outcome} (resumed from retained report)`);
-            continue;
+            let retained: AuditReportV1 | null = null;
+            try {
+              retained = JSON.parse(readFileSync(join(outDir, reportPath), "utf8")) as AuditReportV1;
+            } catch {
+              log(`${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: retained report unreadable — re-running`);
+            }
+            if (retained) {
+              runs.push(summarize(run, retained, exitCodeFor(retained.outcome), reportPath));
+              log(`${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: ${retained.outcome} (resumed from retained report)`);
+              continue;
+            }
           }
           const adapter =
             options.adapterMode === "fake"

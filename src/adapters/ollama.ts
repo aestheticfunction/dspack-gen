@@ -70,7 +70,10 @@ export class OllamaAdapter implements GenerationAdapter {
         body: JSON.stringify(body),
       });
       if (!response.ok) {
-        throw new AdapterOutputError(this.id, `HTTP ${response.status}: ${(await response.text()).slice(0, 300)}`);
+        // Body read can itself fail on a broken stream — keep the HTTP
+        // status in the error either way.
+        const detail = await response.text().catch(() => "(response body unreadable)");
+        throw new AdapterOutputError(this.id, `HTTP ${response.status}: ${detail.slice(0, 300)}`);
       }
       data = (await response.json()) as OllamaChatResponse;
     } catch (error) {

@@ -14,7 +14,7 @@
  * - eval:assert thresholds: pass 0, fail 2, undefined-rate fail 2.
  */
 import { execFileSync, spawnSync } from "node:child_process";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -79,6 +79,19 @@ describe("fake-matrix eval (the CI gate)", () => {
       stdio: ["ignore", "ignore", "ignore"],
     });
     expect(readFileSync(join(outDir, "results.json"), "utf8")).toBe(results);
+  });
+
+  it("--resume re-runs (not crashes) on a corrupted retained report — containment covers the resume path", () => {
+    // Simulate the partial write a mid-run crash leaves behind: truncate one
+    // retained report, then resume. The run must re-execute and the final
+    // results.json must still equal the golden byte-for-byte.
+    const victim = join(outDir, "reports", "fake-scripted--p02-clean-first-attempt--standard--r1.audit-report.json");
+    writeFileSync(victim, '{"reportVersion": "1", "attempts": [{');
+    execFileSync("npx", ["tsx", "src/eval/run.ts", "--adapter", "fake", "--matrix", "eval/matrix.fake.json", "--out", outDir, "--resume"], {
+      stdio: ["ignore", "ignore", "ignore"],
+    });
+    expect(readFileSync(join(outDir, "results.json"), "utf8")).toBe(results);
+    expect(JSON.parse(readFileSync(victim, "utf8"))).toBeTruthy(); // rewritten whole
   });
 });
 
