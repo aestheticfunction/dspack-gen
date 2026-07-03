@@ -36,6 +36,11 @@ no guarantees.
 - `generation.repairTemplate` (2026-07-02, PR-10): the ADR-7 repair template variant used
   for feedback rendering (`standard` | `permit-restructuring`). Absent means `standard` —
   every report written before this field existed used the standard template.
+- `emitted.refusal` (2026-07-03): the emitter's typed refusal message when a lint-clean
+  surface could not be emitted at all (a sub-component outside its compound parent, etc.) —
+  the target-equivalent emitter-gate failure. Outcome is `failed-gate`; `emitted.validations`
+  is empty and `emitted.surfaceMessages` absent in that case. Reports written before this
+  field existed never carried refusals (the pipeline crashed instead — the flaw this fixed).
 
 Breaking changes bump `reportVersion` and get a new schema file; version "1" documents stay
 valid against the "1" schema forever.

@@ -11,6 +11,7 @@
  */
 import {
   emitSurface,
+  EmitSurfaceError,
   transform,
   type A2uiVersion,
   type DspackDoc,
@@ -156,7 +157,27 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
     if (lint.pass) {
       const surface = generated.json as DspackSurface;
       const doc = contract as unknown as DspackDoc;
-      const { messages, warnings } = emitSurface(surface, doc);
+      // The emitter can REFUSE a lint-clean surface outright (typed
+      // EmitSurfaceError — e.g. a sub-component outside its compound parent:
+      // in-vocabulary for S2, ungoverned by S3, unprojectable by the
+      // profile). That is the emitter-gate failure class ("target
+      // equivalent" in the exit-code table), not a crash: outcome
+      // failed-gate, exit 3, refusal recorded in the report (ADR-D1 family
+      // evidence, same as an A3 rejection).
+      let emission;
+      try {
+        emission = emitSurface(surface, doc);
+      } catch (error) {
+        if (error instanceof EmitSurfaceError) {
+          const emitted = { target: "a2ui" as const, refusal: error.message, warnings: [], validations: [] };
+          emit({ type: "emitted", validations: [], warnings: [] });
+          const result = finalize("failed-gate", 3, {}, emitted);
+          emit({ type: "done", outcome: result.report.outcome, exitCode: result.exitCode, report: result.report });
+          return result;
+        }
+        throw error;
+      }
+      const { messages, warnings } = emission;
 
       const validations: EmittedValidation[] = [];
       let gatesPass = true;

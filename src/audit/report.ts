@@ -60,10 +60,17 @@ export interface AuditReportV1 {
   outcome: Outcome;
   emitted?: {
     target: "a2ui";
-    surfaceMessages: unknown;
+    /** Absent when the emitter refused the surface outright (see refusal). */
+    surfaceMessages?: unknown;
     /** Emitter warnings — every synthesis/drop, nothing silent. */
     warnings: Array<{ code: string; message: string }>;
     validations: EmittedValidation[];
+    /**
+     * The emitter's typed refusal message when a lint-clean surface could
+     * not be emitted at all (additive in v1) — the target-equivalent
+     * emitter-gate failure; validations is empty in that case.
+     */
+    refusal?: string;
   };
   timings: { totalMs: number };
 }
@@ -112,6 +119,9 @@ export function renderMarkdown(report: AuditReportV1): string {
 
   if (report.emitted) {
     lines.push("", "## Emitted (A2UI)");
+    if (report.emitted.refusal) {
+      lines.push(`- **REFUSED by the emitter:** ${report.emitted.refusal}`);
+    }
     for (const validation of report.emitted.validations) {
       for (const gate of validation.gates) {
         lines.push(`- [${validation.a2uiVersion}] gate ${gate.gate} ${gate.name}: **${gate.pass ? "PASS" : "FAIL"}**`);
