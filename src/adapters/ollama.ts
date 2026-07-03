@@ -27,6 +27,11 @@ import {
  * still fail rather than block a matrix forever.
  */
 const LOCAL_INFERENCE_TIMEOUT_MS = 60 * 60 * 1000;
+
+/** undici's fetch-init extension, typed so the rest of the init stays checked. */
+interface DispatchedRequestInit extends RequestInit {
+  dispatcher?: Agent;
+}
 const localInferenceDispatcher = new Agent({
   headersTimeout: LOCAL_INFERENCE_TIMEOUT_MS,
   bodyTimeout: LOCAL_INFERENCE_TIMEOUT_MS,
@@ -79,13 +84,14 @@ export class OllamaAdapter implements GenerationAdapter {
     // kills a whole eval matrix (the 2026-07-03 live-run crash).
     let data: OllamaChatResponse;
     try {
-      const response = await this.fetchImpl(`${this.host}/api/chat`, {
+      const init: DispatchedRequestInit = {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(body),
         // undici extension of fetch(init); ignored by injected test fetches.
         dispatcher: localInferenceDispatcher,
-      } as unknown as RequestInit);
+      };
+      const response = await this.fetchImpl(`${this.host}/api/chat`, init);
       if (!response.ok) {
         // Body read can itself fail on a broken stream — keep the HTTP
         // status in the error either way.
