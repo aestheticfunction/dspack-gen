@@ -9,7 +9,7 @@ carrying the whole trail.
 
 **Tagged state:**
 [dspack@m1](https://github.com/aestheticfunction/dspack/releases/tag/m1) ·
-[dspack-to-a2ui@m1](https://github.com/aestheticfunction/dspack-to-a2ui/releases/tag/m1) ·
+[dspack-to-a2ui@m1](https://github.com/aestheticfunction/dspack-emit/releases/tag/m1) ·
 [dspack-gen@m1](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1) ·
 [`@aestheticfunction/dspack-to-a2ui@0.2.0` on npm](https://www.npmjs.com/package/@aestheticfunction/dspack-to-a2ui).
 

@@ -40,19 +40,19 @@ jobs:
           path: dspack-gen
       - uses: actions/checkout@v4
         with:
-          repository: aestheticfunction/dspack-to-a2ui
-          # dspack-to-a2ui #4 and #5 merged 2026-07-02; main carries the Generate view.
+          # renamed from dspack-to-a2ui 2026-07-02 (ADR-D2); main carries the Generate view.
+          repository: aestheticfunction/dspack-emit
           ref: main
-          path: dspack-to-a2ui
+          path: dspack-emit
       - uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: npm ci
         working-directory: dspack-gen
-      - run: npm --prefix dspack-to-a2ui/demo install
+      - run: npm --prefix dspack-emit/demo install
       - run: npx playwright install --with-deps chromium
         working-directory: dspack-gen
       - run: npm run demo:e2e
         working-directory: dspack-gen
         env:
-          DEMO_DIR: ../dspack-to-a2ui
+          DEMO_DIR: ../dspack-emit
