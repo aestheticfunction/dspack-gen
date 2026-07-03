@@ -148,3 +148,40 @@ describe("model identity is configuration", () => {
     expect(adapterFor("ollama:tag:x").id).toBe("ollama:tag:x");
   });
 });
+
+describe("transport failures are typed (2026-07-03 matrix-crash lesson)", () => {
+  const request = { system: "s", messages: [], jsonSchema: { type: "object" } };
+
+  it("Ollama: a REJECTED fetch (connection reset/timeout) raises AdapterOutputError, never a raw exception", async () => {
+    const adapter = new OllamaAdapter({
+      model: "m",
+      fetch: () => Promise.reject(new TypeError("fetch failed")),
+    });
+    await expect(adapter.generate(request)).rejects.toThrowError(AdapterOutputError);
+    await expect(adapter.generate(request)).rejects.toThrowError(/transport failure: fetch failed/);
+  });
+
+  it("Ollama: a mid-body failure (response.json rejects) is typed too", async () => {
+    const adapter = new OllamaAdapter({
+      model: "m",
+      fetch: () =>
+        Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.reject(new Error("terminated")),
+          text: () => Promise.resolve(""),
+        } as unknown as Response),
+    });
+    await expect(adapter.generate(request)).rejects.toThrowError(/transport failure: terminated/);
+  });
+
+  it("Anthropic: an SDK connection failure raises AdapterOutputError with the error class named", async () => {
+    const adapter = new AnthropicAdapter({
+      model: "m",
+      apiKey: "test-key",
+      fetch: () => Promise.reject(new TypeError("Connection error")),
+    });
+    await expect(adapter.generate(request)).rejects.toThrowError(AdapterOutputError);
+    await expect(adapter.generate(request)).rejects.toThrowError(/transport failure/);
+  });
+});

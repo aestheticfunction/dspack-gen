@@ -20,6 +20,9 @@ definitions live in `src/eval/runner.ts` and are computed nowhere else):
   S3-clean attempt within `maxRepairs`. Undefined (not 0) over zero
   violations.
 - **end-to-end pass rate** — outcome `passed`.
+- **error runs** — contained per-run infrastructure crashes: counted and
+  visible (`errorRuns`), excluded from every rate denominator above —
+  they are not observations of the model.
 - **S3-clean gate failures** — outcome `failed-gate`: governance accepted a
   surface an emitter gate refused (the ADR-D1 gap family), recorded for
   every cell and probed deliberately by the `adrD1Probe` prompts.

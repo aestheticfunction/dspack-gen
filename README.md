@@ -67,6 +67,7 @@ surface-emission failure.)
 ```bash
 npm run eval -- --adapter fake --matrix eval/matrix.fake.json   # deterministic; the CI gate
 npm run eval -- --adapter live --matrix eval/matrix.json        # documented live run; never CI
+npm run eval -- --adapter live --matrix eval/matrix.json --out out/eval/<dir> --resume   # resume an interrupted run
 npm run eval:assert -- --results out/eval/fake/results.json --model <ref> --min-repair-success 0.9
 ```
 
@@ -79,7 +80,12 @@ surfaces refused by emitter gates (the ADR-D1 signal; `p10`–`p12` probe it
 deliberately). Prompts span repair shapes — substitution, addition, deletion,
 restructuring — and every prompt crosses the two ADR-7 repair templates
 (`standard` vs `permit-restructuring`, a one-instruction-line delta recorded
-in each audit report). Every run's audit report is retained under
+in each audit report). One run can never kill the matrix: adapter transport failures are typed
+(`failed-adapter`, with a report) and anything that still escapes a run is
+contained as an explicit `error` run — visible in the distribution with a
+retained `.error.json`, excluded from the model-behavior rate denominators
+(`errorRuns` reports the count). `--resume` skips already-retained reports
+and retries error records. Every run's audit report is retained under
 `out/eval/…/reports/`; `results.json` is the artifact, `report.md` the
 derived view; findings go to [docs/findings.md](docs/findings.md) at measured
 strength. The hosted-model `eval:assert` threshold is the only hard eval gate

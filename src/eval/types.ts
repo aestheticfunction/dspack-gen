@@ -60,9 +60,18 @@ export type ScriptStep = { fixture: string } | { error: string };
 
 export interface RunSummary {
   run: number;
+  /**
+   * A pipeline outcome (`passed` | `failed-lint-exhausted` | `failed-gate` |
+   * `failed-adapter`) or `error` — a contained per-run crash (a raw
+   * exception the pipeline did not convert into an outcome). `error` runs
+   * are visible in the distribution but are NOT observations of the model:
+   * they are excluded from the model-behavior rate denominators.
+   */
   outcome: string;
   exitCode: number;
   attempts: number;
+  /** The contained crash message (outcome "error" only). */
+  error?: string;
   /** Attempt-1 S1 gate passed (schema validity — verified, never assumed). */
   firstAttemptSchemaValid: boolean;
   /** Attempt 1 had ≥1 error-level S3 finding. */
@@ -92,7 +101,11 @@ export interface CellResult {
 }
 
 export interface CellMetrics {
+  /** Total runs, including contained errors. */
   runs: number;
+  /** Contained per-run crashes — infrastructure, not model behavior. */
+  errorRuns: number;
+  /** All rates below are over the non-error runs (runs − errorRuns). */
   schemaValidityRate: number;
   firstAttemptViolationRate: number;
   /** Over runs with a first-attempt violation; null when none occurred. */

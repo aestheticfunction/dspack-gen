@@ -14,7 +14,7 @@
  * - eval:assert thresholds: pass 0, fail 2, undefined-rate fail 2.
  */
 import { execFileSync, spawnSync } from "node:child_process";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -52,6 +52,47 @@ describe("fake-matrix eval (the CI gate)", () => {
     expect(run("0.5").status).toBe(0); // golden matrix: repair-success 0.5
     expect(run("0.9").status).toBe(2);
   });
+
+  it("contains per-run crashes as explicit `error` runs — visible, never silent, never matrix-fatal", () => {
+    // p06's empty script makes the ScriptedAdapter throw a RAW Error on the
+    // first generation; the matrix must complete anyway, with the crash
+    // recorded in the distribution and an .error.json retained.
+    const parsed = JSON.parse(results) as {
+      cells: Array<{ promptId: string; metrics: { errorRuns: number; runs: number }; runs: Array<{ outcome: string; error?: string; reportPath: string }> }>;
+    };
+    const crashCells = parsed.cells.filter((c) => c.promptId === "p06-contained-crash");
+    expect(crashCells).toHaveLength(2); // both templates ran despite the crashes
+    for (const cell of crashCells) {
+      expect(cell.metrics.errorRuns).toBe(cell.metrics.runs);
+      for (const run of cell.runs) {
+        expect(run.outcome).toBe("error");
+        expect(run.error).toContain("script exhausted");
+        expect(readFileSync(join(outDir, run.reportPath), "utf8")).toContain("script exhausted");
+      }
+    }
+    // Cells AFTER the crash cell in matrix order completed normally.
+    expect(parsed.cells.some((c) => c.promptId === "p05-s3-clean-gate-fail" && c.metrics.errorRuns === 0)).toBe(true);
+  });
+
+  it("--resume reproduces the identical results.json from retained reports (and retries error records)", () => {
+    execFileSync("npx", ["tsx", "src/eval/run.ts", "--adapter", "fake", "--matrix", "eval/matrix.fake.json", "--out", outDir, "--resume"], {
+      stdio: ["ignore", "ignore", "ignore"],
+    });
+    expect(readFileSync(join(outDir, "results.json"), "utf8")).toBe(results);
+  });
+
+  it("--resume re-runs (not crashes) on a corrupted retained report — containment covers the resume path", () => {
+    // Simulate the partial write a mid-run crash leaves behind: truncate one
+    // retained report, then resume. The run must re-execute and the final
+    // results.json must still equal the golden byte-for-byte.
+    const victim = join(outDir, "reports", "fake-scripted--p02-clean-first-attempt--standard--r1.audit-report.json");
+    writeFileSync(victim, '{"reportVersion": "1", "attempts": [{');
+    execFileSync("npx", ["tsx", "src/eval/run.ts", "--adapter", "fake", "--matrix", "eval/matrix.fake.json", "--out", outDir, "--resume"], {
+      stdio: ["ignore", "ignore", "ignore"],
+    });
+    expect(readFileSync(join(outDir, "results.json"), "utf8")).toBe(results);
+    expect(JSON.parse(readFileSync(victim, "utf8"))).toBeTruthy(); // rewritten whole
+  });
 });
 
 describe("metric definitions", () => {
@@ -69,6 +110,18 @@ describe("metric definitions", () => {
   it("repairSuccessRate is null over zero violations (0/0 is not a rate)", () => {
     const m = computeMetrics([{ run: 1, ...base }]);
     expect(m.repairSuccessRate).toBeNull();
+    expect(m.endToEndPassRate).toBe(1);
+  });
+
+  it("contained error runs are counted but excluded from every rate denominator", () => {
+    const m = computeMetrics([
+      { run: 1, ...base }, // one clean pass
+      { run: 2, ...base, outcome: "error", exitCode: -1, attempts: 0, firstAttemptSchemaValid: false, error: "boom" },
+    ]);
+    expect(m.runs).toBe(2);
+    expect(m.errorRuns).toBe(1);
+    // The error run does not drag the model's rates down: 1/1, not 1/2.
+    expect(m.schemaValidityRate).toBe(1);
     expect(m.endToEndPassRate).toBe(1);
   });
 
