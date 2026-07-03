@@ -15,7 +15,7 @@ import {
   type A2uiVersion,
   type DspackDoc,
   type DspackSurface,
-} from "@aestheticfunction/dspack-to-a2ui";
+} from "@aestheticfunction/dspack-emit";
 import type { Contract } from "../core/contract.js";
 import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
 import { lintSurface, type Finding, type GateReport } from "../core/lint/index.js";

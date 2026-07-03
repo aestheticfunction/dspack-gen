@@ -14,9 +14,9 @@ produces a versioned audit report.
 [m1 tag](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1),
 write-up in [docs/m1-report.md](docs/m1-report.md). M2 in progress (second
 emitter target landed in dspack-emit; eval harness and ds-mcp tools next).
-The emitter repo was renamed `dspack-to-a2ui` → `dspack-emit` (ADR-D2); its
-npm package remains `@aestheticfunction/dspack-to-a2ui` until the next
-publish — this repo's dependency string tracks the npm name.
+The emitter is consumed from npm as `@aestheticfunction/dspack-emit`
+(renamed from `@aestheticfunction/dspack-to-a2ui` with the ADR-D2 repo
+rename; the old package is deprecated with a pointer).
 
 ## The three layers (never collapse them)
 
