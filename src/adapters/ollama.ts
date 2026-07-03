@@ -8,6 +8,7 @@
  * it records the model tag in `meta` and relies on gates S1/S2 to catch
  * unconstrained output; non-JSON output raises AdapterOutputError.
  */
+import { Agent } from "undici";
 import {
   AdapterOutputError,
   parseJsonOutput,
@@ -16,6 +17,25 @@ import {
   type GenerateResult,
   type GenerationAdapter,
 } from "./types.js";
+
+/**
+ * Local inference is legitimately slow: a single 35B generation can exceed
+ * undici's default 300s headersTimeout, which killed runs at exactly ~301s
+ * in the 2026-07-03 eval (reports with zero attempts, "fetch failed").
+ * One long-lived dispatcher with the header/body timeouts raised to an hour
+ * — a deliberate ceiling, not "no timeout": a truly hung server should
+ * still fail rather than block a matrix forever.
+ */
+const LOCAL_INFERENCE_TIMEOUT_MS = 60 * 60 * 1000;
+
+/** undici's fetch-init extension, typed so the rest of the init stays checked. */
+interface DispatchedRequestInit extends RequestInit {
+  dispatcher?: Agent;
+}
+const localInferenceDispatcher = new Agent({
+  headersTimeout: LOCAL_INFERENCE_TIMEOUT_MS,
+  bodyTimeout: LOCAL_INFERENCE_TIMEOUT_MS,
+});
 
 export interface OllamaAdapterOptions {
   /** Required — no default model exists in code (ADR-9 as amended). */
@@ -64,11 +84,14 @@ export class OllamaAdapter implements GenerationAdapter {
     // kills a whole eval matrix (the 2026-07-03 live-run crash).
     let data: OllamaChatResponse;
     try {
-      const response = await this.fetchImpl(`${this.host}/api/chat`, {
+      const init: DispatchedRequestInit = {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(body),
-      });
+        // undici extension of fetch(init); ignored by injected test fetches.
+        dispatcher: localInferenceDispatcher,
+      };
+      const response = await this.fetchImpl(`${this.host}/api/chat`, init);
       if (!response.ok) {
         // Body read can itself fail on a broken stream — keep the HTTP
         // status in the error either way.
