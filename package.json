@@ -29,7 +29,8 @@
     "smoke:ollama": "tsx scripts/smoke-ollama.ts",
     "demo:e2e": "playwright test",
     "eval": "tsx src/eval/run.ts",
-    "eval:assert": "tsx src/eval/assert.ts"
+    "eval:assert": "tsx src/eval/assert.ts",
+    "check:sync": "node scripts/check-sync.mjs"
   },
   "dependencies": {
     "@aestheticfunction/dspack-to-a2ui": "^0.2.0",
