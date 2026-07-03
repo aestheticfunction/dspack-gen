@@ -185,3 +185,23 @@ describe("transport failures are typed (2026-07-03 matrix-crash lesson)", () => 
     await expect(adapter.generate(request)).rejects.toThrowError(/transport failure/);
   });
 });
+
+describe("local-inference transport timeout (the ~301s undici ceiling)", () => {
+  it("Ollama requests carry the long-timeout dispatcher (raised headers/body timeouts)", async () => {
+    let init: Record<string, unknown> | undefined;
+    const adapter = new OllamaAdapter({
+      model: "m",
+      fetch: ((_url: unknown, i: Record<string, unknown>) => {
+        init = i;
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.resolve({ message: { content: "{}" }, model: "m" }),
+          text: () => Promise.resolve(""),
+        } as unknown as Response);
+      }) as unknown as FetchLike,
+    });
+    await adapter.generate({ system: "s", messages: [], jsonSchema: { type: "object" } });
+    expect(init?.dispatcher).toBeDefined();
+  });
+});
