@@ -144,6 +144,33 @@ describe("failure paths are first-class artifacts", () => {
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);
   });
 
+  it("emitter REFUSAL: lint-clean surface the emitter cannot project at all → failed-gate, exit 3, refusal recorded", async () => {
+    // The live-eval discovery (2026-07-03, qwen): a sub-component outside its
+    // compound parent is in-vocabulary (S2), ungoverned (S3), but the a2ui
+    // profile cannot emit it standalone — EmitSurfaceError. That is the
+    // target-equivalent emitter-gate failure, never a crash.
+    const refusalBreaker: Surface = {
+      dspackSurface: "0.1",
+      system: "shadcn/ui",
+      intent: "destructive-action",
+      root: {
+        component: "card",
+        children: [
+          (workedExample.root.children![0] as Surface["root"]),
+          { component: "card-header", text: "stray sub-component" },
+        ],
+      },
+    };
+    const adapter = new ScriptedAdapter([{ output: refusalBreaker }]);
+    const result = await runPipeline({ ...baseOptions, adapter });
+    expect(result.report.outcome).toBe("failed-gate");
+    expect(result.exitCode).toBe(3);
+    expect(result.report.emitted!.refusal).toContain("card-header");
+    expect(result.report.emitted!.validations).toEqual([]);
+    expect(result.surfaceMessages).toBeUndefined();
+    expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);
+  });
+
   it("a throwing onEvent hook never aborts the pipeline or changes the outcome", async () => {
     const adapter = new ScriptedAdapter([{ output: violatingF1 }, { output: workedExample }]);
     const result = await runPipeline({

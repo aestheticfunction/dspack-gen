@@ -305,6 +305,10 @@
               }
             }
           }
+        },
+        "refusal": {
+          "type": "string",
+          "description": "The emitter's typed refusal when a lint-clean surface could not be emitted at all (additive in v1); validations is empty in that case."
         }
       }
     },
