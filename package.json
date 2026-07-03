@@ -37,7 +37,7 @@
     "@anthropic-ai/sdk": "^0.109.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "undici": "^8.6.0"
+    "undici": "^6.27.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
