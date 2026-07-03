@@ -3,13 +3,14 @@
  * end-to-end against `dspack-gen serve` in fake (deterministic scripted
  * adapter) mode — no model, no network beyond localhost.
  *
- * The demo app lives in the dspack-to-a2ui repo; point DEMO_DIR at a checkout
- * that has the Generate view (default: a sibling clone). CI checks the repo
- * out next to this one.
+ * The demo app lives in the dspack-emit repo (formerly dspack-to-a2ui);
+ * point DEMO_DIR at a checkout that has the Generate view (default: a
+ * sibling clone named after the current repo name). CI checks the repo out
+ * next to this one.
  */
 import { defineConfig } from "@playwright/test";
 
-const DEMO_DIR = process.env.DEMO_DIR ?? "../dspack-to-a2ui";
+const DEMO_DIR = process.env.DEMO_DIR ?? "../dspack-emit";
 
 export default defineConfig({
   testDir: "e2e",
