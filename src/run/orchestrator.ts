@@ -16,6 +16,7 @@ import {
   type A2uiVersion,
   type DspackDoc,
   type DspackSurface,
+  type EmitSurfaceResult,
 } from "@aestheticfunction/dspack-emit";
 import type { Contract } from "../core/contract.js";
 import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
@@ -164,7 +165,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       // equivalent" in the exit-code table), not a crash: outcome
       // failed-gate, exit 3, refusal recorded in the report (ADR-D1 family
       // evidence, same as an A3 rejection).
-      let emission;
+      let emission: EmitSurfaceResult;
       try {
         emission = emitSurface(surface, doc);
       } catch (error) {
