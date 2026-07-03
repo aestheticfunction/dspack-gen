@@ -30,6 +30,8 @@ jobs:
           diff /tmp/f1.json fixtures/golden/violating/F1-dialog-for-delete.expected.json
       - name: CLI smoke
         run: npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructive-action > /dev/null
+      - name: Contract-copy drift check (dspack-gen#7)
+        run: npm run check:sync
       - name: Eval harness gate (fake matrix, deterministic golden + threshold exit codes)
         run: |
           npm run eval -- --adapter fake --matrix eval/matrix.fake.json --out out/eval/fake
