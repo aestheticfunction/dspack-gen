@@ -1,0 +1,31 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-03T16:28:45.652Z",
+  "request": {
+    "prompt": "a delete-account confirmation where the title is rendered as a badge chip inside the dialog header",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.3",
+      "sha256": "4c86ba94156fee1754ca599435a12b8e5fc628329c4b2abe4a3d55168c908d07"
+    }
+  },
+  "generation": {
+    "adapterId": "anthropic:claude-sonnet-5",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "adapterError": "[anthropic:claude-sonnet-5] transport failure (BadRequestError): 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the number of strict tools.\"},\"request_id\":\"req_011CcfSUsSP3myUpP4SnHXjY\"}"
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "failed-adapter",
+  "timings": {
+    "totalMs": 397
+  }
+}

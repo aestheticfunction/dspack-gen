@@ -1,0 +1,447 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-03T11:02:46.037Z",
+  "request": {
+    "prompt": "a screen to cancel my subscription immediately",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.3",
+      "sha256": "4c86ba94156fee1754ca599435a12b8e5fc628329c4b2abe4a3d55168c908d07"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Cancel subscription?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will immediately cancel your subscription and you will lose access to premium features. This action cannot be undone."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Keep subscription"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "text": "Yes, cancel"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 1920,
+        "outputTokens": 349
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 23504027917,
+        "load_duration": 196433792,
+        "prompt_eval_duration": 2007463000,
+        "eval_duration": 6765424000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-title",
+                      "text": "Cancel subscription?"
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This will immediately cancel your subscription and revoke access to premium features. This action cannot be undone."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Keep subscription"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Yes, cancel"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 4147,
+        "outputTokens": 349
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 55992531166,
+        "load_duration": 194219541,
+        "prompt_eval_duration": 5354579000,
+        "eval_duration": 6732566000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 2 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 2: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-gate",
+  "emitted": {
+    "target": "a2ui",
+    "surfaceMessages": {
+      "messages": [
+        {
+          "version": "v0.9",
+          "createSurface": {
+            "surfaceId": "destructive_action",
+            "catalogId": "https://rdombrowski.dev/catalogs/shadcn-ui/v0_9_1/catalog.json",
+            "theme": {
+              "agentDisplayName": "shadcn/ui via dspack",
+              "primaryColor": "#0f172a"
+            }
+          }
+        },
+        {
+          "version": "v0.9",
+          "updateComponents": {
+            "surfaceId": "destructive_action",
+            "components": [
+              {
+                "id": "root",
+                "component": "Card",
+                "child": "alertdialog"
+              },
+              {
+                "id": "alertdialog",
+                "component": "AlertDialog",
+                "title": "Cancel subscription?",
+                "description": "This will immediately cancel your subscription and revoke access to premium features. This action cannot be undone.",
+                "cancelLabel": "Keep subscription",
+                "confirmLabel": "Yes, cancel",
+                "action": {
+                  "event": {
+                    "name": "yes_cancel",
+                    "context": {}
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "warnings": [
+      {
+        "code": "surface-composition-flattened",
+        "message": "$.root.children[0]: compound 'alert-dialog' subtree flattened onto emitted props (documented casualty; nested props beyond text are not carried)."
+      },
+      {
+        "code": "surface-synthesized-action",
+        "message": "$.root.children[0]: A2UI requires a declarative action on AlertDialog; synthesized event 'yes_cancel'."
+      }
+    ],
+    "validations": [
+      {
+        "a2uiVersion": "0.9.1",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": false,
+            "errors": [
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'columns'",
+              "AlertDialog#alertdialog: (root) must have required property 'rows'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'triggerLabel'",
+              "AlertDialog#alertdialog: (root) must have required property 'text'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'children'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must match exactly one schema in oneOf"
+            ]
+          }
+        ]
+      },
+      {
+        "a2uiVersion": "1.0",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": false,
+            "errors": [
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'columns'",
+              "AlertDialog#alertdialog: (root) must have required property 'rows'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'triggerLabel'",
+              "AlertDialog#alertdialog: (root) must have required property 'text'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'children'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must match exactly one schema in oneOf"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 79573
+  }
+}

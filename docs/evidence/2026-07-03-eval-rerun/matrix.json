@@ -1,0 +1,120 @@
+{
+  "comment": "Three-model rerun matrix (maintainer-directed 2026-07-03): gemma / qwen3.6:35b / hosted. gpt-oss dropped per directive. The gemma column and 9 qwen runs are REUSED from the interrupted 2026-07-03T03-01-01-569Z run via --resume (same contract sha, same prompts/templates; the harness containment fix changes no success-path semantics). Live eval matrix. Model ids are configuration, verified against the installed/live providers at authoring time (ollama tags from `ollama list` 2026-07-02, GGUF/llama.cpp engine only — mlx variants excluded per the S0 engine finding, ollama/ollama#17013). Prompts span repair shapes (substitution / addition / deletion / restructuring) and include ADR-D1 probes; every prompt crosses both repair templates (the removal-shape hypothesis A/B). Cost scales linearly in runsPerCell × models × prompts × templates — adjust here, never in code. Live runs are documented, never CI-gating.",
+  "contract": "../fixtures/shadcn.v0_3.dspack.json",
+  "runsPerCell": 3,
+  "maxRepairs": 2,
+  "models": [
+    "ollama:gemma4:e4b",
+    "ollama:qwen3.6:35b",
+    "anthropic:claude-sonnet-5"
+  ],
+  "repairTemplates": [
+    "standard",
+    "permit-restructuring"
+  ],
+  "prompts": [
+    {
+      "id": "p01-delete-account",
+      "intent": "destructive-action",
+      "prompt": "a screen to delete my account",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "p02-revoke-access",
+      "intent": "destructive-action",
+      "prompt": "a panel to revoke a teammate's access to the workspace",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "p03-delete-repository",
+      "intent": "destructive-action",
+      "prompt": "a settings section to permanently delete a repository",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "p04-cancel-subscription",
+      "intent": "destructive-action",
+      "prompt": "a screen to cancel my subscription immediately",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "p05-remove-member-table",
+      "intent": "destructive-action",
+      "prompt": "a members table where each row has a remove button",
+      "repairShape": "restructuring",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog",
+        "rule.button-no-interactive-descendants"
+      ]
+    },
+    {
+      "id": "p06-single-button-confirm",
+      "intent": "destructive-action",
+      "prompt": "a delete confirmation with a single prominent delete button and nothing else",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.alertdialog-requires-cancel"
+      ]
+    },
+    {
+      "id": "p07-no-title-confirm",
+      "intent": "destructive-action",
+      "prompt": "a minimal, compact confirmation for deleting my account — skip the heading, just body text and the actions",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.alertdialog-requires-cancel"
+      ]
+    },
+    {
+      "id": "p08-button-wraps-input",
+      "intent": "destructive-action",
+      "prompt": "a danger-zone card whose delete button contains a small confirm checkbox input inside it",
+      "repairShape": "deletion",
+      "targetRules": [
+        "rule.button-no-interactive-descendants"
+      ]
+    },
+    {
+      "id": "p09-nested-trigger-button",
+      "intent": "destructive-action",
+      "prompt": "a delete confirmation whose trigger button shows a badge and a secondary smaller button inside it",
+      "repairShape": "deletion",
+      "targetRules": [
+        "rule.button-no-interactive-descendants"
+      ]
+    },
+    {
+      "id": "p10-title-as-badge",
+      "intent": "destructive-action",
+      "prompt": "a delete-account confirmation where the title is rendered as a badge chip inside the dialog header",
+      "repairShape": "restructuring",
+      "adrD1Probe": true
+    },
+    {
+      "id": "p11-styled-title-nested",
+      "intent": "destructive-action",
+      "prompt": "a confirmation dialog for deleting my account; wrap the title text in a styled container inside the header",
+      "repairShape": "restructuring",
+      "adrD1Probe": true
+    },
+    {
+      "id": "p12-textless-trigger",
+      "intent": "destructive-action",
+      "prompt": "a delete-account confirmation opened by an icon-only button with no visible label",
+      "repairShape": "addition",
+      "adrD1Probe": true
+    }
+  ]
+}
