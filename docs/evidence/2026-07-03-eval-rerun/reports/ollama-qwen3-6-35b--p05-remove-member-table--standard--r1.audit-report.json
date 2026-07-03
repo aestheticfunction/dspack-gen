@@ -1,0 +1,744 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-03T11:04:05.611Z",
+  "request": {
+    "prompt": "a members table where each row has a remove button",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.3",
+      "sha256": "4c86ba94156fee1754ca599435a12b8e5fc628329c4b2abe4a3d55168c908d07"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "table",
+              "children": [
+                {
+                  "component": "table-header",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-head",
+                          "text": "Name"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Email"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Role"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Actions"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "table-body",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "John Doe"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "john@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "Admin"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Remove"
+                            },
+                            {
+                              "component": "alert-dialog-content",
+                              "text": "Remove member?"
+                            },
+                            {
+                              "component": "alert-dialog-description",
+                              "text": "Are you sure you want to remove this member? This action cannot be undone."
+                            },
+                            {
+                              "component": "alert-dialog-footer",
+                              "text": "Cancel"
+                            },
+                            {
+                              "component": "alert-dialog-action",
+                              "text": "Remove"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Jane Smith"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "jane@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "Member"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Remove"
+                            },
+                            {
+                              "component": "alert-dialog-content",
+                              "text": "Remove member?"
+                            },
+                            {
+                              "component": "alert-dialog-description",
+                              "text": "Are you sure you want to remove this member? This action cannot be undone."
+                            },
+                            {
+                              "component": "alert-dialog-footer",
+                              "text": "Cancel"
+                            },
+                            {
+                              "component": "alert-dialog-action",
+                              "text": "Remove"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 3438,
+        "outputTokens": 363
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 54435809709,
+        "load_duration": 216156584,
+        "prompt_eval_duration": 4290840000,
+        "eval_duration": 6955162000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "table",
+              "children": [
+                {
+                  "component": "table-header",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-head",
+                          "text": "Name"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Email"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Role"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Actions"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "table-body",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "John Doe"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "john@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "Admin"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Remove"
+                            },
+                            {
+                              "component": "alert-dialog-content",
+                              "text": "Remove member?"
+                            },
+                            {
+                              "component": "alert-dialog-description",
+                              "text": "Are you sure you want to remove this member? This action cannot be undone."
+                            },
+                            {
+                              "component": "alert-dialog-footer",
+                              "text": "Cancel"
+                            },
+                            {
+                              "component": "alert-dialog-action",
+                              "text": "Remove"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Jane Smith"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "jane@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "Member"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Remove"
+                            },
+                            {
+                              "component": "alert-dialog-content",
+                              "text": "Remove member?"
+                            },
+                            {
+                              "component": "alert-dialog-description",
+                              "text": "Are you sure you want to remove this member? This action cannot be undone."
+                            },
+                            {
+                              "component": "alert-dialog-footer",
+                              "text": "Cancel"
+                            },
+                            {
+                              "component": "alert-dialog-action",
+                              "text": "Remove"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 6845,
+        "outputTokens": 363
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 107863043209,
+        "load_duration": 197185542,
+        "prompt_eval_duration": 9577454000,
+        "eval_duration": 7071410000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "table",
+              "children": [
+                {
+                  "component": "table-header",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-head",
+                          "text": "Name"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Email"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Role"
+                        },
+                        {
+                          "component": "table-head",
+                          "text": "Actions"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "table-body",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "John Doe"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "john@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "Admin"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Remove"
+                            },
+                            {
+                              "component": "alert-dialog-content",
+                              "text": "Remove member?"
+                            },
+                            {
+                              "component": "alert-dialog-description",
+                              "text": "Are you sure you want to remove this member? This action cannot be undone."
+                            },
+                            {
+                              "component": "alert-dialog-footer",
+                              "text": "Cancel"
+                            },
+                            {
+                              "component": "alert-dialog-action",
+                              "text": "Remove"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Jane Smith"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "jane@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "Member"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Remove"
+                            },
+                            {
+                              "component": "alert-dialog-content",
+                              "text": "Remove member?"
+                            },
+                            {
+                              "component": "alert-dialog-description",
+                              "text": "Are you sure you want to remove this member? This action cannot be undone."
+                            },
+                            {
+                              "component": "alert-dialog-footer",
+                              "text": "Cancel"
+                            },
+                            {
+                              "component": "alert-dialog-action",
+                              "text": "Remove"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 7160,
+        "outputTokens": 363
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 96813697000,
+        "load_duration": 201056333,
+        "prompt_eval_duration": 10109602000,
+        "eval_duration": 7131220000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[3].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 4 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[0].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 2: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[0].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 3: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[1].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 4: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[1].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 4 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[0].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 2: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[0].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 3: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[1].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 4: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[1].children[3].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 259114
+  }
+}
