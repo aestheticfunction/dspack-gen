@@ -152,11 +152,12 @@ export function ruleInstruction(rule: RuleEntry, contract?: Contract): string {
       const parts: string[] = [];
       if (r.forbiddenDescendants?.length)
         parts.push(`Never place ${r.forbiddenDescendants.join(" or ")} inside a ${r.component}`);
+      // Steering names the category AND its resolved member ids, so the
+      // model sees concrete vocabulary (mirrors the finding message).
+      const memberships = r.forbiddenCategories?.length && contract ? categoryIndex(contract) : undefined;
       for (const category of r.forbiddenCategories ?? []) {
-        // Steering names the category AND its resolved member ids, so the
-        // model sees concrete vocabulary (mirrors the finding message).
-        const members = contract
-          ? [...categoryIndex(contract)].filter(([, cats]) => cats.includes(category)).map(([id]) => id)
+        const members = memberships
+          ? [...memberships].filter(([, cats]) => cats.includes(category)).map(([id]) => id)
           : [];
         parts.push(
           `never place ${category}-category components${members.length ? ` (${members.join(", ")})` : ""} inside ${r.component}`,
@@ -183,6 +184,9 @@ export function ruleInstruction(rule: RuleEntry, contract?: Contract): string {
       for (const p of r.requiredProps ?? []) {
         needs.push(p.oneOf ? `set ${p.prop} to one of ${p.oneOf.map(String).join("/")}` : `set ${p.prop} directly`);
       }
+      // Schema-invalid but defensive: no constraints to phrase → generic steering,
+      // never a malformed "must ;" sentence (the linter still evaluates the rule).
+      if (needs.length === 0) return `Follow rule ${rule.id}.`;
       const existence = r.within ? `; every ${r.within} must contain a ${r.component}` : "";
       return `${scope} must ${needs.join(", and ")}${existence}.`;
     }
