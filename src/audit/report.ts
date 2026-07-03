@@ -51,6 +51,8 @@ export interface AuditReportV1 {
     schemaSha256: string;
     maxRepairs: number;
     ruleSteering: boolean;
+    /** ADR-7 repair template variant used for feedback (additive in v1; absent ⇒ "standard"). */
+    repairTemplate?: string;
   };
   attempts: AttemptRecord[];
   /** Repair messages verbatim — rendered from the same findings objects above. */

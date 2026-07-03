@@ -20,7 +20,7 @@ import type { Contract } from "../core/contract.js";
 import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
 import { lintSurface, type Finding, type GateReport } from "../core/lint/index.js";
 import { AdapterOutputError, type GenerateMessage, type GenerationAdapter } from "../adapters/types.js";
-import { renderRepairMessage } from "../repair/render.js";
+import { renderRepairMessage, type RepairTemplate } from "../repair/render.js";
 import {
   contractDigest,
   sha256,
@@ -39,6 +39,8 @@ export interface RunOptions {
   adapter: GenerationAdapter;
   /** Regeneration attempts after the first (default 2 ⇒ ≤3 generations). */
   maxRepairs?: number;
+  /** ADR-7 repair template variant (default "standard"); recorded in the report. */
+  repairTemplate?: RepairTemplate;
   compile?: CompileOptions;
   /** A2UI versions to validate the emitted surface against. */
   a2uiVersions?: A2uiVersion[];
@@ -74,6 +76,7 @@ const A_GATE: Record<string, "A1" | "A2" | "A3"> = {
 export async function runPipeline(options: RunOptions): Promise<RunResult> {
   const { contract, intent, prompt, adapter } = options;
   const maxRepairs = options.maxRepairs ?? 2;
+  const repairTemplate = options.repairTemplate ?? "standard";
   const now = options.now ?? (() => new Date());
   const startedAt = now();
 
@@ -110,6 +113,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
         schemaSha256: sha256(context.schema),
         maxRepairs,
         ruleSteering: !options.compile?.omitRuleSteering,
+        repairTemplate,
       },
       attempts,
       repairMessages,
@@ -178,7 +182,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
     }
 
     if (index < maxRepairs) {
-      const repair = renderRepairMessage(lint.findings, contract);
+      const repair = renderRepairMessage(lint.findings, contract, repairTemplate);
       repairMessages.push(repair);
       conversation.push({ role: "assistant", content: generated.raw }, { role: "user", content: repair });
       emit({ type: "repair", index, message: repair });

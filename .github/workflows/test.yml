@@ -30,6 +30,16 @@ jobs:
           diff /tmp/f1.json fixtures/golden/violating/F1-dialog-for-delete.expected.json
       - name: CLI smoke
         run: npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructive-action > /dev/null
+      - name: Eval harness gate (fake matrix, deterministic golden + threshold exit codes)
+        run: |
+          npm run eval -- --adapter fake --matrix eval/matrix.fake.json --out out/eval/fake
+          diff out/eval/fake/results.json fixtures/golden/eval/results.fake.json
+          npm run eval:assert -- --results out/eval/fake/results.json --model fake:scripted --min-repair-success 0.5
+          set +e
+          npm run eval:assert -- --results out/eval/fake/results.json --model fake:scripted --min-repair-success 0.9
+          code=$?
+          set -e
+          test "$code" -eq 2
 
   # PR-7 acceptance gate: the flagship demo, deterministic fake adapter.
   demo-e2e:

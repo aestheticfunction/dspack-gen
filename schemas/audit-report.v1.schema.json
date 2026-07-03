@@ -2,37 +2,88 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/aestheticfunction/dspack-gen/blob/main/schemas/audit-report.v1.schema.json",
   "title": "dspack-gen audit report v1",
-  "description": "The versioned audit artifact every pipeline run emits (ADR-8). Stability guarantee: additive-only within reportVersion 1 — consumers MUST tolerate unknown properties; required fields and enums below never change meaning. See docs/AUDIT.md.",
+  "description": "The versioned audit artifact every pipeline run emits (ADR-8). Stability guarantee: additive-only within reportVersion 1 \u2014 consumers MUST tolerate unknown properties; required fields and enums below never change meaning. See docs/AUDIT.md.",
   "type": "object",
-  "required": ["reportVersion", "createdAt", "request", "generation", "attempts", "repairMessages", "outcome", "timings"],
+  "required": [
+    "reportVersion",
+    "createdAt",
+    "request",
+    "generation",
+    "attempts",
+    "repairMessages",
+    "outcome",
+    "timings"
+  ],
   "properties": {
-    "reportVersion": { "const": "1" },
-    "createdAt": { "type": "string" },
+    "reportVersion": {
+      "const": "1"
+    },
+    "createdAt": {
+      "type": "string"
+    },
     "request": {
       "type": "object",
-      "required": ["prompt", "intent", "contract"],
+      "required": [
+        "prompt",
+        "intent",
+        "contract"
+      ],
       "properties": {
-        "prompt": { "type": "string" },
-        "intent": { "type": "string" },
+        "prompt": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
         "contract": {
           "type": "object",
-          "required": ["name", "dspack", "sha256"],
+          "required": [
+            "name",
+            "dspack",
+            "sha256"
+          ],
           "properties": {
-            "name": { "type": "string" },
-            "dspack": { "type": "string" },
-            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            "name": {
+              "type": "string"
+            },
+            "dspack": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
           }
         }
       }
     },
     "generation": {
       "type": "object",
-      "required": ["adapterId", "schemaSha256", "maxRepairs", "ruleSteering"],
+      "required": [
+        "adapterId",
+        "schemaSha256",
+        "maxRepairs",
+        "ruleSteering"
+      ],
       "properties": {
-        "adapterId": { "type": "string" },
-        "schemaSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "maxRepairs": { "type": "integer", "minimum": 0 },
-        "ruleSteering": { "type": "boolean" }
+        "adapterId": {
+          "type": "string"
+        },
+        "schemaSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "maxRepairs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ruleSteering": {
+          "type": "boolean"
+        },
+        "repairTemplate": {
+          "type": "string",
+          "description": "ADR-7 repair template variant used for feedback rendering (additive in v1; absent means \"standard\")."
+        }
       }
     },
     "attempts": {
@@ -40,24 +91,60 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["index"],
+        "required": [
+          "index"
+        ],
         "properties": {
-          "index": { "type": "integer", "minimum": 0 },
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
           "surface": {},
-          "model": { "type": "string" },
-          "usage": { "type": "object" },
-          "meta": { "type": "object" },
-          "adapterError": { "type": "string" },
+          "model": {
+            "type": "string"
+          },
+          "usage": {
+            "type": "object"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "adapterError": {
+            "type": "string"
+          },
           "gates": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["gate", "name", "status"],
+              "required": [
+                "gate",
+                "name",
+                "status"
+              ],
               "properties": {
-                "gate": { "enum": ["S1", "S2", "S3"] },
-                "name": { "type": "string" },
-                "status": { "enum": ["PASS", "FAIL", "SKIPPED"] },
-                "errors": { "type": "array", "items": { "type": "string" } }
+                "gate": {
+                  "enum": [
+                    "S1",
+                    "S2",
+                    "S3"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "PASS",
+                    "FAIL",
+                    "SKIPPED"
+                  ]
+                },
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
               }
             }
           },
@@ -65,63 +152,154 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["ruleId", "type", "requirement", "level", "message", "rationale", "location"],
+              "required": [
+                "ruleId",
+                "type",
+                "requirement",
+                "level",
+                "message",
+                "rationale",
+                "location"
+              ],
               "properties": {
-                "ruleId": { "type": "string" },
-                "type": { "type": "string" },
-                "requirement": { "enum": ["must", "should"] },
-                "level": { "enum": ["error", "warn"] },
-                "message": { "type": "string" },
-                "rationale": { "type": "string" },
+                "ruleId": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "requirement": {
+                  "enum": [
+                    "must",
+                    "should"
+                  ]
+                },
+                "level": {
+                  "enum": [
+                    "error",
+                    "warn"
+                  ]
+                },
+                "message": {
+                  "type": "string"
+                },
+                "rationale": {
+                  "type": "string"
+                },
                 "location": {
                   "type": "object",
-                  "required": ["path", "component"],
+                  "required": [
+                    "path",
+                    "component"
+                  ],
                   "properties": {
-                    "path": { "type": "string" },
-                    "component": { "type": "string" },
-                    "nodeId": { "type": "string" }
+                    "path": {
+                      "type": "string"
+                    },
+                    "component": {
+                      "type": "string"
+                    },
+                    "nodeId": {
+                      "type": "string"
+                    }
                   }
                 },
-                "exampleIds": { "type": "array", "items": { "type": "string" } }
+                "exampleIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
         }
       }
     },
-    "repairMessages": { "type": "array", "items": { "type": "string" } },
-    "outcome": { "enum": ["passed", "failed-lint-exhausted", "failed-gate", "failed-adapter"] },
+    "repairMessages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outcome": {
+      "enum": [
+        "passed",
+        "failed-lint-exhausted",
+        "failed-gate",
+        "failed-adapter"
+      ]
+    },
     "emitted": {
       "type": "object",
-      "required": ["target", "validations"],
+      "required": [
+        "target",
+        "validations"
+      ],
       "properties": {
-        "target": { "const": "a2ui" },
+        "target": {
+          "const": "a2ui"
+        },
         "surfaceMessages": {},
         "warnings": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["code", "message"],
-            "properties": { "code": { "type": "string" }, "message": { "type": "string" } }
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
           }
         },
         "validations": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["a2uiVersion", "gates"],
+            "required": [
+              "a2uiVersion",
+              "gates"
+            ],
             "properties": {
-              "a2uiVersion": { "type": "string" },
+              "a2uiVersion": {
+                "type": "string"
+              },
               "gates": {
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": ["gate", "name", "pass"],
+                  "required": [
+                    "gate",
+                    "name",
+                    "pass"
+                  ],
                   "properties": {
-                    "gate": { "enum": ["A1", "A2", "A3"] },
-                    "name": { "type": "string" },
-                    "pass": { "type": "boolean" },
-                    "errors": { "type": "array", "items": { "type": "string" } }
+                    "gate": {
+                      "enum": [
+                        "A1",
+                        "A2",
+                        "A3"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "pass": {
+                      "type": "boolean"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -132,8 +310,15 @@
     },
     "timings": {
       "type": "object",
-      "required": ["totalMs"],
-      "properties": { "totalMs": { "type": "number", "minimum": 0 } }
+      "required": [
+        "totalMs"
+      ],
+      "properties": {
+        "totalMs": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
     }
   }
 }
