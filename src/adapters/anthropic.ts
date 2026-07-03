@@ -45,15 +45,24 @@ export class AnthropicAdapter implements GenerationAdapter {
   }
 
   async generate(request: GenerateRequest): Promise<GenerateResult> {
-    const response = await this.client.messages.create({
-      model: this.model,
-      max_tokens: request.params?.maxTokens ?? 16000,
-      system: request.system,
-      messages: request.messages,
-      output_config: {
-        format: { type: "json_schema", schema: request.jsonSchema as never },
-      },
-    } as never);
+    // Typed transport: SDK connection/API errors surface as failed-adapter
+    // outcomes (with a report), never as raw exceptions that kill a matrix.
+    let response;
+    try {
+      response = await this.client.messages.create({
+        model: this.model,
+        max_tokens: request.params?.maxTokens ?? 16000,
+        system: request.system,
+        messages: request.messages,
+        output_config: {
+          format: { type: "json_schema", schema: request.jsonSchema as never },
+        },
+      } as never);
+    } catch (error) {
+      if (error instanceof AdapterOutputError) throw error;
+      const name = error instanceof Error ? error.constructor.name : "unknown";
+      throw new AdapterOutputError(this.id, `transport failure (${name}): ${error instanceof Error ? error.message : String(error)}`);
+    }
 
     const message = response as Anthropic.Message;
     if (message.stop_reason === "refusal") {

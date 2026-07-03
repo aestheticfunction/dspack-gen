@@ -58,15 +58,25 @@ export class OllamaAdapter implements GenerationAdapter {
       options: { temperature: request.params?.temperature ?? 0.2 },
       messages: [{ role: "system", content: request.system }, ...request.messages],
     };
-    const response = await this.fetchImpl(`${this.host}/api/chat`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!response.ok) {
-      throw new AdapterOutputError(this.id, `HTTP ${response.status}: ${(await response.text()).slice(0, 300)}`);
+    // The whole transport exchange is typed: a rejected fetch (connection
+    // reset, timeout under a large model load) must surface as a
+    // failed-adapter outcome with a report, never as a raw exception that
+    // kills a whole eval matrix (the 2026-07-03 live-run crash).
+    let data: OllamaChatResponse;
+    try {
+      const response = await this.fetchImpl(`${this.host}/api/chat`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) {
+        throw new AdapterOutputError(this.id, `HTTP ${response.status}: ${(await response.text()).slice(0, 300)}`);
+      }
+      data = (await response.json()) as OllamaChatResponse;
+    } catch (error) {
+      if (error instanceof AdapterOutputError) throw error;
+      throw new AdapterOutputError(this.id, `transport failure: ${error instanceof Error ? error.message : String(error)}`);
     }
-    const data = (await response.json()) as OllamaChatResponse;
     const raw = data.message?.content ?? "";
     if (raw === "") throw new AdapterOutputError(this.id, "empty model output");
 

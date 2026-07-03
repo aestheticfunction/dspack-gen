@@ -1,5 +1,5 @@
 {
-  "matrixSha256": "cd995306d1d33a21bc24417bb7cbec8896ef2f0517540b3dcaf3ba593b3f61d1",
+  "matrixSha256": "0ed232d9e630e0f3a996d5e9c326639b0ed812dd3492e667325d1bb814dcf600",
   "contract": {
     "name": "shadcn/ui",
     "dspack": "0.3",
@@ -45,6 +45,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 1,
@@ -90,6 +91,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 1,
@@ -129,6 +131,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -168,6 +171,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -213,6 +217,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 0,
@@ -258,6 +263,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 0,
@@ -297,6 +303,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 0,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -336,6 +343,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 0,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -375,6 +383,7 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -414,17 +423,103 @@
       ],
       "metrics": {
         "runs": 2,
+        "errorRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
         "endToEndPassRate": 0,
         "s3CleanGateFailures": 2
       }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p06-contained-crash",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "error",
+          "exitCode": -1,
+          "attempts": 0,
+          "error": "Error: ScriptedAdapter: script exhausted after 0 generation(s)",
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p06-contained-crash--standard--r1.error.json"
+        },
+        {
+          "run": 2,
+          "outcome": "error",
+          "exitCode": -1,
+          "attempts": 0,
+          "error": "Error: ScriptedAdapter: script exhausted after 0 generation(s)",
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p06-contained-crash--standard--r2.error.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "errorRuns": 2,
+        "schemaValidityRate": 0,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p06-contained-crash",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "error",
+          "exitCode": -1,
+          "attempts": 0,
+          "error": "Error: ScriptedAdapter: script exhausted after 0 generation(s)",
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p06-contained-crash--permit-restructuring--r1.error.json"
+        },
+        {
+          "run": 2,
+          "outcome": "error",
+          "exitCode": -1,
+          "attempts": 0,
+          "error": "Error: ScriptedAdapter: script exhausted after 0 generation(s)",
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p06-contained-crash--permit-restructuring--r2.error.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "errorRuns": 2,
+        "schemaValidityRate": 0,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
     }
   ],
   "byModel": {
     "fake:scripted": {
-      "runs": 20,
+      "runs": 24,
+      "errorRuns": 4,
       "schemaValidityRate": 0.8,
       "firstAttemptViolationRate": 0.4,
       "repairSuccessRate": 0.5,

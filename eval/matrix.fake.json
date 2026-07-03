@@ -3,14 +3,19 @@
   "contract": "../fixtures/shadcn.v0_3.dspack.json",
   "runsPerCell": 2,
   "maxRepairs": 2,
-  "repairTemplates": ["standard", "permit-restructuring"],
+  "repairTemplates": [
+    "standard",
+    "permit-restructuring"
+  ],
   "prompts": [
     {
       "id": "p01-violation-then-repair",
       "intent": "destructive-action",
       "prompt": "a screen to delete my account",
       "repairShape": "substitution",
-      "targetRules": ["rule.destructive-requires-alertdialog"]
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
     },
     {
       "id": "p02-clean-first-attempt",
@@ -23,7 +28,9 @@
       "intent": "destructive-action",
       "prompt": "a members table where each row has a remove button",
       "repairShape": "deletion",
-      "targetRules": ["rule.button-no-interactive-descendants"]
+      "targetRules": [
+        "rule.button-no-interactive-descendants"
+      ]
     },
     {
       "id": "p04-adapter-failure",
@@ -37,26 +44,50 @@
       "prompt": "a delete-account confirmation where the title is rendered as a badge chip inside the header",
       "repairShape": "restructuring",
       "adrD1Probe": true
+    },
+    {
+      "id": "p06-contained-crash",
+      "intent": "destructive-action",
+      "prompt": "a screen to delete my account",
+      "repairShape": "substitution",
+      "comment": "empty script => the ScriptedAdapter throws a RAW Error (not AdapterOutputError) on the first generation — the deterministic exercise of per-run crash containment (explicit `error` outcome, matrix continues)."
     }
   ],
   "scripts": {
     "p01-violation-then-repair": [
-      { "fixture": "../fixtures/golden/violating/F1-dialog-for-delete.dsurface.json" },
-      { "fixture": "../fixtures/golden/clean/delete-account.dsurface.json" }
+      {
+        "fixture": "../fixtures/golden/violating/F1-dialog-for-delete.dsurface.json"
+      },
+      {
+        "fixture": "../fixtures/golden/clean/delete-account.dsurface.json"
+      }
     ],
     "p02-clean-first-attempt": [
-      { "fixture": "../fixtures/golden/clean/delete-account.dsurface.json" }
+      {
+        "fixture": "../fixtures/golden/clean/delete-account.dsurface.json"
+      }
     ],
     "p03-exhausted": [
-      { "fixture": "../fixtures/golden/violating/F5-nested-interactive.dsurface.json" },
-      { "fixture": "../fixtures/golden/violating/F5-nested-interactive.dsurface.json" },
-      { "fixture": "../fixtures/golden/violating/F5-nested-interactive.dsurface.json" }
+      {
+        "fixture": "../fixtures/golden/violating/F5-nested-interactive.dsurface.json"
+      },
+      {
+        "fixture": "../fixtures/golden/violating/F5-nested-interactive.dsurface.json"
+      },
+      {
+        "fixture": "../fixtures/golden/violating/F5-nested-interactive.dsurface.json"
+      }
     ],
     "p04-adapter-failure": [
-      { "error": "scripted adapter failure (deterministic failed-adapter path)" }
+      {
+        "error": "scripted adapter failure (deterministic failed-adapter path)"
+      }
     ],
     "p05-s3-clean-gate-fail": [
-      { "fixture": "../fixtures/eval/text-placement-gate-fail.dsurface.json" }
-    ]
+      {
+        "fixture": "../fixtures/eval/text-placement-gate-fail.dsurface.json"
+      }
+    ],
+    "p06-contained-crash": []
   }
 }

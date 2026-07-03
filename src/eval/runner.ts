@@ -8,22 +8,35 @@
  * fixed, so retained reports and `results.json` are byte-stable. Live runs
  * (`--adapter live`) are documented, never CI-gating.
  *
- * Metric definitions (stated once, computed nowhere else):
- * - schemaValidityRate  — runs whose attempt-1 S1 gate passed / runs.
+ * Containment contract (the 2026-07-03 live-run lesson): one run can never
+ * kill the matrix. Adapters type their transport failures (failed-adapter
+ * outcome, with a report); anything that still escapes a run is contained
+ * here as an explicit `error` run — recorded in the distribution with its
+ * message and a retained .error.json, never silent, never fatal. The one
+ * deliberate exception is UnknownRuleTypeError: a bad contract fails every
+ * run identically, so the matrix fails loudly (the linter's exit-4 class).
+ * `resume: true` skips runs whose audit report is already retained
+ * (summarizing from the retained report) and retries error records.
+ *
+ * Metric definitions (stated once, computed nowhere else; every rate is
+ * over the NON-ERROR runs — contained errors are infrastructure, not
+ * observations of the model, and are reported via `errorRuns`):
+ * - schemaValidityRate  — runs whose attempt-1 S1 gate passed / non-error runs.
  * - firstAttemptViolationRate — runs whose attempt 1 had ≥1 error-level S3
- *   finding / runs.
+ *   finding / non-error runs.
  * - repairSuccessRate   — among runs with a first-attempt violation, the
  *   fraction that reached an S3-clean attempt within maxRepairs (outcome
  *   `passed` or `failed-gate`); null when no run violated (0/0 is not 0).
- * - endToEndPassRate    — outcome === "passed" / runs.
+ * - endToEndPassRate    — outcome === "passed" / non-error runs.
  * - s3CleanGateFailures — count of `failed-gate` outcomes: S3 accepted a
  *   surface an emitter gate refused (the ADR-D1 family signal; recorded for
  *   every cell, probe-marked or not).
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import type { Contract } from "../core/contract.js";
 import { runPipeline } from "../run/orchestrator.js";
+import { UnknownRuleTypeError } from "../core/lint/index.js";
 import { adapterFor } from "../adapters/index.js";
 import { ScriptedAdapter, type ScriptEntry } from "../adapters/fake.js";
 import { contractDigest, sha256, type AuditReportV1 } from "../audit/report.js";
@@ -43,6 +56,12 @@ export interface RunMatrixOptions {
   adapterMode: "fake" | "live";
   /** Fixed clock for deterministic retained reports (fake mode). */
   now?: () => Date;
+  /**
+   * Skip runs whose audit report is already retained in outDir (summarize
+   * from the retained report instead); contained-error records are retried.
+   * Makes an interrupted matrix resumable without re-burning compute.
+   */
+  resume?: boolean;
   /** Progress lines (CLI); observational. */
   log?: (line: string) => void;
 }
@@ -68,24 +87,60 @@ export async function runMatrix(options: RunMatrixOptions): Promise<EvalResults>
       for (const repairTemplate of templates) {
         const runs: RunSummary[] = [];
         for (let run = 1; run <= matrix.runsPerCell; run++) {
+          const reportPath = reportRelPath(model, prompt.id, repairTemplate, run);
+          // Resume: a retained audit report is a completed observation —
+          // summarize it instead of re-running. Contained-error records
+          // (.error.json) are NOT skipped: errors are retryable.
+          if (options.resume && existsSync(join(outDir, reportPath))) {
+            const retained = JSON.parse(readFileSync(join(outDir, reportPath), "utf8")) as AuditReportV1;
+            runs.push(summarize(run, retained, exitCodeFor(retained.outcome), reportPath));
+            log(`${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: ${retained.outcome} (resumed from retained report)`);
+            continue;
+          }
           const adapter =
             options.adapterMode === "fake"
               ? scriptedAdapter(matrix, prompt.id, matrixDir)
               : adapterFor(model);
-          const result = await runPipeline({
-            contract,
-            intent: prompt.intent,
-            prompt: prompt.prompt,
-            adapter,
-            maxRepairs,
-            repairTemplate,
-            now: options.now,
-          });
-          const reportPath = retainReport(outDir, model, prompt.id, repairTemplate, run, result.report);
-          runs.push(summarize(run, result.report, result.exitCode, reportPath));
-          log(
-            `${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: ${result.report.outcome}`,
-          );
+          try {
+            const result = await runPipeline({
+              contract,
+              intent: prompt.intent,
+              prompt: prompt.prompt,
+              adapter,
+              maxRepairs,
+              repairTemplate,
+              now: options.now,
+            });
+            retain(outDir, reportPath, result.report);
+            runs.push(summarize(run, result.report, result.exitCode, reportPath));
+            log(
+              `${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: ${result.report.outcome}`,
+            );
+          } catch (error) {
+            // Per-run containment: a raw crash (anything the pipeline did
+            // not convert into an outcome) is recorded as an explicit
+            // `error` run — visible in the distribution, never silent, and
+            // never fatal to the rest of the matrix. Deliberate exception:
+            // UnknownRuleTypeError means the CONTRACT is bad — every run
+            // would fail identically, so the matrix fails loudly (exit 4).
+            if (error instanceof UnknownRuleTypeError) throw error;
+            const message = error instanceof Error ? `${error.constructor.name}: ${error.message}` : String(error);
+            const errorPath = reportPath.replace(/\.audit-report\.json$/, ".error.json");
+            retainRaw(outDir, errorPath, JSON.stringify({ error: message }, null, 2) + "\n");
+            runs.push({
+              run,
+              outcome: "error",
+              exitCode: -1,
+              attempts: 0,
+              error: message,
+              firstAttemptSchemaValid: false,
+              firstAttemptViolated: false,
+              firstAttemptRuleIds: [],
+              s3CleanButGateFailed: false,
+              reportPath: errorPath,
+            });
+            log(`${model} × ${prompt.id} × ${repairTemplate} run ${run}/${matrix.runsPerCell}: ERROR (contained) — ${message}`);
+          }
         }
         cells.push({
           model,
@@ -135,19 +190,23 @@ function scriptedAdapter(matrix: EvalMatrix, promptId: string, matrixDir: string
   return new ScriptedAdapter(entries);
 }
 
-function retainReport(
-  outDir: string,
-  model: string,
-  promptId: string,
-  template: RepairTemplate,
-  run: number,
-  report: AuditReportV1,
-): string {
+function reportRelPath(model: string, promptId: string, template: RepairTemplate, run: number): string {
   const slug = (s: string): string => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-  const rel = join("reports", `${slug(model)}--${promptId}--${template}--r${run}.audit-report.json`);
+  return join("reports", `${slug(model)}--${promptId}--${template}--r${run}.audit-report.json`);
+}
+
+function retain(outDir: string, rel: string, report: AuditReportV1): void {
+  retainRaw(outDir, rel, JSON.stringify(report, null, 2) + "\n");
+}
+
+function retainRaw(outDir: string, rel: string, content: string): void {
   mkdirSync(join(outDir, "reports"), { recursive: true });
-  writeFileSync(join(outDir, rel), JSON.stringify(report, null, 2) + "\n");
-  return rel;
+  writeFileSync(join(outDir, rel), content);
+}
+
+/** The CLI's exit-code mapping, reproduced for resumed (retained) reports. */
+function exitCodeFor(outcome: string): number {
+  return outcome === "passed" ? 0 : outcome === "failed-lint-exhausted" ? 2 : outcome === "failed-gate" ? 3 : 1;
 }
 
 function summarize(run: number, report: AuditReportV1, exitCode: number, reportPath: string): RunSummary {
@@ -172,16 +231,20 @@ function summarize(run: number, report: AuditReportV1, exitCode: number, reportP
 }
 
 export function computeMetrics(runs: RunSummary[]): CellMetrics {
-  const n = runs.length;
-  const violated = runs.filter((r) => r.firstAttemptViolated);
+  // Contained `error` runs are infrastructure, not model behavior: they are
+  // counted (visible) but excluded from every rate denominator below.
+  const observed = runs.filter((r) => r.outcome !== "error");
+  const n = observed.length;
+  const violated = observed.filter((r) => r.firstAttemptViolated);
   const rate = (k: number, d: number): number => (d === 0 ? 0 : round4(k / d));
   return {
-    runs: n,
-    schemaValidityRate: rate(runs.filter((r) => r.firstAttemptSchemaValid).length, n),
+    runs: runs.length,
+    errorRuns: runs.length - n,
+    schemaValidityRate: rate(observed.filter((r) => r.firstAttemptSchemaValid).length, n),
     firstAttemptViolationRate: rate(violated.length, n),
     repairSuccessRate: violated.length === 0 ? null : round4(violated.filter((r) => r.repaired).length / violated.length),
-    endToEndPassRate: rate(runs.filter((r) => r.outcome === "passed").length, n),
-    s3CleanGateFailures: runs.filter((r) => r.s3CleanButGateFailed).length,
+    endToEndPassRate: rate(observed.filter((r) => r.outcome === "passed").length, n),
+    s3CleanGateFailures: observed.filter((r) => r.s3CleanButGateFailed).length,
   };
 }
 
@@ -223,12 +286,14 @@ export function renderReportMarkdown(results: EvalResults): string {
     "",
     "## Per model",
     "",
-    "| model | runs | schema-valid | 1st-attempt violation | repair success | e2e pass | S3-clean gate failures |",
-    "|---|---|---|---|---|---|---|",
+    "(rates are over non-error runs; `errors` are contained infrastructure crashes, not model behavior)",
+    "",
+    "| model | runs | errors | schema-valid | 1st-attempt violation | repair success | e2e pass | S3-clean gate failures |",
+    "|---|---|---|---|---|---|---|---|",
   ];
   for (const [model, m] of Object.entries(results.byModel)) {
     lines.push(
-      `| ${model} | ${m.runs} | ${pct(m.schemaValidityRate)} | ${pct(m.firstAttemptViolationRate)} | ${m.repairSuccessRate === null ? "n/a" : pct(m.repairSuccessRate)} | ${pct(m.endToEndPassRate)} | ${m.s3CleanGateFailures} |`,
+      `| ${model} | ${m.runs} | ${m.errorRuns} | ${pct(m.schemaValidityRate)} | ${pct(m.firstAttemptViolationRate)} | ${m.repairSuccessRate === null ? "n/a" : pct(m.repairSuccessRate)} | ${pct(m.endToEndPassRate)} | ${m.s3CleanGateFailures} |`,
     );
   }
   lines.push("", "## Per rule (first-attempt violations across all cells)", "", "| rule | violations | repaired | unrepaired |", "|---|---|---|---|");
@@ -239,12 +304,12 @@ export function renderReportMarkdown(results: EvalResults): string {
     "",
     "## Per cell",
     "",
-    "| model | prompt | shape | template | ADR-D1 probe | violation | repair | e2e | gate-fail |",
-    "|---|---|---|---|---|---|---|---|---|",
+    "| model | prompt | shape | template | ADR-D1 probe | errors | violation | repair | e2e | gate-fail |",
+    "|---|---|---|---|---|---|---|---|---|---|",
   );
   for (const c of results.cells) {
     lines.push(
-      `| ${c.model} | ${c.promptId} | ${c.repairShape} | ${c.repairTemplate} | ${c.adrD1Probe ? "yes" : ""} | ${pct(c.metrics.firstAttemptViolationRate)} | ${c.metrics.repairSuccessRate === null ? "n/a" : pct(c.metrics.repairSuccessRate)} | ${pct(c.metrics.endToEndPassRate)} | ${c.metrics.s3CleanGateFailures} |`,
+      `| ${c.model} | ${c.promptId} | ${c.repairShape} | ${c.repairTemplate} | ${c.adrD1Probe ? "yes" : ""} | ${c.metrics.errorRuns} | ${pct(c.metrics.firstAttemptViolationRate)} | ${c.metrics.repairSuccessRate === null ? "n/a" : pct(c.metrics.repairSuccessRate)} | ${pct(c.metrics.endToEndPassRate)} | ${c.metrics.s3CleanGateFailures} |`,
     );
   }
   lines.push("");

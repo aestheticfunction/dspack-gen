@@ -15,6 +15,8 @@ function fail(message: string): never {
   process.exit(1);
 }
 
+const BOOLEAN_FLAGS = new Set(["resume"]);
+
 function parseFlags(argv: string[]): Map<string, string> {
   const flags = new Map<string, string>();
   for (let i = 0; i < argv.length; i++) {
@@ -22,6 +24,7 @@ function parseFlags(argv: string[]): Map<string, string> {
     if (!token.startsWith("--")) fail(`unexpected argument '${token}'`);
     const eq = token.indexOf("=");
     if (eq !== -1) flags.set(token.slice(2, eq), token.slice(eq + 1));
+    else if (BOOLEAN_FLAGS.has(token.slice(2))) flags.set(token.slice(2), "true");
     else {
       const value = argv[++i];
       if (value === undefined) fail(`flag '${token}' is missing a value`);
@@ -44,11 +47,16 @@ async function main(): Promise<void> {
     matrixPath,
     outDir,
     adapterMode,
+    // --resume: skip runs whose audit report is already retained in outDir
+    // (contained-error records are retried) — an interrupted matrix picks up
+    // where it stopped instead of re-burning compute.
+    resume: flags.get("resume") === "true",
     // Fixed clock in fake mode: retained reports and results.json are byte-stable.
     now: adapterMode === "fake" ? () => new Date("2026-01-01T00:00:00.000Z") : undefined,
     log: (line) => console.error(line),
   });
-  console.error(`eval: ${results.cells.length} cell(s) -> ${outDir}/results.json`);
+  const errorRuns = results.cells.reduce((k, c) => k + c.metrics.errorRuns, 0);
+  console.error(`eval: ${results.cells.length} cell(s)${errorRuns ? ` — ${errorRuns} CONTAINED ERROR RUN(S), see .error.json records` : ""} -> ${outDir}/results.json`);
 }
 
 void main();
