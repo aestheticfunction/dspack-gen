@@ -62,6 +62,29 @@ npm run context -- --dspack fixtures/shadcn.v0_3.dspack.json --intent destructiv
 (Distinct from dspack-emit's exit codes, where `3` = strict-coverage failure and `4` =
 surface-emission failure.)
 
+## Eval harness
+
+```bash
+npm run eval -- --adapter fake --matrix eval/matrix.fake.json   # deterministic; the CI gate
+npm run eval -- --adapter live --matrix eval/matrix.json        # documented live run; never CI
+npm run eval:assert -- --results out/eval/fake/results.json --model <ref> --min-repair-success 0.9
+```
+
+Every cell run goes through the same `runPipeline` as the CLI and demo; the
+harness only iterates and aggregates. **Model ids live in `eval/matrix.json`
+(config), never in code.** Per cell (model × prompt × repair template,
+`runsPerCell` runs): schema-validity, first-attempt-violation, repair-success
+(null over zero violations), end-to-end pass rates, and the count of S3-clean
+surfaces refused by emitter gates (the ADR-D1 signal; `p10`–`p12` probe it
+deliberately). Prompts span repair shapes — substitution, addition, deletion,
+restructuring — and every prompt crosses the two ADR-7 repair templates
+(`standard` vs `permit-restructuring`, a one-instruction-line delta recorded
+in each audit report). Every run's audit report is retained under
+`out/eval/…/reports/`; `results.json` is the artifact, `report.md` the
+derived view; findings go to [docs/findings.md](docs/findings.md) at measured
+strength. The hosted-model `eval:assert` threshold is the only hard eval gate
+in M2; local models are report-only.
+
 ## Library
 
 `@aestheticfunction/dspack-gen/core` is the **zero-network, emitter-free** subpath (compiler +

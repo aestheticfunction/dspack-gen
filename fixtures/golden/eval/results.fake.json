@@ -1,0 +1,447 @@
+{
+  "matrixSha256": "cd995306d1d33a21bc24417bb7cbec8896ef2f0517540b3dcaf3ba593b3f61d1",
+  "contract": {
+    "name": "shadcn/ui",
+    "dspack": "0.3",
+    "sha256": "4c86ba94156fee1754ca599435a12b8e5fc628329c4b2abe4a3d55168c908d07"
+  },
+  "maxRepairs": 2,
+  "cells": [
+    {
+      "model": "fake:scripted",
+      "promptId": "p01-violation-then-repair",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p01-violation-then-repair--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p01-violation-then-repair--standard--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p01-violation-then-repair",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p01-violation-then-repair--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p01-violation-then-repair--permit-restructuring--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p02-clean-first-attempt",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p02-clean-first-attempt--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p02-clean-first-attempt--standard--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p02-clean-first-attempt",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p02-clean-first-attempt--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p02-clean-first-attempt--permit-restructuring--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p03-exhausted",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.button-no-interactive-descendants"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p03-exhausted--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.button-no-interactive-descendants"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p03-exhausted--standard--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p03-exhausted",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.button-no-interactive-descendants"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p03-exhausted--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.button-no-interactive-descendants"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p03-exhausted--permit-restructuring--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p04-adapter-failure",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p04-adapter-failure--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p04-adapter-failure--standard--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 0,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p04-adapter-failure",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p04-adapter-failure--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/fake-scripted--p04-adapter-failure--permit-restructuring--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 0,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p05-s3-clean-gate-fail",
+      "repairShape": "restructuring",
+      "repairTemplate": "standard",
+      "adrD1Probe": true,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-gate",
+          "exitCode": 3,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": true,
+          "reportPath": "reports/fake-scripted--p05-s3-clean-gate-fail--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-gate",
+          "exitCode": 3,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": true,
+          "reportPath": "reports/fake-scripted--p05-s3-clean-gate-fail--standard--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 2
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p05-s3-clean-gate-fail",
+      "repairShape": "restructuring",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": true,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-gate",
+          "exitCode": 3,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": true,
+          "reportPath": "reports/fake-scripted--p05-s3-clean-gate-fail--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-gate",
+          "exitCode": 3,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": true,
+          "reportPath": "reports/fake-scripted--p05-s3-clean-gate-fail--permit-restructuring--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 2
+      }
+    }
+  ],
+  "byModel": {
+    "fake:scripted": {
+      "runs": 20,
+      "schemaValidityRate": 0.8,
+      "firstAttemptViolationRate": 0.4,
+      "repairSuccessRate": 0.5,
+      "endToEndPassRate": 0.4,
+      "s3CleanGateFailures": 4
+    }
+  },
+  "byRule": {
+    "rule.button-no-interactive-descendants": {
+      "firstAttemptViolations": 4,
+      "repaired": 0,
+      "unrepaired": 4
+    },
+    "rule.destructive-requires-alertdialog": {
+      "firstAttemptViolations": 4,
+      "repaired": 4,
+      "unrepaired": 0
+    }
+  }
+}

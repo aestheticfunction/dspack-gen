@@ -27,7 +27,9 @@
     "test": "vitest run",
     "context": "tsx src/cli.ts context",
     "smoke:ollama": "tsx scripts/smoke-ollama.ts",
-    "demo:e2e": "playwright test"
+    "demo:e2e": "playwright test",
+    "eval": "tsx src/eval/run.ts",
+    "eval:assert": "tsx src/eval/assert.ts"
   },
   "dependencies": {
     "@aestheticfunction/dspack-to-a2ui": "^0.2.0",

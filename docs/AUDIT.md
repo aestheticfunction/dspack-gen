@@ -31,5 +31,11 @@ no guarantees.
   the prompt (steering is never the guarantee — S3 is); `emitted.warnings` records every
   emitter synthesis/drop.
 
+### Additive changes within version "1"
+
+- `generation.repairTemplate` (2026-07-02, PR-10): the ADR-7 repair template variant used
+  for feedback rendering (`standard` | `permit-restructuring`). Absent means `standard` —
+  every report written before this field existed used the standard template.
+
 Breaking changes bump `reportVersion` and get a new schema file; version "1" documents stay
 valid against the "1" schema forever.

@@ -8,7 +8,28 @@
 import type { Contract } from "../core/contract.js";
 import type { Finding } from "../core/lint/findings.js";
 
-export function renderRepairMessage(findings: Finding[], contract: Contract): string {
+/**
+ * Template variants (PR-10 matrix design input, hypothesis-testing only):
+ * the standard template's "Do not change parts that were not flagged" may
+ * inhibit removal/restructuring-shaped repairs (e.g. un-nesting an
+ * interactive element). `permit-restructuring` swaps exactly that one
+ * instruction; everything else — findings serialization, corrected
+ * references, schema instruction — is byte-identical, so eval A/Bs isolate
+ * the single variable. The variant is recorded in the audit report.
+ */
+export type RepairTemplate = "standard" | "permit-restructuring";
+
+const CLOSING_INSTRUCTION: Record<RepairTemplate, string> = {
+  standard: "Do not change parts of the surface that were not flagged.",
+  "permit-restructuring":
+    "Remove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.",
+};
+
+export function renderRepairMessage(
+  findings: Finding[],
+  contract: Contract,
+  template: RepairTemplate = "standard",
+): string {
   const errors = findings.filter((f) => f.level === "error");
   const lines: string[] = [
     `Your surface violates ${errors.length} governance rule finding(s) of the "${contract.name}" design system:`,
@@ -40,7 +61,7 @@ export function renderRepairMessage(findings: Finding[], contract: Contract): st
   lines.push(
     "",
     "Produce a corrected dspack surface document that fixes every violation above.",
-    "Do not change parts of the surface that were not flagged.",
+    CLOSING_INSTRUCTION[template],
     "Respond with a single JSON object conforming to the provided schema. No commentary.",
   );
   return lines.join("\n");
