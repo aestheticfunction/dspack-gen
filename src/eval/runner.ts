@@ -73,6 +73,8 @@ export async function runMatrix(options: RunMatrixOptions): Promise<EvalResults>
   const matrixDir = dirname(matrixAbs);
   const log = options.log ?? (() => {});
   const maxRepairs = matrix.maxRepairs ?? 2;
+  // PR-21: matrix-level emission target; default a2ui (byte-identical prior behavior).
+  const emitTarget = (matrix as { emitTarget?: "a2ui" | "json-render" }).emitTarget ?? "a2ui";
   const templates: RepairTemplate[] = matrix.repairTemplates ?? ["standard"];
 
   const contract = JSON.parse(readFileSync(resolve(matrixDir, matrix.contract), "utf8")) as Contract;
@@ -120,6 +122,7 @@ export async function runMatrix(options: RunMatrixOptions): Promise<EvalResults>
               adapter,
               maxRepairs,
               repairTemplate,
+              emitTarget,
               now: options.now,
             });
             retain(outDir, reportPath, result.report);

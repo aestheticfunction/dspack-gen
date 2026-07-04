@@ -10,6 +10,9 @@
  * the model's own output plus the rendered repair feedback.
  */
 import {
+  buildCatalogModel,
+  emitJsonRenderSpec,
+  EmitJsonRenderError,
   emitSurface,
   EmitSurfaceError,
   transform,
@@ -17,6 +20,7 @@ import {
   type DspackDoc,
   type DspackSurface,
   type EmitSurfaceResult,
+  validateSpecAgainstModel,
 } from "@aestheticfunction/dspack-emit";
 import type { Contract } from "../core/contract.js";
 import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
@@ -46,6 +50,15 @@ export interface RunOptions {
   compile?: CompileOptions;
   /** A2UI versions to validate the emitted surface against. */
   a2uiVersions?: A2uiVersion[];
+  /**
+   * Emission target (PR-21). Default "a2ui" — byte-identical behavior for
+   * existing callers. "json-render" emits via emitJsonRenderSpec against the
+   * contract-generated catalog model (empty profile — the asymmetry
+   * finding's pairing) with per-run gates J2 (emission accepted) and J3
+   * (instance validates against the generated model). J1 (generated modules
+   * compile under real zod) is a dspack-emit CI gate, not per-run.
+   */
+  emitTarget?: "a2ui" | "json-render";
   /** Injectable clock for deterministic reports in tests. */
   now?: () => Date;
   /** Live progress events (the demo's NDJSON stream). Purely observational. */
@@ -158,6 +171,41 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
     if (lint.pass) {
       const surface = generated.json as DspackSurface;
       const doc = contract as unknown as DspackDoc;
+
+      if (options.emitTarget === "json-render") {
+        // Second-emitter path (PR-21): same refusal semantics as a2ui — a
+        // typed emit error is the gate-failure class, never a crash.
+        try {
+          const model = buildCatalogModel(doc, {});
+          const { spec } = emitJsonRenderSpec(surface, doc, {});
+          const findings = validateSpecAgainstModel(spec, model);
+          const gates = [
+            { gate: "J2" as const, name: "emission accepted", pass: true },
+            {
+              gate: "J3" as const,
+              name: "instance validates against the generated catalog model",
+              pass: findings.length === 0,
+              ...(findings.length ? { errors: findings.map((f) => f.message) } : {}),
+            },
+          ];
+          const pass = gates.every((g) => g.pass);
+          const emitted = { target: "json-render" as const, spec, warnings: [], validations: [{ gates }] };
+          emit({ type: "emitted", validations: [{ gates: gates as never }] as never, warnings: [] });
+          const result = pass ? finalize("passed", 0, { surface }, emitted as never) : finalize("failed-gate", 3, {}, emitted as never);
+          emit({ type: "done", outcome: result.report.outcome, exitCode: result.exitCode, report: result.report });
+          return result;
+        } catch (error) {
+          if (error instanceof EmitJsonRenderError) {
+            const emitted = { target: "json-render" as const, refusal: error.message, warnings: [], validations: [] };
+            emit({ type: "emitted", validations: [], warnings: [] });
+            const result = finalize("failed-gate", 3, {}, emitted as never);
+            emit({ type: "done", outcome: result.report.outcome, exitCode: result.exitCode, report: result.report });
+            return result;
+          }
+          throw error;
+        }
+      }
+
       // The emitter can REFUSE a lint-clean surface outright (typed
       // EmitSurfaceError — e.g. a sub-component outside its compound parent:
       // in-vocabulary for S2, ungoverned by S3, unprojectable by the
