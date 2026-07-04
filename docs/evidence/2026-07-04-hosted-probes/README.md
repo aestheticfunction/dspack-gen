@@ -34,6 +34,5 @@ Candidate future path (out of M3 scope, different adapter mode): constrained
 generation via forced tool-use schemas, whose limits are compiled differently
 from `output_config`. Filed as an M4+ candidate, not attempted here.
 
-Reproduce: `npx tsx docs/evidence/2026-07-04-hosted-probes/depth-bisect.mts`
-from the repo root with ANTHROPIC_API_KEY set (each rejection is a
+Reproduce (location-independent): `npx tsx docs/evidence/2026-07-04-hosted-probes/depth-bisect.mts` with ANTHROPIC_API_KEY set (each rejection is a
 pre-generation 400; the accepting width-control probes cost ~16 tokens each).

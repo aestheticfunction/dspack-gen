@@ -3,9 +3,9 @@
  * map prefix) — a diagnostic for the escalation report, not an experiment. */
 import { readFileSync } from "node:fs";
 import Anthropic from "@anthropic-ai/sdk";
-import { buildGenerationSchema } from "./src/core/generation-schema.js";
+import { buildGenerationSchema } from "../../../src/core/generation-schema.js";
 
-const full = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8"));
+const full = JSON.parse(readFileSync(new URL("../../../fixtures/", import.meta.url).pathname + "shadcn.v0_4.dspack.json", "utf8"));
 const client = new Anthropic({ timeout: 120_000 });
 const ids = Object.keys(full.components);
 for (const k of [6, 4, 2, 1]) {
