@@ -190,15 +190,15 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
           ];
           const pass = gates.every((g) => g.pass);
           const emitted = { target: "json-render" as const, spec, warnings: [], validations: [{ gates }] };
-          emit({ type: "emitted", validations: [{ gates: gates as never }] as never, warnings: [] });
-          const result = pass ? finalize("passed", 0, { surface }, emitted as never) : finalize("failed-gate", 3, {}, emitted as never);
+          emit({ type: "emitted", validations: [{ gates }], warnings: [] });
+          const result = pass ? finalize("passed", 0, { surface }, emitted) : finalize("failed-gate", 3, {}, emitted);
           emit({ type: "done", outcome: result.report.outcome, exitCode: result.exitCode, report: result.report });
           return result;
         } catch (error) {
           if (error instanceof EmitJsonRenderError) {
             const emitted = { target: "json-render" as const, refusal: error.message, warnings: [], validations: [] };
             emit({ type: "emitted", validations: [], warnings: [] });
-            const result = finalize("failed-gate", 3, {}, emitted as never);
+            const result = finalize("failed-gate", 3, {}, emitted);
             emit({ type: "done", outcome: result.report.outcome, exitCode: result.exitCode, report: result.report });
             return result;
           }
