@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Decompose rule.trigger-carries-label first-attempt violations into the two
-buckets the findings addendum reports:
+"""CORRECTED decomposition (v2) of rule.trigger-carries-label first-attempt
+violations — three buckets (supersedes decompose-trigger-label.py, whose
+'projectable' definition wrongly counted a trigger's own text as consumable
+by the pre-amendment projection; see the findings correction note):
 
-- genuinely-unprojectable: no trigger in the surface carries a projectable
-  label (neither direct trigger text nor any button descendant with direct
-  text) — the measured v0.3 gap class (A3 would have refused the emission).
-- projectable-but-stricter: every trigger has a projectable label bearer, but
-  the rule's per-node (for-every-button) semantics flag textless sibling
-  buttons — surfaces A3 would have ACCEPTED at v0.3.
+- projectable-today (labeled button): at least one button descendant carries
+  direct text — the pre-amendment subButtonText projection succeeds; A3
+  would have ACCEPTED the emission (the rule's ∀-semantics flagged a
+  textless sibling).
+- liftable (text exists, not on a button): label text exists under the
+  trigger but no labeled button — recoverable by the audited emitter lift
+  (dspack-emit#14), unprojectable before it.
+- unmappable (no text anywhere): no label text under any trigger — the
+  irreducible governance class; only generation/repair can fix these.
 
 Run from the repo root against an evidence dir:
-  python3 docs/evidence/2026-07-04-v04-effect/decompose-trigger-label.py \
+  python3 docs/evidence/2026-07-04-v04-effect/decompose-trigger-label-v2.py \
     docs/evidence/2026-07-04-v04-effect/reports
 """
 import collections
