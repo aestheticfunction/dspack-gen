@@ -234,6 +234,18 @@ export function classifyAdapterFailure(adapterError: string): "no-generation" | 
   return infrastructure ? "no-generation" : "generation-then-bad-output";
 }
 
+/**
+ * Per #19's definition, `no-generation` applies only when NO attempt produced
+ * output: a run whose repair attempt dies on transport still observed the
+ * model on attempt 1 and stays counted.
+ */
+export function classifyFailedAdapterRun(
+  attempts: Array<{ surface?: unknown; adapterError?: string }>,
+): "no-generation" | "generation-then-bad-output" {
+  if (attempts.some((a) => a.surface !== undefined)) return "generation-then-bad-output";
+  return classifyAdapterFailure(attempts.find((a) => a.adapterError)?.adapterError ?? "");
+}
+
 function summarize(run: number, report: AuditReportV1, exitCode: number, reportPath: string): RunSummary {
   const first = report.attempts[0];
   const firstGates = first?.gates ?? [];
@@ -251,9 +263,7 @@ function summarize(run: number, report: AuditReportV1, exitCode: number, reportP
     firstAttemptRuleIds: [...new Set(errorFindings.map((f) => f.ruleId))].sort(),
     ...(firstAttemptViolated ? { repaired: lintCleanReached } : {}),
     s3CleanButGateFailed: report.outcome === "failed-gate",
-    ...(report.outcome === "failed-adapter"
-      ? { adapterFailureClass: classifyAdapterFailure(report.attempts.find((a) => a.adapterError)?.adapterError ?? "") }
-      : {}),
+    ...(report.outcome === "failed-adapter" ? { adapterFailureClass: classifyFailedAdapterRun(report.attempts) } : {}),
     reportPath,
   };
 }
@@ -336,12 +346,12 @@ export function renderReportMarkdown(results: EvalResults): string {
     "",
     "## Per cell",
     "",
-    "| model | prompt | shape | template | ADR-D1 probe | errors | violation | repair | e2e | gate-fail |",
-    "|---|---|---|---|---|---|---|---|---|---|",
+    "| model | prompt | shape | template | ADR-D1 probe | errors | no-gen | violation | repair | e2e | gate-fail |",
+    "|---|---|---|---|---|---|---|---|---|---|---|",
   );
   for (const c of results.cells) {
     lines.push(
-      `| ${c.model} | ${c.promptId} | ${c.repairShape} | ${c.repairTemplate} | ${c.adrD1Probe ? "yes" : ""} | ${c.metrics.errorRuns} | ${pct(c.metrics.firstAttemptViolationRate)} | ${c.metrics.repairSuccessRate === null ? "n/a" : pct(c.metrics.repairSuccessRate)} | ${pct(c.metrics.endToEndPassRate)} | ${c.metrics.s3CleanGateFailures} |`,
+      `| ${c.model} | ${c.promptId} | ${c.repairShape} | ${c.repairTemplate} | ${c.adrD1Probe ? "yes" : ""} | ${c.metrics.errorRuns} | ${c.metrics.noGenerationRuns} | ${pct(c.metrics.firstAttemptViolationRate)} | ${c.metrics.repairSuccessRate === null ? "n/a" : pct(c.metrics.repairSuccessRate)} | ${pct(c.metrics.endToEndPassRate)} | ${c.metrics.s3CleanGateFailures} |`,
     );
   }
   lines.push("");

@@ -21,7 +21,7 @@ import { describe, expect, it } from "vitest";
 import type { Contract } from "../core/contract.js";
 import { lintSurface } from "../core/lint/index.js";
 import { renderRepairMessage } from "../repair/render.js";
-import { classifyAdapterFailure, computeMetrics } from "./runner.js";
+import { classifyAdapterFailure, classifyFailedAdapterRun, computeMetrics } from "./runner.js";
 import type { RunSummary } from "./types.js";
 
 const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
@@ -141,6 +141,17 @@ describe("metric definitions", () => {
     expect(classifyAdapterFailure("[ollama:x] model output is not valid JSON — constrained decoding was not applied")).toBe("generation-then-bad-output");
     // Unknown messages NEVER silently shrink a denominator.
     expect(classifyAdapterFailure("something novel")).toBe("generation-then-bad-output");
+  });
+
+  it("a run whose REPAIR attempt dies on transport stays counted — no-generation requires no output at all (#19)", () => {
+    // Attempt 1 produced a surface; attempt 2 failed with an infrastructure signature.
+    expect(
+      classifyFailedAdapterRun([{ surface: { root: {} } }, { adapterError: "[ollama:x] fetch failed (ECONNRESET)" }]),
+    ).toBe("generation-then-bad-output");
+    // No attempt produced output + infrastructure signature: excluded.
+    expect(classifyFailedAdapterRun([{ adapterError: "[anthropic:x] HTTP 400: The compiled grammar is too large" }])).toBe(
+      "no-generation",
+    );
   });
 
   it("contained error runs are counted but excluded from every rate denominator", () => {
