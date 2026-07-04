@@ -238,7 +238,11 @@
       ],
       "properties": {
         "target": {
-          "const": "a2ui"
+          "enum": [
+            "a2ui",
+            "json-render"
+          ],
+          "description": "Emission target (additive in v1; json-render added for the second-contract eval, PR-21)."
         },
         "surfaceMessages": {},
         "warnings": {
@@ -264,12 +268,12 @@
           "items": {
             "type": "object",
             "required": [
-              "a2uiVersion",
               "gates"
             ],
             "properties": {
               "a2uiVersion": {
-                "type": "string"
+                "type": "string",
+                "description": "A2UI catalog version validated against (a2ui target only; absent for json-render)."
               },
               "gates": {
                 "type": "array",
@@ -285,8 +289,11 @@
                       "enum": [
                         "A1",
                         "A2",
-                        "A3"
-                      ]
+                        "A3",
+                        "J2",
+                        "J3"
+                      ],
+                      "description": "Emitter gate id: A1-A3 (a2ui) or J2-J3 (json-render; J1 is the compile gate exercised in dspack-emit CI, not per-run)."
                     },
                     "name": {
                       "type": "string"

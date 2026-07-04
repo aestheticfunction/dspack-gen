@@ -41,6 +41,8 @@ export interface EvalMatrix {
    * define `scripts` instead.
    */
   models?: string[];
+  /** Emission target for every run in the matrix (default "a2ui"; PR-21). */
+  emitTarget?: "a2ui" | "json-render";
   /** Repair templates to cross with the prompts (default: ["standard"]). */
   repairTemplates?: RepairTemplate[];
   prompts: EvalPrompt[];

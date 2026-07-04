@@ -14,7 +14,7 @@ export type Outcome = "passed" | "failed-lint-exhausted" | "failed-gate" | "fail
 
 /** Emitter gate result, keyed by the architecture-wide A-gate names. */
 export interface EmitterGate {
-  gate: "A1" | "A2" | "A3";
+  gate: "A1" | "A2" | "A3" | "J2" | "J3";
   name: string;
   pass: boolean;
   errors?: string[];
@@ -34,7 +34,8 @@ export interface AttemptRecord {
 }
 
 export interface EmittedValidation {
-  a2uiVersion: string;
+  /** A2UI catalog version validated against (a2ui target only; absent for json-render). */
+  a2uiVersion?: string;
   gates: EmitterGate[];
 }
 
@@ -59,7 +60,7 @@ export interface AuditReportV1 {
   repairMessages: string[];
   outcome: Outcome;
   emitted?: {
-    target: "a2ui";
+    target: "a2ui" | "json-render";
     /** Absent when the emitter refused the surface outright (see refusal). */
     surfaceMessages?: unknown;
     /** Emitter warnings — every synthesis/drop, nothing silent. */
@@ -124,7 +125,9 @@ export function renderMarkdown(report: AuditReportV1): string {
     }
     for (const validation of report.emitted.validations) {
       for (const gate of validation.gates) {
-        lines.push(`- [${validation.a2uiVersion}] gate ${gate.gate} ${gate.name}: **${gate.pass ? "PASS" : "FAIL"}**`);
+        lines.push(
+          `- [${validation.a2uiVersion ?? report.emitted!.target}] gate ${gate.gate} ${gate.name}: **${gate.pass ? "PASS" : "FAIL"}**`,
+        );
       }
     }
     for (const warning of report.emitted.warnings) {
