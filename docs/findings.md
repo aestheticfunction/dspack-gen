@@ -242,3 +242,84 @@ re-tested; per-rule first-attempt violation ordering matches the body's
 (`button-no-interactive-descendants` dominant: 33 of gpt-oss's 46 rule
 findings). Honest limits as in the body: one contract, one intent, small
 per-cell n, rates as k/n; this is about this tag against this contract.
+
+## Addendum — the v0.4-effect rerun, 2026-07-04 (PR-15)
+
+The same 12-prompt × 2-template × 3-run matrix, byte-identical prompts, three
+local families, against the **v0.4 shadcn contract** (2.1.0: `required-props`
+`rule.trigger-carries-label`, category-based
+`rule.alertdialog-no-nested-overlays`). The contract revision is the measured
+variable — the generation context necessarily changes with it (two more rules
+in steering), so this run is compared to the 2026-07-03 v0.3 run as a
+contract-level A/B, not a controlled single-variable prompt experiment.
+Evidence: [`docs/evidence/2026-07-04-v04-effect/`](evidence/2026-07-04-v04-effect/)
+(matrix, `results.json`, `report.md`, 216 retained reports, and the
+decomposition script + output the numbers below are checkable against).
+
+| model | n | 1st-attempt S3 violation | repair to clean | exhausted | **gate-failed** (was) | e2e pass (was) | genuine adapter-fail |
+|---|---|---|---|---|---|---|---|
+| `gemma4:e4b` | 72 | 72/72 | 0 | 72/72 | **0** (43) | 0 (0) | 0 |
+| `qwen3.6:35b` | 72 | 68/68¹ | 0 | 68/72 | **0** (17) | 0 (0) | 4/72¹ |
+| `gpt-oss:latest` | 72 | 72/72 | 0 | 72/72 | **0** (18) | **0 (28)** | 0 |
+
+¹ qwen's four `failed-adapter`s are genuine model observations of the known
+classes (3 × empty output, 1 × unparseable JSON tail) — elevated vs 1/72 on
+2026-07-03; noted, not explained.
+
+### The pre-registered check: confirmed — the failure class moved upstream
+
+**Zero emitter-gate failures in 216 runs** (v0.3 baseline: 78/78 runs carrying
+the trigger-label signature). Every surface that would have died post-emit at
+A3 now dies pre-emit at S3, as a named `rule.trigger-carries-label` finding
+with rationale and repair feedback. The ADR-M3-1 conversion claim holds at the
+strongest measurable value: the projection gap no longer reaches the emitter.
+
+### The conversion exposed a rule-design decision, not just a model behavior
+
+Of the 204 runs whose first attempt violates `rule.trigger-carries-label`
+(the rule fired in every violating run; it is universal):
+
+- **131 are the measured gap class** (`genuinely-unprojectable`): no trigger
+  in the surface carries a projectable label at all — direct trigger text
+  absent AND no button descendant with direct text. At v0.3 these were the
+  gate-failure/exhaustion feedstock. The rule catches them exactly as filed.
+- **73 are `projectable-but-stricter`**: the trigger HAS a labeled bearer —
+  A3 would have accepted the emission — but a **textless sibling button**
+  trips the rule's for-every-button semantics (spec v0.4 §4.1 is
+  ∀-quantified). This is not the class the evidence motivated. It is also
+  not obviously wrong: a textless sibling button is an unlabeled interactive
+  control (a real accessibility defect — it is why gpt-oss's two-button
+  trigger idiom is a smell). But it is **stricter than the projection the
+  rule was filed to protect**, and it has a measured cost: **all 28 of
+  gpt-oss's v0.3 end-to-end passes used exactly this idiom** (one labeled +
+  one unlabeled button in the trigger) and every one of them is a violation
+  under v0.4 as authored.
+
+**Decision surfaced to the maintainer (not patched):** keep the ∀ semantics
+(own the strictness in the rule's rationale — "every button in a trigger
+carries its label" — and accept that v0.4 rejects surfaces v0.3+A3 shipped),
+or amend spec v0.4 §4.1 / the rule to an ∃ form ("at least one label-bearing
+button") before v0.4 semantics freeze. The per-family split of the 73 is
+gemma 29, gpt-oss 31, qwen 13 — the strict bucket is not one model's quirk.
+
+### End-to-end passes went to zero, and repair did not rescue them
+
+0/216 end-to-end (v0.3: 28/216, all gpt-oss). With the universal rule firing
+on the dominant trigger idioms of all three families, every run entered the
+repair loop and **none reached S3-clean within maxRepairs=2** (findings
+decreased in 51 runs, unchanged in 135, increased in 26). The ADR-M3-1
+promise is therefore half-realized at these models' repair ability:
+*repairable in principle* (the feedback names the exact fix and carries the
+corrected reference) but *unrepaired in practice* at n=2 repairs. Direct
+text on a specific nested node appears to be a harder repair target than the
+rule mix v0.3 exercised — relevant design input for the repair-shape
+deconfound (ADR-M3-3), where this rule's two variants were expected to
+populate the addition and restructuring shapes.
+
+### Honest limits
+
+Same as the body plus: the v0.3↔v0.4 comparison confounds steering-text and
+lint-rule changes by construction (the contract IS the variable); zero
+end-to-end passes means the v0.4 success path is exercised only by the
+fake-adapter CI gate; `runsPerCell` = 3; one contract, one intent, local
+models only — the hosted column remains blocked (Phase 2).
