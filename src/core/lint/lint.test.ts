@@ -3,14 +3,14 @@
  *
  * Violating goldens F1–F7 each reproduce their checked-in *.expected.json
  * exactly (regenerate deliberately with UPDATE_GOLDEN=1 npm test — the diff
- * is the review artifact). F6a/F6b are the two measured variants of the
- * projection gap (label nested / label absent — 78/78 gate-failure signature)
- * that v0.4's required-props converts into repairable S3 findings; F7 is the
- * category-based forbidden-composition form. The clean golden (the contract's
- * worked example) passes all gates. S1/S2 are independently reported; unknown
- * rule types throw (CLI exit 4). All three v0.3 evaluators plus v0.4's
- * required-props are active — see rules.ts for why forbidden-composition
- * could not defer to M2.
+ * is the review artifact). F6b is the no-text-anywhere projection-gap variant
+ * (the irreducible governance residue after the 2026-07-04 amendment); the
+ * formerly-violating nested-label shape (old F6a) moved to the CLEAN goldens —
+ * under the amended rule (textScope: subtree) it lints clean and the a2ui
+ * target lifts its label, audited (dspack-emit). F7 is the category-based
+ * forbidden-composition form. S1/S2 are independently reported; unknown rule
+ * types throw (CLI exit 4). All three v0.3 evaluators plus v0.4's
+ * required-props (as amended: textScope, ∃-within) are active.
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -26,8 +26,8 @@ const load = (path: string) => JSON.parse(readFileSync(path, "utf8"));
 describe("violating goldens reproduce their expected reports exactly", () => {
   const fixtures = readdirSync(VIOLATING).filter((f) => f.endsWith(".dsurface.json"));
 
-  it("all eight violating fixtures are present", () => {
-    expect(fixtures.length).toBe(8);
+  it("all seven violating fixtures are present", () => {
+    expect(fixtures.length).toBe(7);
   });
 
   it.each(fixtures)("%s", (fixture) => {
@@ -69,21 +69,20 @@ describe("expected findings, spot-checked (goldens carry the full detail)", () =
     expect(nested.message).toMatch(/inside 'button' \(at \$\.root\.children\[1\], id "subscribe"\)/);
   });
 
-  it("F6a: label nested in a child — required-props fires AT the button, exactly once", () => {
-    const report = lintSurface(load(join(VIOLATING, "F6a-trigger-label-nested.dsurface.json")), contract);
-    const labels = report.findings.filter((f) => f.ruleId === "rule.trigger-carries-label");
-    expect(labels.length).toBe(1);
-    expect(labels[0].location.component).toBe("button");
-    expect(labels[0].location.path).toBe("$.root.children[0].children[0].children[0]");
-    expect(labels[0].message).toMatch(/non-empty direct text .*text in descendants does not count/);
-    expect(report.findings.length).toBe(1); // isolated: no other rule fires
+  it("nested label (old F6a) is CLEAN under the amended rule — the lift's precondition holds", () => {
+    const report = lintSurface(load("fixtures/golden/clean/nested-trigger-label.dsurface.json"), contract);
+    expect(report.gates.map((g) => `${g.gate}:${g.status}`)).toEqual(["S1:PASS", "S2:PASS", "S3:PASS"]);
+    expect(report.findings).toEqual([]);
   });
 
-  it("F6b: label absent entirely — the same rule, the take-2 shape", () => {
+  it("F6b: no label text anywhere under the trigger — fires AT the trigger with the subtree message", () => {
     const report = lintSurface(load(join(VIOLATING, "F6b-trigger-label-missing.dsurface.json")), contract);
     const labels = report.findings.filter((f) => f.ruleId === "rule.trigger-carries-label");
     expect(labels.length).toBe(1);
-    expect(labels[0].location.component).toBe("button");
+    expect(labels[0].location.component).toBe("alert-dialog-trigger");
+    expect(labels[0].message).toBe(
+      "'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).",
+    );
     expect(report.findings.length).toBe(1);
   });
 
@@ -96,29 +95,43 @@ describe("expected findings, spot-checked (goldens carry the full detail)", () =
     expect(report.findings.length).toBe(1);
   });
 
-  it("required-props within-existence: a trigger with no label-bearer at all fires AT the trigger (spec v0.4 §4.1)", () => {
-    const surface = {
+  it("within is ∃-quantified (2026-07-04 amendment): one satisfying sibling clears the scope; none fires AT the scope", () => {
+    const withinRule = {
+      id: "rule.within-unit",
+      type: "required-props",
+      severity: "must",
+      component: "button",
+      within: "alert-dialog-trigger",
+      requiredText: true,
+      rationale: "Unit rule pinning ∃-within semantics.",
+    } as const;
+    const scoped: Contract = { ...contract, rules: [withinRule] };
+    const surfaceWith = (triggerChildren: unknown[]) => ({
       dspackSurface: "0.1",
       system: "shadcn/ui",
       intent: "destructive-action",
-      root: {
-        component: "alert-dialog",
-        children: [
-          { component: "alert-dialog-trigger", children: [{ component: "badge", text: "Delete" }] },
-          {
-            component: "alert-dialog-content",
-            children: [
-              { component: "alert-dialog-title", text: "Delete?" },
-              { component: "alert-dialog-cancel", text: "Cancel" },
-            ],
-          },
-        ],
-      },
-    };
-    const report = lintSurface(surface, contract);
-    const label = report.findings.find((f) => f.ruleId === "rule.trigger-carries-label")!;
-    expect(label.location.component).toBe("alert-dialog-trigger");
-    expect(label.message).toBe("'alert-dialog-trigger' contains no 'button' to carry the required content.");
+      root: { component: "alert-dialog", children: [{ component: "alert-dialog-trigger", children: triggerChildren }] },
+    });
+
+    // One labeled + one textless button: ∃ satisfied — the textless sibling no longer fails the scope.
+    const mixed = lintSurface(
+      surfaceWith([{ component: "button", text: "Delete" }, { component: "button" }]),
+      scoped,
+    );
+    expect(mixed.findings).toEqual([]);
+
+    // All buttons textless: one finding, at the scope.
+    const none = lintSurface(surfaceWith([{ component: "button" }, { component: "button" }]), scoped);
+    expect(none.findings.length).toBe(1);
+    expect(none.findings[0].location.component).toBe("alert-dialog-trigger");
+    expect(none.findings[0].message).toBe(
+      "No 'button' inside 'alert-dialog-trigger' satisfies the required content (2 checked).",
+    );
+
+    // No button at all: the existence clause, unchanged.
+    const empty = lintSurface(surfaceWith([{ component: "badge", text: "Delete" }]), scoped);
+    expect(empty.findings.length).toBe(1);
+    expect(empty.findings[0].message).toBe("'alert-dialog-trigger' contains no 'button' to carry the required content.");
   });
 });
 

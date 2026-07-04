@@ -22,11 +22,11 @@
       "type": "required-props",
       "requirement": "must",
       "level": "error",
-      "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
-      "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+      "message": "'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).",
+      "rationale": "The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.",
       "location": {
-        "path": "$.root.children[0].children[0].children[0]",
-        "component": "button"
+        "path": "$.root.children[0].children[0]",
+        "component": "alert-dialog-trigger"
       },
       "exampleIds": [
         "ex.delete-account-confirmation"

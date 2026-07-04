@@ -1,0 +1,7 @@
+first-attempt runs with a rule.trigger-carries-label finding, bucketed:
+  liftable (text exists, not on a button): 20
+  projectable-today (labeled button): 67
+  unmappable (no text anywhere): 117
+  ollama-gemma4-e4b: {'projectable-today (labeled button)': 29, 'unmappable (no text anywhere)': 29, 'liftable (text exists, not on a button)': 8}
+  ollama-gpt-oss-latest: {'projectable-today (labeled button)': 27, 'unmappable (no text anywhere)': 39, 'liftable (text exists, not on a button)': 6}
+  ollama-qwen3-6-35b: {'unmappable (no text anywhere)': 49, 'liftable (text exists, not on a button)': 6, 'projectable-today (labeled button)': 11}

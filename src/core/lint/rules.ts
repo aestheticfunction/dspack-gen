@@ -239,49 +239,55 @@ function evaluateForbiddenComposition(entry: RuleEntry, surface: Surface, contra
 }
 
 /**
- * required-props (v0.4 §4.1): content every instance of `component` must
- * carry DIRECTLY. Without `within`, every matching node in the surface is
- * checked (conditional — existence is required-composition's job). With
- * `within`, only matching nodes under a `within` ancestor are checked, and
- * every `within` node must contain at least one — the existence clause that
- * closes the scope-carries-no-label-bearer hole (mirrors v0.3's
- * requiredProps.on semantics).
+ * required-props (v0.4 §4.1, as amended 2026-07-04): content every instance
+ * of `component` must carry. `requiredText` looks at the node's own `text`
+ * (textScope "self", the default) or anywhere in its subtree ("subtree" —
+ * for compound wrappers whose documented projections lift a label from
+ * within). Without `within`, EVERY matching node must satisfy. With
+ * `within`, each scope must contain at least one matching descendant, and
+ * AT LEAST ONE of them must satisfy (∃ — the amendment; the original ∀ form
+ * measurably rejected surfaces whose emission succeeds, dspack-gen#24).
  */
 function evaluateRequiredProps(entry: RuleEntry, surface: Surface): Finding[] {
   const rule = entry as RequiredPropsRule;
   const findings: Finding[] = [];
 
-  const checkNode = (target: VisitedNode): void => {
-    if (rule.requiredText && !(typeof target.node.text === "string" && target.node.text.length > 0)) {
-      findings.push(
-        finding(
-          rule,
+  const hasText = (node: VisitedNode["node"]): boolean => typeof node.text === "string" && node.text.length > 0;
+  const subtreeHasText = (node: VisitedNode["node"]): boolean =>
+    hasText(node) ||
+    (node.children ?? []).some(subtreeHasText) ||
+    Object.values(node.slots ?? {}).some((slot) => slot.some(subtreeHasText));
+
+  /** Violation messages for a node; empty when it satisfies the rule. */
+  const violations = (target: VisitedNode): string[] => {
+    const messages: string[] = [];
+    if (rule.requiredText) {
+      if (rule.textScope === "subtree") {
+        if (!subtreeHasText(target.node)) {
+          messages.push(`'${rule.component}' must carry non-empty text somewhere in its subtree (none found).`);
+        }
+      } else if (!hasText(target.node)) {
+        messages.push(
           `'${rule.component}' must carry non-empty direct text (its own \`text\` field — text in descendants does not count).`,
-          locationOf(target),
-        ),
-      );
+        );
+      }
     }
     for (const requirement of rule.requiredProps ?? []) {
       const value = target.node.props?.[requirement.prop];
       if (value === undefined) {
-        findings.push(
-          finding(rule, `Required prop '${requirement.prop}' is not present on '${rule.component}' itself.`, locationOf(target)),
-        );
+        messages.push(`Required prop '${requirement.prop}' is not present on '${rule.component}' itself.`);
       } else if (requirement.oneOf && !requirement.oneOf.includes(value as never)) {
-        findings.push(
-          finding(
-            rule,
-            `Required prop '${requirement.prop}' must be one of ${requirement.oneOf.map((v) => JSON.stringify(v)).join(", ")} (got ${JSON.stringify(value)}).`,
-            locationOf(target),
-          ),
+        messages.push(
+          `Required prop '${requirement.prop}' must be one of ${requirement.oneOf.map((v) => JSON.stringify(v)).join(", ")} (got ${JSON.stringify(value)}).`,
         );
       }
     }
+    return messages;
   };
 
   if (rule.within === undefined) {
     for (const target of walkSurface(surface).filter((v) => v.node.component === rule.component)) {
-      checkNode(target);
+      for (const message of violations(target)) findings.push(finding(rule, message, locationOf(target)));
     }
     return findings;
   }
@@ -296,8 +302,19 @@ function evaluateRequiredProps(entry: RuleEntry, surface: Surface): Finding[] {
           locationOf(scope),
         ),
       );
+      continue;
     }
-    for (const target of targets) checkNode(target);
+    // ∃ (amended): at least one matching descendant satisfies; a finding at
+    // the scope only when all of them violate.
+    if (targets.every((target) => violations(target).length > 0)) {
+      findings.push(
+        finding(
+          rule,
+          `No '${rule.component}' inside '${rule.within}' satisfies the required content (${targets.length} checked).`,
+          locationOf(scope),
+        ),
+      );
+    }
   }
   return findings;
 }

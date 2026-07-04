@@ -176,11 +176,18 @@ export function ruleInstruction(rule: RuleEntry, contract?: Contract): string {
         component: string;
         within?: string;
         requiredText?: true;
+        textScope?: "self" | "subtree";
         requiredProps?: Array<{ prop: string; oneOf?: unknown[] }>;
       };
-      const scope = r.within ? `Every ${r.component} inside ${r.within}` : `Every ${r.component}`;
+      const scope = r.within ? `At least one ${r.component} inside each ${r.within}` : `Every ${r.component}`;
       const needs: string[] = [];
-      if (r.requiredText) needs.push("carry its label as its own `text` field (never nested in a child component)");
+      if (r.requiredText) {
+        needs.push(
+          r.textScope === "subtree"
+            ? "contain non-empty text (its own `text` field or a descendant's)"
+            : "carry its label as its own `text` field (never nested in a child component)",
+        );
+      }
       for (const p of r.requiredProps ?? []) {
         needs.push(p.oneOf ? `set ${p.prop} to one of ${p.oneOf.map(String).join("/")}` : `set ${p.prop} directly`);
       }
