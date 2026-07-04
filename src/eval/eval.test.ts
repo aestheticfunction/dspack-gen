@@ -21,7 +21,7 @@ import { describe, expect, it } from "vitest";
 import type { Contract } from "../core/contract.js";
 import { lintSurface } from "../core/lint/index.js";
 import { renderRepairMessage } from "../repair/render.js";
-import { computeMetrics } from "./runner.js";
+import { classifyAdapterFailure, computeMetrics } from "./runner.js";
 import type { RunSummary } from "./types.js";
 
 const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
@@ -111,6 +111,36 @@ describe("metric definitions", () => {
     const m = computeMetrics([{ run: 1, ...base }]);
     expect(m.repairSuccessRate).toBeNull();
     expect(m.endToEndPassRate).toBe(1);
+  });
+
+  it("no-generation adapter failures are excluded like errors; generation-then-bad-output stays counted (dspack-gen#19)", () => {
+    const m = computeMetrics([
+      { run: 1, ...base }, // one clean pass
+      {
+        run: 2, ...base, outcome: "failed-adapter", exitCode: 1, attempts: 1,
+        firstAttemptSchemaValid: false, adapterFailureClass: "no-generation",
+      },
+      {
+        run: 3, ...base, outcome: "failed-adapter", exitCode: 1, attempts: 1,
+        firstAttemptSchemaValid: false, adapterFailureClass: "generation-then-bad-output",
+      },
+    ]);
+    expect(m.runs).toBe(3);
+    expect(m.noGenerationRuns).toBe(1);
+    expect(m.errorRuns).toBe(0);
+    // Denominator = 2 (pass + model observation); the pre-generation reject is out.
+    expect(m.endToEndPassRate).toBe(0.5);
+    expect(m.schemaValidityRate).toBe(0.5);
+  });
+
+  it("classifyAdapterFailure: only known infrastructure signatures leave the denominator", () => {
+    expect(classifyAdapterFailure("[anthropic:x] HTTP 400: The compiled grammar is too large")).toBe("no-generation");
+    expect(classifyAdapterFailure("[ollama:x] HTTP 500: failed to load model vocabulary")).toBe("no-generation");
+    expect(classifyAdapterFailure("[ollama:x] fetch failed (ECONNREFUSED)")).toBe("no-generation");
+    expect(classifyAdapterFailure("[ollama:x] empty model output")).toBe("generation-then-bad-output");
+    expect(classifyAdapterFailure("[ollama:x] model output is not valid JSON — constrained decoding was not applied")).toBe("generation-then-bad-output");
+    // Unknown messages NEVER silently shrink a denominator.
+    expect(classifyAdapterFailure("something novel")).toBe("generation-then-bad-output");
   });
 
   it("contained error runs are counted but excluded from every rate denominator", () => {

@@ -1,5 +1,5 @@
 {
-  "comment": "CI gate matrix: deterministic scripted runs exercising every pipeline outcome and every metric path. Fixture paths are relative to this file. This is NOT a model eval — it goldens the harness itself.",
+  "comment": "CI gate matrix: deterministic scripted runs exercising every pipeline outcome and every metric path. Fixture paths are relative to this file. This is NOT a model eval \u2014 it goldens the harness itself.",
   "contract": "../fixtures/shadcn.v0_4.dspack.json",
   "runsPerCell": 2,
   "maxRepairs": 2,
@@ -50,7 +50,14 @@
       "intent": "destructive-action",
       "prompt": "a screen to delete my account",
       "repairShape": "substitution",
-      "comment": "empty script => the ScriptedAdapter throws a RAW Error (not AdapterOutputError) on the first generation — the deterministic exercise of per-run crash containment (explicit `error` outcome, matrix continues)."
+      "comment": "empty script => the ScriptedAdapter throws a RAW Error (not AdapterOutputError) on the first generation \u2014 the deterministic exercise of per-run crash containment (explicit `error` outcome, matrix continues)."
+    },
+    {
+      "id": "p07-pre-generation-reject",
+      "intent": "destructive-action",
+      "prompt": "a screen that the hosted path rejects before generation",
+      "repairShape": "substitution",
+      "targetRules": []
     }
   ],
   "scripts": {
@@ -80,7 +87,7 @@
     ],
     "p04-adapter-failure": [
       {
-        "error": "scripted adapter failure (deterministic failed-adapter path)"
+        "error": "empty model output (scripted generation-then-bad-output case, dspack-gen#19)"
       }
     ],
     "p05-s3-clean-gate-fail": [
@@ -88,6 +95,11 @@
         "fixture": "../fixtures/eval/text-placement-gate-fail.dsurface.json"
       }
     ],
-    "p06-contained-crash": []
+    "p06-contained-crash": [],
+    "p07-pre-generation-reject": [
+      {
+        "error": "HTTP 400: The compiled grammar is too large (scripted no-generation case, dspack-gen#19)"
+      }
+    ]
   }
 }
