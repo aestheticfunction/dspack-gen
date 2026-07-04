@@ -110,6 +110,8 @@ export interface RequiredPropsRule extends RuleBase {
   component: string;
   within?: string;
   requiredText?: true;
+  /** v0.4 amendment (2026-07-04): where requiredText looks. Default "self". */
+  textScope?: "self" | "subtree";
   requiredProps?: Array<{ prop: string; oneOf?: unknown[] }>;
 }
 

@@ -15,19 +15,19 @@ import { renderRepairMessage } from "./render.js";
 const contract = JSON.parse(readFileSync("fixtures/shadcn.v0_4.dspack.json", "utf8")) as Contract;
 
 describe("repair feedback for v0.4 finding types", () => {
-  it("required-props finding (F6a) renders to the checked-in golden, corrected reference included", () => {
+  it("required-props finding (F6b) renders to the checked-in golden, corrected reference included", () => {
     const surface = JSON.parse(
-      readFileSync("fixtures/golden/violating/F6a-trigger-label-nested.dsurface.json", "utf8"),
+      readFileSync("fixtures/golden/violating/F6b-trigger-label-missing.dsurface.json", "utf8"),
     );
     const report = lintSurface(surface, contract);
     const message = renderRepairMessage(report.findings, contract);
 
-    const goldenPath = "fixtures/golden/repair/F6a.repair.txt";
+    const goldenPath = "fixtures/golden/repair/F6b.repair.txt";
     if (process.env.UPDATE_GOLDEN) writeFileSync(goldenPath, message);
     expect(message).toBe(readFileSync(goldenPath, "utf8"));
 
     expect(message).toContain("rule.trigger-carries-label");
-    expect(message).toContain("non-empty direct text");
+    expect(message).toContain("non-empty text somewhere in its subtree");
     // The rule links the worked example, so the corrected reference rides along (ADR-3).
     expect(message).toContain("A correct example (ex.delete-account-confirmation)");
   });
