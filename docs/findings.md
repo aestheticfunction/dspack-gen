@@ -276,6 +276,22 @@ strongest measurable value: the projection gap no longer reaches the emitter.
 
 ### The conversion exposed a rule-design decision, not just a model behavior
 
+> **Correction (2026-07-04, later the same day).** The bucket definition
+> below counted a trigger's own direct text as projectable-today; the
+> pre-amendment emitter's `subButtonText` projection does not consume it
+> (verified against `dspack-emit/src/targets/a2ui/surface.ts` and the shadcn
+> profile). Corrected decomposition — script and output committed alongside
+> the original
+> ([`decompose-trigger-label-v2.py`](evidence/2026-07-04-v04-effect/decompose-trigger-label-v2.py),
+> [`decomposition-corrected.txt`](evidence/2026-07-04-v04-effect/decomposition-corrected.txt)):
+> **67 projectable-today** (labeled button; was reported 73) ·
+> **20 liftable** (text exists under the trigger, not on a button) ·
+> **117 unmappable** (no text anywhere). The conclusions below are unchanged
+> in direction; the ADR-M3-1 amendment (dspack#13) acts on the corrected
+> numbers: ∃/`textScope: subtree` semantics recover the 67, the audited
+> emitter lift recovers the 20, and the 117 remain governance's irreducible
+> job.
+
 Of the 204 runs whose first attempt violates `rule.trigger-carries-label`
 (the rule fired in every violating run; it is universal):
 
