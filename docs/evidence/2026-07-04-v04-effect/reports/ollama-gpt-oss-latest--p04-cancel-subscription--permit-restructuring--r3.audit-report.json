@@ -1,0 +1,334 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T03:13:42.756Z",
+  "request": {
+    "prompt": "a screen to cancel my subscription immediately",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "868bec778fbcd06bf2a149e2fa191a5353b81c4a36a2138303d409f98128d657"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gpt-oss:latest",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": []
+                },
+                {
+                  "component": "button",
+                  "text": "Cancel subscription"
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Cancel your subscription?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will cancel your subscription immediately and you will lose access to premium features."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Back"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "text": "Confirm cancellation",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2548,
+        "outputTokens": 159
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 26438361125,
+        "load_duration": 216318000,
+        "prompt_eval_duration": 21035000,
+        "eval_duration": 3279702000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+          "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": []
+                },
+                {
+                  "component": "button",
+                  "text": "Cancel subscription"
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Cancel your subscription?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will cancel your subscription immediately and you will lose access to premium features."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Back"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "text": "Confirm cancellation"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2862,
+        "outputTokens": 150
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 22644854375,
+        "load_duration": 213864084,
+        "prompt_eval_duration": 20514000,
+        "eval_duration": 3026759000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+          "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": []
+                },
+                {
+                  "component": "button",
+                  "text": "Cancel subscription"
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Cancel your subscription?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will cancel your subscription immediately and you will lose access to premium features."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Back"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "text": "Confirm cancellation"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2863,
+        "outputTokens": 150
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 11057977125,
+        "load_duration": 216838000,
+        "prompt_eval_duration": 21647000,
+        "eval_duration": 3033137000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+          "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.trigger-carries-label / must]\n  At: $.root.children[0].children[0] (component: button)\n  'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).\n  Why: The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.trigger-carries-label / must]\n  At: $.root.children[0].children[0] (component: button)\n  'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).\n  Why: The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 60160
+  }
+}

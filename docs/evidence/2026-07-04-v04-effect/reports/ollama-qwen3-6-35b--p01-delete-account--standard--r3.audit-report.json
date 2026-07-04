@@ -1,0 +1,381 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-03T22:32:28.151Z",
+  "request": {
+    "prompt": "a screen to delete my account",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "868bec778fbcd06bf2a149e2fa191a5353b81c4a36a2138303d409f98128d657"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "card-header",
+              "children": [
+                {
+                  "component": "card-title",
+                  "text": "Delete Account"
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-title",
+                      "text": "Are you absolutely sure?"
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 7536,
+        "outputTokens": 401
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 145326247000,
+        "load_duration": 197307500,
+        "prompt_eval_duration": 10970726000,
+        "eval_duration": 8402200999
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+          "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[1].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "card-header",
+              "children": [
+                {
+                  "component": "card-title",
+                  "text": "Delete Account"
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-title",
+                      "text": "Are you absolutely sure?"
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 3944,
+        "outputTokens": 392
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 50419264417,
+        "load_duration": 201319084,
+        "prompt_eval_duration": 4892090000,
+        "eval_duration": 7901309000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+          "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[1].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "card-header",
+              "children": [
+                {
+                  "component": "card-title",
+                  "text": "Delete Account"
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-title",
+                      "text": "Are you absolutely sure?"
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 5037,
+        "outputTokens": 392
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 60930400875,
+        "load_duration": 201309875,
+        "prompt_eval_duration": 6827282000,
+        "eval_duration": 8003252000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).",
+          "rationale": "The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[1].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.trigger-carries-label / must]\n  At: $.root.children[1].children[0].children[0] (component: button)\n  'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).\n  Why: The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.trigger-carries-label / must]\n  At: $.root.children[1].children[0].children[0] (component: button)\n  'button' must carry non-empty direct text (its own `text` field — text in descendants does not count).\n  Why: The trigger button must present its label as its own text. Assistive technology reads the control's accessible name from the element itself, and protocol projections lift a trigger label from the label-bearing component's direct text — a label nested in a child (e.g. a badge) or absent entirely produces a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 256692
+  }
+}

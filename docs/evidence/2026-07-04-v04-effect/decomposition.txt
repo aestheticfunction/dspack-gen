@@ -1,0 +1,6 @@
+first-attempt runs with a rule.trigger-carries-label finding, bucketed:
+  genuinely-unprojectable: 131
+  projectable-but-stricter: 73
+  ollama-gemma4-e4b: {'projectable-but-stricter': 29, 'genuinely-unprojectable': 37}
+  ollama-gpt-oss-latest: {'projectable-but-stricter': 31, 'genuinely-unprojectable': 41}
+  ollama-qwen3-6-35b: {'genuinely-unprojectable': 53, 'projectable-but-stricter': 13}
