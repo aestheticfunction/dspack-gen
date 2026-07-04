@@ -86,6 +86,19 @@ export interface RunSummary {
   repaired?: boolean;
   /** S3-clean but refused by an emitter gate — the ADR-D1 signal. */
   s3CleanButGateFailed: boolean;
+  /**
+   * Classification of a `failed-adapter` outcome (dspack-gen#19), from the
+   * report's typed adapterError message: `no-generation` — the request never
+   * yielded a model turn (transport failure, HTTP/API reject incl. the
+   * grammar-too-large 400s) — is infrastructure and excluded from
+   * model-behavior denominators exactly like a contained `error`;
+   * `generation-then-bad-output` — the request completed and the MODEL
+   * produced unusable output (empty, non-JSON, truncated, refusal) — is a
+   * real observation and stays counted. Unknown messages default to
+   * `generation-then-bad-output`: only known infrastructure signatures may
+   * shrink a denominator.
+   */
+  adapterFailureClass?: "no-generation" | "generation-then-bad-output";
   /** Relative path of the retained audit report. */
   reportPath: string;
 }
@@ -105,7 +118,9 @@ export interface CellMetrics {
   runs: number;
   /** Contained per-run crashes — infrastructure, not model behavior. */
   errorRuns: number;
-  /** All rates below are over the non-error runs (runs − errorRuns). */
+  /** Pre-generation failed-adapters (dspack-gen#19) — infrastructure, not model behavior. */
+  noGenerationRuns: number;
+  /** All rates below are over the observed runs (runs − errorRuns − noGenerationRuns). */
   schemaValidityRate: number;
   firstAttemptViolationRate: number;
   /** Over runs with a first-attempt violation; null when none occurred. */

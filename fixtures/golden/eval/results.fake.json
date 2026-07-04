@@ -1,5 +1,5 @@
 {
-  "matrixSha256": "3f2e793444bc8da5f9db905236f8d7cc8a792305c0a61c62ca97612bc2d4a139",
+  "matrixSha256": "f2aed86eeed5acd8f862fa7c4eeaa29f1a61480189a04b52e81cef65337e30cf",
   "contract": {
     "name": "shadcn/ui",
     "dspack": "0.4",
@@ -46,6 +46,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 1,
@@ -92,6 +93,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 1,
@@ -132,6 +134,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -172,6 +175,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -218,6 +222,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 0,
@@ -264,6 +269,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 1,
         "repairSuccessRate": 0,
@@ -287,6 +293,7 @@
           "firstAttemptViolated": false,
           "firstAttemptRuleIds": [],
           "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
           "reportPath": "reports/fake-scripted--p04-adapter-failure--standard--r1.audit-report.json"
         },
         {
@@ -298,12 +305,14 @@
           "firstAttemptViolated": false,
           "firstAttemptRuleIds": [],
           "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
           "reportPath": "reports/fake-scripted--p04-adapter-failure--standard--r2.audit-report.json"
         }
       ],
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 0,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -327,6 +336,7 @@
           "firstAttemptViolated": false,
           "firstAttemptRuleIds": [],
           "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
           "reportPath": "reports/fake-scripted--p04-adapter-failure--permit-restructuring--r1.audit-report.json"
         },
         {
@@ -338,12 +348,14 @@
           "firstAttemptViolated": false,
           "firstAttemptRuleIds": [],
           "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
           "reportPath": "reports/fake-scripted--p04-adapter-failure--permit-restructuring--r2.audit-report.json"
         }
       ],
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 0,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -384,6 +396,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -424,6 +437,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 0,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 1,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -466,6 +480,7 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 2,
+        "noGenerationRuns": 0,
         "schemaValidityRate": 0,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -508,6 +523,93 @@
       "metrics": {
         "runs": 2,
         "errorRuns": 2,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p07-pre-generation-reject",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "no-generation",
+          "reportPath": "reports/fake-scripted--p07-pre-generation-reject--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "no-generation",
+          "reportPath": "reports/fake-scripted--p07-pre-generation-reject--standard--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "errorRuns": 0,
+        "noGenerationRuns": 2,
+        "schemaValidityRate": 0,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "fake:scripted",
+      "promptId": "p07-pre-generation-reject",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "no-generation",
+          "reportPath": "reports/fake-scripted--p07-pre-generation-reject--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "no-generation",
+          "reportPath": "reports/fake-scripted--p07-pre-generation-reject--permit-restructuring--r2.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 2,
+        "errorRuns": 0,
+        "noGenerationRuns": 2,
         "schemaValidityRate": 0,
         "firstAttemptViolationRate": 0,
         "repairSuccessRate": null,
@@ -518,8 +620,9 @@
   ],
   "byModel": {
     "fake:scripted": {
-      "runs": 24,
+      "runs": 28,
       "errorRuns": 4,
+      "noGenerationRuns": 4,
       "schemaValidityRate": 0.8,
       "firstAttemptViolationRate": 0.4,
       "repairSuccessRate": 0.5,

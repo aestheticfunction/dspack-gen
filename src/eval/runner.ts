@@ -220,6 +220,32 @@ function exitCodeFor(outcome: string): number {
   return outcome === "passed" ? 0 : outcome === "failed-lint-exhausted" ? 2 : outcome === "failed-gate" ? 3 : 1;
 }
 
+/**
+ * dspack-gen#19: classify a failed-adapter from its typed error message.
+ * Conservative by design — only KNOWN infrastructure signatures classify as
+ * `no-generation` (and thereby leave the denominators); anything else is
+ * treated as a model observation.
+ */
+export function classifyAdapterFailure(adapterError: string): "no-generation" | "generation-then-bad-output" {
+  const infrastructure =
+    /HTTP \d{3}/.test(adapterError) ||
+    /grammar is too large/i.test(adapterError) ||
+    /fetch failed|ECONNREFUSED|ECONNRESET|ETIMEDOUT|socket|network|timed? ?out/i.test(adapterError);
+  return infrastructure ? "no-generation" : "generation-then-bad-output";
+}
+
+/**
+ * Per #19's definition, `no-generation` applies only when NO attempt produced
+ * output: a run whose repair attempt dies on transport still observed the
+ * model on attempt 1 and stays counted.
+ */
+export function classifyFailedAdapterRun(
+  attempts: Array<{ surface?: unknown; adapterError?: string }>,
+): "no-generation" | "generation-then-bad-output" {
+  if (attempts.some((a) => a.surface !== undefined)) return "generation-then-bad-output";
+  return classifyAdapterFailure(attempts.find((a) => a.adapterError)?.adapterError ?? "");
+}
+
 function summarize(run: number, report: AuditReportV1, exitCode: number, reportPath: string): RunSummary {
   const first = report.attempts[0];
   const firstGates = first?.gates ?? [];
@@ -237,20 +263,25 @@ function summarize(run: number, report: AuditReportV1, exitCode: number, reportP
     firstAttemptRuleIds: [...new Set(errorFindings.map((f) => f.ruleId))].sort(),
     ...(firstAttemptViolated ? { repaired: lintCleanReached } : {}),
     s3CleanButGateFailed: report.outcome === "failed-gate",
+    ...(report.outcome === "failed-adapter" ? { adapterFailureClass: classifyFailedAdapterRun(report.attempts) } : {}),
     reportPath,
   };
 }
 
 export function computeMetrics(runs: RunSummary[]): CellMetrics {
-  // Contained `error` runs are infrastructure, not model behavior: they are
-  // counted (visible) but excluded from every rate denominator below.
-  const observed = runs.filter((r) => r.outcome !== "error");
+  // Contained `error` runs and pre-generation failed-adapters (dspack-gen#19)
+  // are infrastructure, not model behavior: counted (visible) but excluded
+  // from every rate denominator below.
+  const errorRuns = runs.filter((r) => r.outcome === "error").length;
+  const noGeneration = runs.filter((r) => r.adapterFailureClass === "no-generation").length;
+  const observed = runs.filter((r) => r.outcome !== "error" && r.adapterFailureClass !== "no-generation");
   const n = observed.length;
   const violated = observed.filter((r) => r.firstAttemptViolated);
   const rate = (k: number, d: number): number => (d === 0 ? 0 : round4(k / d));
   return {
     runs: runs.length,
-    errorRuns: runs.length - n,
+    errorRuns,
+    noGenerationRuns: noGeneration,
     schemaValidityRate: rate(observed.filter((r) => r.firstAttemptSchemaValid).length, n),
     firstAttemptViolationRate: rate(violated.length, n),
     repairSuccessRate: violated.length === 0 ? null : round4(violated.filter((r) => r.repaired).length / violated.length),
@@ -297,14 +328,14 @@ export function renderReportMarkdown(results: EvalResults): string {
     "",
     "## Per model",
     "",
-    "(rates are over non-error runs; `errors` are contained infrastructure crashes, not model behavior)",
+    "(rates are over observed runs; `errors` are contained crashes and `no-gen` are pre-generation adapter failures — both infrastructure, not model behavior; dspack-gen#19)",
     "",
-    "| model | runs | errors | schema-valid | 1st-attempt violation | repair success | e2e pass | S3-clean gate failures |",
-    "|---|---|---|---|---|---|---|---|",
+    "| model | runs | errors | no-gen | schema-valid | 1st-attempt violation | repair success | e2e pass | S3-clean gate failures |",
+    "|---|---|---|---|---|---|---|---|---|",
   ];
   for (const [model, m] of Object.entries(results.byModel)) {
     lines.push(
-      `| ${model} | ${m.runs} | ${m.errorRuns} | ${pct(m.schemaValidityRate)} | ${pct(m.firstAttemptViolationRate)} | ${m.repairSuccessRate === null ? "n/a" : pct(m.repairSuccessRate)} | ${pct(m.endToEndPassRate)} | ${m.s3CleanGateFailures} |`,
+      `| ${model} | ${m.runs} | ${m.errorRuns} | ${m.noGenerationRuns} | ${pct(m.schemaValidityRate)} | ${pct(m.firstAttemptViolationRate)} | ${m.repairSuccessRate === null ? "n/a" : pct(m.repairSuccessRate)} | ${pct(m.endToEndPassRate)} | ${m.s3CleanGateFailures} |`,
     );
   }
   lines.push("", "## Per rule (first-attempt violations across all cells)", "", "| rule | violations | repaired | unrepaired |", "|---|---|---|---|");
@@ -315,12 +346,12 @@ export function renderReportMarkdown(results: EvalResults): string {
     "",
     "## Per cell",
     "",
-    "| model | prompt | shape | template | ADR-D1 probe | errors | violation | repair | e2e | gate-fail |",
-    "|---|---|---|---|---|---|---|---|---|---|",
+    "| model | prompt | shape | template | ADR-D1 probe | errors | no-gen | violation | repair | e2e | gate-fail |",
+    "|---|---|---|---|---|---|---|---|---|---|---|",
   );
   for (const c of results.cells) {
     lines.push(
-      `| ${c.model} | ${c.promptId} | ${c.repairShape} | ${c.repairTemplate} | ${c.adrD1Probe ? "yes" : ""} | ${c.metrics.errorRuns} | ${pct(c.metrics.firstAttemptViolationRate)} | ${c.metrics.repairSuccessRate === null ? "n/a" : pct(c.metrics.repairSuccessRate)} | ${pct(c.metrics.endToEndPassRate)} | ${c.metrics.s3CleanGateFailures} |`,
+      `| ${c.model} | ${c.promptId} | ${c.repairShape} | ${c.repairTemplate} | ${c.adrD1Probe ? "yes" : ""} | ${c.metrics.errorRuns} | ${c.metrics.noGenerationRuns} | ${pct(c.metrics.firstAttemptViolationRate)} | ${c.metrics.repairSuccessRate === null ? "n/a" : pct(c.metrics.repairSuccessRate)} | ${pct(c.metrics.endToEndPassRate)} | ${c.metrics.s3CleanGateFailures} |`,
     );
   }
   lines.push("");
