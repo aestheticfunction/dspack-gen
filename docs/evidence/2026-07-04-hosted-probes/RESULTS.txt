@@ -1,0 +1,23 @@
+ADR-M3-4 probes, 2026-07-04 (contract shadcn 2.2.0, model claude-sonnet-5, output_config.format json_schema)
+
+Probe 2 — observed surface depth, 323 surfaces from the 144 retained July-3 local runs:
+  depth 3: 2 | depth 4: 18 | depth 5: 123 | depth 6: 180
+  max observed = 6 (AT the unroll bound — distribution is right-censored)
+
+Probe 1 — hosted grammar-ceiling bisect (full vocabulary, 39 branches/level):
+  depth 6 (69 KB) REJECTED | 5 (57 KB) REJECTED | 4 (45 KB) REJECTED
+  depth 3 (33 KB) REJECTED | 2 (21 KB) REJECTED | 1 (9 KB) REJECTED
+  => NO compiling depth exists. WIDTH BINDS.
+
+Width control (depth 1, component-count slice):
+  6 components (+20 subs, 5.7 KB) REJECTED
+  4 components (+20 subs, 5.0 KB) REJECTED
+  2 components (+8 subs, 2.4 KB) ACCEPTED
+  1 component  (+0 subs, 0.7 KB) ACCEPTED
+  => ceiling admits ~2 components at depth 1; the minimal destructive-action
+     vocabulary (alert-dialog+subs, button, card, text) is ALREADY over it.
+
+Decision-rule outcome (pre-agreed, ADR-M3-4): "no compiling depth (width binds)
+→ per-intent pruning would be a different experiment → escalate; do not run."
+ESCALATED. Additional evidence: even the pruning experiment appears infeasible
+at this ceiling — the smallest honest per-intent vocabulary exceeds it.
