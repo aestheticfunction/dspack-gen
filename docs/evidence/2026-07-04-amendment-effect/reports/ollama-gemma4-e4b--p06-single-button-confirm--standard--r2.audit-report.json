@@ -1,0 +1,329 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T15:04:16.283Z",
+  "request": {
+    "prompt": "a delete confirmation with a single prominent delete button and nothing else",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "text": "Confirm Deletion?"
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "Are you sure you want to proceed with the deletion? This action is irreversible."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Delete Account"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1499,
+        "outputTokens": 168
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 12769039209,
+        "load_duration": 262701209,
+        "prompt_eval_duration": 96027000,
+        "eval_duration": 3581891000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).",
+          "rationale": "The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "alert-dialog-trigger"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": []
+                    },
+                    {
+                      "component": "button",
+                      "text": "Delete Account"
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "text": "Confirm Deletion?"
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "Are you sure you want to proceed with the deletion? This action is irreversible."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Delete Account"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 2046,
+        "outputTokens": 204
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 12328461167,
+        "load_duration": 264963375,
+        "prompt_eval_duration": 99008000,
+        "eval_duration": 4465295000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.trigger-carries-label / must]\n  At: $.root.children[0].children[0] (component: alert-dialog-trigger)\n  'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).\n  Why: The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "passed",
+  "emitted": {
+    "target": "a2ui",
+    "surfaceMessages": {
+      "messages": [
+        {
+          "version": "v0.9",
+          "createSurface": {
+            "surfaceId": "destructive_action",
+            "catalogId": "https://rdombrowski.dev/catalogs/shadcn-ui/v0_9_1/catalog.json",
+            "theme": {
+              "agentDisplayName": "shadcn/ui via dspack",
+              "primaryColor": "#0f172a"
+            }
+          }
+        },
+        {
+          "version": "v0.9",
+          "updateComponents": {
+            "surfaceId": "destructive_action",
+            "components": [
+              {
+                "id": "root",
+                "component": "Card",
+                "child": "alertdialog"
+              },
+              {
+                "id": "alertdialog",
+                "component": "AlertDialog",
+                "triggerLabel": "Delete Account",
+                "title": "Confirm Deletion?",
+                "description": "Are you sure you want to proceed with the deletion? This action is irreversible.",
+                "cancelLabel": "Cancel",
+                "confirmLabel": "Delete Account",
+                "action": {
+                  "event": {
+                    "name": "delete_account",
+                    "context": {}
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "warnings": [
+      {
+        "code": "surface-composition-flattened",
+        "message": "$.root.children[0]: compound 'alert-dialog' subtree flattened onto emitted props (documented casualty; nested props beyond text are not carried)."
+      },
+      {
+        "code": "surface-synthesized-action",
+        "message": "$.root.children[0]: A2UI requires a declarative action on AlertDialog; synthesized event 'delete_account'."
+      }
+    ],
+    "validations": [
+      {
+        "a2uiVersion": "0.9.1",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": true
+          }
+        ]
+      },
+      {
+        "a2uiVersion": "1.0",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 25174
+  }
+}

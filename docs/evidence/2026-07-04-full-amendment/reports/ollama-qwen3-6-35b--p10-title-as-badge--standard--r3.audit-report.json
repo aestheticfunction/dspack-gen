@@ -1,0 +1,486 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T23:48:16.216Z",
+  "request": {
+    "prompt": "a delete-account confirmation where the title is rendered as a badge chip inside the dialog header",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {
+                            "variant": "destructive"
+                          },
+                          "children": [
+                            {
+                              "component": "button",
+                              "text": "Delete Account"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "children": [
+                            {
+                              "component": "badge",
+                              "props": {
+                                "variant": "destructive"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-footer",
+              "children": [
+                {
+                  "component": "alert-dialog-cancel",
+                  "text": "Cancel"
+                },
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "destructive"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 6126,
+        "outputTokens": 198
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 106008861208,
+        "load_duration": 205201875,
+        "prompt_eval_duration": 8408275000,
+        "eval_duration": 4058200000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {
+                            "variant": "destructive"
+                          },
+                          "children": [
+                            {
+                              "component": "button",
+                              "text": "Delete account"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "children": [
+                            {
+                              "component": "badge",
+                              "props": {
+                                "variant": "destructive"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-footer",
+              "children": [
+                {
+                  "component": "alert-dialog-cancel",
+                  "text": "Cancel"
+                },
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "destructive"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 4607,
+        "outputTokens": 198
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 62699775375,
+        "load_duration": 195550500,
+        "prompt_eval_duration": 5963189000,
+        "eval_duration": 3887084000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "badge",
+                          "props": {
+                            "variant": "destructive"
+                          },
+                          "children": [
+                            {
+                              "component": "button",
+                              "text": "Delete account"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "children": [
+                            {
+                              "component": "badge",
+                              "props": {
+                                "variant": "destructive"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-footer",
+              "children": [
+                {
+                  "component": "alert-dialog-cancel",
+                  "text": "Cancel"
+                },
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "destructive"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "destructive"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 5929,
+        "outputTokens": 198
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 80614803416,
+        "load_duration": 199122333,
+        "prompt_eval_duration": 8034257000,
+        "eval_duration": 3946620000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 2 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 2: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[0].children[0].children[0] (component: button)\n  Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 2 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 2: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[0].children[0].children[0] (component: button)\n  Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 249345
+  }
+}

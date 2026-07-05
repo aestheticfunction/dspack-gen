@@ -1,0 +1,420 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T15:35:30.212Z",
+  "request": {
+    "prompt": "a confirmation dialog for deleting my account; wrap the title text in a styled container inside the header",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "button",
+                          "text": "Delete account"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "card",
+                          "props": {
+                            "className": "p-4 mb-2 flex items-center gap-3"
+                          },
+                          "children": [
+                            {
+                              "component": "alert-dialog-title",
+                              "text": "Account Deletion Confirmation?"
+                            },
+                            {
+                              "component": "card",
+                              "props": {
+                                "className": "bg-red-100 text-red-700 px-3 py-1 rounded-md font-medium text-sm border border-red-300 flex items-center gap-2 border-dashed shadow-inner"
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-title",
+                              "text": "⚠️ Permanent Action"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "Are you sure you want to delete your account? This action is irreversible and will permanently remove all associated data, including projects, files, and history."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Confirm Deletion"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1506,
+        "outputTokens": 294
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 21584933542,
+        "load_duration": 267157209,
+        "prompt_eval_duration": 1043625000,
+        "eval_duration": 6863918000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "button",
+                          "text": "Delete account"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "card",
+                          "props": {
+                            "className": "p-4 mb-2 flex items-center gap-3"
+                          },
+                          "children": [
+                            {
+                              "component": "alert-dialog-title",
+                              "text": "Account Deletion Confirmation?"
+                            },
+                            {
+                              "component": "card",
+                              "props": {
+                                "className": "bg-red-100 text-red-700 px-3 py-1 rounded-md font-medium text-sm border border-red-300 flex items-center gap-2 border-dashed shadow-inner"
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-title",
+                              "text": "⚠️ Permanent Action"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "Are you sure you want to delete your account? This action is irreversible and will permanently remove all associated data, including projects, files, and history."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Confirm Deletion"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 2152,
+        "outputTokens": 295
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 18082544375,
+        "load_duration": 271421250,
+        "prompt_eval_duration": 100255000,
+        "eval_duration": 6522975000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "button",
+                          "text": "Delete account"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "card",
+                          "props": {
+                            "className": "p-4 mb-2 flex items-center gap-3"
+                          },
+                          "children": [
+                            {
+                              "component": "alert-dialog-title",
+                              "text": "Account Deletion Confirmation?"
+                            },
+                            {
+                              "component": "card",
+                              "props": {
+                                "className": "bg-red-100 text-red-700 px-3 py-1 rounded-md font-medium text-sm border border-red-300 flex items-center gap-2 border-dashed shadow-inner"
+                              }
+                            },
+                            {
+                              "component": "alert-dialog-title",
+                              "text": "⚠️ Permanent Action"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "Are you sure you want to delete your account? This action is irreversible and will permanently remove all associated data, including projects, files, and history."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Confirm Deletion"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 2798,
+        "outputTokens": 295
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 18822392250,
+        "load_duration": 265611500,
+        "prompt_eval_duration": 100859000,
+        "eval_duration": 6533656000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[0].children[0] (component: button)\n  Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[0].children[0] (component: button)\n  Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nDo not change parts of the surface that were not flagged.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 58507
+  }
+}
