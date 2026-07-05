@@ -224,3 +224,31 @@ describe("clean golden and gate independence", () => {
     );
   });
 });
+
+describe("Astryx negative fixtures — the prop-presence rules CAN fire (Finding B's control)", () => {
+  // Finding B (findings.md, 2026-07-05) reports these rules fired 0/216 in
+  // the live Astryx column because the props-based API pre-empts the
+  // violation. A rule that never fires is only a finding if it fires on a
+  // deliberately violating surface — these are that control (the M2
+  // never-fired discipline). Goldens regenerate with UPDATE_GOLDEN=1.
+  const astryx = JSON.parse(readFileSync("fixtures/astryx.v0_1_2.dspack.json", "utf8")) as Contract;
+  const cases: Array<[string, string, string]> = [
+    ["FA1-button-no-label", "rule.button-carries-label", "Required prop 'label' is not present on 'button' itself."],
+    ["FA2-alertdialog-missing-content", "rule.alertdialog-carries-content", "Required prop 'description' is not present on 'alert-dialog' itself."],
+    ["FA3-input-no-label", "rule.input-carries-label", "Required prop 'label' is not present on 'text-input' itself."],
+  ];
+
+  it.each(cases)("%s fires %s and reproduces its golden", (fixture, ruleId, message) => {
+    const report = lintSurface(load(join("fixtures/golden/violating-astryx", `${fixture}.dsurface.json`)), astryx);
+    const expectedPath = join("fixtures/golden/violating-astryx", `${fixture}.expected.json`);
+    const rendered = JSON.stringify(report, null, 2) + "\n";
+    if (process.env.UPDATE_GOLDEN) writeFileSync(expectedPath, rendered);
+    expect(rendered).toBe(readFileSync(expectedPath, "utf8"));
+    expect(report.pass).toBe(false);
+    // A rule can emit several findings (FA2: description AND actionLabel
+    // missing) — assert set membership, not first-match order.
+    const messages = report.findings.filter((f) => f.ruleId === ruleId).map((f) => f.message);
+    expect(messages.length, `${ruleId} must fire`).toBeGreaterThan(0);
+    expect(messages).toContain(message);
+  });
+});

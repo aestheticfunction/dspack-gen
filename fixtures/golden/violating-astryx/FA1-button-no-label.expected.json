@@ -1,0 +1,39 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.button-carries-label",
+      "type": "required-props",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required prop 'label' is not present on 'button' itself.",
+      "rationale": "\"Always provide a label for icon-only buttons so screen readers can announce what the button does\" — and label is the component's required accessible name in every mode. The schema does not check prop presence; this rule does — Astryx Button docs, v0.1.2",
+      "location": {
+        "path": "$.root.children[0]",
+        "component": "button"
+      },
+      "exampleIds": [
+        "ex.delete-project-confirmation"
+      ]
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

@@ -1,0 +1,37 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.input-carries-label",
+      "type": "required-props",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required prop 'label' is not present on 'text-input' itself.",
+      "rationale": "\"Always provide a visible label so users know what the field is for. Only hide the label when surrounding context makes the purpose unambiguous\" (and then via isLabelHidden, which keeps it announced — never by omitting it) — Astryx TextInput docs, v0.1.2",
+      "location": {
+        "path": "$.root.children[0]",
+        "component": "text-input"
+      },
+      "exampleIds": []
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}

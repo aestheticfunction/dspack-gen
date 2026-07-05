@@ -1,0 +1,23 @@
+{
+  "dspackSurface": "0.1",
+  "system": "Astryx",
+  "intent": "destructive-action",
+  "root": {
+    "component": "card",
+    "children": [
+      {
+        "component": "button",
+        "props": {
+          "label": "Delete project",
+          "variant": "destructive"
+        }
+      },
+      {
+        "component": "alert-dialog",
+        "props": {
+          "title": "Delete this project?"
+        }
+      }
+    ]
+  }
+}
