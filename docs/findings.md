@@ -481,3 +481,19 @@ runtime behavior ("show a loading state for actions that take time"). The
 census is the M3 exit's answer to "does prose guidance convert?": *the
 deterministic core converts; the ceiling items are now named with
 evidence.*
+
+### Verification notes (2026-07-05, maintainer audit)
+
+- **The 78/78 signature count is verified by strict gate-error + surface-shape
+  analysis** (not string matching):
+  [`docs/evidence/verify-signature-78.py`](evidence/verify-signature-78.py),
+  one command, asserts the count. Decomposition: 71 single-trigger cases
+  (unlabeled or nested-label button) + 7 multi-trigger cases whose only label
+  text sits on a trigger node itself — unprojectable by the pre-amendment
+  projection per the corrected precondition, hence signature. Zero
+  no-trigger, zero refusals, zero unrelated A3 errors across all 78.
+- **Finding B's control now exists**: three deliberately violating Astryx
+  fixtures ([`fixtures/golden/violating-astryx/`](../fixtures/golden/violating-astryx/))
+  prove each never-fired prop-presence rule fires with the exact expected
+  finding (golden-locked in `lint.test.ts`). The rules are
+  authored-correct-and-preempted, not mis-authored.

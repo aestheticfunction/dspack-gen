@@ -1,0 +1,54 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.alertdialog-carries-content",
+      "type": "required-props",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required prop 'description' is not present on 'alert-dialog' itself.",
+      "rationale": "title, description, and actionLabel are required by the component API (aria-labelledby / aria-describedby wiring), and \"describe what will happen in the description so the user knows the consequences before confirming\". The schema does not check prop presence; this rule does — Astryx AlertDialog docs, v0.1.2",
+      "location": {
+        "path": "$.root.children[1]",
+        "component": "alert-dialog"
+      },
+      "exampleIds": [
+        "ex.delete-project-confirmation"
+      ]
+    },
+    {
+      "ruleId": "rule.alertdialog-carries-content",
+      "type": "required-props",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required prop 'actionLabel' is not present on 'alert-dialog' itself.",
+      "rationale": "title, description, and actionLabel are required by the component API (aria-labelledby / aria-describedby wiring), and \"describe what will happen in the description so the user knows the consequences before confirming\". The schema does not check prop presence; this rule does — Astryx AlertDialog docs, v0.1.2",
+      "location": {
+        "path": "$.root.children[1]",
+        "component": "alert-dialog"
+      },
+      "exampleIds": [
+        "ex.delete-project-confirmation"
+      ]
+    }
+  ],
+  "errorCount": 2,
+  "warnCount": 0,
+  "pass": false
+}
