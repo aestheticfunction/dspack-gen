@@ -10,12 +10,14 @@ produces a versioned audit report.
 
 > *A2UI defines what can render. dspack defines what is correct.*
 
-**Status: Milestones 1 and 2 complete.** Tags
-[m1](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1) and
-[m2](https://github.com/aestheticfunction/dspack-gen/releases/tag/m2); write-ups in
-[docs/m1-report.md](docs/m1-report.md) and [docs/m2-report.md](docs/m2-report.md),
-findings in [docs/findings.md](docs/findings.md). M3 (dspack v0.4 and a second
-contract) is in progress.
+**Status: Milestones 1 through 3 complete.** Tags
+[m1](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1),
+[m2](https://github.com/aestheticfunction/dspack-gen/releases/tag/m2), and
+[m3](https://github.com/aestheticfunction/dspack-gen/releases/tag/m3); write-ups in
+[docs/m1-report.md](docs/m1-report.md), [docs/m2-report.md](docs/m2-report.md), and
+[docs/m3-report.md](docs/m3-report.md), findings in
+[docs/findings.md](docs/findings.md). M4 is trigger-gated on A2UI v1.0 leaving
+Candidate status.
 The emitter is consumed from npm as `@aestheticfunction/dspack-emit`
 (renamed from `@aestheticfunction/dspack-to-a2ui` with the ADR-D2 repo
 rename; the old package is deprecated with a pointer).
