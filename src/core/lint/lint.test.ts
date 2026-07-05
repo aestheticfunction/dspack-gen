@@ -245,8 +245,10 @@ describe("Astryx negative fixtures — the prop-presence rules CAN fire (Finding
     if (process.env.UPDATE_GOLDEN) writeFileSync(expectedPath, rendered);
     expect(rendered).toBe(readFileSync(expectedPath, "utf8"));
     expect(report.pass).toBe(false);
-    const finding = report.findings.find((f) => f.ruleId === ruleId)!;
-    expect(finding, `${ruleId} must fire`).toBeDefined();
-    expect(finding.message).toBe(message);
+    // A rule can emit several findings (FA2: description AND actionLabel
+    // missing) — assert set membership, not first-match order.
+    const messages = report.findings.filter((f) => f.ruleId === ruleId).map((f) => f.message);
+    expect(messages.length, `${ruleId} must fire`).toBeGreaterThan(0);
+    expect(messages).toContain(message);
   });
 });

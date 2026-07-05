@@ -34,7 +34,8 @@ for name, pat in [
 ]:
     buckets = collections.Counter()
     for f in sorted(glob.glob(pat)):
-        r = json.load(open(f))
+        with open(f) as fp:
+            r = json.load(fp)
         if r["outcome"] != "failed-gate": continue
         errs = [e for v in (r.get("emitted") or {}).get("validations", [])
                 for g in v.get("gates", []) if g.get("gate") == "A3" and not g.get("pass")
