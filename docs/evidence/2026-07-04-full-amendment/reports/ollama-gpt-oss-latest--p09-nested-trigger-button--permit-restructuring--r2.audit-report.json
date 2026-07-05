@@ -1,0 +1,476 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T20:45:31.121Z",
+  "request": {
+    "prompt": "a delete confirmation whose trigger button shows a badge and a secondary smaller button inside it",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gpt-oss:latest",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "children": [
+            {
+              "component": "alert-dialog-trigger",
+              "children": [
+                {
+                  "component": "button",
+                  "props": {
+                    "variant": "secondary",
+                    "size": "sm"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "outline"
+                      },
+                      "children": [
+                        {
+                          "component": "input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Badge"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive",
+                        "size": "icon"
+                      },
+                      "children": [
+                        {
+                          "component": "input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Delete"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog-content",
+              "children": [
+                {
+                  "component": "alert-dialog-title",
+                  "text": "Delete your account?"
+                },
+                {
+                  "component": "alert-dialog-description",
+                  "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                },
+                {
+                  "component": "alert-dialog-footer",
+                  "children": [
+                    {
+                      "component": "alert-dialog-cancel",
+                      "text": "Cancel"
+                    },
+                    {
+                      "component": "alert-dialog-action",
+                      "text": "Delete account"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 1895,
+        "outputTokens": 212
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 11633046980,
+        "load_duration": 289207902,
+        "prompt_eval_duration": 17408000,
+        "eval_duration": 3682424000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[1]",
+            "component": "button"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0]",
+            "component": "input"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[1].children[0]",
+            "component": "input"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0].children[1]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[1].children[0]",
+            "component": "input"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).",
+          "rationale": "The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0]",
+            "component": "alert-dialog-trigger"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Delete account"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "outline"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-title",
+                      "text": "Delete your account?"
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Delete account"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 3846,
+        "outputTokens": 179
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 28244405633,
+        "load_duration": 335697703,
+        "prompt_eval_duration": 17925000,
+        "eval_duration": 3065317000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0]",
+            "component": "input"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).",
+          "rationale": "The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "alert-dialog-trigger"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Delete account"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-title",
+                      "text": "Delete your account?"
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This will permanently delete your account and all associated data. This action cannot be undone."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Delete account"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 3088,
+        "outputTokens": 168
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 4817355495,
+        "load_duration": 325011366,
+        "prompt_eval_duration": 17209000,
+        "eval_duration": 2777028000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.button-no-interactive-descendants",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0].children[0]).",
+          "rationale": "Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.",
+          "location": {
+            "path": "$.root.children[0].children[0].children[0].children[0]",
+            "component": "input"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.trigger-carries-label",
+          "type": "required-props",
+          "requirement": "must",
+          "level": "error",
+          "message": "'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).",
+          "rationale": "The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.",
+          "location": {
+            "path": "$.root.children[0].children[0]",
+            "component": "alert-dialog-trigger"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 5 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[1] (component: button)\n  Forbidden descendant 'button' inside 'button' (at $.root.children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 2: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[0].children[0] (component: input)\n  Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 3: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[1].children[0] (component: input)\n  Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 4: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[1].children[0] (component: input)\n  Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0].children[1]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 5: [rule.trigger-carries-label / must]\n  At: $.root.children[0] (component: alert-dialog-trigger)\n  'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).\n  Why: The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 2 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.button-no-interactive-descendants / must]\n  At: $.root.children[0].children[0].children[0].children[0] (component: input)\n  Forbidden descendant 'input' inside 'button' (at $.root.children[0].children[0].children[0]).\n  Why: Nested interactive elements create ambiguous click targets and are an accessibility violation: screen readers cannot determine intent and click handling varies across browsers.\nViolation 2: [rule.trigger-carries-label / must]\n  At: $.root.children[0].children[0] (component: alert-dialog-trigger)\n  'alert-dialog-trigger' must carry non-empty text somewhere in its subtree (none found).\n  Why: The trigger must present an accessible label: non-empty text somewhere under the trigger. Protocol projections lift the label from the trigger's subtree (preferring a label-bearing button; lifts are audited) — a trigger with no label text anywhere yields a control with no accessible name and an instance downstream emitters must refuse.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 44778
+  }
+}

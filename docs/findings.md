@@ -339,3 +339,72 @@ lint-rule changes by construction (the contract IS the variable); zero
 end-to-end passes means the v0.4 success path is exercised only by the
 fake-adapter CI gate; `runsPerCell` = 3; one contract, one intent, local
 models only — the hosted column remains blocked (Phase 2).
+
+## Addendum — the ADR-M3-1 amendment, measured in three stages (2026-07-04)
+
+The amendment (dspack#13 · dspack-gen#25 · dspack-emit#14, published as
+`@aestheticfunction/dspack-emit@0.3.1`) was measured as a three-stage
+contract/emitter A/B on byte-identical prompts, three local families,
+`runsPerCell` = 3. Stage evidence:
+[`2026-07-04-v04-effect/`](evidence/2026-07-04-v04-effect/) (∀ rule, pre-lift
+emitter), [`2026-07-04-amendment-effect/`](evidence/2026-07-04-amendment-effect/)
+(amended rules, pre-lift emitter 0.3.0),
+[`2026-07-04-full-amendment/`](evidence/2026-07-04-full-amendment/) (amended
+rules × lifting emitter 0.3.1).
+
+| | v0.3 baseline | v0.4-∀ | rules-only | **full amendment** |
+|---|---|---|---|---|
+| end-to-end passes | 28/216 | 0/216 | 49/216 | **67/216** |
+| emitter-gate failures | 78 | 0¹ | 32 | **7** |
+| …carrying the trigger-label signature | 78/78 | — | 31/32 | **0/7²** |
+| per-family e2e (gemma · qwen · gpt-oss) | 0 · 0 · 28 | 0 · 0 · 0 | 7 · 0 · 42 | **17 · 9 · 41** |
+
+¹ v0.4-∀'s zero gate failures came at the cost of zero passes: the ∀ rule
+consumed everything upstream. ² Four of the seven residuals mention
+`triggerLabel` in their schema text but none is the signature — see below.
+
+**Headline, at measured strength:** the projection gap that produced 78/78
+unrepairable gate failures at v0.3 is CLOSED at the full amendment — and
+closed the right way. End-to-end passes reached 2.4× the v0.3 baseline
+(67 vs 28), **all three families now pass live** (gemma 17/72 and qwen 9/72
+are each their family's first live passes in any run), and the audited lift
+did visible work: **28 runs carry `surface-label-lifted` warnings** (gemma
+12, qwen 11, gpt-oss 5) — every one a run that would have gate-failed on the
+pre-lift emitter, now emitted with its label relocated and the relocation on
+the audit record.
+
+**The seven residual gate failures are two known, different classes:**
+three are the sub-component-outside-compound refusal family (#16; a
+standalone `card-header`), and four are surfaces with **no
+`alert-dialog-trigger` at all** (A3: AlertDialog requires `child`) — the
+amended trigger rule is conditional on trigger instances and nothing in the
+contract requires the trigger sub-component to exist.
+**Filed, not patched:** adding `alert-dialog-trigger` to
+`rule.alertdialog-requires-cancel`'s `requiredSubComponents` is a one-line
+contract-revision candidate that would convert this residue to repairable
+S3 findings.
+
+**Repair under the amended rule works where ∀ made it impossible:** repair
+success gemma 8.3%, qwen 10.9%, gpt-oss 31.7% (vs 0% across the board under
+∀). First-attempt violation stays high (83–89% for gemma/qwen) — the
+governance floor is real; the difference is that repair and emission can now
+finish the job.
+
+**Infrastructure notes, for the record:** stages ran dual-host (a second
+digest-verified Ollama 0.31.1 box took the gpt-oss and part of the qwen
+columns; model digests byte-identical; run provenance in the helper matrix
+comments). An earlier attempt on the second box at Ollama 0.20.0 failed
+loudly (`HTTP 500: failed to load model vocabulary required for format`) —
+a third face of the S0 engine-dependence family (mlx silently ignores
+`format`; the hosted API rejects large grammars; pre-0.31 servers hard-fail)
+— its five contaminated reports were scrubbed before any analysis. qwen
+produced 7 genuine `failed-adapter`s across the two new stages (empty
+output / unparseable tail); the #19 classifier's first live application
+confirms all 7 as `generation-then-bad-output` (counted), 0 as
+`no-generation`.
+
+**Honest limits:** the stages differ by contract revision AND emitter
+version by construction (that is what was measured); prompts byte-identical
+throughout; small per-cell n; one contract, one intent, local families only
+(the hosted path is closed as unreachable — see
+[`2026-07-04-hosted-probes/`](evidence/2026-07-04-hosted-probes/) and #20).

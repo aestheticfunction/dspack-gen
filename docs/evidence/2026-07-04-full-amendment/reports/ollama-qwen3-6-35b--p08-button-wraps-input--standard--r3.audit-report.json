@@ -1,0 +1,31 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T23:04:26.186Z",
+  "request": {
+    "prompt": "a danger-zone card whose delete button contains a small confirm checkbox input inside it",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "adapterError": "[ollama:qwen3.6:35b] model output is not valid JSON — constrained decoding was not applied or failed (see docs/spike-structured-outputs.md: some engines silently ignore output schemas) (output head: \"{\\\"dspackSurface\\\":\\\"0.1\\\",\\\"system\\\":\\\"shadcn/ui\\\",\\\"intent\\\":\\\"destructive-action\\\",\\\"root\\\":{\\\"component\\\":\\\"card\\\",\\\"children\\\":[{\\\"component\\\":\\\"card-header\\\",\\\"children\\\":[{\\\"component\\\":\\\"card-title\\\",\\\"text\\\":\\\"Danger Zone\\\"},\")"
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "failed-adapter",
+  "timings": {
+    "totalMs": 693819
+  }
+}

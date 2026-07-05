@@ -1,0 +1,586 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T20:35:04.773Z",
+  "request": {
+    "prompt": "a members table where each row has a remove button",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "table",
+              "children": [
+                {
+                  "component": "table-header",
+                  "children": [
+                    {
+                      "component": "table-head",
+                      "text": "Member Name"
+                    },
+                    {
+                      "component": "table-head",
+                      "text": "Email Address"
+                    },
+                    {
+                      "component": "table-head",
+                      "text": "Actions"
+                    }
+                  ]
+                },
+                {
+                  "component": "table-body",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Alice Johnson"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "alice@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "button",
+                              "props": {
+                                "variant": "destructive",
+                                "size": "icon",
+                                "asChild": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Bob Smith"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "bob@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "button",
+                              "props": {
+                                "variant": "destructive",
+                                "size": "icon",
+                                "asChild": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Charlie Brown"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "charlie@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "button",
+                              "props": {
+                                "variant": "destructive",
+                                "size": "icon",
+                                "asChild": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1497,
+        "outputTokens": 346
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 23625123875,
+        "load_duration": 272620083,
+        "prompt_eval_duration": 108080000,
+        "eval_duration": 8472382000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required component 'alert-dialog' does not appear in the surface.",
+          "rationale": "Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.",
+          "location": {
+            "path": "$.root",
+            "component": "surface"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "table",
+              "children": [
+                {
+                  "component": "table-header",
+                  "children": [
+                    {
+                      "component": "table-head",
+                      "text": "Member Name"
+                    },
+                    {
+                      "component": "table-head",
+                      "text": "Email Address"
+                    },
+                    {
+                      "component": "table-head",
+                      "text": "Actions"
+                    }
+                  ]
+                },
+                {
+                  "component": "table-body",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Alice Johnson"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "alice@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Bob Smith"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "bob@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Charlie Brown"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "charlie@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog",
+                              "props": {
+                                "open": false,
+                                "onOpenChange": ""
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 2193,
+        "outputTokens": 337
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 25088732125,
+        "load_duration": 276849792,
+        "prompt_eval_duration": 106867000,
+        "eval_duration": 8673399000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[2].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[0].children[2].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[2].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[1].children[2].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[2].children[2].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.alertdialog-requires-cancel",
+          "type": "required-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).",
+          "rationale": "A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.",
+          "location": {
+            "path": "$.root.children[0].children[1].children[2].children[2].children[0]",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "table",
+              "children": [
+                {
+                  "component": "table-header",
+                  "children": [
+                    {
+                      "component": "table-head",
+                      "text": "Member Name"
+                    },
+                    {
+                      "component": "table-head",
+                      "text": "Email Address"
+                    },
+                    {
+                      "component": "table-head",
+                      "text": "Actions"
+                    }
+                  ]
+                },
+                {
+                  "component": "table-body",
+                  "children": [
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Alice Johnson"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "alice@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Delete User"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Bob Smith"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "bob@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Delete User"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component": "table-row",
+                      "children": [
+                        {
+                          "component": "table-cell",
+                          "text": "Charlie Brown"
+                        },
+                        {
+                          "component": "table-cell",
+                          "text": "charlie@example.com"
+                        },
+                        {
+                          "component": "table-cell",
+                          "children": [
+                            {
+                              "component": "alert-dialog-trigger",
+                              "text": "Delete User"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "table-footer",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 3472,
+        "outputTokens": 334
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 18112160917,
+        "load_duration": 268076667,
+        "prompt_eval_duration": 112977000,
+        "eval_duration": 8281231000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required component 'alert-dialog' does not appear in the surface.",
+          "rationale": "Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.",
+          "location": {
+            "path": "$.root",
+            "component": "surface"
+          },
+          "exampleIds": [
+            "ex.delete-account-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.destructive-requires-alertdialog / must]\n  At: $.root (component: surface)\n  Required component 'alert-dialog' does not appear in the surface.\n  Why: Dialog can be dismissed by clicking the overlay or pressing Escape, so a user can bypass a destructive confirmation without making a conscious choice. AlertDialog forces an explicit confirm/cancel decision and is announced with greater urgency by screen readers.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 6 governance rule finding(s) of the \"shadcn/ui\" design system:\n\nViolation 1: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[0].children[2].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 2: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[0].children[2].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 3: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[1].children[2].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 4: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[1].children[2].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 5: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[2].children[2].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-cancel' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\nViolation 6: [rule.alertdialog-requires-cancel / must]\n  At: $.root.children[0].children[1].children[2].children[2].children[0] (component: alert-dialog)\n  Required sub-component 'alert-dialog-title' (min 1) not found among descendants (found 0).\n  Why: A confirmation without an explicit cancel action and a title naming the consequence funnels the user toward the destructive action; the title is also required for aria-labelledby.\n\nA correct example (ex.delete-account-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"shadcn/ui\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"alert-dialog\",\"children\":[{\"component\":\"alert-dialog-trigger\",\"children\":[{\"component\":\"button\",\"props\":{\"variant\":\"destructive\"},\"text\":\"Delete account\"}]},{\"component\":\"alert-dialog-content\",\"children\":[{\"component\":\"alert-dialog-title\",\"text\":\"Delete your account?\"},{\"component\":\"alert-dialog-description\",\"text\":\"This will permanently delete your account and all associated data. This action cannot be undone.\"},{\"component\":\"alert-dialog-footer\",\"children\":[{\"component\":\"alert-dialog-cancel\",\"text\":\"Cancel\"},{\"component\":\"alert-dialog-action\",\"text\":\"Delete account\"}]}]}]}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 66837
+  }
+}

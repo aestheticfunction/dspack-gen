@@ -1,0 +1,225 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T20:26:05.412Z",
+  "request": {
+    "prompt": "a settings section to permanently delete a repository",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "dropdown-menu-trigger",
+                          "text": "Delete Repository"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "text": "Are you sure you want to delete this repository?"
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-description",
+                      "text": "This action is irreversible. Deleting the repository will permanently remove all associated code, branches, issues, and data for 'My Awesome Repo'. Please ensure you have backed up any necessary information."
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Keep Repository"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Delete Permanently"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1495,
+        "outputTokens": 211
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 15784206584,
+        "load_duration": 275419000,
+        "prompt_eval_duration": 113000000,
+        "eval_duration": 5127289000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "a2ui",
+    "surfaceMessages": {
+      "messages": [
+        {
+          "version": "v0.9",
+          "createSurface": {
+            "surfaceId": "destructive_action",
+            "catalogId": "https://rdombrowski.dev/catalogs/shadcn-ui/v0_9_1/catalog.json",
+            "theme": {
+              "agentDisplayName": "shadcn/ui via dspack",
+              "primaryColor": "#0f172a"
+            }
+          }
+        },
+        {
+          "version": "v0.9",
+          "updateComponents": {
+            "surfaceId": "destructive_action",
+            "components": [
+              {
+                "id": "root",
+                "component": "Card",
+                "child": "alertdialog"
+              },
+              {
+                "id": "alertdialog",
+                "component": "AlertDialog",
+                "title": "Are you sure you want to delete this repository?",
+                "description": "This action is irreversible. Deleting the repository will permanently remove all associated code, branches, issues, and data for 'My Awesome Repo'. Please ensure you have backed up any necessary information.",
+                "cancelLabel": "Keep Repository",
+                "confirmLabel": "Delete Permanently",
+                "triggerLabel": "Delete Repository",
+                "action": {
+                  "event": {
+                    "name": "delete_permanently",
+                    "context": {}
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "warnings": [
+      {
+        "code": "surface-label-lifted",
+        "message": "$.root.children[0]: 'triggerLabel' lifted from direct text on 'dropdown-menu-trigger' inside 'alert-dialog-trigger' — no label-bearing component carried it (documented projection extension; lift, never synthesis)."
+      },
+      {
+        "code": "surface-composition-flattened",
+        "message": "$.root.children[0]: compound 'alert-dialog' subtree flattened onto emitted props (documented casualty; nested props beyond text are not carried)."
+      },
+      {
+        "code": "surface-synthesized-action",
+        "message": "$.root.children[0]: A2UI requires a declarative action on AlertDialog; synthesized event 'delete_permanently'."
+      }
+    ],
+    "validations": [
+      {
+        "a2uiVersion": "0.9.1",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": true
+          }
+        ]
+      },
+      {
+        "a2uiVersion": "1.0",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 15839
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-04T14:49:31.056Z",
+  "request": {
+    "prompt": "a panel to revoke a teammate's access to the workspace",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "shadcn/ui",
+      "dspack": "0.4",
+      "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "0650528c2fa8d7ebfc0e969df9409d7ca3ad7837856448babf686dea40b0ea7f",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "shadcn/ui",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "alert-dialog",
+              "children": [
+                {
+                  "component": "alert-dialog-trigger",
+                  "children": [
+                    {
+                      "component": "button",
+                      "props": {
+                        "variant": "destructive"
+                      },
+                      "children": [
+                        {
+                          "component": "dropdown-menu-trigger",
+                          "text": "Revoke Access for [Teammate Name]"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog-content",
+                  "children": [
+                    {
+                      "component": "alert-dialog-header",
+                      "children": [
+                        {
+                          "component": "alert-dialog-title",
+                          "text": "Confirm Revocation of Access?"
+                        },
+                        {
+                          "component": "alert-dialog-description",
+                          "text": "Are you sure you want to revoke access for [Teammate Name]? This action will immediately remove their permissions from the workspace and they will no longer be able to view or edit any content."
+                        }
+                      ]
+                    },
+                    {
+                      "component": "alert-dialog-footer",
+                      "children": [
+                        {
+                          "component": "alert-dialog-cancel",
+                          "text": "Cancel"
+                        },
+                        {
+                          "component": "alert-dialog-action",
+                          "text": "Revoke Access"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1499,
+        "outputTokens": 214
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 22606308666,
+        "load_duration": 288438291,
+        "prompt_eval_duration": 147846000,
+        "eval_duration": 7407745000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "failed-gate",
+  "emitted": {
+    "target": "a2ui",
+    "surfaceMessages": {
+      "messages": [
+        {
+          "version": "v0.9",
+          "createSurface": {
+            "surfaceId": "destructive_action",
+            "catalogId": "https://rdombrowski.dev/catalogs/shadcn-ui/v0_9_1/catalog.json",
+            "theme": {
+              "agentDisplayName": "shadcn/ui via dspack",
+              "primaryColor": "#0f172a"
+            }
+          }
+        },
+        {
+          "version": "v0.9",
+          "updateComponents": {
+            "surfaceId": "destructive_action",
+            "components": [
+              {
+                "id": "root",
+                "component": "Card",
+                "child": "alertdialog"
+              },
+              {
+                "id": "alertdialog",
+                "component": "AlertDialog",
+                "title": "Confirm Revocation of Access?",
+                "description": "Are you sure you want to revoke access for [Teammate Name]? This action will immediately remove their permissions from the workspace and they will no longer be able to view or edit any content.",
+                "cancelLabel": "Cancel",
+                "confirmLabel": "Revoke Access",
+                "action": {
+                  "event": {
+                    "name": "revoke_access",
+                    "context": {}
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "warnings": [
+      {
+        "code": "surface-composition-flattened",
+        "message": "$.root.children[0]: compound 'alert-dialog' subtree flattened onto emitted props (documented casualty; nested props beyond text are not carried)."
+      },
+      {
+        "code": "surface-synthesized-action",
+        "message": "$.root.children[0]: A2UI requires a declarative action on AlertDialog; synthesized event 'revoke_access'."
+      }
+    ],
+    "validations": [
+      {
+        "a2uiVersion": "0.9.1",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": false,
+            "errors": [
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'columns'",
+              "AlertDialog#alertdialog: (root) must have required property 'rows'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'triggerLabel'",
+              "AlertDialog#alertdialog: (root) must have required property 'text'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'children'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must match exactly one schema in oneOf"
+            ]
+          }
+        ]
+      },
+      {
+        "a2uiVersion": "1.0",
+        "gates": [
+          {
+            "gate": "A1",
+            "name": "schema-compile + no-external-ref",
+            "pass": true
+          },
+          {
+            "gate": "A2",
+            "name": "catalog-shape",
+            "pass": true
+          },
+          {
+            "gate": "A3",
+            "name": "instance",
+            "pass": false,
+            "errors": [
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'child'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'label'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'columns'",
+              "AlertDialog#alertdialog: (root) must have required property 'rows'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'triggerLabel'",
+              "AlertDialog#alertdialog: (root) must have required property 'text'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must have required property 'children'",
+              "AlertDialog#alertdialog: /component must be equal to constant",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must NOT have unevaluated properties",
+              "AlertDialog#alertdialog: (root) must match exactly one schema in oneOf"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 22658
+  }
+}
