@@ -1,0 +1,271 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:01:15.794Z",
+  "request": {
+    "prompt": "a settings section to permanently wipe a workspace",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h3"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Workspace Settings"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Manage your workspace configuration and data retention policies."
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "h3"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Danger Zone"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Permanently wipe the workspace. All data, including projects and files, will be lost forever."
+                }
+              ]
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Wipe workspace",
+                "variant": "destructive"
+              }
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Wipe workspace?",
+                "description": "This will permanently erase all data in this workspace. This action cannot be undone.",
+                "actionLabel": "Wipe workspace",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              }
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 2634,
+        "outputTokens": 223
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 22624171250,
+        "load_duration": 343804843,
+        "prompt_eval_duration": 577205000,
+        "eval_duration": 3047919000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "text",
+            "text_3",
+            "text_5",
+            "text_7",
+            "button",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h3"
+          },
+          "children": [
+            "text_2"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "text": "Workspace Settings"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_4"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "text": "Manage your workspace configuration and data retention policies."
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_5": {
+          "type": "Text",
+          "props": {
+            "as": "h3"
+          },
+          "children": [
+            "text_6"
+          ],
+          "visible": true
+        },
+        "text_6": {
+          "type": "Text",
+          "props": {
+            "text": "Danger Zone"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_7": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_8"
+          ],
+          "visible": true
+        },
+        "text_8": {
+          "type": "Text",
+          "props": {
+            "text": "Permanently wipe the workspace. All data, including projects and files, will be lost forever."
+          },
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Wipe workspace",
+            "variant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Wipe workspace?",
+            "description": "This will permanently erase all data in this workspace. This action cannot be undone.",
+            "actionLabel": "Wipe workspace",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 22658
+  }
+}

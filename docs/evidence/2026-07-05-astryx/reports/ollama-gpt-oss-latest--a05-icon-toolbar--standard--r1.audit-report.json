@@ -1,0 +1,189 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T04:08:29.671Z",
+  "request": {
+    "prompt": "a compact toolbar of icon-only buttons where one deletes the item",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gpt-oss:latest",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            {
+              "component": "button",
+              "props": {
+                "label": "Open menu",
+                "isIconOnly": true,
+                "tooltip": "Open menu"
+              }
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Refresh",
+                "isIconOnly": true,
+                "tooltip": "Refresh"
+              }
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Delete item",
+                "variant": "destructive",
+                "isIconOnly": true,
+                "tooltip": "Delete item"
+              }
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Delete this item?",
+                "description": "This action cannot be undone. The item will be permanently removed.",
+                "actionLabel": "Delete item",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              }
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 1819,
+        "outputTokens": 158
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 15945317500,
+        "load_duration": 229887750,
+        "prompt_eval_duration": 25656000,
+        "eval_duration": 3972511000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "button",
+            "button_2",
+            "button_3",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Open menu",
+            "isIconOnly": true,
+            "tooltip": "Open menu"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_2": {
+          "type": "Button",
+          "props": {
+            "label": "Refresh",
+            "isIconOnly": true,
+            "tooltip": "Refresh"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_3": {
+          "type": "Button",
+          "props": {
+            "label": "Delete item",
+            "variant": "destructive",
+            "isIconOnly": true,
+            "tooltip": "Delete item"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete this item?",
+            "description": "This action cannot be undone. The item will be permanently removed.",
+            "actionLabel": "Delete item",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 15950
+  }
+}

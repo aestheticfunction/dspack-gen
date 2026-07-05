@@ -1,0 +1,250 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T03:18:35.187Z",
+  "request": {
+    "prompt": "a bulk-delete flow for selected files with a confirmation",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 2812,
+        "outputTokens": 59
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 22409556378,
+        "load_duration": 351901005,
+        "prompt_eval_duration": 622260000,
+        "eval_duration": 915873000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required component 'alert-dialog' does not appear in the surface.",
+          "rationale": "\"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2",
+          "location": {
+            "path": "$.root",
+            "component": "surface"
+          },
+          "exampleIds": [
+            "ex.delete-project-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": []
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": []
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 3155,
+        "outputTokens": 60
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 21872361281,
+        "load_duration": 327510996,
+        "prompt_eval_duration": 747504000,
+        "eval_duration": 841525000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required component 'alert-dialog' does not appear in the surface.",
+          "rationale": "\"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2",
+          "location": {
+            "path": "$.root",
+            "component": "surface"
+          },
+          "exampleIds": [
+            "ex.delete-project-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": []
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": []
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 3786,
+        "outputTokens": 60
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 25399660518,
+        "load_duration": 327986652,
+        "prompt_eval_duration": 1052038000,
+        "eval_duration": 831282000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required component 'alert-dialog' does not appear in the surface.",
+          "rationale": "\"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2",
+          "location": {
+            "path": "$.root",
+            "component": "surface"
+          },
+          "exampleIds": [
+            "ex.delete-project-confirmation"
+          ]
+        }
+      ]
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"Astryx\" design system:\n\nViolation 1: [rule.destructive-requires-alertdialog / must]\n  At: $.root (component: surface)\n  Required component 'alert-dialog' does not appear in the surface.\n  Why: \"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2\n\nA correct example (ex.delete-project-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"Astryx\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"text\",\"props\":{\"as\":\"h2\"},\"text\":\"Danger zone\"},{\"component\":\"text\",\"props\":{\"as\":\"p\"},\"text\":\"Deleting a project removes all of its data permanently.\"},{\"component\":\"button\",\"props\":{\"label\":\"Delete project\",\"variant\":\"destructive\"}},{\"component\":\"alert-dialog\",\"props\":{\"title\":\"Delete this project?\",\"description\":\"This action cannot be undone. The project and all its data will be permanently removed.\",\"actionLabel\":\"Delete project\",\"cancelLabel\":\"Cancel\",\"actionVariant\":\"destructive\"}}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary.",
+    "Your surface violates 1 governance rule finding(s) of the \"Astryx\" design system:\n\nViolation 1: [rule.destructive-requires-alertdialog / must]\n  At: $.root (component: surface)\n  Required component 'alert-dialog' does not appear in the surface.\n  Why: \"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2\n\nA correct example (ex.delete-project-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"Astryx\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"text\",\"props\":{\"as\":\"h2\"},\"text\":\"Danger zone\"},{\"component\":\"text\",\"props\":{\"as\":\"p\"},\"text\":\"Deleting a project removes all of its data permanently.\"},{\"component\":\"button\",\"props\":{\"label\":\"Delete project\",\"variant\":\"destructive\"}},{\"component\":\"alert-dialog\",\"props\":{\"title\":\"Delete this project?\",\"description\":\"This action cannot be undone. The project and all its data will be permanently removed.\",\"actionLabel\":\"Delete project\",\"cancelLabel\":\"Cancel\",\"actionVariant\":\"destructive\"}}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "failed-lint-exhausted",
+  "timings": {
+    "totalMs": 69762
+  }
+}

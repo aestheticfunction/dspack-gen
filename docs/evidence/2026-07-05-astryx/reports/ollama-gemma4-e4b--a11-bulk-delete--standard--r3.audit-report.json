@@ -1,0 +1,502 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:24:10.936Z",
+  "request": {
+    "prompt": "a bulk-delete flow for selected files with a confirmation",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "warning",
+                        "label": "Warning"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "props": {
+                        "as": "span"
+                      },
+                      "children": [
+                        {
+                          "component": "text-input",
+                          "props": {
+                            "type": "text",
+                            "label": "File Name",
+                            "placeholder": "Enter file name",
+                            "description": "The file to be deleted."
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "component": "text-input",
+                      "props": {
+                        "type": "text",
+                        "label": "File ID",
+                        "placeholder": "Enter file ID",
+                        "description": "The unique identifier for the file."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text-input",
+                      "props": {
+                        "type": "text",
+                        "label": "File Name",
+                        "placeholder": "Enter file name",
+                        "description": "The file to be deleted."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text-input",
+                      "props": {
+                        "type": "text",
+                        "label": "File ID",
+                        "placeholder": "Enter file ID",
+                        "description": "The unique identifier for the file."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Delete Selected Files",
+                "variant": "destructive",
+                "size": "lg",
+                "isDisabled": false
+              }
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Confirm Bulk Deletion",
+                "description": "Are you sure you want to delete these selected files? This action is irreversible and all associated data will be lost.",
+                "actionLabel": "Delete Files Permanently",
+                "cancelLabel": "Keep Files"
+              }
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "warning",
+                        "label": "Warning"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text-input",
+                      "props": {
+                        "type": "text",
+                        "label": "File Name",
+                        "placeholder": "Enter file name",
+                        "description": "The file to be deleted."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text-input",
+                      "props": {
+                        "type": "text",
+                        "label": "File ID",
+                        "placeholder": "Enter file ID",
+                        "description": "The unique identifier for the file."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1339,
+        "outputTokens": 496
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 20578013250,
+        "load_duration": 266216959,
+        "prompt_eval_duration": 97955000,
+        "eval_duration": 10444010000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text",
+            "text_5",
+            "button",
+            "alert_dialog",
+            "text_8"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2",
+            "text_3"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "badge"
+          ],
+          "visible": true
+        },
+        "badge": {
+          "type": "Badge",
+          "props": {
+            "variant": "warning",
+            "label": "Warning"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_4",
+            "text_input_2"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_input"
+          ],
+          "visible": true
+        },
+        "text_input": {
+          "type": "TextInput",
+          "props": {
+            "type": "text",
+            "label": "File Name",
+            "placeholder": "Enter file name",
+            "description": "The file to be deleted."
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_input_2": {
+          "type": "TextInput",
+          "props": {
+            "type": "text",
+            "label": "File ID",
+            "placeholder": "Enter file ID",
+            "description": "The unique identifier for the file."
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_5": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_6",
+            "text_7"
+          ],
+          "visible": true
+        },
+        "text_6": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_input_3"
+          ],
+          "visible": true
+        },
+        "text_input_3": {
+          "type": "TextInput",
+          "props": {
+            "type": "text",
+            "label": "File Name",
+            "placeholder": "Enter file name",
+            "description": "The file to be deleted."
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_7": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_input_4"
+          ],
+          "visible": true
+        },
+        "text_input_4": {
+          "type": "TextInput",
+          "props": {
+            "type": "text",
+            "label": "File ID",
+            "placeholder": "Enter file ID",
+            "description": "The unique identifier for the file."
+          },
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Delete Selected Files",
+            "variant": "destructive",
+            "size": "lg",
+            "isDisabled": false
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Confirm Bulk Deletion",
+            "description": "Are you sure you want to delete these selected files? This action is irreversible and all associated data will be lost.",
+            "actionLabel": "Delete Files Permanently",
+            "cancelLabel": "Keep Files"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_8": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_9",
+            "text_10",
+            "text_11"
+          ],
+          "visible": true
+        },
+        "text_9": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "badge_2"
+          ],
+          "visible": true
+        },
+        "badge_2": {
+          "type": "Badge",
+          "props": {
+            "variant": "warning",
+            "label": "Warning"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_10": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_input_5"
+          ],
+          "visible": true
+        },
+        "text_input_5": {
+          "type": "TextInput",
+          "props": {
+            "type": "text",
+            "label": "File Name",
+            "placeholder": "Enter file name",
+            "description": "The file to be deleted."
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_11": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_input_6"
+          ],
+          "visible": true
+        },
+        "text_input_6": {
+          "type": "TextInput",
+          "props": {
+            "type": "text",
+            "label": "File ID",
+            "placeholder": "Enter file ID",
+            "description": "The unique identifier for the file."
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 20583
+  }
+}

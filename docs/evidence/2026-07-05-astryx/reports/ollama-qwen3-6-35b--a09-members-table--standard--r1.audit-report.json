@@ -1,0 +1,447 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T03:00:12.609Z",
+  "request": {
+    "prompt": "a members table where each row has a remove button",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Team Members"
+                }
+              ]
+            },
+            {
+              "component": "card",
+              "props": {
+                "variant": "outlined"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "text": "Alice Smith"
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "text": "alice@example.com"
+                    }
+                  ]
+                },
+                {
+                  "component": "button",
+                  "props": {
+                    "label": "Remove",
+                    "variant": "secondary"
+                  }
+                }
+              ]
+            },
+            {
+              "component": "card",
+              "props": {
+                "variant": "outlined"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "text": "Bob Jones"
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "text": "bob@example.com"
+                    }
+                  ]
+                },
+                {
+                  "component": "button",
+                  "props": {
+                    "label": "Remove",
+                    "variant": "secondary"
+                  }
+                }
+              ]
+            },
+            {
+              "component": "card",
+              "props": {
+                "variant": "outlined"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "text": "Charlie Davis"
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "text": "charlie@example.com"
+                    }
+                  ]
+                },
+                {
+                  "component": "button",
+                  "props": {
+                    "label": "Remove",
+                    "variant": "secondary"
+                  }
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Remove member?",
+                "description": "Are you sure you want to remove this member? They will lose access immediately.",
+                "actionLabel": "Remove",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              }
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 5671,
+        "outputTokens": 329
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 123079202000,
+        "load_duration": 209828625,
+        "prompt_eval_duration": 9695385000,
+        "eval_duration": 7975966000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text",
+            "card",
+            "card_2",
+            "card_3",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "text": "Team Members"
+          },
+          "children": [],
+          "visible": true
+        },
+        "card": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "text_3",
+            "text_5",
+            "button"
+          ],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_4"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "text": "Alice Smith"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_5": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_6"
+          ],
+          "visible": true
+        },
+        "text_6": {
+          "type": "Text",
+          "props": {
+            "text": "alice@example.com"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Remove",
+            "variant": "secondary"
+          },
+          "children": [],
+          "visible": true
+        },
+        "card_2": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "text_7",
+            "text_9",
+            "button_2"
+          ],
+          "visible": true
+        },
+        "text_7": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_8"
+          ],
+          "visible": true
+        },
+        "text_8": {
+          "type": "Text",
+          "props": {
+            "text": "Bob Jones"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_9": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_10"
+          ],
+          "visible": true
+        },
+        "text_10": {
+          "type": "Text",
+          "props": {
+            "text": "bob@example.com"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_2": {
+          "type": "Button",
+          "props": {
+            "label": "Remove",
+            "variant": "secondary"
+          },
+          "children": [],
+          "visible": true
+        },
+        "card_3": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "text_11",
+            "text_13",
+            "button_3"
+          ],
+          "visible": true
+        },
+        "text_11": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_12"
+          ],
+          "visible": true
+        },
+        "text_12": {
+          "type": "Text",
+          "props": {
+            "text": "Charlie Davis"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_13": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_14"
+          ],
+          "visible": true
+        },
+        "text_14": {
+          "type": "Text",
+          "props": {
+            "text": "charlie@example.com"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_3": {
+          "type": "Button",
+          "props": {
+            "label": "Remove",
+            "variant": "secondary"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Remove member?",
+            "description": "Are you sure you want to remove this member? They will lose access immediately.",
+            "actionLabel": "Remove",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 123119
+  }
+}

@@ -408,3 +408,76 @@ version by construction (that is what was measured); prompts byte-identical
 throughout; small per-cell n; one contract, one intent, local families only
 (the hosted path is closed as unreachable — see
 [`2026-07-04-hosted-probes/`](evidence/2026-07-04-hosted-probes/) and #20).
+
+## Addendum — the Astryx column and the repair-shape deconfound (2026-07-05, PR-21)
+
+The second contract's eval column: the nine-component Astryx slice
+(props-based idiom, pinned v0.1.2), 12 shape-targeted prompts × 2 templates
+× 3 runs × three families, emitted via the **json-render target** (per the
+ADR-M3-5 caveat this column does not and cannot exercise the A2UI projection
+gap). Evidence: [`2026-07-05-astryx/`](evidence/2026-07-05-astryx/)
+(216 retained reports; dual-host, digests verified).
+
+| model | 1st-attempt violation | repair success | **e2e pass** | gate failures |
+|---|---|---|---|---|
+| `gemma4:e4b` | 41/72 | 22/41 | **53/72 (74%)** | 0 |
+| `gpt-oss:latest` | 38/72 | 24/38 | **58/72 (81%)** | 0 |
+| `qwen3.6:35b` | 16/66¹ | 9/16 | **59/72 (82%)²** | 0 |
+
+¹ six genuine adapter failures (all `generation-then-bad-output`; 0
+`no-generation`). ² rate over observed runs.
+
+**Finding A — the props-based idiom is dramatically more governable.**
+Against the same families that manage 12–57% e2e on shadcn (full
+amendment), Astryx yields 74–82%, with repair success 54–63% (vs 8–32%) and
+**zero emitter-gate failures in 216 runs** — the contract-generated-catalog
+pairing is lossless at scale, exactly as the asymmetry finding predicted
+(its only documented casualty, the data-driven array props, never produced
+a gate failure because generation carries labels, not data rows).
+
+**Finding B — governance-by-API-shape.** The three prop-presence rules
+(`alertdialog-carries-content`, `button-carries-label`,
+`input-carries-label`) **never fired once** in 216 runs, including on the
+prompts engineered to elicit them (a04–a06, a11–a12). Astryx's API makes
+the violation unnatural: when the label IS the prop, models supply it. The
+contract's governance load concentrated on the one genuinely behavioral
+rule — `destructive-requires-alertdialog` (92 first-attempt violations,
+52 repaired) — plus a trickle on `action-label-specific` (3/3 repaired) and
+`dialog-no-nested-overlays` (2/2 repaired). Together with the shadcn arc
+this is the ecosystem's sharpest architectural result: **the projection gap
+and the label-governance problem are artifacts of compositional APIs;
+props-based APIs internalize them** — and what remains for governance
+everywhere is *choice* (which component for which intent).
+
+**Finding C — the repair-shape deconfound, per the pre-agreed rule.**
+Rule-identity repair rates across both contracts (runs violating →
+repaired):
+
+| shape | rules that actually fired | verdict |
+|---|---|---|
+| substitution | shadcn `destructive-requires-alertdialog` 0/7 · astryx same-id 52/92 · astryx `action-label-specific` 3/3 | **≥2 distinct fired rules ✓** — and the spread (0/7 vs 52/92 for the same semantic rule across contracts) says CONTRACT/vocabulary dominates shape |
+| addition | shadcn `alertdialog-requires-cancel` 9/41 · astryx content/label rules 0 fired | **still confounded** (one fired rule) — the Astryx analogs were pre-empted by the API shape (Finding B) |
+| deletion | shadcn `button-no-interactive-descendants` 11/106 · astryx `dialog-no-nested-overlays` 2/2 | two fired rules ✓ but the astryx n is 2 — **reported, not powered** |
+| restructuring | shadcn only (pre-declared: no Astryx analog) | **still confounded** |
+| (v0.4) direct-content | shadcn `trigger-carries-label` 10/88 | single-rule, noted |
+
+The honest verdict: the original hypothesis ("removal/restructuring-shaped
+repairs succeed less") is **superseded rather than answered** — the
+between-contract variance on the SAME rule (0/7 vs 52/92) is larger than
+any between-shape variance observed, so repair difficulty looks primarily
+contract-idiom-dependent. The shape question would need same-contract rule
+pairs to power; filed as design input for any future matrix, not pursued
+further in M3.
+
+**Finding D — the prose→rule conversion census (first pass, one author).**
+Of ~104 structured `bestPractices` entries across the nine harvested
+components, **6 became machine-checkable rules** (all six shipped;
+provenance-quoted in the contract). The non-convertible classes, with
+verbatim exemplars: max-cardinality ("Don't place more than one primary
+button in the same view" — a documented v0.4 ceiling item), ancestor
+requirements ("don't use the destructive variant without a confirmation
+step"), quality judgments ("write labels that describe the action"), and
+runtime behavior ("show a loading state for actions that take time"). The
+census is the M3 exit's answer to "does prose guidance convert?": *the
+deterministic core converts; the ceiling items are now named with
+evidence.*

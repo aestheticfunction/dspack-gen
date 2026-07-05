@@ -1,0 +1,199 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T03:21:50.584Z",
+  "request": {
+    "prompt": "a danger-zone card for an account with delete and transfer-ownership actions",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "props": {
+            "variant": "elevated"
+          },
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": []
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": []
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Delete account",
+                "variant": "destructive"
+              },
+              "children": []
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Transfer ownership",
+                "variant": "secondary"
+              },
+              "children": []
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Delete this account?",
+                "description": "This will permanently remove your account and all associated data. This action cannot be undone.",
+                "actionLabel": "Delete account",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              },
+              "children": []
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 4684,
+        "outputTokens": 340
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 52782362443,
+        "load_duration": 246077540,
+        "prompt_eval_duration": 1347773000,
+        "eval_duration": 4676645000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {
+            "variant": "elevated"
+          },
+          "children": [
+            "text",
+            "text_2",
+            "button",
+            "button_2",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Delete account",
+            "variant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_2": {
+          "type": "Button",
+          "props": {
+            "label": "Transfer ownership",
+            "variant": "secondary"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete this account?",
+            "description": "This will permanently remove your account and all associated data. This action cannot be undone.",
+            "actionLabel": "Delete account",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 52918
+  }
+}

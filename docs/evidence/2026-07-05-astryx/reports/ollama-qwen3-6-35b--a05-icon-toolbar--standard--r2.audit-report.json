@@ -1,0 +1,189 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:31:49.819Z",
+  "request": {
+    "prompt": "a compact toolbar of icon-only buttons where one deletes the item",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            {
+              "component": "button",
+              "props": {
+                "label": "Edit",
+                "isIconOnly": true,
+                "tooltip": "Edit item"
+              }
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Share",
+                "isIconOnly": true,
+                "tooltip": "Share item"
+              }
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Delete item?",
+                "description": "This action cannot be undone.",
+                "actionLabel": "Delete item",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              }
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Delete",
+                "variant": "destructive",
+                "isIconOnly": true,
+                "tooltip": "Delete item"
+              }
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 3089,
+        "outputTokens": 147
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 40531443792,
+        "load_duration": 189740500,
+        "prompt_eval_duration": 3575136000,
+        "eval_duration": 2760274000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "button",
+            "button_2",
+            "alert_dialog",
+            "button_3"
+          ],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Edit",
+            "isIconOnly": true,
+            "tooltip": "Edit item"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_2": {
+          "type": "Button",
+          "props": {
+            "label": "Share",
+            "isIconOnly": true,
+            "tooltip": "Share item"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete item?",
+            "description": "This action cannot be undone.",
+            "actionLabel": "Delete item",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button_3": {
+          "type": "Button",
+          "props": {
+            "label": "Delete",
+            "variant": "destructive",
+            "isIconOnly": true,
+            "tooltip": "Delete item"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 40527
+  }
+}

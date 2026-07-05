@@ -1,0 +1,187 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T03:13:50.381Z",
+  "request": {
+    "prompt": "a screen to cancel my subscription immediately",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Cancel subscription"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "You are about to cancel your current plan. Access will be revoked immediately."
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Cancel subscription?",
+                "description": "This action is irreversible. You will lose access to all premium features immediately.",
+                "actionLabel": "Cancel subscription",
+                "cancelLabel": "Keep subscription",
+                "actionVariant": "destructive"
+              }
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 3352,
+        "outputTokens": 139
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 31860808608,
+        "load_duration": 312927887,
+        "prompt_eval_duration": 853752000,
+        "eval_duration": 1902185000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text",
+            "text_3",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "text": "Cancel subscription"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_4"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "text": "You are about to cancel your current plan. Access will be revoked immediately."
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Cancel subscription?",
+            "description": "This action is irreversible. You will lose access to all premium features immediately.",
+            "actionLabel": "Cancel subscription",
+            "cancelLabel": "Keep subscription",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 31892
+  }
+}

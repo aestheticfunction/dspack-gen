@@ -1,0 +1,178 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T04:31:06.293Z",
+  "request": {
+    "prompt": "a bulk-delete flow for selected files with a confirmation",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gpt-oss:latest",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": []
+            },
+            {
+              "component": "table",
+              "props": {
+                "data": ":[{\"name\":\"Report.pdf\",\"size\":\"1.2 MB\",\"modified\":\"2024-06-01\"},{\"name\":\"Photo.jpg\",\"size\":\"3.5 MB\",\"modified\":\"2024-05-28\"}],"
+              },
+              "children": []
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Delete selected files",
+                "variant": "destructive"
+              },
+              "children": []
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Delete selected files?",
+                "description": "You are about to permanently delete the following files:\n- Report.pdf\n- Photo.jpg\nThis action cannot be undone.",
+                "actionLabel": "Delete selected files",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              }
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 2440,
+        "outputTokens": 197
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 35301987500,
+        "load_duration": 229377292,
+        "prompt_eval_duration": 26209000,
+        "eval_duration": 5304675000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {
+            "variant": "outlined"
+          },
+          "children": [
+            "text",
+            "table",
+            "button",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [],
+          "visible": true
+        },
+        "table": {
+          "type": "Table",
+          "props": {},
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Delete selected files",
+            "variant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete selected files?",
+            "description": "You are about to permanently delete the following files:\n- Report.pdf\n- Photo.jpg\nThis action cannot be undone.",
+            "actionLabel": "Delete selected files",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 35305
+  }
+}
