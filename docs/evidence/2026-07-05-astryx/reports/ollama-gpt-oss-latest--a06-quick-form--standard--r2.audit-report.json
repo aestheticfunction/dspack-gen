@@ -1,0 +1,136 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T04:11:16.448Z",
+  "request": {
+    "prompt": "a quick inline form asking the user to type the project name before deletion — keep the fields minimal, no labels cluttering it",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gpt-oss:latest",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "props": {
+            "title": "Delete this project?",
+            "description": "Please type the project name to confirm deletion. This action cannot be undone.",
+            "actionLabel": "Delete project",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [
+            {
+              "component": "text-input",
+              "props": {
+                "label": "Project name",
+                "placeholder": "Project name",
+                "isRequired": true,
+                "size": "md"
+              }
+            }
+          ]
+        }
+      },
+      "model": "gpt-oss:latest",
+      "usage": {
+        "inputTokens": 1962,
+        "outputTokens": 104
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 17098122875,
+        "load_duration": 225890917,
+        "prompt_eval_duration": 23659000,
+        "eval_duration": 2582943000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete this project?",
+            "description": "Please type the project name to confirm deletion. This action cannot be undone.",
+            "actionLabel": "Delete project",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [
+            "text_input"
+          ],
+          "visible": true
+        },
+        "text_input": {
+          "type": "TextInput",
+          "props": {
+            "label": "Project name",
+            "placeholder": "Project name",
+            "isRequired": true,
+            "size": "md"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 17101
+  }
+}

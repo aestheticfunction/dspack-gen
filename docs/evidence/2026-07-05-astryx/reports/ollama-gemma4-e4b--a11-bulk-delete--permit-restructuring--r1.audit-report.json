@@ -1,0 +1,351 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:24:31.520Z",
+  "request": {
+    "prompt": "a bulk-delete flow for selected files with a confirmation",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "badge",
+                      "props": {
+                        "variant": "warning",
+                        "label": "Warning"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "props": {
+                        "as": "span"
+                      },
+                      "children": [
+                        {
+                          "component": "text",
+                          "props": {
+                            "as": "span"
+                          },
+                          "children": [
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "span"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "props": {
+                "as": "p"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "props": {
+                        "as": "span"
+                      },
+                      "children": [
+                        {
+                          "component": "text",
+                          "props": {
+                            "as": "span"
+                          },
+                          "children": [
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "span"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Are you sure?",
+                "description": "You are about to delete multiple selected files. This action is irreversible and all data will be lost.",
+                "actionLabel": "Delete Selected Files",
+                "cancelLabel": "Keep Files"
+              }
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Select Files to Delete",
+                "variant": "secondary",
+                "size": "md"
+              }
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1339,
+        "outputTokens": 275
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 16332873625,
+        "load_duration": 254883792,
+        "prompt_eval_duration": 98888000,
+        "eval_duration": 5854115000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text",
+            "text_7",
+            "alert_dialog",
+            "button"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2",
+            "text_3"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "badge"
+          ],
+          "visible": true
+        },
+        "badge": {
+          "type": "Badge",
+          "props": {
+            "variant": "warning",
+            "label": "Warning"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_4"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_5"
+          ],
+          "visible": true
+        },
+        "text_5": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_6"
+          ],
+          "visible": true
+        },
+        "text_6": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_7": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_8"
+          ],
+          "visible": true
+        },
+        "text_8": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_9"
+          ],
+          "visible": true
+        },
+        "text_9": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_10"
+          ],
+          "visible": true
+        },
+        "text_10": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_11"
+          ],
+          "visible": true
+        },
+        "text_11": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Are you sure?",
+            "description": "You are about to delete multiple selected files. This action is irreversible and all data will be lost.",
+            "actionLabel": "Delete Selected Files",
+            "cancelLabel": "Keep Files"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Select Files to Delete",
+            "variant": "secondary",
+            "size": "md"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 16338
+  }
+}

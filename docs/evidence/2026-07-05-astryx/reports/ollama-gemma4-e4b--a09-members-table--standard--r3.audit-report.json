@@ -1,0 +1,266 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:18:43.938Z",
+  "request": {
+    "prompt": "a members table where each row has a remove button",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "standard"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "props": {
+                        "as": "h3"
+                      },
+                      "children": [
+                        {
+                          "component": "text",
+                          "props": {
+                            "as": "span"
+                          },
+                          "children": [
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "h1"
+                              }
+                            },
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "span"
+                              }
+                            },
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "span"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "component": "table",
+              "props": {
+                "data": "[{\"id\":\"user-a\",\"name\":\"Alice Smith\",\"email\":\"alice@example.com\"},{\"id\":\"user-b\",\"name\":\"Bob Johnson\",\"email\":\"bob@example.com\"}]",
+                "columns": "[{\"header\":\"Member Name\",\"accessor\":\"name\"},{\"header\":\"Email Address\",\"accessor\":\"email\"},{\"header\":\"Actions\",\"accessor\":\"actions\"}]",
+                "density": "balanced",
+                "dividers": "rows",
+                "isStriped": true
+              },
+              "children": [
+                {
+                  "component": "alert-dialog",
+                  "props": {
+                    "title": "Remove Member?",
+                    "description": "Are you sure you want to remove this member? This action is irreversible.",
+                    "actionLabel": "Remove Member",
+                    "cancelLabel": "Keep Member",
+                    "actionVariant": "destructive"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1338,
+        "outputTokens": 304
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 19051168959,
+        "load_duration": 255654959,
+        "prompt_eval_duration": 98580000,
+        "eval_duration": 6679275000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text",
+            "table"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_3"
+          ],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "h3"
+          },
+          "children": [
+            "text_4"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_5",
+            "text_6",
+            "text_7"
+          ],
+          "visible": true
+        },
+        "text_5": {
+          "type": "Text",
+          "props": {
+            "as": "h1"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_6": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_7": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [],
+          "visible": true
+        },
+        "table": {
+          "type": "Table",
+          "props": {
+            "density": "balanced",
+            "dividers": "rows",
+            "isStriped": true
+          },
+          "children": [
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Remove Member?",
+            "description": "Are you sure you want to remove this member? This action is irreversible.",
+            "actionLabel": "Remove Member",
+            "cancelLabel": "Keep Member",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 19056
+  }
+}

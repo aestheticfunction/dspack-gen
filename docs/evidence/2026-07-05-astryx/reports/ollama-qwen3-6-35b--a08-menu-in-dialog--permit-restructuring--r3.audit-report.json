@@ -1,0 +1,229 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T02:56:47.536Z",
+  "request": {
+    "prompt": "a dialog for managing a member, with a dropdown menu of destructive options inside it",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "dialog",
+          "props": {
+            "purpose": "form"
+          },
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "span"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "props": {
+                        "as": "span"
+                      },
+                      "children": [
+                        {
+                          "component": "text",
+                          "props": {
+                            "as": "span"
+                          },
+                          "children": [
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "span"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 6378,
+        "outputTokens": 101
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 134099688125,
+        "load_duration": 203659167,
+        "prompt_eval_duration": 10953252000,
+        "eval_duration": 2459978000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Component 'dialog' is forbidden for intent 'destructive-action'.",
+          "rationale": "\"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2",
+          "location": {
+            "path": "$.root",
+            "component": "dialog"
+          },
+          "exampleIds": [
+            "ex.delete-project-confirmation"
+          ]
+        },
+        {
+          "ruleId": "rule.destructive-requires-alertdialog",
+          "type": "component-choice",
+          "requirement": "must",
+          "level": "error",
+          "message": "Required component 'alert-dialog' does not appear in the surface.",
+          "rationale": "\"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2",
+          "location": {
+            "path": "$.root",
+            "component": "surface"
+          },
+          "exampleIds": [
+            "ex.delete-project-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "props": {
+            "title": "Remove this member?",
+            "description": "This action cannot be undone. The member will lose access to the project immediately.",
+            "actionLabel": "Remove member",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          }
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 4423,
+        "outputTokens": 74
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 70937706041,
+        "load_duration": 228298666,
+        "prompt_eval_duration": 6850029000,
+        "eval_duration": 1674355000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 2 governance rule finding(s) of the \"Astryx\" design system:\n\nViolation 1: [rule.destructive-requires-alertdialog / must]\n  At: $.root (component: dialog)\n  Component 'dialog' is forbidden for intent 'destructive-action'.\n  Why: \"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2\nViolation 2: [rule.destructive-requires-alertdialog / must]\n  At: $.root (component: surface)\n  Required component 'alert-dialog' does not appear in the surface.\n  Why: \"Don't use AlertDialog for non-destructive actions; use a standard Dialog instead\" — and its converse: AlertDialog \"asks the user to confirm a destructive or irreversible action before it happens\". A destructive flow must use the confirmation dialog, not the dismissible one — Astryx AlertDialog docs, v0.1.2\n\nA correct example (ex.delete-project-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"Astryx\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"text\",\"props\":{\"as\":\"h2\"},\"text\":\"Danger zone\"},{\"component\":\"text\",\"props\":{\"as\":\"p\"},\"text\":\"Deleting a project removes all of its data permanently.\"},{\"component\":\"button\",\"props\":{\"label\":\"Delete project\",\"variant\":\"destructive\"}},{\"component\":\"alert-dialog\",\"props\":{\"title\":\"Delete this project?\",\"description\":\"This action cannot be undone. The project and all its data will be permanently removed.\",\"actionLabel\":\"Delete project\",\"cancelLabel\":\"Cancel\",\"actionVariant\":\"destructive\"}}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Remove this member?",
+            "description": "This action cannot be undone. The member will lose access to the project immediately.",
+            "actionLabel": "Remove member",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 205071
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T03:19:53.825Z",
+  "request": {
+    "prompt": "a bulk-delete flow for selected files with a confirmation",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "props": {
+            "title": "Delete selected files?",
+            "description": "You are about to permanently delete the following 3 files:\n\n- report_q3.pdf\n- budget_draft.xlsx\n- client_notes.docx\n\nThis action cannot be undone.",
+            "actionLabel": "Delete files",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          }
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 5724,
+        "outputTokens": 96
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 108175336417,
+        "load_duration": 232136667,
+        "prompt_eval_duration": 8414057000,
+        "eval_duration": 2009339000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete selected files?",
+            "description": "You are about to permanently delete the following 3 files:\n\n- report_q3.pdf\n- budget_draft.xlsx\n- client_notes.docx\n\nThis action cannot be undone.",
+            "actionLabel": "Delete files",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 108200
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:09:09.740Z",
+  "request": {
+    "prompt": "a quick inline form asking the user to type the project name before deletion — keep the fields minimal, no labels cluttering it",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "props": {
+                    "as": "p"
+                  },
+                  "children": [
+                    {
+                      "component": "text",
+                      "props": {
+                        "as": "span"
+                      },
+                      "children": [
+                        {
+                          "component": "text",
+                          "props": {
+                            "as": "h3"
+                          },
+                          "children": [
+                            {
+                              "component": "text",
+                              "props": {
+                                "as": "span"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "component": "alert-dialog",
+                  "props": {
+                    "title": "Confirm Project Deletion",
+                    "description": "Please confirm the deletion of this project. This action is irreversible and will remove all associated data.",
+                    "actionLabel": "Delete Project",
+                    "cancelLabel": "Cancel",
+                    "actionVariant": "destructive"
+                  }
+                },
+                {
+                  "component": "text-input",
+                  "props": {
+                    "label": "Project Name",
+                    "placeholder": "Enter project name to continue",
+                    "size": "md"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1353,
+        "outputTokens": 183
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 17175949750,
+        "load_duration": 266031458,
+        "prompt_eval_duration": 112032000,
+        "eval_duration": 4534630000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2",
+            "alert_dialog",
+            "text_input"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "as": "p"
+          },
+          "children": [
+            "text_3"
+          ],
+          "visible": true
+        },
+        "text_3": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [
+            "text_4"
+          ],
+          "visible": true
+        },
+        "text_4": {
+          "type": "Text",
+          "props": {
+            "as": "h3"
+          },
+          "children": [
+            "text_5"
+          ],
+          "visible": true
+        },
+        "text_5": {
+          "type": "Text",
+          "props": {
+            "as": "span"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Confirm Project Deletion",
+            "description": "Please confirm the deletion of this project. This action is irreversible and will remove all associated data.",
+            "actionLabel": "Delete Project",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_input": {
+          "type": "TextInput",
+          "props": {
+            "label": "Project Name",
+            "placeholder": "Enter project name to continue",
+            "size": "md"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 17180
+  }
+}

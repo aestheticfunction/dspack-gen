@@ -1,0 +1,4099 @@
+{
+  "matrixSha256": "a369d0d4a139d6dfb82eb0f5732edf682b8434f2ee0aa4bc1446b93f843f39db",
+  "contract": {
+    "name": "Astryx",
+    "dspack": "0.4",
+    "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+  },
+  "maxRepairs": 2,
+  "cells": [
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a01-delete-project",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a01-delete-project--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a01-delete-project--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-gemma4-e4b--a01-delete-project--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a01-delete-project",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a01-delete-project--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a01-delete-project--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a01-delete-project--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0.3333,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a02-revoke-key",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a02-revoke-key--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a02-revoke-key--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a02-revoke-key--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a02-revoke-key",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a02-revoke-key--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a02-revoke-key--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a02-revoke-key--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a03-wipe-workspace",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a03-wipe-workspace--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a03-wipe-workspace--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a03-wipe-workspace--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a03-wipe-workspace",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a03-wipe-workspace--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a03-wipe-workspace--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a03-wipe-workspace--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0.3333,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a04-minimal-confirm",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a04-minimal-confirm--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a04-minimal-confirm--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a04-minimal-confirm--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a04-minimal-confirm",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a04-minimal-confirm--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a04-minimal-confirm--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a04-minimal-confirm--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a05-icon-toolbar",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a05-icon-toolbar--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a05-icon-toolbar--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a05-icon-toolbar--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a05-icon-toolbar",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a05-icon-toolbar--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a05-icon-toolbar--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a05-icon-toolbar--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a06-quick-form",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a06-quick-form--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a06-quick-form--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a06-quick-form--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a06-quick-form",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a06-quick-form--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a06-quick-form--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a06-quick-form--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a07-generic-confirm",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a07-generic-confirm--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a07-generic-confirm--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.alertdialog-action-label-specific"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a07-generic-confirm--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a07-generic-confirm",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.alertdialog-action-label-specific"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a07-generic-confirm--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.alertdialog-action-label-specific"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a07-generic-confirm--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a07-generic-confirm--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0.6667,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a08-menu-in-dialog",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog",
+            "rule.dialog-no-nested-overlays"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a08-menu-in-dialog--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a08-menu-in-dialog--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a08-menu-in-dialog--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a08-menu-in-dialog",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a08-menu-in-dialog--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a08-menu-in-dialog--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog",
+            "rule.dialog-no-nested-overlays"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a08-menu-in-dialog--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a09-members-table",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a09-members-table--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a09-members-table--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a09-members-table--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a09-members-table",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a09-members-table--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a09-members-table--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a09-members-table--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a10-ordinary-cancel-sub",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a10-ordinary-cancel-sub--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a10-ordinary-cancel-sub--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a10-ordinary-cancel-sub--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a10-ordinary-cancel-sub",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a10-ordinary-cancel-sub--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a10-ordinary-cancel-sub--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a10-ordinary-cancel-sub--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a11-bulk-delete",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a11-bulk-delete--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a11-bulk-delete--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a11-bulk-delete--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a11-bulk-delete",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a11-bulk-delete--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a11-bulk-delete--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a11-bulk-delete--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a12-danger-zone",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a12-danger-zone--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a12-danger-zone--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a12-danger-zone--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gemma4:e4b",
+      "promptId": "a12-danger-zone",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a12-danger-zone--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a12-danger-zone--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gemma4-e4b--a12-danger-zone--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0.5,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a01-delete-project",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a01-delete-project--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a01-delete-project--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a01-delete-project--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a01-delete-project",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a01-delete-project--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a01-delete-project--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a01-delete-project--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a02-revoke-key",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a02-revoke-key--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a02-revoke-key--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a02-revoke-key--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a02-revoke-key",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a02-revoke-key--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a02-revoke-key--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a02-revoke-key--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a03-wipe-workspace",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a03-wipe-workspace--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a03-wipe-workspace--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a03-wipe-workspace--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a03-wipe-workspace",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a03-wipe-workspace--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a03-wipe-workspace--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a03-wipe-workspace--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a04-minimal-confirm",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a04-minimal-confirm--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a04-minimal-confirm--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a04-minimal-confirm--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a04-minimal-confirm",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a04-minimal-confirm--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a04-minimal-confirm--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a04-minimal-confirm--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a05-icon-toolbar",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a05-icon-toolbar--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a05-icon-toolbar--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a05-icon-toolbar--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0.6667,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a05-icon-toolbar",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a05-icon-toolbar--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a05-icon-toolbar--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a05-icon-toolbar--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a06-quick-form",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a06-quick-form--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a06-quick-form--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a06-quick-form--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0.6667,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a06-quick-form",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a06-quick-form--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a06-quick-form--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a06-quick-form--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0.6667,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a07-generic-confirm",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a07-generic-confirm--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a07-generic-confirm--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a07-generic-confirm--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a07-generic-confirm",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a07-generic-confirm--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a07-generic-confirm--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a07-generic-confirm--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a08-menu-in-dialog",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a08-menu-in-dialog--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a08-menu-in-dialog--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a08-menu-in-dialog--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a08-menu-in-dialog",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a08-menu-in-dialog--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a08-menu-in-dialog--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a08-menu-in-dialog--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a09-members-table",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a09-members-table--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a09-members-table--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a09-members-table--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a09-members-table",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a09-members-table--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a09-members-table--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a09-members-table--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0.6667,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a10-ordinary-cancel-sub",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a10-ordinary-cancel-sub--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a10-ordinary-cancel-sub--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a10-ordinary-cancel-sub--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a10-ordinary-cancel-sub",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a10-ordinary-cancel-sub--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a10-ordinary-cancel-sub--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a10-ordinary-cancel-sub--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a11-bulk-delete",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a11-bulk-delete--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a11-bulk-delete--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a11-bulk-delete--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a11-bulk-delete",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a11-bulk-delete--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a11-bulk-delete--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a11-bulk-delete--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0.6667,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a12-danger-zone",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a12-danger-zone--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a12-danger-zone--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a12-danger-zone--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:qwen3.6:35b",
+      "promptId": "a12-danger-zone",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a12-danger-zone--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-adapter",
+          "exitCode": 1,
+          "attempts": 1,
+          "firstAttemptSchemaValid": false,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "adapterFailureClass": "generation-then-bad-output",
+          "reportPath": "reports/ollama-qwen3-6-35b--a12-danger-zone--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-qwen3-6-35b--a12-danger-zone--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 0.6667,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a01-delete-project",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a01-delete-project--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a01-delete-project--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a01-delete-project--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0.3333,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a01-delete-project",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a01-delete-project--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a01-delete-project--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a01-delete-project--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a02-revoke-key",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a02-revoke-key--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a02-revoke-key--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a02-revoke-key--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0.6667,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a02-revoke-key",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a02-revoke-key--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a02-revoke-key--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a02-revoke-key--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.3333,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a03-wipe-workspace",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a03-wipe-workspace--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a03-wipe-workspace--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a03-wipe-workspace--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a03-wipe-workspace",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a03-wipe-workspace--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a03-wipe-workspace--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a03-wipe-workspace--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a04-minimal-confirm",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a04-minimal-confirm--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a04-minimal-confirm--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a04-minimal-confirm--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a04-minimal-confirm",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a04-minimal-confirm--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a04-minimal-confirm--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a04-minimal-confirm--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a05-icon-toolbar",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a05-icon-toolbar--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a05-icon-toolbar--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a05-icon-toolbar--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a05-icon-toolbar",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a05-icon-toolbar--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a05-icon-toolbar--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a05-icon-toolbar--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a06-quick-form",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a06-quick-form--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a06-quick-form--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a06-quick-form--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a06-quick-form",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a06-quick-form--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a06-quick-form--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a06-quick-form--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a07-generic-confirm",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a07-generic-confirm--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a07-generic-confirm--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a07-generic-confirm--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a07-generic-confirm",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a07-generic-confirm--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a07-generic-confirm--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a07-generic-confirm--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0,
+        "repairSuccessRate": null,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a08-menu-in-dialog",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a08-menu-in-dialog--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a08-menu-in-dialog--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a08-menu-in-dialog--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0.5,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a08-menu-in-dialog",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a08-menu-in-dialog--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a08-menu-in-dialog--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a08-menu-in-dialog--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a09-members-table",
+      "repairShape": "deletion",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a09-members-table--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a09-members-table--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a09-members-table--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.3333,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a09-members-table",
+      "repairShape": "deletion",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a09-members-table--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a09-members-table--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a09-members-table--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a10-ordinary-cancel-sub",
+      "repairShape": "substitution",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a10-ordinary-cancel-sub--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a10-ordinary-cancel-sub--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a10-ordinary-cancel-sub--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0,
+        "endToEndPassRate": 0,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a10-ordinary-cancel-sub",
+      "repairShape": "substitution",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a10-ordinary-cancel-sub--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a10-ordinary-cancel-sub--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a10-ordinary-cancel-sub--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 0.6667,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a11-bulk-delete",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a11-bulk-delete--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a11-bulk-delete--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "failed-lint-exhausted",
+          "exitCode": 2,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": false,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a11-bulk-delete--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 0.5,
+        "endToEndPassRate": 0.6667,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a11-bulk-delete",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a11-bulk-delete--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a11-bulk-delete--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a11-bulk-delete--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a12-danger-zone",
+      "repairShape": "addition",
+      "repairTemplate": "standard",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a12-danger-zone--standard--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 1,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": false,
+          "firstAttemptRuleIds": [],
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a12-danger-zone--standard--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a12-danger-zone--standard--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 0.6667,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    },
+    {
+      "model": "ollama:gpt-oss:latest",
+      "promptId": "a12-danger-zone",
+      "repairShape": "addition",
+      "repairTemplate": "permit-restructuring",
+      "adrD1Probe": false,
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a12-danger-zone--permit-restructuring--r1.audit-report.json"
+        },
+        {
+          "run": 2,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 2,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a12-danger-zone--permit-restructuring--r2.audit-report.json"
+        },
+        {
+          "run": 3,
+          "outcome": "passed",
+          "exitCode": 0,
+          "attempts": 3,
+          "firstAttemptSchemaValid": true,
+          "firstAttemptViolated": true,
+          "firstAttemptRuleIds": [
+            "rule.destructive-requires-alertdialog"
+          ],
+          "repaired": true,
+          "s3CleanButGateFailed": false,
+          "reportPath": "reports/ollama-gpt-oss-latest--a12-danger-zone--permit-restructuring--r3.audit-report.json"
+        }
+      ],
+      "metrics": {
+        "runs": 3,
+        "errorRuns": 0,
+        "noGenerationRuns": 0,
+        "schemaValidityRate": 1,
+        "firstAttemptViolationRate": 1,
+        "repairSuccessRate": 1,
+        "endToEndPassRate": 1,
+        "s3CleanGateFailures": 0
+      }
+    }
+  ],
+  "byModel": {
+    "ollama:gemma4:e4b": {
+      "runs": 72,
+      "errorRuns": 0,
+      "noGenerationRuns": 0,
+      "schemaValidityRate": 1,
+      "firstAttemptViolationRate": 0.5694,
+      "repairSuccessRate": 0.5366,
+      "endToEndPassRate": 0.7361,
+      "s3CleanGateFailures": 0
+    },
+    "ollama:gpt-oss:latest": {
+      "runs": 72,
+      "errorRuns": 0,
+      "noGenerationRuns": 0,
+      "schemaValidityRate": 1,
+      "firstAttemptViolationRate": 0.5278,
+      "repairSuccessRate": 0.6316,
+      "endToEndPassRate": 0.8056,
+      "s3CleanGateFailures": 0
+    },
+    "ollama:qwen3.6:35b": {
+      "runs": 72,
+      "errorRuns": 0,
+      "noGenerationRuns": 0,
+      "schemaValidityRate": 0.9167,
+      "firstAttemptViolationRate": 0.2222,
+      "repairSuccessRate": 0.5625,
+      "endToEndPassRate": 0.8194,
+      "s3CleanGateFailures": 0
+    }
+  },
+  "byRule": {
+    "rule.alertdialog-action-label-specific": {
+      "firstAttemptViolations": 3,
+      "repaired": 3,
+      "unrepaired": 0
+    },
+    "rule.destructive-requires-alertdialog": {
+      "firstAttemptViolations": 92,
+      "repaired": 52,
+      "unrepaired": 40
+    },
+    "rule.dialog-no-nested-overlays": {
+      "firstAttemptViolations": 2,
+      "repaired": 2,
+      "unrepaired": 0
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T02:52:48.943Z",
+  "request": {
+    "prompt": "a dialog for managing a member, with a dropdown menu of destructive options inside it",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "card",
+          "children": [
+            {
+              "component": "text",
+              "props": {
+                "as": "h2"
+              },
+              "children": [
+                {
+                  "component": "text",
+                  "text": "Manage Member"
+                }
+              ]
+            },
+            {
+              "component": "badge",
+              "props": {
+                "variant": "success",
+                "label": "Active"
+              }
+            },
+            {
+              "component": "text-input",
+              "props": {
+                "label": "Name"
+              }
+            },
+            {
+              "component": "text-input",
+              "props": {
+                "label": "Email"
+              }
+            },
+            {
+              "component": "button",
+              "props": {
+                "label": "Delete member",
+                "variant": "destructive"
+              }
+            },
+            {
+              "component": "alert-dialog",
+              "props": {
+                "title": "Delete this member?",
+                "description": "This action cannot be undone. The member will be permanently removed.",
+                "actionLabel": "Delete member",
+                "cancelLabel": "Cancel",
+                "actionVariant": "destructive"
+              }
+            }
+          ]
+        }
+      },
+      "model": "qwen3.6:35b",
+      "usage": {
+        "inputTokens": 10323,
+        "outputTokens": 158
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 238578445917,
+        "load_duration": 207590125,
+        "prompt_eval_duration": 19989778000,
+        "eval_duration": 3882625000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "Card",
+          "props": {},
+          "children": [
+            "text",
+            "badge",
+            "text_input",
+            "text_input_2",
+            "button",
+            "alert_dialog"
+          ],
+          "visible": true
+        },
+        "text": {
+          "type": "Text",
+          "props": {
+            "as": "h2"
+          },
+          "children": [
+            "text_2"
+          ],
+          "visible": true
+        },
+        "text_2": {
+          "type": "Text",
+          "props": {
+            "text": "Manage Member"
+          },
+          "children": [],
+          "visible": true
+        },
+        "badge": {
+          "type": "Badge",
+          "props": {
+            "variant": "success",
+            "label": "Active"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_input": {
+          "type": "TextInput",
+          "props": {
+            "label": "Name"
+          },
+          "children": [],
+          "visible": true
+        },
+        "text_input_2": {
+          "type": "TextInput",
+          "props": {
+            "label": "Email"
+          },
+          "children": [],
+          "visible": true
+        },
+        "button": {
+          "type": "Button",
+          "props": {
+            "label": "Delete member",
+            "variant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        },
+        "alert_dialog": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete this member?",
+            "description": "This action cannot be undone. The member will be permanently removed.",
+            "actionLabel": "Delete member",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 238591
+  }
+}

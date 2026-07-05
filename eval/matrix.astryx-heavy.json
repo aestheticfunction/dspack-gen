@@ -1,0 +1,128 @@
+{
+  "comment": "Helper: qwen + gpt-oss columns of the Astryx matrix on the second Ollama host (digest-verified); shared out dir \u2014 retention-based splitting with the local primary.",
+  "contract": "../fixtures/astryx.v0_1_2.dspack.json",
+  "emitTarget": "json-render",
+  "runsPerCell": 3,
+  "maxRepairs": 2,
+  "models": [
+    "ollama:qwen3.6:35b",
+    "ollama:gpt-oss:latest"
+  ],
+  "repairTemplates": [
+    "standard",
+    "permit-restructuring"
+  ],
+  "prompts": [
+    {
+      "id": "a01-delete-project",
+      "intent": "destructive-action",
+      "prompt": "a screen to delete a project",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "a02-revoke-key",
+      "intent": "destructive-action",
+      "prompt": "a panel to revoke an API key immediately",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "a03-wipe-workspace",
+      "intent": "destructive-action",
+      "prompt": "a settings section to permanently wipe a workspace",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "a04-minimal-confirm",
+      "intent": "destructive-action",
+      "prompt": "the most minimal possible delete confirmation \u2014 just the dialog, nothing extra",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.alertdialog-carries-content"
+      ]
+    },
+    {
+      "id": "a05-icon-toolbar",
+      "intent": "destructive-action",
+      "prompt": "a compact toolbar of icon-only buttons where one deletes the item",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.button-carries-label"
+      ]
+    },
+    {
+      "id": "a06-quick-form",
+      "intent": "destructive-action",
+      "prompt": "a quick inline form asking the user to type the project name before deletion \u2014 keep the fields minimal, no labels cluttering it",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.input-carries-label"
+      ]
+    },
+    {
+      "id": "a07-generic-confirm",
+      "intent": "destructive-action",
+      "prompt": "a delete confirmation where the confirm button just says OK",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.alertdialog-action-label-specific"
+      ]
+    },
+    {
+      "id": "a08-menu-in-dialog",
+      "intent": "destructive-action",
+      "prompt": "a dialog for managing a member, with a dropdown menu of destructive options inside it",
+      "repairShape": "deletion",
+      "targetRules": [
+        "rule.dialog-no-nested-overlays"
+      ]
+    },
+    {
+      "id": "a09-members-table",
+      "intent": "destructive-action",
+      "prompt": "a members table where each row has a remove button",
+      "repairShape": "deletion",
+      "targetRules": [
+        "rule.button-carries-label",
+        "rule.dialog-no-nested-overlays"
+      ]
+    },
+    {
+      "id": "a10-ordinary-cancel-sub",
+      "intent": "destructive-action",
+      "prompt": "a screen to cancel my subscription immediately",
+      "repairShape": "substitution",
+      "targetRules": [
+        "rule.destructive-requires-alertdialog"
+      ]
+    },
+    {
+      "id": "a11-bulk-delete",
+      "intent": "destructive-action",
+      "prompt": "a bulk-delete flow for selected files with a confirmation",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.alertdialog-carries-content",
+        "rule.alertdialog-action-label-specific"
+      ]
+    },
+    {
+      "id": "a12-danger-zone",
+      "intent": "destructive-action",
+      "prompt": "a danger-zone card for an account with delete and transfer-ownership actions",
+      "repairShape": "addition",
+      "targetRules": [
+        "rule.button-carries-label",
+        "rule.alertdialog-carries-content"
+      ]
+    }
+  ]
+}

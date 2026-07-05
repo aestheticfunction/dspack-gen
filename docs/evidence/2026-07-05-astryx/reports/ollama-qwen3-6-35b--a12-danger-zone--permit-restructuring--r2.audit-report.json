@@ -1,0 +1,31 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T03:39:32.429Z",
+  "request": {
+    "prompt": "a danger-zone card for an account with delete and transfer-ownership actions",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:qwen3.6:35b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "adapterError": "[ollama:qwen3.6:35b] empty model output"
+    }
+  ],
+  "repairMessages": [],
+  "outcome": "failed-adapter",
+  "timings": {
+    "totalMs": 755407
+  }
+}

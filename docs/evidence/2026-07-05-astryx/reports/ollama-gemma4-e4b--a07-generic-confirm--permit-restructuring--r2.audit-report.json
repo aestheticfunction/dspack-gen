@@ -1,0 +1,178 @@
+{
+  "reportVersion": "1",
+  "createdAt": "2026-07-05T01:11:34.515Z",
+  "request": {
+    "prompt": "a delete confirmation where the confirm button just says OK",
+    "intent": "destructive-action",
+    "contract": {
+      "name": "Astryx",
+      "dspack": "0.4",
+      "sha256": "f4ea9be8e50d8af0baf35c6812407407c57ed6df472b42beaf9605102928620d"
+    }
+  },
+  "generation": {
+    "adapterId": "ollama:gemma4:e4b",
+    "schemaSha256": "06632f6b1957143dcb76e3b9c61fe58517b56795e54a59376ba2a76e0278fffe",
+    "maxRepairs": 2,
+    "ruleSteering": true,
+    "repairTemplate": "permit-restructuring"
+  },
+  "attempts": [
+    {
+      "index": 0,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "props": {
+            "title": "Delete Project?",
+            "description": "Are you sure you want to delete this project? This action is irreversible.",
+            "actionLabel": "OK",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          }
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1338,
+        "outputTokens": 121
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 16005340667,
+        "load_duration": 287456042,
+        "prompt_eval_duration": 122287000,
+        "eval_duration": 3119162000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "FAIL"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "rule.alertdialog-action-label-specific",
+          "type": "forbidden-composition",
+          "requirement": "must",
+          "level": "error",
+          "message": "Forbidden value \"OK\" for prop 'actionLabel'.",
+          "rationale": "\"Make the action button label specific: 'Delete project' is better than 'OK' or 'Confirm'\". The forbidden values are the generic labels the guidance names (plus their nearest kin) — Astryx AlertDialog docs, v0.1.2",
+          "location": {
+            "path": "$.root",
+            "component": "alert-dialog"
+          },
+          "exampleIds": [
+            "ex.delete-project-confirmation"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "surface": {
+        "dspackSurface": "0.1",
+        "system": "Astryx",
+        "intent": "destructive-action",
+        "root": {
+          "component": "alert-dialog",
+          "props": {
+            "title": "Delete Project?",
+            "description": "Are you sure you want to delete this project? This action is irreversible.",
+            "actionLabel": "Confirm deletion",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          }
+        }
+      },
+      "model": "gemma4:e4b",
+      "usage": {
+        "inputTokens": 1797,
+        "outputTokens": 73
+      },
+      "meta": {
+        "provider": "ollama",
+        "total_duration": 11408051375,
+        "load_duration": 280932208,
+        "prompt_eval_duration": 105995000,
+        "eval_duration": 1882826000
+      },
+      "gates": [
+        {
+          "gate": "S1",
+          "name": "surface-schema",
+          "status": "PASS"
+        },
+        {
+          "gate": "S2",
+          "name": "contract-vocabulary",
+          "status": "PASS"
+        },
+        {
+          "gate": "S3",
+          "name": "governance",
+          "status": "PASS"
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "repairMessages": [
+    "Your surface violates 1 governance rule finding(s) of the \"Astryx\" design system:\n\nViolation 1: [rule.alertdialog-action-label-specific / must]\n  At: $.root (component: alert-dialog)\n  Forbidden value \"OK\" for prop 'actionLabel'.\n  Why: \"Make the action button label specific: 'Delete project' is better than 'OK' or 'Confirm'\". The forbidden values are the generic labels the guidance names (plus their nearest kin) — Astryx AlertDialog docs, v0.1.2\n\nA correct example (ex.delete-project-confirmation): {\"dspackSurface\":\"0.1\",\"system\":\"Astryx\",\"intent\":\"destructive-action\",\"root\":{\"component\":\"card\",\"children\":[{\"component\":\"text\",\"props\":{\"as\":\"h2\"},\"text\":\"Danger zone\"},{\"component\":\"text\",\"props\":{\"as\":\"p\"},\"text\":\"Deleting a project removes all of its data permanently.\"},{\"component\":\"button\",\"props\":{\"label\":\"Delete project\",\"variant\":\"destructive\"}},{\"component\":\"alert-dialog\",\"props\":{\"title\":\"Delete this project?\",\"description\":\"This action cannot be undone. The project and all its data will be permanently removed.\",\"actionLabel\":\"Delete project\",\"cancelLabel\":\"Cancel\",\"actionVariant\":\"destructive\"}}]}}\n\nProduce a corrected dspack surface document that fixes every violation above.\nRemove or restructure whatever is necessary to fix the violations, including deleting the offending elements; preserve unaffected content where possible.\nRespond with a single JSON object conforming to the provided schema. No commentary."
+  ],
+  "outcome": "passed",
+  "emitted": {
+    "target": "json-render",
+    "spec": {
+      "root": "root",
+      "elements": {
+        "root": {
+          "type": "AlertDialog",
+          "props": {
+            "title": "Delete Project?",
+            "description": "Are you sure you want to delete this project? This action is irreversible.",
+            "actionLabel": "Confirm deletion",
+            "cancelLabel": "Cancel",
+            "actionVariant": "destructive"
+          },
+          "children": [],
+          "visible": true
+        }
+      }
+    },
+    "warnings": [],
+    "validations": [
+      {
+        "gates": [
+          {
+            "gate": "J2",
+            "name": "emission accepted",
+            "pass": true
+          },
+          {
+            "gate": "J3",
+            "name": "instance validates against the generated catalog model",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "totalMs": 27422
+  }
+}
