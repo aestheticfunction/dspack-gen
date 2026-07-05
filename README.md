@@ -1,7 +1,7 @@
 # dspack-gen
 
 **Generation + governance pipeline for [dspack](https://github.com/aestheticfunction/dspack)
-contracts.** Compiles a dspack v0.3 contract into generation context, generates dspack
+contracts.** Compiles a dspack v0.3/v0.4 contract into generation context, generates dspack
 surfaces via schema-constrained LLMs (Ollama local or hosted — interchangeable adapters),
 lints them deterministically against the contract's governance rules, repairs bounded, emits
 to protocols (A2UI and json-render via
@@ -10,10 +10,12 @@ produces a versioned audit report.
 
 > *A2UI defines what can render. dspack defines what is correct.*
 
-**Status: Milestone 1 complete** —
-[m1 tag](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1),
-write-up in [docs/m1-report.md](docs/m1-report.md). M2 in progress (second
-emitter target landed in dspack-emit; eval harness and ds-mcp tools next).
+**Status: Milestones 1 and 2 complete.** Tags
+[m1](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1) and
+[m2](https://github.com/aestheticfunction/dspack-gen/releases/tag/m2); write-ups in
+[docs/m1-report.md](docs/m1-report.md) and [docs/m2-report.md](docs/m2-report.md),
+findings in [docs/findings.md](docs/findings.md). M3 (dspack v0.4 and a second
+contract) is in progress.
 The emitter is consumed from npm as `@aestheticfunction/dspack-emit`
 (renamed from `@aestheticfunction/dspack-to-a2ui` with the ADR-D2 repo
 rename; the old package is deprecated with a pointer).
