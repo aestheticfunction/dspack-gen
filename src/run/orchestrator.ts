@@ -20,6 +20,7 @@ import {
   type DspackDoc,
   type DspackSurface,
   type EmitSurfaceResult,
+  type Profile,
   validateSpecAgainstModel,
 } from "@aestheticfunction/dspack-emit";
 import type { Contract } from "../core/contract.js";
@@ -59,6 +60,12 @@ export interface RunOptions {
    * compile under real zod) is a dspack-emit CI gate, not per-run.
    */
   emitTarget?: "a2ui" | "json-render";
+  /**
+   * A2UI mapping profile for the "a2ui" target (default: the emitter's
+   * shadcn profile, byte-identical behavior for existing callers). Pass the
+   * contract's own profile to emit non-shadcn contracts (e.g. Astryx).
+   */
+  emitProfile?: Profile;
   /** Injectable clock for deterministic reports in tests. */
   now?: () => Date;
   /** Live progress events (the demo's NDJSON stream). Purely observational. */
@@ -215,7 +222,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       // evidence, same as an A3 rejection).
       let emission: EmitSurfaceResult;
       try {
-        emission = emitSurface(surface, doc);
+        emission = emitSurface(surface, doc, options.emitProfile ? { profile: options.emitProfile } : {});
       } catch (error) {
         if (error instanceof EmitSurfaceError) {
           const emitted = { target: "a2ui" as const, refusal: error.message, warnings: [], validations: [] };
@@ -231,7 +238,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       const validations: EmittedValidation[] = [];
       let gatesPass = true;
       for (const version of options.a2uiVersions ?? (["0.9.1", "1.0"] as A2uiVersion[])) {
-        const { validation } = transform(doc, version, { messages });
+        const { validation } = transform(doc, version, { messages }, options.emitProfile);
         const gates: EmitterGate[] = validation.gates.map((gate) => ({
           gate: A_GATE[gate.name] ?? "A1",
           name: gate.name,
