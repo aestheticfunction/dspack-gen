@@ -23,7 +23,7 @@
       "requirement": "must",
       "level": "error",
       "message": "Required prop 'label' is not present on 'button' itself.",
-      "rationale": "\"Always provide a label for icon-only buttons so screen readers can announce what the button does\" — and label is the component's required accessible name in every mode. The schema does not check prop presence; this rule does — Astryx Button docs, v0.1.2",
+      "rationale": "\"Always provide a label for icon-only buttons so screen readers can announce what the button does\" — and label is the component's required accessible name in every mode. The schema does not check prop presence; this rule does — Astryx Button docs, v0.1.4",
       "location": {
         "path": "$.root.children[0]",
         "component": "button"
