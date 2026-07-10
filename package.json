@@ -1,10 +1,31 @@
 {
   "name": "@aestheticfunction/dspack-gen",
   "version": "0.1.0",
-  "private": true,
   "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1\u2013S3, bounded repair, protocol emission, audit reports.",
   "type": "module",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aestheticfunction/dspack-gen.git"
+  },
+  "homepage": "https://github.com/aestheticfunction/dspack-gen#readme",
+  "bugs": {
+    "url": "https://github.com/aestheticfunction/dspack-gen/issues"
+  },
+  "keywords": [
+    "dspack",
+    "design-systems",
+    "generative-ui",
+    "governance",
+    "a2ui",
+    "llm"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "dspack-gen": "./dist/cli.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -18,12 +39,15 @@
   "files": [
     "dist",
     "src",
+    "!src/**/*.test.ts",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepare": "npm run build",
+    "prepublishOnly": "npm run test",
     "test": "vitest run",
     "context": "tsx src/cli.ts context",
     "smoke:ollama": "tsx scripts/smoke-ollama.ts",

@@ -95,10 +95,38 @@ in M2; local models are report-only.
 
 ## Library
 
+```bash
+npm install @aestheticfunction/dspack-gen
+```
+
+ESM only, Node >= 20. The root entry is the full pipeline:
+
+```ts
+import { runPipeline, adapterFor } from "@aestheticfunction/dspack-gen";
+import { readFileSync } from "node:fs";
+
+const contract = JSON.parse(readFileSync("astryx.dspack.json", "utf8"));
+const result = await runPipeline({
+  contract,
+  intent: "destructive-action",
+  prompt: "a screen to delete a project",
+  adapter: adapterFor("ollama:gemma3"),
+});
+console.log(result.report.outcome, result.exitCode);
+```
+
 `@aestheticfunction/dspack-gen/core` is the **zero-network, emitter-free** subpath (compiler +
 linter) that [ds-mcp](https://github.com/aestheticfunction/ds-mcp) consumes without breaking
 its read-only/no-network security posture. The boundary is enforced by
-`src/core/core-boundary.test.ts`.
+`src/core/core-boundary.test.ts`:
+
+```ts
+import { compileContext, lintSurface } from "@aestheticfunction/dspack-gen/core";
+```
+
+The CLI installs as `dspack-gen` (same commands as the repo scripts): `context`,
+`lint`, `run`, `serve`. Outside this repository, always pass `--dspack <contract>`
+(the `serve` default path points at a repo fixture).
 
 ## Development
 

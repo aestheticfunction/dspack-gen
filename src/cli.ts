@@ -1,4 +1,4 @@
-#!/usr/bin/env -S npx tsx
+#!/usr/bin/env node
 /**
  * dspack-gen CLI.
  *
@@ -140,8 +140,28 @@ async function commandRun(flags: Map<string, string>): Promise<void> {
   process.exit(result.exitCode);
 }
 
+const USAGE = `dspack-gen <command> [flags]
+
+Commands:
+  context --dspack <contract.json> --intent <id> [--depth N] [--no-steering]
+      Print the compiled generation context ({ system, schema, fewshot }).
+  lint --dspack <contract.json> --surface <file.dsurface.json>
+      Run surface gates S1-S3; JSON report on stdout, human rendering on stderr.
+  run --dspack <contract.json> --intent <id> --prompt <text> --model <ref> [--out <dir>] [--max-repairs N]
+      Full pipeline: generate -> lint -> repair -> emit -> audit report.
+      <ref> is ollama:<id> or anthropic:<id>.
+  serve --dspack <contract.json> [--port <n>]
+      Localhost NDJSON server streaming the pipeline.
+
+Exit codes: 0 clean, 1 usage/internal error, 2 governance failure,
+3 emitter-gate failure, 4 unknown rule type.`;
+
 function main(): void {
   const [command, ...rest] = process.argv.slice(2);
+  if (command === undefined || command === "help" || command === "--help" || command === "-h") {
+    console.log(USAGE);
+    process.exit(command === undefined ? 1 : 0);
+  }
   const flags = parseFlags(rest);
   if (command === "context") return commandContext(flags);
   if (command === "lint") return commandLint(flags);
