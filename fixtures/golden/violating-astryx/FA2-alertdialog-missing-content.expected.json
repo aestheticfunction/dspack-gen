@@ -23,7 +23,7 @@
       "requirement": "must",
       "level": "error",
       "message": "Required prop 'description' is not present on 'alert-dialog' itself.",
-      "rationale": "title, description, and actionLabel are required by the component API (aria-labelledby / aria-describedby wiring), and \"describe what will happen in the description so the user knows the consequences before confirming\". The schema does not check prop presence; this rule does — Astryx AlertDialog docs, v0.1.2",
+      "rationale": "title, description, and actionLabel are required by the component API (aria-labelledby / aria-describedby wiring), and \"describe what will happen in the description so the user knows the consequences before confirming\". The schema does not check prop presence; this rule does — Astryx AlertDialog docs, v0.1.4",
       "location": {
         "path": "$.root.children[1]",
         "component": "alert-dialog"
@@ -38,7 +38,7 @@
       "requirement": "must",
       "level": "error",
       "message": "Required prop 'actionLabel' is not present on 'alert-dialog' itself.",
-      "rationale": "title, description, and actionLabel are required by the component API (aria-labelledby / aria-describedby wiring), and \"describe what will happen in the description so the user knows the consequences before confirming\". The schema does not check prop presence; this rule does — Astryx AlertDialog docs, v0.1.2",
+      "rationale": "title, description, and actionLabel are required by the component API (aria-labelledby / aria-describedby wiring), and \"describe what will happen in the description so the user knows the consequences before confirming\". The schema does not check prop presence; this rule does — Astryx AlertDialog docs, v0.1.4",
       "location": {
         "path": "$.root.children[1]",
         "component": "alert-dialog"
