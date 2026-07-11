@@ -1,6 +1,6 @@
 {
   "name": "@aestheticfunction/dspack-gen",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1\u2013S3, bounded repair, protocol emission, audit reports.",
   "type": "module",
   "license": "Apache-2.0",

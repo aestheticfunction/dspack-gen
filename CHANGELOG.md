@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.1 — generation-schema grammar alignment
+
+Two fixes to the generation schema for grammar-constrained decoders
+(Ollama structured outputs / llama.cpp grammars), which enforce the
+schema's declared shapes and property order verbatim:
+
+- Array-typed contract props now reach the schema as `{ type: "array" }`
+  (previously the string fallback), with an optional contract-declared
+  `items` schema passed through verbatim. The string fallback made the
+  grammar forbid the arrays models plan (e.g. table `columns`), measured
+  as malformed scalar props, abandoned subtrees, and emit-gate failures.
+- Node properties are declared `component, id, props, text, children`
+  (previously `text` before `props`). Models and the worked examples
+  serialize `props` first; under order-enforcing grammars the old
+  declaration made node text unreachable once `props` was emitted —
+  measured as text-less nodes in every live generation.
+
+Golden regenerated; no API changes.
+
 ## 0.1.0 — first public release
 
 The generation and governance pipeline for dspack contracts, previously

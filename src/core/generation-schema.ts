@@ -80,18 +80,29 @@ function componentProps(component: ContractComponent): Json | null {
         ? { type: "boolean" }
         : descriptor.type === "number"
           ? { type: "number" }
-          : { type: "string" };
+          : descriptor.type === "array"
+            ? // Array props must reach the grammar as arrays: the previous
+              // string fallback made grammar-constrained decoders (Ollama
+              // structured outputs) forbid the array the model plans,
+              // forcing malformed scalars or abandoned subtrees. An optional
+              // contract-declared `items` schema passes through verbatim.
+              { type: "array", ...(descriptor.items !== undefined ? { items: descriptor.items as Json } : {}) }
+            : { type: "string" };
   }
   return { type: "object", additionalProperties: false, properties };
 }
 
 function branch(id: string, props: Json | null, level: number, depth: number): Json {
+  // Declaration order is load-bearing: grammar-constrained decoders enforce
+  // it verbatim. Models (and the worked examples) serialize `props` before
+  // `text`; declaring `text` first made node text unreachable once `props`
+  // was emitted — measured as text-less nodes in every live generation.
   const properties: Json = {
     component: { const: id },
     id: { type: "string" },
-    text: { type: "string" },
   };
   if (props) properties.props = props;
+  properties.text = { type: "string" };
   if (level < depth - 1) {
     properties.children = { type: "array", items: { $ref: `#/$defs/node_${level + 1}` } };
   }
