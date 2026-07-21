@@ -36,6 +36,14 @@ export interface ContractProp {
   description?: string;
   values?: Array<string | number | boolean | { value: unknown; description?: string }>;
   default?: unknown;
+  /**
+   * Contract-declared: the component is not usable without this prop, so the
+   * generation schema marks it `required` (and `props` itself required on the
+   * node branch). Grammar-constrained decoders skip optional heavy branches —
+   * measured as data-less tables in live runs — and a repair round cannot fix
+   * what the grammar never demands.
+   */
+  required?: boolean;
   [k: string]: unknown;
 }
 

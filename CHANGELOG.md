@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.2 — contract-declared required props reach the grammar
+
+- A contract prop descriptor may now declare `required: true`; the
+  generation schema lists it in the props object's `required` and makes
+  `props` itself required on that component's node branch (an inner
+  requirement never binds if the grammar can drop `props` wholesale).
+  Grammar-constrained decoders skip optional heavy branches: across ~20
+  live record-collection generations (gpt-oss:latest, qwen3-coder:30b),
+  a table's nested `data` rows were never emitted while optional scalar
+  props were, and repair rounds could not help — the grammar never
+  demanded the prop. Verified directly against Ollama structured
+  outputs: with `data` required, the same model fills rows first try.
+  Contracts without required flags produce byte-identical schemas.
+
 ## 0.1.1 — generation-schema grammar alignment
 
 Two fixes to the generation schema for grammar-constrained decoders
