@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — contract-declared required props reach the grammar
+## 0.1.2 — contract-declared required props reach the grammar
 
 - A contract prop descriptor may now declare `required: true`; the
   generation schema lists it in the props object's `required` and makes
