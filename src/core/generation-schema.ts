@@ -72,7 +72,9 @@ function componentProps(component: ContractComponent): Json | null {
   const entries = Object.entries(component.props ?? {});
   if (entries.length === 0) return null;
   const properties: Json = {};
+  const required: string[] = [];
   for (const [name, descriptor] of entries) {
+    if (descriptor.required === true) required.push(name);
     const values = enumValues(descriptor);
     properties[name] = values
       ? { enum: values }
@@ -89,7 +91,11 @@ function componentProps(component: ContractComponent): Json | null {
               { type: "array", ...(descriptor.items !== undefined ? { items: descriptor.items as Json } : {}) }
             : { type: "string" };
   }
-  return { type: "object", additionalProperties: false, properties };
+  // Contract-declared required props must reach the grammar as required:
+  // optional heavy branches (nested arrays of records) are skipped by
+  // grammar-constrained decoders, and repair rounds cannot fix what the
+  // grammar never demands.
+  return { type: "object", additionalProperties: false, properties, ...(required.length > 0 ? { required } : {}) };
 }
 
 function branch(id: string, props: Json | null, level: number, depth: number): Json {
@@ -106,5 +112,8 @@ function branch(id: string, props: Json | null, level: number, depth: number): J
   if (level < depth - 1) {
     properties.children = { type: "array", items: { $ref: `#/$defs/node_${level + 1}` } };
   }
-  return { type: "object", additionalProperties: false, required: ["component"], properties };
+  // A required prop inside an optional `props` object never binds — the
+  // grammar just drops `props` — so the node itself must require it.
+  const required = props && Array.isArray((props as { required?: string[] }).required) ? ["component", "props"] : ["component"];
+  return { type: "object", additionalProperties: false, required, properties };
 }

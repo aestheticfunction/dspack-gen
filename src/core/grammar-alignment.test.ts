@@ -20,6 +20,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import { describe, expect, it } from "vitest";
 import type { Contract } from "./contract.js";
 import { compileContext } from "./compiler.js";
+import { buildGenerationSchema } from "./generation-schema.js";
 import { lintSurface } from "./lint/index.js";
 
 const astryx = JSON.parse(readFileSync("fixtures/astryx.v0_1_2.dspack.json", "utf8")) as Contract;
@@ -102,4 +103,61 @@ describe("worked examples validate against their own generation schemas", () => 
       for (const gate of report.gates) expect(gate.status, `${example.id} ${gate.gate}`).not.toBe("FAIL");
     });
   }
+});
+
+describe("contract-declared required props reach the grammar as required", () => {
+  // Grammar-constrained decoders skip optional heavy branches: across ~20
+  // live record-collection generations (gpt-oss:latest and qwen3-coder:30b,
+  // 2026-07-21) the table's nested `data` rows were NEVER emitted while
+  // optional scalar props were, and repair rounds could not help — the
+  // grammar never demanded the prop. `required: true` on a contract prop
+  // descriptor is the contract-authored fix.
+  const contract = {
+    name: "T",
+    components: {
+      table: {
+        name: "Table",
+        description: "",
+        props: {
+          columns: { type: "array", items: { type: "string" }, required: true },
+          data: {
+            type: "array",
+            items: { type: "object", required: ["cells"], properties: { cells: { type: "array", items: { type: "string" } } } },
+            required: true,
+          },
+          density: { type: "enum", values: ["compact"] },
+        },
+      },
+      text: { name: "Text", description: "", props: { type: { type: "enum", values: ["body"] } } },
+    },
+  } as unknown as Contract;
+  const schema = buildGenerationSchema(contract, "record-collection") as any;
+  const table = branchesOf(schema).find((b: any) => b.properties.component.const === "table");
+  const text = branchesOf(schema).find((b: any) => b.properties.component.const === "text");
+
+  it("required-flagged props land in the props schema's required list", () => {
+    expect(table.properties.props.required).toEqual(["columns", "data"]);
+  });
+
+  it("the node branch requires `props` itself, or the inner requirement never binds", () => {
+    expect(table.required).toEqual(["component", "props"]);
+  });
+
+  it("components without required flags keep the fully optional shape", () => {
+    expect(text.properties.props.required).toBeUndefined();
+    expect(text.required).toEqual(["component"]);
+  });
+
+  it("a data-less table no longer validates; a data-filled one does", () => {
+    const validate = ajv.compile(schema);
+    const node = (props?: unknown) => ({
+      dspackSurface: "0.1",
+      system: "T",
+      intent: "record-collection",
+      root: { component: "table", id: "t", ...(props === undefined ? {} : { props }) },
+    });
+    expect(validate(node({ columns: ["Ticket"], data: [{ cells: ["#1"] }] }))).toBe(true);
+    expect(validate(node({ columns: ["Ticket"] }))).toBe(false);
+    expect(validate(node())).toBe(false);
+  });
 });
