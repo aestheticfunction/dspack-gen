@@ -13,6 +13,8 @@ produces a versioned audit report.
 > Part of the [dspack ecosystem](https://github.com/aestheticfunction) — the organization profile has the full map of how the repositories fit together.
 >
 > **Kind:** library + CLI (npm `@aestheticfunction/dspack-gen`, bin `dspack-gen`) · **Audience:** engineers running or evaluating governed generation · **Neighbors:** consumes [dspack](https://github.com/aestheticfunction/dspack) contracts and [dspack-emit](https://github.com/aestheticfunction/dspack-emit); its core is vendored by [ds-mcp](https://github.com/aestheticfunction/ds-mcp); driven end to end by [dspack-studio](https://github.com/aestheticfunction/dspack-studio) ([hosted replay](https://studio.aesthetic-function.com))
+>
+> **Bringing your own contract?** Every command takes `--dspack <your-file>` directly — no fixture registration. The journey from an existing design system to a contract these commands accept is the [adoption guide](https://github.com/aestheticfunction/dspack/blob/main/ADOPTING.md).
 
 **Status: Milestones 1 through 3 complete.** Tags
 [m1](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1),
