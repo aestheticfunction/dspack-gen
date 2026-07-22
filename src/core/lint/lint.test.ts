@@ -26,8 +26,9 @@ const load = (path: string) => JSON.parse(readFileSync(path, "utf8"));
 describe("violating goldens reproduce their expected reports exactly", () => {
   const fixtures = readdirSync(VIOLATING).filter((f) => f.endsWith(".dsurface.json"));
 
-  it("all seven violating fixtures are present", () => {
-    expect(fixtures.length).toBe(7);
+  it("all nine violating fixtures are present", () => {
+    // F1-F7: destructive-action (v2.2.0). F8-F9: record-collection (v2.3.0).
+    expect(fixtures.length).toBe(9);
   });
 
   it.each(fixtures)("%s", (fixture) => {

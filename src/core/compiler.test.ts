@@ -30,10 +30,20 @@ describe("compileContext golden", () => {
     expect(rendered).toBe(readFileSync(GOLDEN, "utf8"));
   });
 
-  it("renders all three rules with rationales into the system prompt", () => {
+  it("renders every applicable rule with its rationale into the system prompt", () => {
+    // The contract carries intent-scoped rules for more than one intent
+    // (v2.3.0 added record-collection); the destructive-action context
+    // renders exactly the rules that apply to it — unscoped rules plus its
+    // own — and none of another intent's.
+    const applies = (rule: NonNullable<typeof contract.rules>[number]) =>
+      !rule.appliesTo || rule.appliesTo.intents.includes("destructive-action");
     for (const rule of contract.rules!) {
-      expect(context.system).toContain(rule.id);
-      expect(context.system).toContain(rule.rationale);
+      if (applies(rule)) {
+        expect(context.system).toContain(rule.id);
+        expect(context.system).toContain(rule.rationale);
+      } else {
+        expect(context.system).not.toContain(rule.id);
+      }
     }
     expect(context.system).toContain("dialog is forbidden");
   });

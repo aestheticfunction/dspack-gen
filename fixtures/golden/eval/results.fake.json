@@ -3,7 +3,7 @@
   "contract": {
     "name": "shadcn/ui",
     "dspack": "0.4",
-    "sha256": "3da1761b2bb69f700a5a33b05c39b7ae5bba0db1f5b3e3d86945c2db229cb81e"
+    "sha256": "168421bef05f9be6ccdec93a426c2f9bb2c6af682eaf56dc022a6f8c9b879fa4"
   },
   "maxRepairs": 2,
   "cells": [

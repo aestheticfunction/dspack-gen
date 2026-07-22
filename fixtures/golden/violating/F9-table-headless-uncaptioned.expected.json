@@ -1,0 +1,54 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.table-carries-structure",
+      "type": "required-composition",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required sub-component 'table-header' (min 1) not found among descendants (found 0).",
+      "rationale": "The table's own constraints demand semantic structure: header cells as th within a TableHeader so screen readers can associate columns, and records inside a TableBody. A table without both is a grid of divs wearing table styling.",
+      "location": {
+        "path": "$.root",
+        "component": "table"
+      },
+      "exampleIds": [
+        "ex.support-ticket-queue"
+      ]
+    },
+    {
+      "ruleId": "rule.table-carries-caption",
+      "type": "required-composition",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required sub-component 'table-caption' (min 1) not found among descendants (found 0).",
+      "rationale": "The data-table-with-row-actions pattern requires an accessible name via TableCaption or an aria-label. The pattern permits either; the contract can only govern the declarative form, so the caption is the enforceable floor — an aria-label alternative is legitimate but inexpressible in current rule types and remains guidance.",
+      "location": {
+        "path": "$.root",
+        "component": "table"
+      },
+      "exampleIds": [
+        "ex.support-ticket-queue"
+      ]
+    }
+  ],
+  "errorCount": 2,
+  "warnCount": 0,
+  "pass": false
+}

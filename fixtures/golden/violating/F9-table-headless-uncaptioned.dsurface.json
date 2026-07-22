@@ -1,0 +1,49 @@
+{
+  "dspackSurface": "0.1",
+  "system": "shadcn/ui",
+  "intent": "record-collection",
+  "root": {
+    "component": "table",
+    "children": [
+      {
+        "component": "table-body",
+        "children": [
+          {
+            "component": "table-row",
+            "children": [
+              {
+                "component": "table-cell",
+                "text": "#4812"
+              },
+              {
+                "component": "table-cell",
+                "text": "Cannot export billing statement"
+              },
+              {
+                "component": "table-cell",
+                "text": "Urgent"
+              }
+            ]
+          },
+          {
+            "component": "table-row",
+            "children": [
+              {
+                "component": "table-cell",
+                "text": "#4809"
+              },
+              {
+                "component": "table-cell",
+                "text": "Two-factor codes arrive late"
+              },
+              {
+                "component": "table-cell",
+                "text": "Open"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

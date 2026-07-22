@@ -1,0 +1,39 @@
+{
+  "gates": [
+    {
+      "gate": "S1",
+      "name": "surface-schema",
+      "status": "PASS"
+    },
+    {
+      "gate": "S2",
+      "name": "contract-vocabulary",
+      "status": "PASS"
+    },
+    {
+      "gate": "S3",
+      "name": "governance",
+      "status": "FAIL"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "rule.record-collection-requires-table",
+      "type": "component-choice",
+      "requirement": "must",
+      "level": "error",
+      "message": "Required component 'table' does not appear in the surface.",
+      "rationale": "The data-table-with-row-actions pattern: a record collection is built from the Table primitives, not prose or ad-hoc stacks. Records share uniform fields; a semantic table is how they stay scannable, sortable, and navigable by assistive technology.",
+      "location": {
+        "path": "$.root",
+        "component": "surface"
+      },
+      "exampleIds": [
+        "ex.support-ticket-queue"
+      ]
+    }
+  ],
+  "errorCount": 1,
+  "warnCount": 0,
+  "pass": false
+}
