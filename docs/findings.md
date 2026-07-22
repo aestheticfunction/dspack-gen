@@ -412,7 +412,10 @@ throughout; small per-cell n; one contract, one intent, local families only
 ## Addendum — the Astryx column and the repair-shape deconfound (2026-07-05, PR-21)
 
 The second contract's eval column: the nine-component Astryx slice
-(props-based idiom, pinned v0.1.2), 12 shape-targeted prompts × 2 templates
+(props-based idiom, pinned v0.1.2 — the pin as of this dated report; the
+canonical contract has since moved to v0.1.4, see
+[dspack examples/README](https://github.com/aestheticfunction/dspack/blob/main/examples/README.md)),
+12 shape-targeted prompts × 2 templates
 × 3 runs × three families, emitted via the **json-render target** (per the
 ADR-M3-5 caveat this column does not and cannot exercise the A2UI projection
 gap). Evidence: [`2026-07-05-astryx/`](evidence/2026-07-05-astryx/)
