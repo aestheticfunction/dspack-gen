@@ -10,6 +10,10 @@ produces a versioned audit report.
 
 > *A2UI defines what can render. dspack defines what is correct.*
 
+> Part of the [dspack ecosystem](https://github.com/aestheticfunction) — the organization profile has the full map of how the repositories fit together.
+>
+> **Kind:** library + CLI (npm `@aestheticfunction/dspack-gen`, bin `dspack-gen`) · **Audience:** engineers running or evaluating governed generation · **Neighbors:** consumes [dspack](https://github.com/aestheticfunction/dspack) contracts and [dspack-emit](https://github.com/aestheticfunction/dspack-emit); its core is vendored by [ds-mcp](https://github.com/aestheticfunction/ds-mcp); driven end to end by [dspack-studio](https://github.com/aestheticfunction/dspack-studio) ([hosted replay](https://studio.aesthetic-function.com))
+
 **Status: Milestones 1 through 3 complete.** Tags
 [m1](https://github.com/aestheticfunction/dspack-gen/releases/tag/m1),
 [m2](https://github.com/aestheticfunction/dspack-gen/releases/tag/m2), and
@@ -51,7 +55,8 @@ npm run context -- --dspack fixtures/shadcn.v0_4.dspack.json --intent destructiv
 # prints { system, schema, fewshot } — the compiled generation context
 ```
 
-`lint` (S1–S3) and `run` (full pipeline) land in later M1 PRs.
+`lint` (S1–S3), `run` (full pipeline), and `serve` are the other shipped CLI
+commands — see [Library](#library) below for the full surface.
 
 ### Exit codes (whole CLI surface)
 
