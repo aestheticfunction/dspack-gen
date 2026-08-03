@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.3 — export seams for stream consumers and adapter hosts
+
+Exports only; no pipeline, lint, or schema behavior changes. Contracts
+without changes produce byte-identical artifacts.
+
+- `PipelineEvent` is re-exported from the package root, so stream
+  consumers (dspack-studio's agui-bridge) can drop their hand-maintained
+  structural mirror of the union.
+- New `./adapter-types` subpath exposing the adapter contract
+  (`GenerationAdapter`, `GenerateRequest`, `GenerateResult`,
+  `AdapterOutputError`, `parseJsonOutput`) from a module that imports
+  nothing — hosts implementing their own adapter (a Workers runtime, a
+  browser shell) get the types without pulling Node transport code. A
+  boundary test locks the imports-nothing property.
+- The `@aestheticfunction/dspack-emit` range widens to
+  `^0.3.1 || ^0.4.0` so consumers depending on emit 0.4.x (profiles as
+  data) resolve a single emit version across their tree. dspack-emit
+  0.4.0 is additive; every API this package uses is unchanged.
+
 ## 0.1.2 — contract-declared required props reach the grammar
 
 - A contract prop descriptor may now declare `required: true`; the
