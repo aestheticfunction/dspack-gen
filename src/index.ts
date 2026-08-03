@@ -10,6 +10,6 @@ export * from "./adapters/index.js";
 export { ScriptedAdapter, type ScriptEntry } from "./adapters/fake.js";
 export { renderRepairMessage, type RepairTemplate } from "./repair/render.js";
 export * from "./audit/report.js";
-export { runPipeline, type RunOptions, type RunResult } from "./run/orchestrator.js";
+export { runPipeline, type RunOptions, type RunResult, type PipelineEvent } from "./run/orchestrator.js";
 export { runMatrix, computeMetrics, type RunMatrixOptions } from "./eval/runner.js";
 export type { EvalMatrix, EvalPrompt, EvalResults, CellResult, CellMetrics, RepairShape } from "./eval/types.js";
