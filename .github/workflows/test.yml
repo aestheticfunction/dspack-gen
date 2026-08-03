@@ -16,6 +16,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: pack-and-install boundary
+        run: npm run test:pack
       - name: Build (exports map consumers)
         run: npm run build
       - name: Lint CLI gate (F1 golden, exit 2)
