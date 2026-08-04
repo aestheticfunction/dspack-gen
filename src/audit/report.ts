@@ -58,6 +58,11 @@ export interface AuditReportV1 {
   attempts: AttemptRecord[];
   /** Repair messages verbatim — rendered from the same findings objects above. */
   repairMessages: string[];
+  /**
+   * Conversation seed verbatim (additive in v1; absent ⇒ none): the prior
+   * turns supplied via RunOptions.conversation for a refinement run.
+   */
+  conversation?: Array<{ role: "user" | "assistant"; content: string }>;
   outcome: Outcome;
   emitted?: {
     target: "a2ui" | "json-render";

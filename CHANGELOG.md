@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.2.0
+
+- **`RunOptions.conversation`** — prior turns seeded between the contract's
+  few-shot examples and the new user prompt: the conversational-refinement
+  contract for the Studio composer's chat-driven builder. Pass the
+  immediately prior generated surface as an assistant message (plus its
+  originating user prompt) and ask for the change in `prompt`. The system
+  prompt stays immutable (ADR-7); generation still produces a COMPLETE
+  surface judged by the full S1–S3 + emit gate ladder; bounded repair
+  appends after the seed exactly as it appends after a first attempt.
+  Deliberately not a chat-history abstraction: callers own what carries
+  over between runs.
+- The audit report records the seed verbatim (`report.conversation`,
+  additive in v1; absent when unused — existing reports byte-identical);
+  `schemas/audit-report.v1.schema.json` gains the optional property.
+- Fail-first tests pin: the prior surface is actually supplied to the
+  adapter in position; refinement is non-vacuous (a conditioning adapter
+  produces a different governed result only when the seed is present);
+  system-prompt immutability; repair-after-seed convergence; report
+  recording and absence.
+
 ## 0.1.3 — export seams for stream consumers and adapter hosts
 
 Exports only; no pipeline, lint, or schema behavior changes. Contracts

@@ -66,6 +66,18 @@ export interface RunOptions {
    * contract's own profile to emit non-shadcn contracts (e.g. Astryx).
    */
   emitProfile?: Profile;
+  /**
+   * Prior turns seeded between the contract's few-shot examples and the new
+   * user prompt — the conversational-refinement contract (dspack-studio
+   * Phase 3): pass the immediately prior generated surface as an assistant
+   * message plus its originating user prompt, and ask for the change in
+   * `prompt`. The system prompt stays immutable (ADR-7); generation still
+   * produces a COMPLETE surface judged by the full gate ladder; the repair
+   * loop appends after the seed exactly as it appends after a first attempt.
+   * Not a chat-history abstraction: callers own what (if anything) carries
+   * over between runs. Recorded verbatim in the audit report when present.
+   */
+  conversation?: GenerateMessage[];
   /** Injectable clock for deterministic reports in tests. */
   now?: () => Date;
   /** Live progress events (the demo's NDJSON stream). Purely observational. */
@@ -103,7 +115,11 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
   const startedAt = now();
 
   const context = compileContext(contract, intent, options.compile);
-  const conversation: GenerateMessage[] = [...context.fewshot, { role: "user", content: prompt }];
+  const conversation: GenerateMessage[] = [
+    ...context.fewshot,
+    ...(options.conversation ?? []),
+    { role: "user", content: prompt },
+  ];
   // Purely observational, enforced: a throwing hook (e.g. a stream write
   // after the client disconnected) must never abort the pipeline or change
   // its outcome — the audit report is the artifact, events are a view.
@@ -139,6 +155,7 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       },
       attempts,
       repairMessages,
+      ...(options.conversation && options.conversation.length > 0 ? { conversation: options.conversation } : {}),
       outcome,
       ...(emitted ? { emitted } : {}),
       timings: { totalMs: now().getTime() - startedAt.getTime() },

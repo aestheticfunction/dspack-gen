@@ -222,6 +222,29 @@
         "type": "string"
       }
     },
+    "conversation": {
+      "description": "Conversation seed verbatim (additive; absent = none): prior turns supplied for a refinement run.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "outcome": {
       "enum": [
         "passed",
