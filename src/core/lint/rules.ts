@@ -115,12 +115,29 @@ function evaluateComponentChoice(entry: RuleEntry, surface: Surface): Finding[] 
  * requiredProps entry MUST hold (on the node itself, or on every descendant
  * matching `on` — of which at least one must exist).
  */
-function evaluateRequiredComposition(entry: RuleEntry, surface: Surface): Finding[] {
+function evaluateRequiredComposition(entry: RuleEntry, surface: Surface, contract: Contract): Finding[] {
   const rule = entry as RequiredCompositionRule;
   const findings: Finding[] = [];
+  // Resolved lazily, exactly like forbiddenCategories: membership comes from
+  // the contract's categories declarations at lint time (spec v0.4 §4.2/§4.3).
+  const categories = rule.requiredCategories?.length ? categoryIndex(contract) : undefined;
 
   for (const visited of walkSurface(surface).filter((v) => v.node.component === rule.component)) {
     const descendants = descendantsOf(visited);
+
+    for (const requirement of rule.requiredCategories ?? []) {
+      const min = requirement.min ?? 1;
+      const found = descendants.filter((d) => (categories!.get(d.node.component) ?? []).includes(requirement.id)).length;
+      if (found < min) {
+        findings.push(
+          finding(
+            rule,
+            `Required category '${requirement.id}' (min ${min}) not found among descendants (found ${found}) — no descendant of this node is a '${requirement.id}' member; members elsewhere in the surface do not satisfy this rule.`,
+            locationOf(visited),
+          ),
+        );
+      }
+    }
 
     for (const requirement of rule.requiredSubComponents ?? []) {
       const min = requirement.min ?? 1;

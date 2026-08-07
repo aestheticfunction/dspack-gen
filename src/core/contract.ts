@@ -93,6 +93,13 @@ export interface ComponentChoiceRule extends RuleBase {
 }
 
 export interface RequiredCompositionRule extends RuleBase {
+  /**
+   * spec v0.4 §4.3 (2026-08-07 amendment, lifted from the §6 ceiling on the
+   * T1 Build evidence): categories from which at least `min` descendants must
+   * appear beneath each matching node. AND across entries, OR within a
+   * category's membership; LOCAL to the matching node's descendants.
+   */
+  requiredCategories?: Array<{ id: string; min?: number }>;
   type: "required-composition";
   component: string;
   requiredSubComponents?: Array<{ id: string; min?: number }>;
