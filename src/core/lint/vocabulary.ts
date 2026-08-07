@@ -4,12 +4,18 @@
  * constrained: the S0 spike caught Ollama's mlx engine silently ignoring
  * `format`, which is why S2 is never assumed from generation.
  *
- * Scope per spec §8: component/sub-component ids, prop names on components,
- * enum prop values, declared slot names, plus surface-level consistency
- * (registered intent, matching system name). Deliberately NOT checked:
- * acceptsChildren semantics, non-enum prop types, ordering.
+ * Scope per spec v0.3 §8 + the v0.4 §5.1 amendment: component/sub-component
+ * ids, prop names on components, enum prop values, declared slot names,
+ * surface-level consistency (registered intent, matching system name), and
+ * sub-component CONTAINMENT — a sub-declared id may appear only within the
+ * subtree of an instance of a declaring compound, unless the contract also
+ * declares the id as a top-level component (independently usable).
+ * Ownership comes only from composition.subComponents; it is never inferred
+ * from names, prefixes, adjacency, or examples. Deliberately NOT checked:
+ * acceptsChildren semantics, non-enum prop types, ordering (containment is
+ * ownership, not order).
  */
-import { type Contract, type Surface, duplicateSubComponentIds, enumValues, subComponentIndex } from "../contract.js";
+import { type Contract, type Surface, type SurfaceNode, duplicateSubComponentIds, enumValues, subComponentIndex } from "../contract.js";
 import { walkSurface } from "./walk.js";
 
 export function checkVocabulary(surface: Surface, contract: Contract): string[] {
@@ -76,5 +82,39 @@ export function checkVocabulary(surface: Surface, contract: Contract): string[] 
       }
     }
   }
+
+  // Containment (spec v0.4 §5.1): every sub-declared id needs a declaring
+  // compound among its ANCESTORS (any depth — intermediate structure is
+  // fine; parent-only would be a different, stricter rule). Owners are the
+  // full declaration set (exactly one today, since duplicate sub ids refuse
+  // above; the set form is the spec's, not a behavior). An id that is also
+  // a top-level component is a component everywhere and exempt. The
+  // ancestor-carrying walk mirrors walkSurface exactly (children + slots).
+  const owners = new Map<string, string[]>();
+  for (const [id, component] of Object.entries(components)) {
+    for (const sub of component.composition?.subComponents ?? []) {
+      owners.set(sub.id, [...(owners.get(sub.id) ?? []), id]);
+    }
+  }
+  const containment = (node: SurfaceNode, path: string, ancestors: ReadonlySet<string>): void => {
+    const id = node.component;
+    const declaredBy = owners.get(id);
+    if (declaredBy && !(id in components) && !declaredBy.some((owner) => ancestors.has(owner))) {
+      const ownerList = declaredBy.map((o) => `'${o}'`).join(" or ");
+      errors.push(
+        `${path}: sub-component '${id}' of ${ownerList} appears outside any ${ownerList} subtree — ` +
+          `a declared sub-component is only valid within its declaring compound (declare '${id}' as a top-level ` +
+          `component if it is independently usable)`,
+      );
+    }
+    const next = new Set(ancestors);
+    next.add(id);
+    (node.children ?? []).forEach((child, i) => containment(child, `${path}.children[${i}]`, next));
+    for (const slot of Object.keys(node.slots ?? {}).sort()) {
+      node.slots![slot].forEach((child, i) => containment(child, `${path}.slots.${slot}[${i}]`, next));
+    }
+  };
+  containment(surface.root, "$.root", new Set());
+
   return errors;
 }

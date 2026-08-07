@@ -146,16 +146,21 @@ describe("failure paths are first-class artifacts", () => {
 
   it("emitter REFUSAL: lint-clean surface the emitter cannot project at all → failed-gate, exit 3, refusal recorded", async () => {
     // The live-eval discovery (2026-07-03, qwen): a sub-component outside its
-    // compound parent is in-vocabulary (S2), ungoverned (S3), but the a2ui
+    // compound parent was in-vocabulary (S2), ungoverned (S3), but the a2ui
     // profile cannot emit it standalone — EmitSurfaceError. That is the
     // target-equivalent emitter-gate failure, never a crash.
     //
-    // Fixture note (2026-08-06): the stray sub is table-footer, not
-    // card-header. card-header INSIDE a card stopped being a refusal the day
-    // the card plan learned to dissolve its own sub-family (emit 0.3.2's
-    // subFlatten) — this test only stayed green because the lockfile froze
-    // emit 0.3.1. A table sub inside a CARD is outside its compound under
-    // every emitter version, which is what the discovery actually was.
+    // Fixture note (2026-08-06): the stray sub became table-footer, not
+    // card-header, after emit 0.3.2's subFlatten dissolved card's family.
+    //
+    // Fixture note (2026-08-07, spec v0.4 §5.1): the stray-sub shape is no
+    // longer lint-clean — S2 containment now catches it in-loop, which is
+    // the amendment's whole point (see containment.test.ts). The
+    // lint-clean-but-refused class this test pins is exercised through its
+    // other member: a declared CASUALTY component ('dropdown-menu' in the
+    // shipped profile; 'dialog' is intent-forbidden by S3 here) —
+    // in-vocabulary, ungoverned in this surface, and refused by the emitter
+    // with the casualty reason.
     const refusalBreaker: Surface = {
       dspackSurface: "0.1",
       system: "shadcn/ui",
@@ -164,7 +169,7 @@ describe("failure paths are first-class artifacts", () => {
         component: "card",
         children: [
           (workedExample.root.children![0] as Surface["root"]),
-          { component: "table-footer", text: "stray sub-component" },
+          { component: "dropdown-menu", text: "stray casualty" },
         ],
       },
     };
@@ -172,7 +177,7 @@ describe("failure paths are first-class artifacts", () => {
     const result = await runPipeline({ ...baseOptions, adapter });
     expect(result.report.outcome).toBe("failed-gate");
     expect(result.exitCode).toBe(3);
-    expect(result.report.emitted!.refusal).toContain("table-footer");
+    expect(result.report.emitted!.refusal).toContain("dropdown-menu");
     expect(result.report.emitted!.validations).toEqual([]);
     expect(result.surfaceMessages).toBeUndefined();
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);

@@ -276,7 +276,10 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
     }
 
     if (index < maxRepairs) {
-      const repair = renderRepairMessage(lint.findings, contract, repairTemplate);
+      // S2 errors ride the repair message alongside governance findings
+      // (spec v0.4 §5.1: containment defects must be repairable in-loop).
+      const s2Errors = lint.gates.find((g) => g.gate === "S2")?.errors ?? [];
+      const repair = renderRepairMessage(lint.findings, contract, repairTemplate, s2Errors);
       repairMessages.push(repair);
       conversation.push({ role: "assistant", content: generated.raw }, { role: "user", content: repair });
       emit({ type: "repair", index, message: repair });

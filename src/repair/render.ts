@@ -29,12 +29,37 @@ export function renderRepairMessage(
   findings: Finding[],
   contract: Contract,
   template: RepairTemplate = "standard",
+  /**
+   * S2 vocabulary errors (pathed strings from the gate report), rendered in
+   * their own section BEFORE governance findings: spec v0.4 §5.1 requires
+   * containment defects to reach the repair loop, and vocabulary errors are
+   * more fundamental than rule findings (a rule cannot be judged on
+   * vocabulary the contract does not have). Empty/omitted keeps the message
+   * byte-identical to the pre-amendment rendering.
+   */
+  vocabularyErrors: readonly string[] = [],
 ): string {
   const errors = findings.filter((f) => f.level === "error");
-  const lines: string[] = [
-    `Your surface violates ${errors.length} governance rule finding(s) of the "${contract.name}" design system:`,
-    "",
-  ];
+  const lines: string[] = [];
+  if (vocabularyErrors.length > 0) {
+    lines.push(
+      `Your surface uses the "${contract.name}" vocabulary incorrectly in ${vocabularyErrors.length} place(s):`,
+      "",
+    );
+    vocabularyErrors.forEach((error, index) => {
+      lines.push(`Vocabulary error ${index + 1}: ${error}`);
+    });
+    lines.push("");
+  }
+  // The governance header is unconditional when there are no vocabulary
+  // errors (byte-compatible with the pre-§5.1 rendering); with vocabulary
+  // errors present, a zero-findings governance section would be noise.
+  if (errors.length > 0 || vocabularyErrors.length === 0) {
+    lines.push(
+      `Your surface violates ${errors.length} governance rule finding(s) of the "${contract.name}" design system:`,
+      "",
+    );
+  }
 
   errors.forEach((finding, index) => {
     const where = finding.location.nodeId
