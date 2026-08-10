@@ -11,7 +11,12 @@
 
 > **Not current shadcn/ui coverage.** This package's fixtures, goldens, grammar-alignment corpus, and pipeline tests were built against the 8-component contract. Do not cite them as production-shadcn evidence.
 
-**Why:** dspack#35 moved `main` to the production contract on 2026-08-05; `check:sync` follows `main` and runs before the test suite in CI, so every branch here went red (or green-by-stale-lockfile) with no code change. Syncing forward would break the fixture corpus rather than widen it — the migration is gated on the dspack-emit representation milestone (aestheticfunction/dspack-emit#28).
+**Why:** dspack#35 moved `main` to the production contract on 2026-08-05; `check:sync` follows `main` and runs before the test suite in CI, so every branch here went red (or green-by-stale-lockfile) with no code change. Syncing forward would break the fixture corpus rather than widen it — the migration was gated on the dspack-emit representation milestone
+(aestheticfunction/dspack-emit#28), **which shipped as dspack-emit 0.6.0** (T1-T4 +
+layered dissolution; this package's peer range already admits `^0.6.0`). The
+blocker is therefore cleared and the pin is now a deliberate, reviewable
+fixture-corpus decision rather than a wait — migrating means rebuilding the
+goldens and grammar corpus against the production contract.
 
 **Enforcement:** the sync check verifies the pinned artifact's sha256 on every run (a pinned ref must be immutable; a change means force-push or CDN mismatch — `TAMPERED`, exit 1), still fails on local drift, and always prints how far behind `main` the pin sits. Verified: clean → 0, mutated hash → 1, restored → 0.
 

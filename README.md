@@ -42,8 +42,8 @@ rename; the old package is deprecated with a pointer).
 | Gate | Check | Where |
 |---|---|---|
 | S1 | generic dspack surface schema | here (pre-emission) |
-| S2 | contract vocabulary (components, sub-components, props, enum values, slots) | here (pre-emission) |
-| S3 | governance rules (typed, deterministic, rationale-bearing) | here (pre-emission) |
+| S2 | contract vocabulary (components, sub-components, props, enum values, slots) **and sub-component containment** — a sub-declared id may appear only inside its declaring compound (spec v0.4 §5.1); containment errors are repairable in-loop | here (pre-emission) |
+| S3 | governance rules (typed, deterministic, rationale-bearing), including `required-props`, category-based `forbidden-composition`, and `requiredCategories` (spec v0.4 §4.3) | here (pre-emission) |
 | A1–A3 | schema-compile / catalog-shape / instance validation | dspack-emit (per emitted target) |
 
 S1/S2 are checks on **any** produced surface; constrained decoding may implement S2 during
@@ -132,6 +132,25 @@ its read-only/no-network security posture. The boundary is enforced by
 ```ts
 import { compileContext, lintSurface } from "@aestheticfunction/dspack-gen/core";
 ```
+
+`@aestheticfunction/dspack-gen/browser` is the **browser-safe** subpath: the
+same `runPipeline` plus `ScriptedAdapter`, without the Node-only adapters and
+emitter plumbing, so a page can run the governed pipeline itself and bring its
+own adapter for the model turn (dspack-studio's Composer does exactly this —
+gates and emission in the browser, only the proposal goes out):
+
+```ts
+import { runPipeline, ScriptedAdapter } from "@aestheticfunction/dspack-gen/browser";
+```
+
+One caveat the host must handle: the provenance hash reaches for `node:crypto`,
+so bundlers should alias it to a synchronous SHA-256 shim.
+
+`@aestheticfunction/dspack-gen/adapter-types` exposes the adapter interface
+alone (`GenerationAdapter`, `GenerateRequest`, `GenerateResult`,
+`AdapterOutputError`, `parseJsonOutput`) for hosts implementing their own
+provider — the seam dspack-studio's agent uses for its OpenAI-compatible
+adapter.
 
 The CLI installs as `dspack-gen` (same commands as the repo scripts): `context`,
 `lint`, `run`, `serve`. Outside this repository, always pass `--dspack <contract>`

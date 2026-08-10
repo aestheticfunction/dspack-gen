@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.3.2
+
+- `./browser` export: a supported browser-safe boundary — `runPipeline`,
+  `RunOptions`, `RunResult`, `PipelineEvent`, `ScriptedAdapter`. Hosts bring
+  their own adapter for the model turn and alias `node:crypto` to a
+  synchronous SHA-256 shim.
+
+## 0.3.1
+
+- dspack-emit peer range admits `^0.6.0`.
+
+## 0.3.0
+
+- **S2 sub-component containment** (spec v0.4 §5.1): a sub-declared id may
+  appear only within its declaring compound. Containment errors ride the
+  repair message, so they are repairable in-loop.
+
+## 0.2.2
+
+- **S3 evaluates `requiredCategories`** (spec v0.4 §4.3 amendment).
+
+## 0.2.1
+
+- dspack-emit peer range admits `^0.5.0`.
+
 ## 0.2.0
 
 - **`RunOptions.conversation`** — prior turns seeded between the contract's
