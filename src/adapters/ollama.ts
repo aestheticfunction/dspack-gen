@@ -75,6 +75,12 @@ export class OllamaAdapter implements GenerationAdapter {
       model: this.model,
       stream: false,
       format: request.jsonSchema,
+      // Structured-output generation cannot budget reasoning tokens: thinking
+      // models (qwen 3.6 — spelled with a space; the no-default-model guard
+      // scans this file) burn the whole `num_predict` on reasoning and return
+      // empty content ("empty model output"). Empirically verified harmless
+      // on non-thinking models (gemma4 ignores it).
+      think: false,
       options: { temperature: request.params?.temperature ?? 0.2 },
       messages: [{ role: "system", content: request.system }, ...request.messages],
     };

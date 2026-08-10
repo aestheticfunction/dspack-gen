@@ -1,6 +1,6 @@
 {
   "name": "@aestheticfunction/dspack-gen",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1–S3, bounded repair, protocol emission, audit reports.",
   "type": "module",
   "license": "Apache-2.0",
@@ -66,7 +66,7 @@
     "test:pack": "bash scripts/pack-test.sh"
   },
   "dependencies": {
-    "@aestheticfunction/dspack-emit": "^0.3.1 || ^0.4.0 || ^0.5.0 || ^0.6.0",
+    "@aestheticfunction/dspack-emit": "^0.3.1 || ^0.4.0 || ^0.5.0 || ^0.6.0 || ^0.7.0",
     "@anthropic-ai/sdk": "^0.109.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",

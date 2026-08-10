@@ -50,6 +50,9 @@ describe("OllamaAdapter", () => {
     expect(capture.url).toBe("http://ollama.test/api/chat");
     expect(capture.body!.format).toEqual(context.schema); // depth-unrolled schema round-trips
     expect(capture.body!.stream).toBe(false);
+    // Thinking models must not spend the structured-output budget on reasoning
+    // (qwen3.6 returned "empty model output"); harmless on non-thinking models.
+    expect(capture.body!.think).toBe(false);
     expect((capture.body!.messages as unknown[]).length).toBe(request.messages.length + 1); // + system
     expect(result.json).toEqual(workedSurface);
     expect(result.usage).toEqual({ inputTokens: 100, outputTokens: 50 });
