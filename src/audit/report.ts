@@ -31,6 +31,14 @@ export interface AttemptRecord {
   /** Surface gates S1/S2/S3, independently reported. */
   gates?: GateReport[];
   findings?: Finding[];
+  /**
+   * Phase-2 representability (additive in v1): the active emit profile's
+   * typed refusal of this attempt's lint-clean surface. Recorded per attempt
+   * because refusals are repair-loop events now, not only terminal ones — a
+   * passed run can carry refused attempts on its trail. Run-layer concern:
+   * the S-gates above are untouched by it.
+   */
+  representability?: { pass: false; refusal: string };
 }
 
 export interface EmittedValidation {

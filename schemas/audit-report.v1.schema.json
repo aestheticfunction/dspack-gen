@@ -112,6 +112,22 @@
           "adapterError": {
             "type": "string"
           },
+          "representability": {
+            "type": "object",
+            "description": "Phase-2 representability (additive in v1): the active emit profile's typed refusal of this attempt's lint-clean surface. Refusals are repair-loop events, so a passed run may carry refused attempts.",
+            "required": [
+              "pass",
+              "refusal"
+            ],
+            "properties": {
+              "pass": {
+                "const": false
+              },
+              "refusal": {
+                "type": "string"
+              }
+            }
+          },
           "gates": {
             "type": "array",
             "items": {

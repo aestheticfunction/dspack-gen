@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.4.0
+
+- **Representability repair loop** (Phase-2): an a2ui `EmitSurfaceError` — the
+  emitter refusing a contract-legal-but-unrepresentable surface (declared
+  casualties, transparent-dissolution donation boundaries, Collect join key
+  violations) — now rides the bounded repair loop instead of finalizing
+  `failed-gate` on first refusal. The refusal text becomes the repair turn,
+  with one class-targeted hint; exhausted budget keeps the original terminal
+  semantics (`failed-gate`, exit 3, `emitted.refusal`). New additive report
+  field `attempts[].representability = { pass: false, refusal }`.
+- **Casualty-free generation view**: with `RunOptions.emitProfile` set,
+  generation compiles from the contract minus the profile's declared
+  `casualtyComponents` (system-prompt vocabulary, generation schema, few-shot
+  examples). S-gates and the report's contract digest keep the ratified
+  original contract.
+- **Ollama `think: false`**: structured-output generation cannot budget
+  reasoning tokens — thinking models burned the whole `num_predict` on
+  reasoning and returned "empty model output"; harmless on non-thinking
+  models.
+
 ## 0.3.2
 
 - `./browser` export: a supported browser-safe boundary — `runPipeline`,

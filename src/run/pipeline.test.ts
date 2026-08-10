@@ -144,7 +144,7 @@ describe("failure paths are first-class artifacts", () => {
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);
   });
 
-  it("emitter REFUSAL: lint-clean surface the emitter cannot project at all → failed-gate, exit 3, refusal recorded", async () => {
+  it("emitter REFUSAL with no repair budget → failed-gate, exit 3, refusal recorded", async () => {
     // The live-eval discovery (2026-07-03, qwen): a sub-component outside its
     // compound parent was in-vocabulary (S2), ungoverned (S3), but the a2ui
     // profile cannot emit it standalone — EmitSurfaceError. That is the
@@ -161,6 +161,11 @@ describe("failure paths are first-class artifacts", () => {
     // shipped profile; 'dialog' is intent-forbidden by S3 here) —
     // in-vocabulary, ungoverned in this surface, and refused by the emitter
     // with the casualty reason.
+    //
+    // Phase-2 note: refusals are REPAIRABLE now (representability.test.ts
+    // covers the loop); maxRepairs 0 pins the preserved TERMINAL semantics —
+    // refusal with the budget exhausted stays failed-gate/exit 3 with the
+    // refusal recorded.
     const refusalBreaker: Surface = {
       dspackSurface: "0.1",
       system: "shadcn/ui",
@@ -174,10 +179,14 @@ describe("failure paths are first-class artifacts", () => {
       },
     };
     const adapter = new ScriptedAdapter([{ output: refusalBreaker }]);
-    const result = await runPipeline({ ...baseOptions, adapter });
+    const result = await runPipeline({ ...baseOptions, adapter, maxRepairs: 0 });
     expect(result.report.outcome).toBe("failed-gate");
     expect(result.exitCode).toBe(3);
     expect(result.report.emitted!.refusal).toContain("dropdown-menu");
+    expect(result.report.attempts[0].representability).toEqual({
+      pass: false,
+      refusal: expect.stringContaining("dropdown-menu"),
+    });
     expect(result.report.emitted!.validations).toEqual([]);
     expect(result.surfaceMessages).toBeUndefined();
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);

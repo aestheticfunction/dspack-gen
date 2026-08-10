@@ -41,6 +41,11 @@ no guarantees.
   the target-equivalent emitter-gate failure. Outcome is `failed-gate`; `emitted.validations`
   is empty and `emitted.surfaceMessages` absent in that case. Reports written before this
   field existed never carried refusals (the pipeline crashed instead — the flaw this fixed).
+- `attempts[].representability` (2026-08-10, Phase-2): `{ pass: false, refusal }` on each
+  attempt whose lint-clean surface the active emit profile refused. Refusals ride the
+  bounded repair loop now, so a `passed` run may carry refused attempts on its trail;
+  `emitted.refusal` still marks the terminal case (budget exhausted). The matching repair
+  turn appears verbatim in `repairMessages[]` at the attempt's index.
 
 Breaking changes bump `reportVersion` and get a new schema file; version "1" documents stay
 valid against the "1" schema forever.

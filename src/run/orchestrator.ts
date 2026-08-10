@@ -8,6 +8,11 @@
  * failed-adapter (exit 1) — produces a complete audit report. The system
  * prompt is immutable across attempts; the only delta between attempts is
  * the model's own output plus the rendered repair feedback.
+ *
+ * Phase-2 representability: an a2ui EmitSurfaceError (the emitter refusing a
+ * contract-legal surface) rides the same bounded repair loop — the refusal
+ * text becomes the repair turn — and generation compiles from a casualty-free
+ * view of the contract so the model is not steered into refusals at all.
  */
 import {
   buildCatalogModel,
@@ -25,6 +30,7 @@ import {
 } from "@aestheticfunction/dspack-emit";
 import type { Contract } from "../core/contract.js";
 import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
+import { casualtyFreeView } from "./casualty-view.js";
 import { lintSurface, type Finding, type GateReport } from "../core/lint/index.js";
 import { AdapterOutputError, type GenerateMessage, type GenerationAdapter } from "../adapters/types.js";
 import { renderRepairMessage, type RepairTemplate } from "../repair/render.js";
@@ -107,6 +113,42 @@ const A_GATE: Record<string, "A1" | "A2" | "A3"> = {
   instance: "A3",
 };
 
+/**
+ * Refusal-class detection over the emitter's message text: one targeted hint
+ * per class, matched in declaration order. The emitter's refusal strings are
+ * typed API surface in spirit (dspack-emit pins them in its own tests), so
+ * matching on them is the honest seam short of structured refusal codes.
+ */
+const REFUSAL_HINTS: ReadonlyArray<{ pattern: RegExp; hint: string }> = [
+  {
+    pattern: /declared casualty/,
+    hint: "Do not use that component with this profile — express the same meaning with other approved components.",
+  },
+  {
+    pattern: /donation boundary/,
+    hint: "Each transparent form wrapper (e.g. 'field') must contain exactly one labeled control.",
+  },
+  {
+    pattern: /carries no key|dangling counterpart|join/,
+    hint: "Give every collected sub-component item a unique `id`, and make paired items (e.g. tabs-trigger/tabs-content) use matching ids.",
+  },
+];
+
+/**
+ * The representability repair turn (Phase-2): the emitter refusal verbatim —
+ * it names the offending component/path precisely — plus at most one
+ * class-targeted hint. Unlike S3 repair messages this is not rendered from
+ * findings (there are none: the surface is lint-clean); the refusal IS the
+ * finding.
+ */
+function representabilityRepairMessage(refusal: string): string {
+  const base =
+    "The surface passed all governance gates but cannot be represented by the active emit profile. " +
+    `Emitter refusal: ${refusal}. Correct the composition and return the complete corrected JSON object.`;
+  const hint = REFUSAL_HINTS.find(({ pattern }) => pattern.test(refusal))?.hint;
+  return hint ? `${base} ${hint}` : base;
+}
+
 export async function runPipeline(options: RunOptions): Promise<RunResult> {
   const { contract, intent, prompt, adapter } = options;
   const maxRepairs = options.maxRepairs ?? 2;
@@ -114,7 +156,16 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
   const now = options.now ?? (() => new Date());
   const startedAt = now();
 
-  const context = compileContext(contract, intent, options.compile);
+  // Generation compiles from the casualty-free view of the contract: the
+  // active emit profile's declared casualties leave the system-prompt
+  // vocabulary, the generation schema, and the few-shot exemplars, so the
+  // model is never steered into components the emitter must refuse. ONLY
+  // generation sees the view — lintSurface below keeps the ORIGINAL contract
+  // (the S-gates govern the contract as ratified; S2 vocabulary is unchanged)
+  // and so does contractDigest (report identity must not vary with the
+  // emit profile).
+  const generationContract = casualtyFreeView(contract, options.emitProfile);
+  const context = compileContext(generationContract, intent, options.compile);
   const conversation: GenerateMessage[] = [
     ...context.fewshot,
     ...(options.conversation ?? []),
@@ -231,17 +282,29 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
       }
 
       // The emitter can REFUSE a lint-clean surface outright (typed
-      // EmitSurfaceError — e.g. a sub-component outside its compound parent:
-      // in-vocabulary for S2, ungoverned by S3, unprojectable by the
-      // profile). That is the emitter-gate failure class ("target
-      // equivalent" in the exit-code table), not a crash: outcome
-      // failed-gate, exit 3, refusal recorded in the report (ADR-D1 family
-      // evidence, same as an A3 rejection).
+      // EmitSurfaceError — declared casualties, transparent-dissolution
+      // donation boundaries, Collect join key violations: in-vocabulary for
+      // S2, ungoverned by S3, unprojectable by the profile). That is the
+      // emitter-gate failure class ("target equivalent" in the exit-code
+      // table), not a crash — and since Phase-2 it is a REPAIRABLE one: the
+      // refusal text is a precise repair instruction, so while repair budget
+      // remains it becomes the next repair turn instead of dying terminal.
+      // Exhausted budget keeps the original semantics: outcome failed-gate,
+      // exit 3, refusal recorded in the report (ADR-D1 family evidence, same
+      // as an A3 rejection).
       let emission: EmitSurfaceResult;
       try {
         emission = emitSurface(surface, doc, options.emitProfile ? { profile: options.emitProfile } : {});
       } catch (error) {
         if (error instanceof EmitSurfaceError) {
+          attempts[attempts.length - 1].representability = { pass: false, refusal: error.message };
+          if (index < maxRepairs) {
+            const repair = representabilityRepairMessage(error.message);
+            repairMessages.push(repair);
+            conversation.push({ role: "assistant", content: generated.raw }, { role: "user", content: repair });
+            emit({ type: "repair", index, message: repair });
+            continue;
+          }
           const emitted = { target: "a2ui" as const, refusal: error.message, warnings: [], validations: [] };
           emit({ type: "emitted", validations: [], warnings: [] });
           const result = finalize("failed-gate", 3, {}, emitted);
@@ -268,6 +331,11 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
 
       const emitted = { target: "a2ui" as const, surfaceMessages: { messages }, warnings, validations };
       emit({ type: "emitted", validations, warnings });
+      // The post-emit validations-fail branch stays TERMINAL (no repair):
+      // emit-side self-validation (dspack-emit ≥0.7 gates its own output
+      // before returning) makes this branch unreachable from emit output —
+      // it remains as the guard for older emitters and caller-supplied
+      // a2uiVersions the profile was never validated against.
       const result = gatesPass
         ? finalize("passed", 0, { surface, surfaceMessages: { messages } }, emitted)
         : finalize("failed-gate", 3, {}, emitted);
