@@ -120,9 +120,14 @@ describe("failure paths are first-class artifacts", () => {
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);
   });
 
-  it("emitter-gate failure: lint-clean surface that fails A3 → failed-gate, exit 3", async () => {
+  it("emitter-gate failure: lint-clean surface the catalog would reject → refusal rides the loop, terminal failed-gate exit 3", async () => {
     // Governed (alert-dialog present & complete) but the input node has no
-    // text, so the emitted TextField lacks its required label — A3 fails.
+    // text, so the emitted TextField would lack its required label. Under
+    // dspack-emit ≥0.7 that is REFUSED at emission (the emitter never ships
+    // an instance its own catalog rejects — the class that used to explode
+    // at A3 downstream), and since Phase 2 the refusal is a REPAIRABLE
+    // signal. With zero repair budget it stays exactly the old terminal
+    // shape: failed-gate, exit 3, refusal recorded, no validations array.
     const gateBreaker: Surface = {
       dspackSurface: "0.1",
       system: "shadcn/ui",
@@ -136,11 +141,12 @@ describe("failure paths are first-class artifacts", () => {
       },
     };
     const adapter = new ScriptedAdapter([{ output: gateBreaker }]);
-    const result = await runPipeline({ ...baseOptions, adapter });
+    const result = await runPipeline({ ...baseOptions, adapter, maxRepairs: 0 });
     expect(result.report.outcome).toBe("failed-gate");
     expect(result.exitCode).toBe(3);
-    const gates = result.report.emitted!.validations[0].gates;
-    expect(gates.find((g) => g.gate === "A3")!.pass).toBe(false);
+    expect(result.report.emitted!.refusal).toMatch(/would not validate against the emitted catalog/);
+    expect(result.report.attempts[0]!.representability).toEqual({ pass: false, refusal: result.report.emitted!.refusal });
+    expect(result.report.emitted!.validations).toEqual([]);
     expect(validateReport(JSON.parse(JSON.stringify(result.report)))).toBe(true);
   });
 

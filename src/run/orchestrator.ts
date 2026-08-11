@@ -31,6 +31,7 @@ import {
 import type { Contract } from "../core/contract.js";
 import { applicableRules, compileContext, type CompileOptions } from "../core/compiler.js";
 import { casualtyFreeView } from "./casualty-view.js";
+import { requireJoinIds } from "./join-id-view.js";
 import { lintSurface, type Finding, type GateReport } from "../core/lint/index.js";
 import { AdapterOutputError, type GenerateMessage, type GenerationAdapter } from "../adapters/types.js";
 import { renderRepairMessage, type RepairTemplate } from "../repair/render.js";
@@ -165,7 +166,11 @@ export async function runPipeline(options: RunOptions): Promise<RunResult> {
   // and so does contractDigest (report identity must not vary with the
   // emit profile).
   const generationContract = casualtyFreeView(contract, options.emitProfile);
-  const context = compileContext(generationContract, intent, options.compile);
+  const compiled = compileContext(generationContract, intent, options.compile);
+  // P3a: sub-components the profile joins by id must CARRY an id — the schema
+  // requires it for exactly those components (join-id-view.ts). Same layering
+  // as the casualty view: generation-only, profile-derived, gates untouched.
+  const context = { ...compiled, schema: requireJoinIds(compiled.schema as Record<string, unknown>, options.emitProfile) };
   const conversation: GenerateMessage[] = [
     ...context.fewshot,
     ...(options.conversation ?? []),

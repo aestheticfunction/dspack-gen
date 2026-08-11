@@ -1,3 +1,11 @@
+## 0.5.0 — 2026-08-11
+
+Generation-quality release (P3a): the pipeline teaches the model what the emitter will demand, from knowledge the contract already carries.
+
+- **Composition notes reach the system prompt.** Each component vocabulary line now carries the contract's own `composition.notes` (capped at two sentences / 360 chars). Measured on the Gateway corpus: every field-donation failure and tab/radio key mismatch contradicted prose the contract already states verbatim — generation just never saw it.
+- **Join-participating sub-components require `id` in the generation schema** (`run/join-id-view.ts`, profile-derived, generation-only — S-gates and the contract untouched). Keyless and prefix-mismatched join items were the dominant residual join failure.
+- Dev/CI stack aligned to dspack-emit 0.7 (lockfile): the p05 eval cell and the pipeline emitter-gate test recalibrated to 0.7 semantics (missing-required-prop surfaces now REFUSE at emission and ride the repair loop; the eval golden regenerated accordingly — refusals terminate as failed-gate, never script-exhaustion errors).
+
 # Changelog
 
 ## 0.4.0
