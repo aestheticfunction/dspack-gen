@@ -93,6 +93,12 @@
     "p05-s3-clean-gate-fail": [
       {
         "fixture": "../fixtures/eval/text-placement-gate-fail.dsurface.json"
+      },
+      {
+        "fixture": "../fixtures/eval/text-placement-gate-fail.dsurface.json"
+      },
+      {
+        "fixture": "../fixtures/eval/text-placement-gate-fail.dsurface.json"
       }
     ],
     "p06-contained-crash": [],

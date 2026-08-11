@@ -67,6 +67,21 @@ export function compileContext(
   };
 }
 
+/**
+ * First two sentences of a component's composition notes, word-truncated at
+ * 360 chars. Two sentences because the audited contracts state placement in
+ * the first and pairing/exclusion rules in the second (tabs' exact-match
+ * rule, radio's htmlFor pairing); the ceiling keeps a runaway sentence from
+ * bloating the vocabulary block.
+ */
+function capCompositionNotes(notes: unknown): string | null {
+  if (typeof notes !== "string" || !notes.trim()) return null;
+  const twoSentences = notes.match(/^(?:[^.!?]*[.!?]){1,2}/);
+  let out = (twoSentences ? twoSentences[0] : notes).trim();
+  if (out.length > 360) out = `${out.slice(0, 357).replace(/\s+\S*$/, "")}…`;
+  return out;
+}
+
 function fewshotPair(example: ExampleEntry): FewshotMessage[] {
   return [
     { role: "user", content: example.prompt ?? example.description ?? example.id },
@@ -99,6 +114,14 @@ function renderSystemPrompt(
     let line = `- ${id} — ${component.description}`;
     if (props) line += ` Props: ${props}.`;
     if (subs) line += ` Sub-components (used as children): ${subs}.`;
+    // P3a: the contract's own composition semantics ride the vocabulary line.
+    // A sub-component LIST without its nesting rules invites plausible-but-
+    // unprojectable compositions (measured on the Gateway corpus: every field
+    // donation failure and join key mismatch contradicted prose the contract
+    // already carries). Capped at two sentences / 360 chars — ambiguity
+    // removal, not prompt growth.
+    const notes = capCompositionNotes(component.composition?.notes);
+    if (notes) line += ` Composition: ${notes}`;
     lines.push(line);
   }
 
