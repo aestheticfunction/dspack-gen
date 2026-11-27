@@ -151,6 +151,14 @@ describe("the proposal schema", () => {
   });
 });
 
+describe("types", () => {
+  it("every runtime export of ./theme is declared in index.d.ts", () => {
+    const dts = readFileSync(fileURLToPath(new URL("./index.d.ts", import.meta.url)), "utf8");
+    const missing = Object.keys(theme).filter((k) => !new RegExp(`\\b(const|function) ${k}\\b`).test(dts));
+    expect(missing).toEqual([]);
+  });
+});
+
 describe("no side effects", () => {
   it("the compiler's modules read no clock, randomness, environment or network, and import only each other", () => {
     for (const file of ["compile.mjs", "constraints.mjs", "solve.mjs", "workspace.mjs"]) {

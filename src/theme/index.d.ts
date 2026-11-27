@@ -79,6 +79,29 @@ export const DEFAULT_DISPLAY_VOICE: "brand";
 export const HUE_DEGREES: Record<HueFamily, number>;
 export const PERMITTED_HUE_NUDGES: HueNudge[];
 
+/** The compiler's derivation constants: part of its identity (changing one moves COMPILER_VERSION). */
+export const BISECTION_STEPS: number;
+export const DEPTH_LIGHTNESS: Record<string, number>;
+export const DEPTH_LIGHTNESS_BY_SCHEME: Record<Scheme, Record<string, number>>;
+export const SURFACE_STEPS: Record<string, number>;
+export const SURFACE_STEPS_BY_SCHEME: Record<Scheme, Record<string, number>>;
+export const PRESENCE_BIAS: Record<string, number>;
+export const PRESENCE_BIAS_BY_SCHEME: Record<Scheme, Record<string, number>>;
+export const PRESENCE_CHROMA: Record<string, number>;
+export const ACCENT_STEPS_BY_SCHEME: Record<Scheme, Record<string, number>>;
+export const ACCENT_EXTREME: Record<Scheme, number>;
+export const TINT_SATURATION: Record<string, number>;
+export const INK_HUE: Record<string, number>;
+export const INK_SATURATION: number;
+export const INK_TARGETS: Record<string, Record<string, number>>;
+export const CHROMA_SATURATION: Record<string, number>;
+export const HEADLINE_WEIGHT: Record<string, string>;
+export const HEADLINE_TRACKING: Record<string, string>;
+export const ELEVATION_SHADOW: Record<string, string>;
+export const ELEVATION_SHADOW_BY_SCHEME: Record<Scheme, Record<string, string>>;
+export const VEIL_BY_DEPTH: Record<string, string>;
+export const VEIL_BY_DEPTH_BY_SCHEME: Record<Scheme, Record<string, string>>;
+
 export function compileProposal(input: { proposal: unknown; contract?: TokenContract; scheme?: Scheme }): CompileResult;
 export function compileRealizations(input: { proposal: unknown; contract?: TokenContract }): RealizationsResult;
 export function normalizeProposal<T>(proposal: T): T;
@@ -118,5 +141,9 @@ export const WORKSPACE_OPTIONS: { [K in keyof WorkspaceOptions]-?: Array<NonNull
 export const DEFAULT_WORKSPACE: Readonly<Required<WorkspaceOptions>>;
 export const STATUS_HUES: Record<"success" | "warning" | "error" | "info", number>;
 export const SURROUND: Record<"light" | "dark", string>;
+export const STATUS_SATURATION: number;
+export const DENSITY_SCALE: Record<"comfortable" | "compact", string>;
+export const TEXT_SCALE: Record<"standard" | "large", string>;
+export const LABEL_CASE: Record<"sentence" | "capitals", { transform: string; tracking: string }>;
 export function workspaceOptionIssues(options: unknown): string[];
 export function compileWorkspace(input: { proposal: unknown; scheme?: Scheme; options?: WorkspaceOptions; contract?: TokenContract }): WorkspaceResult;
