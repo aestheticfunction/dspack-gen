@@ -1,3 +1,12 @@
+## 0.6.0 — unreleased
+
+- **The deterministic theme compiler graduates here** (`@aestheticfunction/dspack-gen/theme`, docs/theme.md):
+  - **What it does.** A closed-enum theme-direction proposal compiles to governed token values for dark and light, held to the ratified WCAG constraint set (C1 to C18b) with bounded, named repair, or to nothing.
+  - **Where it came from.** Moved verbatim from its incubation in Aesthetic Function's website, released under Apache-2.0 by its owner.
+  - **How it is held.** A 48-proposal parity grid, covering every enum member, holds it to the incubation copy's outputs.
+  - **New subpaths.** `./theme`, plus the module and schema files for consumers that need them. The pack test covers them.
+  - **Not included.** The website's natural-language front end.
+
 ## 0.5.0 — 2026-08-11
 
 Generation-quality release (P3a): the pipeline teaches the model what the emitter will demand, from knowledge the contract already carries.

@@ -1,6 +1,6 @@
 {
   "name": "@aestheticfunction/dspack-gen",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Generation + governance pipeline for dspack contracts: prompt/context compiler, surface gates S1–S3, bounded repair, protocol emission, audit reports.",
   "type": "module",
   "license": "Apache-2.0",
@@ -18,7 +18,8 @@
     "generative-ui",
     "governance",
     "a2ui",
-    "llm"
+    "llm",
+    "theme"
   ],
   "publishConfig": {
     "access": "public"
@@ -42,12 +43,21 @@
     "./browser": {
       "types": "./dist/browser.d.ts",
       "import": "./dist/browser.js"
-    }
+    },
+    "./theme": {
+      "types": "./src/theme/index.d.ts",
+      "import": "./src/theme/index.mjs"
+    },
+    "./theme/compile.mjs": "./src/theme/compile.mjs",
+    "./theme/constraints.mjs": "./src/theme/constraints.mjs",
+    "./theme/solve.mjs": "./src/theme/solve.mjs",
+    "./theme/theme-direction.v1.schema.json": "./src/theme/theme-direction.v1.schema.json"
   },
   "files": [
     "dist",
     "src",
     "!src/**/*.test.ts",
+    "!src/theme/fixtures",
     "LICENSE",
     "README.md",
     "CHANGELOG.md"

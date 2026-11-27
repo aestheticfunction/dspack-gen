@@ -152,6 +152,14 @@ alone (`GenerationAdapter`, `GenerateRequest`, `GenerateResult`,
 provider — the seam dspack-studio's agent uses for its OpenAI-compatible
 adapter.
 
+`@aestheticfunction/dspack-gen/theme` is the **deterministic theme compiler**: a closed-enum
+theme-direction proposal compiles to governed token values in both schemes, held to a ratified WCAG
+constraint set, or to nothing. No network, clock, randomness or model. See [docs/theme.md](docs/theme.md):
+
+```ts
+import { compileRealizations } from "@aestheticfunction/dspack-gen/theme";
+```
+
 The CLI installs as `dspack-gen` (same commands as the repo scripts): `context`,
 `lint`, `run`, `serve`. Outside this repository, always pass `--dspack <contract>`
 (the `serve` default path points at a repo fixture).
