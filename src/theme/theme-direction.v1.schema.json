@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "theme-direction.v1.schema.json",
+  "title": "theme-direction.v1",
+  "$comment": "The ONLY thing a hosted model may emit (P5, CANON §3 exception). Every field is a closed enum or a bounded display string. There is no field through which a colour, CSS declaration, selector, URL, font reference, token name, solver threshold, or executable content can pass — the model proposes INTENT, and the deterministic compiler derives every applicable value. An attacker who fully controls the model's output can therefore only choose among enum members. Scope was set by what the P4.6a contract can genuinely express, not by what an earlier plan proposed; see `x-excluded` for what was deliberately left out and why.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "directionVersion",
+    "refusal",
+    "refusalCategory",
+    "interpretation",
+    "surface",
+    "ink",
+    "accent",
+    "typography",
+    "elevation"
+  ],
+  "properties": {
+    "directionVersion": {
+      "const": "1",
+      "description": "Pins the vocabulary. A later version adds fields additively; an old proposal must replay forever."
+    },
+    "refusal": {
+      "type": "boolean",
+      "description": "true only when the phrase asks the direction to express hate, slurs, or targeted harassment, or is unusable as art direction. When true nothing is applied and the remaining fields carry neutral defaults."
+    },
+    "refusalCategory": {
+      "type": "string",
+      "enum": [
+        "none",
+        "hateful",
+        "harassment",
+        "unsafe",
+        "unintelligible"
+      ],
+      "description": "Bounded reason. Never free text, so a refusal cannot become a channel for arbitrary output."
+    },
+    "interpretation": {
+      "type": "string",
+      "description": "ONE plain sentence describing what the direction heard, shown on the receipt. Display-only: it reaches no style, attribute, or script. Length is capped and the value is HTML-escaped by the consumer — the cap is enforced in code rather than by maxLength here, because strict structured-output modes do not reliably support length keywords."
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hueFamily",
+        "hueNudge",
+        "tint",
+        "depth"
+      ],
+      "description": "The page's ground: compiles to surface.bg / bg-1 / bg-2 / line / line-soft / veil.",
+      "properties": {
+        "hueFamily": {
+          "type": "string",
+          "enum": [
+            "red",
+            "ember",
+            "amber",
+            "gold",
+            "olive",
+            "green",
+            "sage",
+            "teal",
+            "cyan",
+            "sky",
+            "blue",
+            "indigo",
+            "violet",
+            "magenta",
+            "rose",
+            "neutral"
+          ]
+        },
+        "hueNudge": {
+          "type": "string",
+          "enum": [
+            "-12",
+            "-6",
+            "0",
+            "+6",
+            "+12"
+          ],
+          "description": "Degrees. A string enum rather than a number, because strict structured output cannot constrain numeric ranges."
+        },
+        "tint": {
+          "type": "string",
+          "enum": [
+            "none",
+            "whisper",
+            "tinted",
+            "saturated"
+          ]
+        },
+        "depth": {
+          "type": "string",
+          "enum": [
+            "abyss",
+            "deep",
+            "dim",
+            "dusk"
+          ],
+          "description": "Intensity within the reader's colour scheme, not a choice of scheme: abyss is deepest, dusk shallowest. The compiler realizes the same intent as near-black under Dark and as paper under Light."
+        }
+      }
+    },
+    "ink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "warmth",
+        "contrastCharacter"
+      ],
+      "description": "Compiles to ink.fg / fg-body / fg-dim / fg-secondary, each solved to a target ratio against its governing surface.",
+      "properties": {
+        "warmth": {
+          "type": "string",
+          "enum": [
+            "cool",
+            "neutral",
+            "warm"
+          ]
+        },
+        "contrastCharacter": {
+          "type": "string",
+          "enum": [
+            "soft",
+            "standard",
+            "stark"
+          ]
+        }
+      }
+    },
+    "accent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hueFamily",
+        "hueNudge",
+        "chroma",
+        "presence"
+      ],
+      "description": "Compiles to accent.accent-text and accent.accent-fill separately — the semantic split delivered in P4.6 F1, which is what makes the accent solvable at all.",
+      "properties": {
+        "hueFamily": {
+          "type": "string",
+          "enum": [
+            "red",
+            "ember",
+            "amber",
+            "gold",
+            "olive",
+            "green",
+            "sage",
+            "teal",
+            "cyan",
+            "sky",
+            "blue",
+            "indigo",
+            "violet",
+            "magenta",
+            "rose"
+          ]
+        },
+        "hueNudge": {
+          "type": "string",
+          "enum": [
+            "-12",
+            "-6",
+            "0",
+            "+6",
+            "+12"
+          ]
+        },
+        "chroma": {
+          "type": "string",
+          "enum": [
+            "muted",
+            "soft",
+            "clear",
+            "vivid",
+            "electric"
+          ]
+        },
+        "presence": {
+          "type": "string",
+          "enum": [
+            "recede",
+            "balance",
+            "carry"
+          ]
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headlineWeight",
+        "headlineTracking"
+      ],
+      "description": "Governed typography, under the narrow TH2 amendment and its DR-19 widening. The display voice names a treatment, never a typeface: the deterministic compiler owns the family, the weights that family actually ships, the tracking that suits it, the same-origin asset path, and the fallback. Weight is clamped to the committed faces, so a profile the catalogue cannot serve is not offerable and no synthetic weight is reachable. Body, navigation, code and brand-mark families are untouched. Japanese and Chinese pages keep their curated system stacks: the family is applied only on Latin-script locales, and a stylesheet priority rule holds even if that check regresses. No scale or line-height axis exists because the contract has no token for either.",
+      "properties": {
+        "displayVoice": {
+          "type": "string",
+          "enum": [
+            "brand",
+            "expressive",
+            "technical"
+          ],
+          "description": "The character of the display headings, and the only typographic identity a direction may choose. Optional: an absent value means brand, the shipped treatment, so a direction recorded before this field existed still replays exactly as it did. Compiles to one committed, self-hosted, OFL-licensed family; an unknown value compiles to nothing at all."
+        },
+        "headlineWeight": {
+          "type": "string",
+          "enum": [
+            "light",
+            "regular",
+            "medium",
+            "semibold",
+            "bold"
+          ],
+          "description": "Compiles to a weight the committed Oswald faces actually ship (300-700). A profile the catalogue cannot serve is not offerable."
+        },
+        "headlineTracking": {
+          "type": "string",
+          "enum": [
+            "tight",
+            "normal",
+            "open"
+          ]
+        }
+      }
+    },
+    "elevation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "character"
+      ],
+      "description": "Compiles to elevation.shadow-menu, the site's one real elevation.",
+      "properties": {
+        "character": {
+          "type": "string",
+          "enum": [
+            "flat",
+            "soft",
+            "standard",
+            "dramatic"
+          ]
+        }
+      }
+    }
+  },
+  "x-excluded": {
+    "$comment": "Recorded so the omissions read as decisions rather than oversights. Each names the repository fact that makes the axis unofferable today.",
+    "shape/radius": "No radius token exists in the contract; the 106 radius declarations are literals in frozen per-page styleCss. P4.6b work.",
+    "texture": "No texture token exists. The paper-grain data-URI and its opacity were deliberately deferred in P4.6 F2 as not-yet-modelled.",
+    "density/spacing": "rhythm.maxw/prose/gut/section-y are layout dimensions, not a density scale, and varying them risks reflow with no gate able to prove safety. TH2 also confines selectable themes to surface/ink/accent.",
+    "motion": "MOTION.md treats BEAT/SNAP/DRAW as the choreography's identity and its duration budgets are saturated. Only motion.ease-gsap could vary, which is not enough to be worth a public axis, and varying it risks contradicting a ratified motion rule.",
+    "body, navigation and brand-mark families": "The display voice reaches display headings and nothing else. Body, navigation, code and the brand mark are chrome identity and locale infrastructure, and the mark stays Latin under the CJK themes by design; a direction that could restyle them could make the site unreadable in its own language.",
+    "type scale / line-height": "No contract token exists for either.",
+    "colour scheme": "Not proposable. Scheme is the visitor's environment preference (System, Light, Dark), not art direction: one proposal produces a governed realization in each, so a model that could ask for a scheme would be choosing on the visitor's behalf."
+  }
+}

@@ -1,0 +1,2367 @@
+{
+ "compilerVersion": "theme-direction-compiler@2.0.0",
+ "source": "af-site scripts/theme-direction at 910ca7c, before graduation",
+ "hash": "sha256 of JSON.stringify(compileRealizations({ proposal, contract: { tokens: {} } }))",
+ "cases": [
+  {
+   "id": "grid-00",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 0.",
+    "surface": {
+     "hueFamily": "red",
+     "hueNudge": "-12",
+     "tint": "none",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "red",
+     "hueNudge": "0",
+     "chroma": "muted",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "normal",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "24a55dd1710f924d580def84e3ce53f036569fa9b5c75c033672228be32ee049"
+  },
+  {
+   "id": "grid-01",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 1.",
+    "surface": {
+     "hueFamily": "ember",
+     "hueNudge": "-6",
+     "tint": "none",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "teal",
+     "hueNudge": "+6",
+     "chroma": "muted",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "open",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "f60f73e40869ce7474bbefde006e73fdb3bfdfdafee735350e808db58b69bce2"
+  },
+  {
+   "id": "grid-02",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 2.",
+    "surface": {
+     "hueFamily": "amber",
+     "hueNudge": "0",
+     "tint": "whisper",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "rose",
+     "hueNudge": "+12",
+     "chroma": "soft",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "tight",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "dd9a688709cefe6717a33f502ee3864bf989d586eb298e75c80c00fc7bd91724"
+  },
+  {
+   "id": "grid-03",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 3.",
+    "surface": {
+     "hueFamily": "gold",
+     "hueNudge": "+6",
+     "tint": "whisper",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "sage",
+     "hueNudge": "-12",
+     "chroma": "soft",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "normal"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "ab06ce0f14aedecdc587aae8be776b9c4579bb0247724ff37c57312be4a0e65e"
+  },
+  {
+   "id": "grid-04",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 4.",
+    "surface": {
+     "hueFamily": "olive",
+     "hueNudge": "+12",
+     "tint": "tinted",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "magenta",
+     "hueNudge": "-6",
+     "chroma": "clear",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "open",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "51d5cc4fb7b2d48856d3f82eaa54e919cbcdba02a8abad16befcd6ef24a012a5"
+  },
+  {
+   "id": "grid-05",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 5.",
+    "surface": {
+     "hueFamily": "green",
+     "hueNudge": "-12",
+     "tint": "tinted",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "green",
+     "hueNudge": "0",
+     "chroma": "clear",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "tight",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "fb685593e401f20a9c39efd1bb28a56a8a4735ba5932fbc2104f4c79d0c9bac1"
+  },
+  {
+   "id": "grid-06",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 6.",
+    "surface": {
+     "hueFamily": "sage",
+     "hueNudge": "-6",
+     "tint": "saturated",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "violet",
+     "hueNudge": "+6",
+     "chroma": "vivid",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "normal",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "969c1b471b3b9704820ee6816633287a1d4193f864149c54c5611940692aadd1"
+  },
+  {
+   "id": "grid-07",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 7.",
+    "surface": {
+     "hueFamily": "teal",
+     "hueNudge": "0",
+     "tint": "saturated",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "olive",
+     "hueNudge": "+12",
+     "chroma": "vivid",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "open"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "3b0c45a876c228d74660456ffcb39c176c9ebe08f7de1638538287ad00ef909e"
+  },
+  {
+   "id": "grid-08",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 8.",
+    "surface": {
+     "hueFamily": "cyan",
+     "hueNudge": "+6",
+     "tint": "none",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "indigo",
+     "hueNudge": "-12",
+     "chroma": "electric",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "tight",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "0de374b343f6a295085b5512c9efbbe29c4dd1f818a2f5a81efe6d9901fbf823"
+  },
+  {
+   "id": "grid-09",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 9.",
+    "surface": {
+     "hueFamily": "sky",
+     "hueNudge": "+12",
+     "tint": "none",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "gold",
+     "hueNudge": "-6",
+     "chroma": "electric",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "normal",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "34f37902fbf826097f1e490d99628df76cce86ce83fca8ffa3e73629c74de2e3"
+  },
+  {
+   "id": "grid-10",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 10.",
+    "surface": {
+     "hueFamily": "blue",
+     "hueNudge": "-12",
+     "tint": "whisper",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "blue",
+     "hueNudge": "0",
+     "chroma": "muted",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "open",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "ca992bf8f5f1e94f4a23c79ee9d12f4691d6f8833268888c7c612c8f3e380f73"
+  },
+  {
+   "id": "grid-11",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 11.",
+    "surface": {
+     "hueFamily": "indigo",
+     "hueNudge": "-6",
+     "tint": "whisper",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "amber",
+     "hueNudge": "+6",
+     "chroma": "muted",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "tight"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "d414b0c5d94307238a7695d7e57107a3ab0f2beb89af287bff7b2764bbc62361"
+  },
+  {
+   "id": "grid-12",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 12.",
+    "surface": {
+     "hueFamily": "violet",
+     "hueNudge": "0",
+     "tint": "tinted",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "sky",
+     "hueNudge": "+12",
+     "chroma": "soft",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "normal",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "7eec4d8ac53e2a4d74cb9a2641dc2d9902b62b49bc26163de71df853028e4bfb"
+  },
+  {
+   "id": "grid-13",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 13.",
+    "surface": {
+     "hueFamily": "magenta",
+     "hueNudge": "+6",
+     "tint": "tinted",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "ember",
+     "hueNudge": "-12",
+     "chroma": "soft",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "open",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "bfb6cddf8ce3fab6d02beaab1628895be7fd36a487c9b64a8ad30d2db28626cd"
+  },
+  {
+   "id": "grid-14",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 14.",
+    "surface": {
+     "hueFamily": "rose",
+     "hueNudge": "+12",
+     "tint": "saturated",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "cyan",
+     "hueNudge": "-6",
+     "chroma": "clear",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "tight",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "b0d92b5054a26fe01d389af5892e2c462dae5e188080745339d124d206a8c29b"
+  },
+  {
+   "id": "grid-15",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 15.",
+    "surface": {
+     "hueFamily": "neutral",
+     "hueNudge": "-12",
+     "tint": "saturated",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "red",
+     "hueNudge": "0",
+     "chroma": "clear",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "normal"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "fea9f92764e9784e62c7c9cac240096b0a053816b78ad105fe54a22159b7a91d"
+  },
+  {
+   "id": "grid-16",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 16.",
+    "surface": {
+     "hueFamily": "red",
+     "hueNudge": "-6",
+     "tint": "none",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "teal",
+     "hueNudge": "+6",
+     "chroma": "vivid",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "open",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "458943b8c3d149466d60982186c9c4449e61b7d19135bd05fe0124b365e71c76"
+  },
+  {
+   "id": "grid-17",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 17.",
+    "surface": {
+     "hueFamily": "ember",
+     "hueNudge": "0",
+     "tint": "none",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "rose",
+     "hueNudge": "+12",
+     "chroma": "vivid",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "tight",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "0b5ef93282d596e68753a5fe334ce4a9d4c95faa1b54e53321e5e4d99cf643b6"
+  },
+  {
+   "id": "grid-18",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 18.",
+    "surface": {
+     "hueFamily": "amber",
+     "hueNudge": "+6",
+     "tint": "whisper",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "sage",
+     "hueNudge": "-12",
+     "chroma": "electric",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "normal",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "d56255870da8146b9409ded94e52ddf889b930ca3fa60992311ecddf3924afa3"
+  },
+  {
+   "id": "grid-19",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 19.",
+    "surface": {
+     "hueFamily": "gold",
+     "hueNudge": "+12",
+     "tint": "whisper",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "magenta",
+     "hueNudge": "-6",
+     "chroma": "electric",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "open"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "dbf9e302de7d2fe4fa5aa5b01b74aec1be028f05331314c15f03f5279bb41c07"
+  },
+  {
+   "id": "grid-20",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 20.",
+    "surface": {
+     "hueFamily": "olive",
+     "hueNudge": "-12",
+     "tint": "tinted",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "green",
+     "hueNudge": "0",
+     "chroma": "muted",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "tight",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "d6554387fa83b4e533ac5a0bd99a744783aac64a5c4feb562440b931fdd7230c"
+  },
+  {
+   "id": "grid-21",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 21.",
+    "surface": {
+     "hueFamily": "green",
+     "hueNudge": "-6",
+     "tint": "tinted",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "violet",
+     "hueNudge": "+6",
+     "chroma": "muted",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "normal",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "78a83f2482e91febd1a2295661738ccba2f205f0bb0b0c6260d4175066588733"
+  },
+  {
+   "id": "grid-22",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 22.",
+    "surface": {
+     "hueFamily": "sage",
+     "hueNudge": "0",
+     "tint": "saturated",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "olive",
+     "hueNudge": "+12",
+     "chroma": "soft",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "open",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "b6af877fd5d17ce3ec753f29b4d936221a08fbe88c2bdacb4d4fe5ab6f703701"
+  },
+  {
+   "id": "grid-23",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 23.",
+    "surface": {
+     "hueFamily": "teal",
+     "hueNudge": "+6",
+     "tint": "saturated",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "indigo",
+     "hueNudge": "-12",
+     "chroma": "soft",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "tight"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "1bfcbbf99ab46f75d78bd788692cb7b630629ca21d210d83fc11d8347dac92ac"
+  },
+  {
+   "id": "grid-24",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 24.",
+    "surface": {
+     "hueFamily": "cyan",
+     "hueNudge": "+12",
+     "tint": "none",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "gold",
+     "hueNudge": "-6",
+     "chroma": "clear",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "normal",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "c197b84c21a30c43a3cfdf0cb4ed72aa298dbf6543ccc77b8a36ce28514a6385"
+  },
+  {
+   "id": "grid-25",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 25.",
+    "surface": {
+     "hueFamily": "sky",
+     "hueNudge": "-12",
+     "tint": "none",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "blue",
+     "hueNudge": "0",
+     "chroma": "clear",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "open",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "0c1ddaeca85ba867f2b6c48f20546e24e08dc39e361377357c0e9d53251c84e7"
+  },
+  {
+   "id": "grid-26",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 26.",
+    "surface": {
+     "hueFamily": "blue",
+     "hueNudge": "-6",
+     "tint": "whisper",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "amber",
+     "hueNudge": "+6",
+     "chroma": "vivid",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "tight",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "8aed7754ee8d60d1ca668724851a47ff13b883361ef5d6371127bcbbcaa98a54"
+  },
+  {
+   "id": "grid-27",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 27.",
+    "surface": {
+     "hueFamily": "indigo",
+     "hueNudge": "0",
+     "tint": "whisper",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "sky",
+     "hueNudge": "+12",
+     "chroma": "vivid",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "normal"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "3ef0b9a0ce9ff5417802503bcd9b8e86630291bcb47103d6fa7b0535ffe54d29"
+  },
+  {
+   "id": "grid-28",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 28.",
+    "surface": {
+     "hueFamily": "violet",
+     "hueNudge": "+6",
+     "tint": "tinted",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "ember",
+     "hueNudge": "-12",
+     "chroma": "electric",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "open",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "9074150808b680b9f71e7e99acc148273347a8611881e50837123902390396fa"
+  },
+  {
+   "id": "grid-29",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 29.",
+    "surface": {
+     "hueFamily": "magenta",
+     "hueNudge": "+12",
+     "tint": "tinted",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "cyan",
+     "hueNudge": "-6",
+     "chroma": "electric",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "tight",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "b4474f08dbbf051e30f0af33eb760cc6299d3bfbea9a52d64d09eb17e5078374"
+  },
+  {
+   "id": "grid-30",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 30.",
+    "surface": {
+     "hueFamily": "rose",
+     "hueNudge": "-12",
+     "tint": "saturated",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "red",
+     "hueNudge": "0",
+     "chroma": "muted",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "normal",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "eb8990d4150285ea43b049d1b95f257f5708d8be1235f2bee14a0de60dc5e578"
+  },
+  {
+   "id": "grid-31",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 31.",
+    "surface": {
+     "hueFamily": "neutral",
+     "hueNudge": "-6",
+     "tint": "saturated",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "teal",
+     "hueNudge": "+6",
+     "chroma": "muted",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "open"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "3a79f764ca530ef87fbf971464ee48db29af18f296677a197ebd978483b1f67c"
+  },
+  {
+   "id": "grid-32",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 32.",
+    "surface": {
+     "hueFamily": "red",
+     "hueNudge": "0",
+     "tint": "none",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "rose",
+     "hueNudge": "+12",
+     "chroma": "soft",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "tight",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "d567c0fc7ad63396e6586cef89093b5c81f814b04ba809a8e3d80bd44a2c70d0"
+  },
+  {
+   "id": "grid-33",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 33.",
+    "surface": {
+     "hueFamily": "ember",
+     "hueNudge": "+6",
+     "tint": "none",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "sage",
+     "hueNudge": "-12",
+     "chroma": "soft",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "normal",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "918e8f460076094739e1482cc5f9d8642adb520a9c1c138207da672f05aa91f9"
+  },
+  {
+   "id": "grid-34",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 34.",
+    "surface": {
+     "hueFamily": "amber",
+     "hueNudge": "+12",
+     "tint": "whisper",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "magenta",
+     "hueNudge": "-6",
+     "chroma": "clear",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "open",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "da90d9fcc5dc5c0d4756eb85291a9222be9d5ef338b203b56acdea2cc9275b5e"
+  },
+  {
+   "id": "grid-35",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 35.",
+    "surface": {
+     "hueFamily": "gold",
+     "hueNudge": "-12",
+     "tint": "whisper",
+     "depth": "abyss"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "green",
+     "hueNudge": "0",
+     "chroma": "clear",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "tight"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "7c84fa6a43f15f127c0e36c6216dfd0903e326a18d782922f1c38e18be1974d5"
+  },
+  {
+   "id": "grid-36",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 36.",
+    "surface": {
+     "hueFamily": "olive",
+     "hueNudge": "-6",
+     "tint": "tinted",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "violet",
+     "hueNudge": "+6",
+     "chroma": "vivid",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "normal",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "2abe98656aa3efe746e042057ed2934cfe666a1226ee608d7a46b23d3090fb02"
+  },
+  {
+   "id": "grid-37",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 37.",
+    "surface": {
+     "hueFamily": "green",
+     "hueNudge": "0",
+     "tint": "tinted",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "olive",
+     "hueNudge": "+12",
+     "chroma": "vivid",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "open",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "7a450e33e4b06ab6760de2e22faa3f5e78d9e245b2acc00ea602256764789aa2"
+  },
+  {
+   "id": "grid-38",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 38.",
+    "surface": {
+     "hueFamily": "sage",
+     "hueNudge": "+6",
+     "tint": "saturated",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "indigo",
+     "hueNudge": "-12",
+     "chroma": "electric",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "tight",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "31a07d1a0fa1eb4baf4a4fe5bffe05a1d0b3d3e3004648013ca56f82bc5d4434"
+  },
+  {
+   "id": "grid-39",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 39.",
+    "surface": {
+     "hueFamily": "teal",
+     "hueNudge": "+12",
+     "tint": "saturated",
+     "depth": "deep"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "gold",
+     "hueNudge": "-6",
+     "chroma": "electric",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "normal"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "a8e64f648c150928ee16e4db2a540dbb73429c6764a337eba976fffb5da3e169"
+  },
+  {
+   "id": "grid-40",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 40.",
+    "surface": {
+     "hueFamily": "cyan",
+     "hueNudge": "-12",
+     "tint": "none",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "blue",
+     "hueNudge": "0",
+     "chroma": "muted",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "open",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "cd53b7c4d19907140378792a6ea3352f7c3b6762390050d6be091ff4db9ce98f"
+  },
+  {
+   "id": "grid-41",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 41.",
+    "surface": {
+     "hueFamily": "sky",
+     "hueNudge": "-6",
+     "tint": "none",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "amber",
+     "hueNudge": "+6",
+     "chroma": "muted",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "tight",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "dec976cbe52d5d3924f675e4cc499421947b2ba75383631ccbc78a7fca834fc7"
+  },
+  {
+   "id": "grid-42",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 42.",
+    "surface": {
+     "hueFamily": "blue",
+     "hueNudge": "0",
+     "tint": "whisper",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "sky",
+     "hueNudge": "+12",
+     "chroma": "soft",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "normal",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "dd389a831c03f0537a90d5cb54af6aa1b0aaca41e85ffd04ff6167dfb602672d"
+  },
+  {
+   "id": "grid-43",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 43.",
+    "surface": {
+     "hueFamily": "indigo",
+     "hueNudge": "+6",
+     "tint": "whisper",
+     "depth": "dim"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "soft"
+    },
+    "accent": {
+     "hueFamily": "ember",
+     "hueNudge": "-12",
+     "chroma": "soft",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "semibold",
+     "headlineTracking": "open"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "ce81b2b4b04817133ec8d03640c638b6641d311e102ec36cdc3c1501e56fa830"
+  },
+  {
+   "id": "grid-44",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 44.",
+    "surface": {
+     "hueFamily": "violet",
+     "hueNudge": "+12",
+     "tint": "tinted",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "cyan",
+     "hueNudge": "-6",
+     "chroma": "clear",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "bold",
+     "headlineTracking": "tight",
+     "displayVoice": "brand"
+    },
+    "elevation": {
+     "character": "dramatic"
+    }
+   },
+   "ok": true,
+   "sha256": "0cdff921cddaf3b3016d2068188eba16954f636935b916a7ba5e2f8c4eae5421"
+  },
+  {
+   "id": "grid-45",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 45.",
+    "surface": {
+     "hueFamily": "magenta",
+     "hueNudge": "-12",
+     "tint": "tinted",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "cool",
+     "contrastCharacter": "standard"
+    },
+    "accent": {
+     "hueFamily": "red",
+     "hueNudge": "0",
+     "chroma": "clear",
+     "presence": "balance"
+    },
+    "typography": {
+     "headlineWeight": "light",
+     "headlineTracking": "normal",
+     "displayVoice": "expressive"
+    },
+    "elevation": {
+     "character": "flat"
+    }
+   },
+   "ok": true,
+   "sha256": "6f08636c75c735676433d049606dc0ceb402542d16ba6c70df183f61745f75bc"
+  },
+  {
+   "id": "grid-46",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 46.",
+    "surface": {
+     "hueFamily": "rose",
+     "hueNudge": "-6",
+     "tint": "saturated",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "neutral",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "teal",
+     "hueNudge": "+6",
+     "chroma": "vivid",
+     "presence": "carry"
+    },
+    "typography": {
+     "headlineWeight": "regular",
+     "headlineTracking": "open",
+     "displayVoice": "technical"
+    },
+    "elevation": {
+     "character": "soft"
+    }
+   },
+   "ok": true,
+   "sha256": "5d6bb7fdb556da5f2c1b99d982a93b40a14f5b735ce34cee4d4689120a70f88a"
+  },
+  {
+   "id": "grid-47",
+   "proposal": {
+    "directionVersion": "1",
+    "refusal": false,
+    "refusalCategory": "none",
+    "interpretation": "Parity grid proposal 47.",
+    "surface": {
+     "hueFamily": "neutral",
+     "hueNudge": "0",
+     "tint": "saturated",
+     "depth": "dusk"
+    },
+    "ink": {
+     "warmth": "warm",
+     "contrastCharacter": "stark"
+    },
+    "accent": {
+     "hueFamily": "rose",
+     "hueNudge": "+12",
+     "chroma": "vivid",
+     "presence": "recede"
+    },
+    "typography": {
+     "headlineWeight": "medium",
+     "headlineTracking": "tight"
+    },
+    "elevation": {
+     "character": "standard"
+    }
+   },
+   "ok": true,
+   "sha256": "171f84550b16a5f89d876a06bf70db979132a5b21f8e27e3a522ad22be737107"
+  }
+ ],
+ "full": [
+  {
+   "id": "grid-00",
+   "output": {
+    "ok": true,
+    "compilerVersion": "theme-direction-compiler@2.0.0",
+    "directionVersion": "1",
+    "realizations": {
+     "dark": {
+      "tokens": {
+       "surface.bg": "#0e0e0e",
+       "surface.veil": "rgba(0,0,0,.62)",
+       "surface.bg-1": "#131313",
+       "surface.bg-2": "#181818",
+       "surface.line-soft": "#1c1c1c",
+       "surface.line": "#292929",
+       "ink.fg": "#c1c4c8",
+       "ink.fg-body": "#a3a8ae",
+       "ink.fg-dim": "#828891",
+       "ink.fg-secondary": "#7f868e",
+       "ink.fg-faint": "#61676e",
+       "ink.on-accent": "#110c0c",
+       "accent.green": "#a27b79",
+       "accent.accent-text": "#a27b79",
+       "accent.accent-fill": "#a27b79",
+       "accent.accent-edge": "#a27b79",
+       "accent.green-bright": "#b59695",
+       "accent.accent-link": "#b59695",
+       "accent.accent-fill-hover": "#b59695",
+       "accent.green-deep": "#835d5b",
+       "accent.drift": "#957d87",
+       "accent.green-glow": "rgba(162,123,121,.16)",
+       "accent.accent-glow": "rgba(162,123,121,.16)",
+       "type.display": "'Oswald'",
+       "type.hl-weight": "300",
+       "type.hl-tracking": "-0.01em",
+       "elevation.shadow-menu": "0 18px 48px rgba(0,0,0,.5)"
+      },
+      "constraints": [
+       {
+        "id": "C1",
+        "pair": "ink.fg on surface.bg",
+        "required": 4.5,
+        "achieved": 11.0288,
+        "disposition": "passed"
+       },
+       {
+        "id": "C2",
+        "pair": "ink.fg on surface.bg-1",
+        "required": 4.5,
+        "achieved": 10.615,
+        "disposition": "passed"
+       },
+       {
+        "id": "C3",
+        "pair": "ink.fg-body on surface.bg",
+        "required": 4.5,
+        "achieved": 8.0615,
+        "disposition": "passed"
+       },
+       {
+        "id": "C4",
+        "pair": "ink.fg-body on surface.bg-1",
+        "required": 4.5,
+        "achieved": 7.759,
+        "disposition": "passed"
+       },
+       {
+        "id": "C5",
+        "pair": "ink.fg-dim on surface.bg",
+        "required": 4.5,
+        "achieved": 5.405,
+        "disposition": "passed"
+       },
+       {
+        "id": "C6",
+        "pair": "ink.fg-dim on surface.bg-1",
+        "required": 4.5,
+        "achieved": 5.2022,
+        "disposition": "passed"
+       },
+       {
+        "id": "C7",
+        "pair": "accent.green-bright on surface.bg",
+        "required": 4.5,
+        "achieved": 7.1346,
+        "disposition": "passed"
+       },
+       {
+        "id": "C8",
+        "pair": "accent.green-bright on surface.bg-1",
+        "required": 4.5,
+        "achieved": 6.8669,
+        "disposition": "passed"
+       },
+       {
+        "id": "C9",
+        "pair": "accent.green on surface.bg",
+        "required": 3,
+        "achieved": 5.1897,
+        "disposition": "passed"
+       },
+       {
+        "id": "C10",
+        "pair": "ink.on-accent on accent.green",
+        "required": 4.5,
+        "achieved": 5.219,
+        "disposition": "passed"
+       },
+       {
+        "id": "C11",
+        "pair": "accent.green on surface.bg",
+        "required": 4.5,
+        "achieved": 5.1897,
+        "disposition": "passed"
+       },
+       {
+        "id": "C12",
+        "pair": "accent.green on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.995,
+        "disposition": "passed"
+       },
+       {
+        "id": "C13",
+        "pair": "accent.green on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.7735,
+        "disposition": "passed"
+       },
+       {
+        "id": "C14",
+        "pair": "accent.accent-text on surface.bg",
+        "required": 4.5,
+        "achieved": 5.1897,
+        "disposition": "passed"
+       },
+       {
+        "id": "C15",
+        "pair": "accent.accent-text on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.995,
+        "disposition": "passed"
+       },
+       {
+        "id": "C16",
+        "pair": "accent.accent-text on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.7735,
+        "disposition": "passed"
+       },
+       {
+        "id": "C17",
+        "pair": "ink.on-accent on accent.accent-fill",
+        "required": 4.5,
+        "achieved": 5.219,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18",
+        "pair": "ink.fg-secondary on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.8221,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18b",
+        "pair": "ink.fg-secondary on surface.bg-1",
+        "required": 4.5,
+        "achieved": 5.0459,
+        "disposition": "passed"
+       }
+      ],
+      "repairs": []
+     },
+     "light": {
+      "tokens": {
+       "surface.bg": "#ededed",
+       "surface.veil": "rgba(0,0,0,.10)",
+       "surface.bg-1": "#eaeaea",
+       "surface.bg-2": "#e5e5e5",
+       "surface.line-soft": "#e0e0e0",
+       "surface.line": "#d0d0d0",
+       "ink.fg": "#2f3236",
+       "ink.fg-body": "#43474b",
+       "ink.fg-dim": "#5b6067",
+       "ink.fg-secondary": "#5e636b",
+       "ink.fg-faint": "#7b818a",
+       "ink.on-accent": "#f9f6f6",
+       "accent.green": "#805a59",
+       "accent.accent-text": "#805a59",
+       "accent.accent-fill": "#805a59",
+       "accent.accent-edge": "#805a59",
+       "accent.green-bright": "#654746",
+       "accent.accent-link": "#654746",
+       "accent.accent-fill-hover": "#654746",
+       "accent.green-deep": "#a07776",
+       "accent.drift": "#7d6670",
+       "accent.green-glow": "rgba(128,90,89,.16)",
+       "accent.accent-glow": "rgba(128,90,89,.16)",
+       "type.display": "'Oswald'",
+       "type.hl-weight": "300",
+       "type.hl-tracking": "-0.01em",
+       "elevation.shadow-menu": "0 18px 48px rgba(0,0,0,.18)"
+      },
+      "constraints": [
+       {
+        "id": "C1",
+        "pair": "ink.fg on surface.bg",
+        "required": 4.5,
+        "achieved": 11.002,
+        "disposition": "passed"
+       },
+       {
+        "id": "C2",
+        "pair": "ink.fg on surface.bg-1",
+        "required": 4.5,
+        "achieved": 10.7066,
+        "disposition": "passed"
+       },
+       {
+        "id": "C3",
+        "pair": "ink.fg-body on surface.bg",
+        "required": 4.5,
+        "achieved": 8.0022,
+        "disposition": "passed"
+       },
+       {
+        "id": "C4",
+        "pair": "ink.fg-body on surface.bg-1",
+        "required": 4.5,
+        "achieved": 7.7873,
+        "disposition": "passed"
+       },
+       {
+        "id": "C5",
+        "pair": "ink.fg-dim on surface.bg",
+        "required": 4.5,
+        "achieved": 5.4129,
+        "disposition": "passed"
+       },
+       {
+        "id": "C6",
+        "pair": "ink.fg-dim on surface.bg-1",
+        "required": 4.5,
+        "achieved": 5.2675,
+        "disposition": "passed"
+       },
+       {
+        "id": "C7",
+        "pair": "accent.green-bright on surface.bg",
+        "required": 4.5,
+        "achieved": 7.0535,
+        "disposition": "passed"
+       },
+       {
+        "id": "C8",
+        "pair": "accent.green-bright on surface.bg-1",
+        "required": 4.5,
+        "achieved": 6.864,
+        "disposition": "passed"
+       },
+       {
+        "id": "C9",
+        "pair": "accent.green on surface.bg",
+        "required": 3,
+        "achieved": 5.0893,
+        "disposition": "passed"
+       },
+       {
+        "id": "C10",
+        "pair": "ink.on-accent on accent.green",
+        "required": 4.5,
+        "achieved": 5.5442,
+        "disposition": "passed"
+       },
+       {
+        "id": "C11",
+        "pair": "accent.green on surface.bg",
+        "required": 4.5,
+        "achieved": 5.0893,
+        "disposition": "passed"
+       },
+       {
+        "id": "C12",
+        "pair": "accent.green on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.9526,
+        "disposition": "passed"
+       },
+       {
+        "id": "C13",
+        "pair": "accent.green on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.7299,
+        "disposition": "passed"
+       },
+       {
+        "id": "C14",
+        "pair": "accent.accent-text on surface.bg",
+        "required": 4.5,
+        "achieved": 5.0893,
+        "disposition": "passed"
+       },
+       {
+        "id": "C15",
+        "pair": "accent.accent-text on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.9526,
+        "disposition": "passed"
+       },
+       {
+        "id": "C16",
+        "pair": "accent.accent-text on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.7299,
+        "disposition": "passed"
+       },
+       {
+        "id": "C17",
+        "pair": "ink.on-accent on accent.accent-fill",
+        "required": 4.5,
+        "achieved": 5.5442,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18",
+        "pair": "ink.fg-secondary on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.8001,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18b",
+        "pair": "ink.fg-secondary on surface.bg-1",
+        "required": 4.5,
+        "achieved": 5.0261,
+        "disposition": "passed"
+       }
+      ],
+      "repairs": []
+     }
+    },
+    "reasons": []
+   }
+  },
+  {
+   "id": "grid-17",
+   "output": {
+    "ok": true,
+    "compilerVersion": "theme-direction-compiler@2.0.0",
+    "directionVersion": "1",
+    "realizations": {
+     "dark": {
+      "tokens": {
+       "surface.bg": "#0e0e0e",
+       "surface.veil": "rgba(0,0,0,.62)",
+       "surface.bg-1": "#131313",
+       "surface.bg-2": "#181818",
+       "surface.line-soft": "#1c1c1c",
+       "surface.line": "#292929",
+       "ink.fg": "#e8e6e5",
+       "ink.fg-body": "#c2bfba",
+       "ink.fg-dim": "#9a948d",
+       "ink.fg-secondary": "#8f8981",
+       "ink.fg-faint": "#6f6a63",
+       "ink.on-accent": "#13090a",
+       "accent.green": "#c4626f",
+       "accent.accent-text": "#c4626f",
+       "accent.accent-fill": "#c4626f",
+       "accent.accent-edge": "#c4626f",
+       "accent.green-bright": "#d0848e",
+       "accent.accent-link": "#d0848e",
+       "accent.accent-fill-hover": "#d0848e",
+       "accent.green-deep": "#a9404e",
+       "accent.drift": "#b86496",
+       "accent.green-glow": "rgba(196,98,111,.16)",
+       "accent.accent-glow": "rgba(196,98,111,.16)",
+       "type.display": "'Anton'",
+       "type.hl-weight": "400",
+       "type.hl-tracking": "-0.01em",
+       "elevation.shadow-menu": "0 1px 2px rgba(0,0,0,.28)"
+      },
+      "constraints": [
+       {
+        "id": "C1",
+        "pair": "ink.fg on surface.bg",
+        "required": 4.5,
+        "achieved": 15.5184,
+        "disposition": "passed"
+       },
+       {
+        "id": "C2",
+        "pair": "ink.fg on surface.bg-1",
+        "required": 4.5,
+        "achieved": 14.936,
+        "disposition": "passed"
+       },
+       {
+        "id": "C3",
+        "pair": "ink.fg-body on surface.bg",
+        "required": 4.5,
+        "achieved": 10.5304,
+        "disposition": "passed"
+       },
+       {
+        "id": "C4",
+        "pair": "ink.fg-body on surface.bg-1",
+        "required": 4.5,
+        "achieved": 10.1352,
+        "disposition": "passed"
+       },
+       {
+        "id": "C5",
+        "pair": "ink.fg-dim on surface.bg",
+        "required": 4.5,
+        "achieved": 6.4299,
+        "disposition": "passed"
+       },
+       {
+        "id": "C6",
+        "pair": "ink.fg-dim on surface.bg-1",
+        "required": 4.5,
+        "achieved": 6.1886,
+        "disposition": "passed"
+       },
+       {
+        "id": "C7",
+        "pair": "accent.green-bright on surface.bg",
+        "required": 4.5,
+        "achieved": 6.7778,
+        "disposition": "passed"
+       },
+       {
+        "id": "C8",
+        "pair": "accent.green-bright on surface.bg-1",
+        "required": 4.5,
+        "achieved": 6.5235,
+        "disposition": "passed"
+       },
+       {
+        "id": "C9",
+        "pair": "accent.green on surface.bg",
+        "required": 3,
+        "achieved": 4.8939,
+        "disposition": "passed"
+       },
+       {
+        "id": "C10",
+        "pair": "ink.on-accent on accent.green",
+        "required": 4.5,
+        "achieved": 4.9702,
+        "disposition": "passed"
+       },
+       {
+        "id": "C11",
+        "pair": "accent.green on surface.bg",
+        "required": 4.5,
+        "achieved": 4.8939,
+        "disposition": "passed"
+       },
+       {
+        "id": "C12",
+        "pair": "accent.green on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.7103,
+        "disposition": "passed"
+       },
+       {
+        "id": "C13",
+        "pair": "accent.green on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.5014,
+        "disposition": "passed"
+       },
+       {
+        "id": "C14",
+        "pair": "accent.accent-text on surface.bg",
+        "required": 4.5,
+        "achieved": 4.8939,
+        "disposition": "passed"
+       },
+       {
+        "id": "C15",
+        "pair": "accent.accent-text on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.7103,
+        "disposition": "passed"
+       },
+       {
+        "id": "C16",
+        "pair": "accent.accent-text on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.5014,
+        "disposition": "passed"
+       },
+       {
+        "id": "C17",
+        "pair": "ink.on-accent on accent.accent-fill",
+        "required": 4.5,
+        "achieved": 4.9702,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18",
+        "pair": "ink.fg-secondary on surface.bg-2",
+        "required": 4.5,
+        "achieved": 5.1266,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18b",
+        "pair": "ink.fg-secondary on surface.bg-1",
+        "required": 4.5,
+        "achieved": 5.3645,
+        "disposition": "passed"
+       }
+      ],
+      "repairs": []
+     },
+     "light": {
+      "tokens": {
+       "surface.bg": "#ededed",
+       "surface.veil": "rgba(0,0,0,.10)",
+       "surface.bg-1": "#eaeaea",
+       "surface.bg-2": "#e5e5e5",
+       "surface.line-soft": "#e0e0e0",
+       "surface.line": "#d0d0d0",
+       "ink.fg": "#171514",
+       "ink.fg-body": "#373431",
+       "ink.fg-dim": "#58544e",
+       "ink.fg-secondary": "#635d58",
+       "ink.fg-faint": "#827b74",
+       "ink.on-accent": "#faf5f5",
+       "accent.green": "#ae4250",
+       "accent.accent-text": "#ae4250",
+       "accent.accent-fill": "#ae4250",
+       "accent.accent-edge": "#ae4250",
+       "accent.green-bright": "#8d3541",
+       "accent.accent-link": "#8d3541",
+       "accent.accent-fill-hover": "#8d3541",
+       "accent.green-deep": "#c66874",
+       "accent.drift": "#ac4f86",
+       "accent.green-glow": "rgba(174,66,80,.16)",
+       "accent.accent-glow": "rgba(174,66,80,.16)",
+       "type.display": "'Anton'",
+       "type.hl-weight": "400",
+       "type.hl-tracking": "-0.01em",
+       "elevation.shadow-menu": "0 1px 2px rgba(0,0,0,.06)"
+      },
+      "constraints": [
+       {
+        "id": "C1",
+        "pair": "ink.fg on surface.bg",
+        "required": 4.5,
+        "achieved": 15.5464,
+        "disposition": "passed"
+       },
+       {
+        "id": "C2",
+        "pair": "ink.fg on surface.bg-1",
+        "required": 4.5,
+        "achieved": 15.1289,
+        "disposition": "passed"
+       },
+       {
+        "id": "C3",
+        "pair": "ink.fg-body on surface.bg",
+        "required": 4.5,
+        "achieved": 10.5639,
+        "disposition": "passed"
+       },
+       {
+        "id": "C4",
+        "pair": "ink.fg-body on surface.bg-1",
+        "required": 4.5,
+        "achieved": 10.2802,
+        "disposition": "passed"
+       },
+       {
+        "id": "C5",
+        "pair": "ink.fg-dim on surface.bg",
+        "required": 4.5,
+        "achieved": 6.4221,
+        "disposition": "passed"
+       },
+       {
+        "id": "C6",
+        "pair": "ink.fg-dim on surface.bg-1",
+        "required": 4.5,
+        "achieved": 6.2496,
+        "disposition": "passed"
+       },
+       {
+        "id": "C7",
+        "pair": "accent.green-bright on surface.bg",
+        "required": 4.5,
+        "achieved": 6.5992,
+        "disposition": "passed"
+       },
+       {
+        "id": "C8",
+        "pair": "accent.green-bright on surface.bg-1",
+        "required": 4.5,
+        "achieved": 6.422,
+        "disposition": "passed"
+       },
+       {
+        "id": "C9",
+        "pair": "accent.green on surface.bg",
+        "required": 3,
+        "achieved": 4.8547,
+        "disposition": "passed"
+       },
+       {
+        "id": "C10",
+        "pair": "ink.on-accent on accent.green",
+        "required": 4.5,
+        "achieved": 5.2625,
+        "disposition": "passed"
+       },
+       {
+        "id": "C11",
+        "pair": "accent.green on surface.bg",
+        "required": 4.5,
+        "achieved": 4.8547,
+        "disposition": "passed"
+       },
+       {
+        "id": "C12",
+        "pair": "accent.green on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.7243,
+        "disposition": "passed"
+       },
+       {
+        "id": "C13",
+        "pair": "accent.green on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.5119,
+        "disposition": "passed"
+       },
+       {
+        "id": "C14",
+        "pair": "accent.accent-text on surface.bg",
+        "required": 4.5,
+        "achieved": 4.8547,
+        "disposition": "passed"
+       },
+       {
+        "id": "C15",
+        "pair": "accent.accent-text on surface.bg-1",
+        "required": 4.5,
+        "achieved": 4.7243,
+        "disposition": "passed"
+       },
+       {
+        "id": "C16",
+        "pair": "accent.accent-text on surface.bg-2",
+        "required": 4.5,
+        "achieved": 4.5119,
+        "disposition": "passed"
+       },
+       {
+        "id": "C17",
+        "pair": "ink.on-accent on accent.accent-fill",
+        "required": 4.5,
+        "achieved": 5.2625,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18",
+        "pair": "ink.fg-secondary on surface.bg-2",
+        "required": 4.5,
+        "achieved": 5.1498,
+        "disposition": "passed"
+       },
+       {
+        "id": "C18b",
+        "pair": "ink.fg-secondary on surface.bg-1",
+        "required": 4.5,
+        "achieved": 5.3922,
+        "disposition": "passed"
+       }
+      ],
+      "repairs": []
+     }
+    },
+    "reasons": []
+   }
+  }
+ ]
+}
