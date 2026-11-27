@@ -12,3 +12,4 @@
 export * from "./constraints.mjs";
 export { constraintsForRole, roleFeasibility, ITERATIONS, rgbToHsl, hslToHex, solveRole } from "./solve.mjs";
 export * from "./compile.mjs";
+export * from "./workspace.mjs";

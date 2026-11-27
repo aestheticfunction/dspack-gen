@@ -98,3 +98,25 @@ export const ITERATIONS: number;
 export function constraintsForRole(role: string, constraints?: Constraint[]): Constraint[];
 export function roleFeasibility(role: string, tokens: Record<string, string>, constraints?: Constraint[]): unknown;
 export function solveRole(role: string, tokens: Record<string, string>, options?: { seed?: string; constraints?: Constraint[] }): unknown;
+
+// ---- workspace.mjs: a working environment's appearance, layered on the compiler ----
+
+export interface WorkspaceOptions {
+  density?: "comfortable" | "compact";
+  textScale?: "standard" | "large";
+  labelCase?: "sentence" | "capitals";
+  display?: "brand" | "plain";
+  surround?: "workspace" | "light" | "dark";
+}
+
+export type WorkspaceResult =
+  | { ok: true; workspaceVersion: string; compilerVersion: string; scheme: Scheme; options: Required<WorkspaceOptions>; tokens: Record<string, string>; constraints: ConstraintResult[]; repairs: Array<Record<string, unknown>> }
+  | { ok: false; workspaceVersion: string; compilerVersion: string | null; tokens: null; reasons: string[] };
+
+export const WORKSPACE_VERSION: string;
+export const WORKSPACE_OPTIONS: { [K in keyof WorkspaceOptions]-?: Array<NonNullable<WorkspaceOptions[K]>> };
+export const DEFAULT_WORKSPACE: Readonly<Required<WorkspaceOptions>>;
+export const STATUS_HUES: Record<"success" | "warning" | "error" | "info", number>;
+export const SURROUND: Record<"light" | "dark", string>;
+export function workspaceOptionIssues(options: unknown): string[];
+export function compileWorkspace(input: { proposal: unknown; scheme?: Scheme; options?: WorkspaceOptions; contract?: TokenContract }): WorkspaceResult;

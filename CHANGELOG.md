@@ -6,6 +6,11 @@
   - **How it is held.** A 48-proposal parity grid, covering every enum member, holds it to the incubation copy's outputs.
   - **New subpaths.** `./theme`, plus the module and schema files for consumers that need them. The pack test covers them.
   - **Not included.** The website's natural-language front end.
+- **The workspace layer** (`compileWorkspace`, `WORKSPACE_VERSION`), for tools people work in all day:
+  - status colours and the link, solved and checked at 4.5:1 on every surface;
+  - closed choices for density, text scale, label case, display face and a canvas surround.
+
+  It is layered on the compiler and never changes its output.
 
 ## 0.5.0 — 2026-08-11
 

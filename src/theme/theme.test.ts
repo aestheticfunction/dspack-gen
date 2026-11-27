@@ -153,7 +153,7 @@ describe("the proposal schema", () => {
 
 describe("no side effects", () => {
   it("the compiler's modules read no clock, randomness, environment or network, and import only each other", () => {
-    for (const file of ["compile.mjs", "constraints.mjs", "solve.mjs"]) {
+    for (const file of ["compile.mjs", "constraints.mjs", "solve.mjs", "workspace.mjs"]) {
       const source = readFileSync(fileURLToPath(new URL(`./${file}`, import.meta.url)), "utf8").replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
       expect(source, file).not.toMatch(/Date\.now|new Date|Math\.random|process\.|globalThis|fetch\(|XMLHttpRequest|require\(/);
       for (const m of source.matchAll(/^import .* from "([^"]+)";$/gm)) expect(m[1], file).toMatch(/^\.\/(compile|constraints|solve)\.mjs$/);

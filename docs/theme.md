@@ -53,6 +53,19 @@ The modules are also exported as files (`./theme/compile.mjs`, `./theme/constrai
 
 The `contract` argument is read only for its token shape (`tokens.<category>.values.<name>.value`). Constraint evaluation runs over the resolved set. Every token the constraints name is produced by the compiler, so `{ tokens: {} }` is a valid contract.
 
+## The workspace layer (`compileWorkspace`)
+
+A working environment needs more than a site's appearance does. `compileWorkspace({ proposal, scheme, options })` calls `compileProposal` and adds tokens; it never changes one the compiler produced, and `COMPILER_VERSION` does not move for it. Its own identity is `WORKSPACE_VERSION`.
+
+- **Status colours.** `status.success`, `status.warning`, `status.error`, `status.info` and `status.link` are solved to 4.5:1 against the hardest surface and checked on `bg`, `bg-1` and `bg-2` (W1 to W15). The link is re-solved at fixed hue and chroma if needed, and the repair is reported.
+- **Workspace choices**, all closed enums, defaults first:
+  - `density`: `comfortable` | `compact` → `space.scale`;
+  - `textScale`: `standard` | `large` → `type.scale`;
+  - `labelCase`: `sentence` | `capitals` → `label.transform`, `label.tracking`;
+  - `display`: `brand` | `plain` → `type.workspace-display`;
+  - `surround`: `workspace` | `light` | `dark` → `surround.bg`, a backdrop for the canvas that need not follow the chrome.
+- **Fail-closed**, like the compiler: an unknown choice or a rejected proposal gives `tokens: null`.
+
 ## Versioning and consumers
 
 - **The theme subpath is versioned with the package**, from 0.6.0. `COMPILER_VERSION` is the finer identity a stored theme or a receipt should record.
